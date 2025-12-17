@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom'; // ✅ IMPORTED FOR NAVIGATION
 
 // Import Swiper styles
 import 'swiper/css';
@@ -20,10 +21,11 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: 1,
-    tag: 'Travel',
-    title: 'AI in hospitality: How to prepare your hospitality business',
+    // ✅ Updated to match the specific Detail Page we created
+    tag: 'Construction',
+    title: 'How to implement construction time tracking software',
     date: 'November 28, 2025',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   },
   {
     id: 2,
@@ -74,24 +76,9 @@ const blogPosts: BlogPost[] = [
     date: 'November 10, 2025',
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   },
-  {
-    id: 9,
-    tag: 'Travel',
-    title: 'Sustainable Tourism: Tech Solutions for Green Travel',
-    date: 'November 08, 2025',
-    image: 'https://images.unsplash.com/photo-1546961329-78bef0414d7c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 10,
-    tag: 'Education',
-    title: 'EdTech Trends: Gamification in Learning',
-    date: 'November 05, 2025',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
 ];
 
-// --- BRAND SVG COMPONENTS (Clean, No-Download, High Quality) ---
-
+// --- BRAND SVG COMPONENTS ---
 const BmwLogo = () => (
   <svg viewBox="0 0 50 50" width="100%" height="100%">
     <circle cx="25" cy="25" r="24" fill="#1d1d1b" />
@@ -103,33 +90,27 @@ const BmwLogo = () => (
     <text x="25" y="7" textAnchor="middle" fill="#fff" fontSize="5" fontFamily="Arial" fontWeight="bold">BMW</text>
   </svg>
 );
-
 const DiorLogo = () => (
   <svg viewBox="0 0 100 30" width="100%" height="100%">
     <text x="50" y="22" textAnchor="middle" fill="#000" fontSize="26" fontFamily="Times New Roman, serif">DIOR</text>
   </svg>
 );
-
 const HermesLogo = () => (
   <svg viewBox="0 0 120 40" width="100%" height="100%">
     <text x="60" y="25" textAnchor="middle" fill="#111" fontSize="22" fontFamily="Georgia, serif">HERMÈS</text>
     <text x="60" y="35" textAnchor="middle" fill="#111" fontSize="8" fontFamily="Arial" letterSpacing="2">PARIS</text>
   </svg>
 );
-
 const SainsburysLogo = () => (
   <svg viewBox="0 0 120 30" width="100%" height="100%">
     <text x="60" y="22" textAnchor="middle" fill="#ef8300" fontSize="20" fontFamily="Arial" fontWeight="bold">Sainsbury's</text>
   </svg>
 );
-
-// ✅ FIXED: Clean Netflix Path (No crossed lines)
 const NetflixLogo = () => (
   <svg viewBox="0 0 140 38" width="100%" height="100%">
      <path fill="#E50914" d="M20 27h4.2V10l9.1 17h4.2V8.5h-4.1v15.3l-9-16.7H20v19.9zm20.6 0h13.4v-3.8h-9.2v-4h8.3v-3.7h-8.3V11.4h9.2V7.7H40.6v19.3zm16.9 0h4.2V11.6h5.9V7.7H57.5v3.9h6v15.4zm13.1 0h12.4v-3.8h-8.2v-4h7.5v-3.7h-7.5V11.4h8.2V7.7H70.6v19.3zm15.4 0h11.7v-3.8H90.2V7.7H86v19.3zm14.7 0h4.2V7.7h-4.2v19.3zm7.3 0h5l3.8-6.5 3.8 6.5h5l-6.2-10.2 5.9-9h-4.9l-3.5 6.2-3.4-6.2h-4.9l5.9 8.9-6.5 10.3z"/>
   </svg>
 );
-
 const SpotifyLogo = () => (
   <svg viewBox="0 0 120 40" width="100%" height="100%">
      <g fill="#1DB954">
@@ -139,13 +120,11 @@ const SpotifyLogo = () => (
      <text x="45" y="27" fill="#1DB954" fontSize="18" fontFamily="Arial" fontWeight="bold">Spotify</text>
   </svg>
 );
-
 const CocaColaLogo = () => (
   <svg viewBox="0 0 120 40" width="100%" height="100%">
     <text x="60" y="25" textAnchor="middle" fill="#F40009" fontSize="24" fontFamily="Brush Script MT, cursive" fontWeight="bold">Coca-Cola</text>
   </svg>
 );
-
 const GivenchyLogo = () => (
   <svg viewBox="0 0 100 50" width="100%" height="100%">
     <rect x="35" y="0" width="30" height="30" stroke="#000" strokeWidth="2" fill="none"/>
@@ -153,7 +132,6 @@ const GivenchyLogo = () => (
     <text x="50" y="45" textAnchor="middle" fill="#000" fontSize="10" fontFamily="Arial" letterSpacing="2">GIVENCHY</text>
   </svg>
 );
-
 const SantanderLogo = () => (
   <svg viewBox="0 0 140 40" width="100%" height="100%">
     <path d="M25 20 Q30 10 35 20 Q30 30 25 20" fill="#EC0000" stroke="#EC0000" strokeWidth="15" />
@@ -204,12 +182,30 @@ const DiagonalArrow = () => (
 const BlogSection = () => {
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
+  const navigate = useNavigate(); // ✅ Hook for navigation
+
+  // ✅ Helper: Convert Title to Slug & Navigate
+  const handleCardClick = (title: string) => {
+    // 1. Convert to lowercase
+    // 2. Remove special chars
+    // 3. Replace spaces with dashes
+    const slug = title
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
+    // Navigate to the specific blog page
+    navigate(`/blog/${slug}`);
+  };
 
   return (
     <SectionWrapper>
       <HeaderContainer>
         <MainTitle>Want to know more?</MainTitle>
-        <LinkTitle href="/blog">
+        {/* Clickable Header Link */}
+        <LinkTitle onClick={() => navigate('/blog')} style={{ cursor: 'pointer' }}>
           Check our blog <DiagonalArrow />
         </LinkTitle>
       </HeaderContainer>
@@ -228,7 +224,8 @@ const BlogSection = () => {
         >
           {blogPosts.map((post) => (
             <SwiperSlide key={post.id}>
-              <Card>
+              {/* ✅ Added onClick event to the Card */}
+              <Card onClick={() => handleCardClick(post.title)}>
                 <ImageWrapper>
                   <img src={post.image} alt={post.title} />
                 </ImageWrapper>
@@ -289,51 +286,53 @@ export default BlogSection;
 // --- Styles ---
 
 const SectionWrapper = styled.section`
-  padding: 80px 20px;
+  padding: 100px 20px;
   background-color: #f9f9fa; 
   font-family: 'Inter', sans-serif; 
   overflow: hidden;
 
   @media (max-width: 768px) {
-    padding: 40px 20px;
+    padding: 60px 20px;
   }
 `;
 
 const HeaderContainer = styled.div`
-  margin-bottom: 50px;
-  max-width: 1200px;
+  margin-bottom: 60px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0 10px;
 `;
 
 const MainTitle = styled.h2`
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 500;
   color: #111;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -1px;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 `;
 
-const LinkTitle = styled.a`
-  font-size: 3rem;
+const LinkTitle = styled.span`
+  font-size: 3.5rem;
   font-weight: 500;
   color: #28a665;
-  text-decoration: none;
   border-bottom: 3px solid #28a665;
   display: inline-flex;
   align-items: center;
-  line-height: 1.2;
+  line-height: 1.1;
   transition: opacity 0.3s ease;
   margin-top: 10px;
+  letter-spacing: -1px;
 
   &:hover { opacity: 0.8; }
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 2.5rem;
     border-bottom-width: 2px;
   }
 `;
@@ -350,34 +349,39 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 400px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 440px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
   border: 1px solid #eaeaea;
+  border-radius: 4px;
+  overflow: hidden;
 
+  /* Replicating the clean hover lift of Coaxsoft */
   &:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    transform: translateY(-8px);
+    border-color: transparent;
   }
 `;
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 220px;
+  height: 240px;
   overflow: hidden;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
   }
 
-  ${Card}:hover & img { transform: scale(1.05); }
+  ${Card}:hover & img { transform: scale(1.08); }
 `;
 
 const CardContent = styled.div`
-  padding: 24px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -385,29 +389,36 @@ const CardContent = styled.div`
 `;
 
 const TagBadge = styled.span`
-  background-color: #eef2fa;
+  background-color: #e6f7ef; /* Very light green bg */
   color: #28a665;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 12px;
-  margin-bottom: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 12px;
+  margin-bottom: 20px;
   display: inline-block;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  border-radius: 4px;
 `;
 
 const CardTitle = styled.h3`
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1.4;
   color: #111;
   margin: 0 0 20px 0;
-  font-weight: 400;
+  font-weight: 500;
   flex-grow: 1; 
+  transition: color 0.2s;
+
+  ${Card}:hover & {
+    color: #28a665;
+  }
 `;
 
 const CardDate = styled.div`
   font-size: 14px;
-  color: #888;
+  color: #999;
+  font-weight: 500;
   margin-top: auto;
 `;
 
@@ -415,51 +426,52 @@ const NavContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 16px;
-  margin-top: 40px;
+  margin-top: 50px;
   margin-bottom: 20px;
 `;
 
 const NavButton = styled.button`
-  width: 50px;
-  height: 50px;
-  border: 1px solid #ddd;
+  width: 56px;
+  height: 56px;
+  border: 1px solid #e0e0e0;
   background: transparent;
+  border-radius: 50%; /* Rounded circles like Coaxsoft */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: #111;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 
   &:hover {
     border-color: #28a665;
-    color: #28a665;
-    background: #fff;
+    color: #fff;
+    background: #28a665;
   }
   
-  &:disabled { opacity: 0.3; }
+  &:disabled { opacity: 0.3; cursor: not-allowed; }
 `;
 
 /* --- STYLES FOR INDUSTRY LEADERS --- */
 
 const LeadersSection = styled.div`
-  margin-top: 120px;
+  margin-top: 140px;
   text-align: center;
-  max-width: 1100px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 `;
 
 const LeadersTitle = styled.h2`
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 400;
   color: #111;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
   line-height: 1.2;
   
   @media (max-width: 768px) {
-    font-size: 1.8rem;
-    margin-bottom: 40px;
+    font-size: 2rem;
+    margin-bottom: 50px;
   }
 `;
 
@@ -467,27 +479,28 @@ const LogosGridWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0; /* Complete the grid border */
 `;
 
 const LogosRow = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  border-bottom: 1px solid #e0e0e0;
 `;
 
 const LogoBox = styled.div`
   flex: 0 0 20%; 
-  height: 120px;
+  height: 160px; /* Taller boxes */
   display: flex;
   align-items: center;
   justify-content: center;
   border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 30px;
+  background: #f9f9fa;
   transition: background-color 0.3s;
 
-  &:last-child { border-right: none; }
   &:hover { background-color: #fff; }
 
   /* 2nd Row (4 items) = 25% width */
@@ -495,29 +508,34 @@ const LogoBox = styled.div`
 
   @media (max-width: 900px) {
     flex: 0 0 33.33% !important; 
-    border-right: 1px solid #e0e0e0;
-    &:nth-child(3n) { border-right: none; }
   }
 
   @media (max-width: 600px) {
     flex: 0 0 50% !important;
-    height: 100px;
-    &:nth-child(2n) { border-right: none; }
+    height: 120px;
   }
 `;
 
 const LogoInner = styled.div`
   width: 100%;
-  max-width: 120px;
-  height: 50px;
+  max-width: 140px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.7; /* Slight fade by default */
+  transition: opacity 0.3s;
   
+  ${LogoBox}:hover & { opacity: 1; }
+
   svg {
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.3s;
   }
+
+  ${LogoBox}:hover & svg { filter: grayscale(0%); }
 `;
