@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser"; // ✅ 1. Imported EmailJS
 
 // --- Configuration & Colors ---
 const COAX_BLUE = "#28a665";
@@ -40,6 +41,7 @@ const CheckIcon = () => (
 
 export default function ContactForm() {
   const [activeTab, setActiveTab] = useState<'contact' | 'estimation'>('estimation');
+  const [isSending, setIsSending] = useState(false); // ✅ 2. Loading State
   
   const [formData, setFormData] = useState({
     firstName: "",
@@ -64,6 +66,54 @@ export default function ContactForm() {
 
   const handleBudgetChange = (value: string) => {
     setFormData(prev => ({ ...prev, budget: value }));
+  };
+
+  // ✅ 3. The Function to Send Emails
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Basic Validation
+    if (!formData.firstName || !formData.email || !formData.message) {
+      alert("Please fill in First Name, Email, and Message.");
+      return;
+    }
+
+    setIsSending(true); // Start loading
+
+    // Prepare data
+    const templateParams = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+      budget: formData.budget || "Not specified",
+      agreeFuture: formData.agreeFuture ? "Yes" : "No",
+      agreeTerms: formData.agreeTerms ? "Yes" : "No",
+    };
+
+    // Send using your keys
+    emailjs.send(
+      "service_v0bvgaj",      // Service ID
+      "template_9jp1jr8",     // Template ID
+      templateParams,
+      "MNATOKAylaiM9uzxD"     // Public Key
+    )
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+      alert("Message sent successfully!");
+      setIsSending(false); // Stop loading
+      
+      // Clear form
+      setFormData({
+        firstName: "", lastName: "", email: "", phone: "", message: "", 
+        budget: "", agreeFuture: false, agreeTerms: false,
+      });
+    }, (err) => {
+      console.log('FAILED...', err);
+      alert("Failed to send message. Please try again.");
+      setIsSending(false); // Stop loading even if failed
+    });
   };
 
   return (
@@ -197,8 +247,16 @@ export default function ContactForm() {
               </CheckboxLabel>
             </CheckboxGroup>
 
-            <SubmitButton whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              {activeTab === 'estimation' ? "Send Request" : "Send Message"} <SendPlaneIcon />
+            {/* ✅ 4. Updated Submit Button with Logic */}
+            <SubmitButton 
+              whileHover={{ scale: isSending ? 1 : 1.02 }} 
+              whileTap={{ scale: isSending ? 1 : 0.98 }}
+              onClick={handleSubmit}
+              disabled={isSending}
+              style={{ opacity: isSending ? 0.7 : 1, cursor: isSending ? 'not-allowed' : 'pointer' }}
+            >
+              {isSending ? "Sending..." : (activeTab === 'estimation' ? "Send Request" : "Send Message")} 
+              {!isSending && <SendPlaneIcon />}
             </SubmitButton>
           </Form>
         </LeftPanel>

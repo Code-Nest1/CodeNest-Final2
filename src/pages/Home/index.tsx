@@ -5,20 +5,22 @@ import styled from "styled-components";
 import Hero from "../../components/sections/Hero";
 import Services from "../../components/sections/Services";
 // import CaseStudies from "../../components/sections/CaseStudies";
-import ContactForm from "../../components/sections/ContactForm";
+// import ContactForm from "../../components/sections/ContactForm"; // (Uncommented this for you if you plan to use it)
 import Challenges from "../Challenges";
 import Industries from "../../components/sections/Industries";
 import About from "../../components/sections/AboutUs/index";
 import TrustedPartners from "../../components/sections/TrustedPartners"; 
 import ClientFeedback from "../../components/sections/ClientFeedback";
-import BlogSection from '../../components/sections/Blog'; // Imported here
+import BlogSection from '../../components/sections/Blog';
+
+// ✅ IMPORT THE SCROLL BUTTON
+import ScrollToTop from "../../components/ScrollToTop";
 
 const Page = styled.main`
   overflow-x: hidden;
   width: 100%;
 `;
 
-// Wrapper for sections that need constrained width (like Services/Contact)
 const SectionWrap = styled.section`
   max-width: 1200px;
   margin: 0 auto;
@@ -31,7 +33,6 @@ interface HomeProps {
 
 export default function Home({ scrollTo }: HomeProps) {
   
-  // Logic to handle smooth scrolling to specific IDs
   React.useEffect(() => {
     if (!scrollTo) return;
     const el = document.getElementById(scrollTo);
@@ -78,13 +79,13 @@ export default function Home({ scrollTo }: HomeProps) {
         <ClientFeedback />
       </div>
 
-      {/* ✅ BLOG SECTION (Added Here) */}
+      {/* BLOG SECTION */}
       <div id="blog">
         <BlogSection />
       </div>
       
-      {/* CASE STUDIES
-      <SectionWrap id="case-studies">
+      {/* CASE STUDIES */}
+      {/* <SectionWrap id="case-studies">
         <CaseStudies />
       </SectionWrap> */}
 
@@ -92,6 +93,9 @@ export default function Home({ scrollTo }: HomeProps) {
       {/* <SectionWrap id="contact">
         <ContactForm />
       </SectionWrap> */}
+
+      {/* ✅ ADD THE BUTTON HERE AT THE BOTTOM */}
+      <ScrollToTop />
 
     </Page>
   );

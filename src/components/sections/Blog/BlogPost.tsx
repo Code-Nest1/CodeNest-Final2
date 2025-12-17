@@ -2,9 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-// --- YOUR EXACT IMPORT ---
-import ContactForm from '../../ContactForm/index';
-
 // --- Global Styles ---
 const GlobalStyle = createGlobalStyle`
   body {
@@ -260,44 +257,6 @@ const BlogPost = () => {
           </SliderWrapper>
         </PageContainer>
       </RelatedSection>
-
-      {/* --- YOUR CONTACT FORM WITH REQUIRED PROPS --- */}
-      <ContactForm 
-        id="contact" 
-        title="Get in touch" 
-        content="Have a project in mind? Let’s talk about how we can help you build your custom solution." 
-      />
-
-      {/* --- Footer --- */}
-      <Footer>
-        <FooterContent>
-          <div className="col brand">
-            <h4>COAX Software</h4>
-            <p>Building the future of digital construction technology.</p>
-          </div>
-          <div className="col">
-            <h5>Company</h5>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Careers</a>
-          </div>
-          <div className="col">
-            <h5>Resources</h5>
-            <a href="#">Blog</a>
-            <a href="#">Case Studies</a>
-            <a href="#">Contact</a>
-          </div>
-          <div className="col">
-            <h5>Social</h5>
-            <a href="#">LinkedIn</a>
-            <a href="#">Facebook</a>
-            <a href="#">Twitter</a>
-          </div>
-        </FooterContent>
-        <FooterBottom>
-          &copy; 2025 COAX Software. All rights reserved.
-        </FooterBottom>
-      </Footer>
     </>
   );
 };
@@ -353,8 +312,3 @@ const CardsContainer = styled.div` display: flex; gap: 30px; overflow-x: auto; s
 const BlogCard = styled.div` min-width: 500px; background: white; display: flex; height: 280px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer; &:hover { transform: translateY(-5px); } .card-img { width: 45%; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; } } .card-content { width: 55%; padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; } .tag { background: #eef2ff; color: #2e5bff; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 6px 12px; border-radius: 4px; margin-bottom: 16px; } h3 { font-size: 20px; font-weight: 700; color: #111; margin: 0 0 16px 0; line-height: 1.4; } .date { font-size: 13px; color: #999; margin-top: auto; } @media (max-width: 600px) { min-width: 300px; flex-direction: column; height: auto; .card-img { width: 100%; height: 180px; } .card-content { width: 100%; } } `;
 const SliderControls = styled.div` display: flex; gap: 12px; margin-top: 40px; `;
 const SliderButton = styled.button` width: 48px; height: 48px; border: 1px solid #ddd; background: white; color: #111; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; &:hover { background: #2e5bff; border-color: #2e5bff; color: white; } `;
-
-// Footer Styles
-const Footer = styled.footer` background: #000; color: #666; padding: 80px 0 30px; font-size: 14px; `;
-const FooterContent = styled.div` max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 60px; @media (max-width: 900px) { grid-template-columns: 1fr 1fr; } .brand { h4 { color: white; font-size: 20px; margin: 0 0 15px 0; } } h5 { color: white; font-size: 16px; margin: 0 0 20px 0; } a { display: block; margin-bottom: 10px; transition: color 0.2s; &:hover { color: #2e5bff; } } `;
-const FooterBottom = styled.div` max-width: 1200px; margin: 0 auto; padding: 0 40px; border-top: 1px solid #222; padding-top: 30px; text-align: center; `;
