@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 
-// --- Global Styles ---
+// --- Global Styles & Theme ---
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -11,48 +12,105 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     color: #111;
-    background: #fff;
+    /* Subtle gradient background for a modern feel */
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%);
     overflow-x: hidden;
   }
-  a { text-decoration: none; color: inherit; }
-  ul, ol { list-style: none; padding: 0; margin: 0; }
-  button { font-family: inherit; }
-  ::selection { background: #2e5bff; color: white; }
+  
+  ::selection { background: #28a665; color: white; }
+
+  /* --- WORDPRESS CONTENT STYLING (Green Theme) --- */
+  .wp-content {
+    font-family: 'Manrope', sans-serif;
+    color: #333;
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  /* HEADINGS */
+  .wp-content h2, .wp-content h3, .wp-content h4 {
+    color: #1a1a1a;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+  }
+  .wp-content h2 { font-size: 32px; }
+  .wp-content h3 { font-size: 26px; }
+
+  /* PARAGRAPHS */
+  .wp-content p { margin-bottom: 24px; color: #444; }
+
+  /* IMAGES */
+  .wp-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(40, 166, 101, 0.1); /* Subtle green shadow */
+  }
+
+  /* LISTS */
+  .wp-content ul, .wp-content ol { margin-bottom: 30px; padding-left: 20px; }
+  .wp-content li { margin-bottom: 12px; }
+  .wp-content ul { list-style: disc; }
+  .wp-content ol { list-style: decimal; }
+  /* Custom bullet color */
+  .wp-content li::marker { color: #28a665; }
+
+  /* BLOCKQUOTES */
+  .wp-content blockquote {
+    border-left: 4px solid #28a665; /* Green Accent */
+    background: #f0fdf4; /* Very light green bg */
+    padding: 30px 40px;
+    margin: 40px 0;
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    font-size: 20px;
+    color: #1a4d33;
+  }
+
+  /* LINKS */
+  .wp-content a {
+    color: #28a665;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  .wp-content a:hover { color: #1e8550; }
+  
+  /* CODE BLOCKS */
+  .wp-content pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
 `;
 
+// --- Types ---
+interface WPRendered { rendered: string; }
+interface WPPostData {
+  id: number;
+  date: string;
+  slug: string;
+  title: WPRendered;
+  content: WPRendered;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{ source_url: string }>;
+    'author'?: Array<{ name: string; avatar_urls?: { '96': string } }>;
+  };
+}
+
 // --- Icons ---
-const ArrowRightIcon = () => (<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12l-18 12v-24z" /></svg>);
 const ArrowLeftBtn = () => (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>);
 const ArrowRightBtn = () => (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>);
 
-// Workflow Icons
-const IconBIM = () => (<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2e5bff" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>);
-const IconPreConst = () => (<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2e5bff" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/></svg>);
-const IconOps = () => (<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2e5bff" strokeWidth="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>);
-const IconChange = () => (<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2e5bff" strokeWidth="1.5"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>);
-const IconSite = () => (<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2e5bff" strokeWidth="1.5"><path d="M3 21h18M5 21V7l8-4 8 4v14"/><path d="M13 11v10"/></svg>);
-
-// --- Data ---
-const articleData = {
-  title: 'How to implement construction time tracking software',
-  author: {
-    name: 'Petro Starych',
-    role: 'COO, Co-Founder COAX Software',
-    subRole: 'on Development',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=100&h=100&q=80',
-    date: 'December 12, 2024',
-  },
-  coverImage: 'https://img.freepik.com/free-vector/blue-futuristic-networking-technology_53876-100694.jpg?w=1380',
-  toc: [
-    { id: 'intro', title: 'How is time tracking software better than manual timesheets?' },
-    { id: 'benefits', title: 'Benefits of construction timesheet software' },
-    { id: 'roi', title: 'The ROI of construction time tracking software' },
-    { id: 'how-does', title: 'How does construction timekeeping software work?' },
-    { id: 'steps', title: 'Steps to implement time tracking software in construction' },
-    { id: 'faq', title: 'FAQ' },
-  ],
-};
-
+// --- Hardcoded Related Posts Data ---
 const relatedPosts = [
   {
     id: 1,
@@ -79,31 +137,37 @@ const relatedPosts = [
 
 // --- Main Component ---
 const BlogPost = () => {
-  const [activeSection, setActiveSection] = useState('intro');
-  const sliderRef = useRef<HTMLDivElement>(null);
+  const { slug } = useParams<{ slug: string }>();
+  const [post, setPost] = useState<WPPostData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const sliderRef = useRef<HTMLDivElement>(null); 
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-      const sections = articleData.toc.map(s => document.getElementById(s.id));
-      for (const section of sections) {
-        if (section && section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
-          setActiveSection(section.id);
+    if (!slug) { setLoading(false); return; }
+    
+    // Fetch from your specific subdomain
+    const wpUrl = `https://blogs.codenest.us.com/wp-json/wp/v2/posts?slug=${slug}&_embed`;
+
+    axios.get(wpUrl)
+      .then(res => {
+        if (res.data && res.data.length > 0) {
+          setPost(res.data[0]);
+        } else {
+          setPost(null);
         }
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching post:", err);
+        setLoading(false);
+        setPost(null);
+      });
+  }, [slug]);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) window.scrollTo({ top: element.offsetTop - 100, behavior: 'smooth' });
-  };
-
+  // Slider Logic
   const scrollSlider = (direction: 'left' | 'right') => {
     if (sliderRef.current) {
-      const scrollAmount = 400; // Width of a card
+      const scrollAmount = 400; 
       if (direction === 'left') {
         sliderRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       } else {
@@ -112,119 +176,57 @@ const BlogPost = () => {
     }
   };
 
+  if (loading) return <LoadingContainer>Loading Article...</LoadingContainer>;
+  if (!post) return <LoadingContainer>Article not found.</LoadingContainer>;
+
+  // Extract Data
+  const title = post.title.rendered;
+  const content = post.content.rendered;
+  const date = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const featureImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
+  const authorName = post._embedded?.['author']?.[0]?.name || 'Editor';
+  const authorImg = post._embedded?.['author']?.[0]?.avatar_urls?.['96'] || 'https://via.placeholder.com/96';
+
   return (
     <>
       <GlobalStyle />
       <PageContainer>
-        {/* Header & Content */}
+        {/* Header & Breadcrumbs */}
         <HeaderWrapper>
           <Breadcrumbs>
-            <Link to="/">Home</Link><span className="divider">.</span>
-            <Link to="/blog">Blog</Link><span className="divider">.</span>
-            <span className="current">{articleData.title}</span>
+            <Link to="/">Home</Link><span className="divider">/</span>
+            <Link to="/blog">Blog</Link><span className="divider">/</span>
+            <span className="current" dangerouslySetInnerHTML={{ __html: title }} />
           </Breadcrumbs>
-          <DateText>{articleData.author.date}</DateText>
+          
+          <DateText>{date}</DateText>
+          
           <HeaderGrid>
             <AuthorBox>
-              <AuthorImg src={articleData.author.image} alt={articleData.author.name} />
+              <AuthorImg src={authorImg} alt={authorName} />
               <AuthorInfo>
-                <AuthorName>{articleData.author.name}</AuthorName>
-                <AuthorRole>{articleData.author.role}</AuthorRole>
-                <AuthorSubRole>{articleData.author.subRole}</AuthorSubRole>
+                <AuthorName>{authorName}</AuthorName>
+                <AuthorRole>Author</AuthorRole>
               </AuthorInfo>
             </AuthorBox>
-            <MainTitle>{articleData.title}</MainTitle>
+            <MainTitle dangerouslySetInnerHTML={{ __html: title }} />
           </HeaderGrid>
         </HeaderWrapper>
 
-        <HeroSection><HeroImg src={articleData.coverImage} alt="Hero" /></HeroSection>
+        {/* Hero Image */}
+        {featureImg && (
+          <HeroSection>
+            <HeroImg src={featureImg} alt="Cover" />
+          </HeroSection>
+        )}
 
+        {/* Main Content Area */}
         <ContentContainer>
-          <Sidebar>
-            <TocLabel><span>/</span> Table of Contents</TocLabel>
-            <TocList>
-              {articleData.toc.map((item) => (
-                <TocItem key={item.id} $active={activeSection === item.id} onClick={() => scrollToSection(item.id)}>
-                  {item.title}
-                </TocItem>
-              ))}
-            </TocList>
-          </Sidebar>
-
-          <ArticleBody>
-             <div id="intro">
-               <IntroText>
-                 To get out of the trap that <LinkSpan>40% of employees</LinkSpan> fall into, wasting 25% of their time on manual data entry, an <LinkSpan>experiment by Redman et al.</LinkSpan> suggests a workflow on how to implement automatic construction productivity tracking.
-               </IntroText>
-               <CustomList>
-                 <li><div className="icon"><ArrowRightIcon /></div><p><strong>Use on-the-go mobile apps</strong> instead of repetitive manual processes.</p></li>
-                 <li><div className="icon"><ArrowRightIcon /></div><p><strong>Integrate the mentioned apps</strong> with a project management software.</p></li>
-               </CustomList>
-               <p>Sound simple? Well, there are many nuances to trace. In this article, we will break down the benefits, workflows, and implementation steps.</p>
-             </div>
-
-             <div id="benefits">
-               <SectionHeading>Benefits of construction timesheet software</SectionHeading>
-               <p>Digital technologies open up a world of possibilities:</p>
-               <CustomList>
-                 <li><div className="icon"><ArrowRightIcon /></div><p><strong>Digital time sheet software eliminates data entry</strong>, saving about two full days.</p></li>
-                 <li><div className="icon"><ArrowRightIcon /></div><p><strong>Managers get instant visual feedback</strong> on what labor costs are for each project.</p></li>
-               </CustomList>
-             </div>
-
-             <div id="roi">
-               <SectionHeading>The ROI of construction time tracking software</SectionHeading>
-               <p>Time theft costs roughly 7% of labor budgets. <strong>Time tracking software uses real-time monitoring and GPS verification to directly address these losses.</strong></p>
-               <StatsContainer>
-                  <div className="stat-box left">
-                    <p className="stat-label">Instead of focusing on priority activities, construction professionals spend</p>
-                    <div className="chart-circle"><span>35%</span></div>
-                    <p className="stat-sub">of their work hours completing non-optimal activities</p>
-                  </div>
-                  <div className="divider-line"></div>
-                  <div className="stat-box right">
-                    <div className="top-val">14+ hours</div>
-                    <p className="stat-label">are wasted each week, dealing with</p>
-                    <div className="tree-diagram">
-                      <div className="branch"><span className="val">4.7</span><span className="desc">Conflict resolution</span></div>
-                      <div className="branch center"><span className="val">5.5</span><span className="desc">Dispersed info</span></div>
-                      <div className="branch"><span className="val">3.9</span><span className="desc">Mistakes/Rework</span></div>
-                    </div>
-                  </div>
-               </StatsContainer>
-             </div>
-
-             <div id="how-does">
-               <SectionHeading>How does construction timekeeping software work?</SectionHeading>
-               <WorkflowContainer>
-                 <h6>5 essential construction workflows</h6>
-                 <div className="grid">
-                   <div className="item"><IconBIM /><span>BIM workflow</span></div>
-                   <div className="item"><IconPreConst /><span>Pre-construction</span></div>
-                   <div className="item"><IconOps /><span>OPs</span></div>
-                   <div className="item"><IconChange /><span>Change orders</span></div>
-                   <div className="item"><IconSite /><span>Construction site</span></div>
-                 </div>
-               </WorkflowContainer>
-             </div>
-
-             <div id="steps">
-               <SectionHeading>Steps to implement time tracking software</SectionHeading>
-               <NumberedList>
-                 <li><strong>Set communication and goals.</strong> Communicate purposes clearly.</li>
-                 <li><strong>Choose the software.</strong> Look for mobile capabilities and GPS.</li>
-                 <li><strong>Create an implementation schedule.</strong> Assign oversight to seasoned staff.</li>
-                 <li><strong>Carry out pilot testing.</strong> Soft launch with a small team.</li>
-                 <li><strong>Offer thorough instruction.</strong> Conduct focused training sessions.</li>
-               </NumberedList>
-             </div>
-             
-             <div id="faq" style={{height:'50px'}}></div>
-          </ArticleBody>
+          <ArticleBody className="wp-content" dangerouslySetInnerHTML={{ __html: content }} />
         </ContentContainer>
       </PageContainer>
 
-      {/* --- Related Blogs Slider --- */}
+      {/* --- Related Blogs Slider (Updated Color Theme) --- */}
       <RelatedSection>
         <PageContainer>
           <SectionHeader>
@@ -251,8 +253,8 @@ const BlogPost = () => {
             </CardsContainer>
             
             <SliderControls>
-              <SliderButton onClick={() => scrollSlider('left')}><ArrowLeftBtn /></SliderButton>
-              <SliderButton onClick={() => scrollSlider('right')}><ArrowRightBtn /></SliderButton>
+              <SliderButton onClick={() => scrollSlider('left')} aria-label="Previous"><ArrowLeftBtn /></SliderButton>
+              <SliderButton onClick={() => scrollSlider('right')} aria-label="Next"><ArrowRightBtn /></SliderButton>
             </SliderControls>
           </SliderWrapper>
         </PageContainer>
@@ -264,51 +266,154 @@ const BlogPost = () => {
 export default BlogPost;
 
 // ==========================================
-// STYLED COMPONENTS
+// STYLED COMPONENTS (Green Theme: #28a665)
 // ==========================================
 
-const PageContainer = styled.div`
-  max-width: 1440px; margin: 0 auto; padding: 40px 60px;
-  @media (max-width: 1024px) { padding: 20px; }
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 `;
-const HeaderWrapper = styled.header` margin-bottom: 40px; `;
-const Breadcrumbs = styled.nav`
-  font-size: 13px; color: #999; display: flex; align-items: center; gap: 8px; margin-bottom: 24px;
-  a { transition: color 0.2s; &:hover { color: #2e5bff; } }
-  .divider { color: #ccc; padding-bottom: 5px; }
-  .current { color: #111; }
-`;
-const DateText = styled.div` font-size: 13px; color: #999; margin-bottom: 20px; `;
-const HeaderGrid = styled.div` display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: flex-start; @media (max-width: 768px){ grid-template-columns: 1fr; }`;
-const AuthorBox = styled.div` display: flex; gap: 16px; `;
-const AuthorImg = styled.img` width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid #eee; `;
-const AuthorInfo = styled.div` display: flex; flex-direction: column; font-size: 14px; line-height: 1.4; `;
-const AuthorName = styled.span` font-weight: 700; color: #2e5bff; `;
-const AuthorRole = styled.span` color: #999; font-size: 12px; `;
-const AuthorSubRole = styled.span` color: #999; font-size: 12px; `;
-const MainTitle = styled.h1` font-size: 48px; font-weight: 400; line-height: 1.15; color: #1a1a1a; margin: 0; letter-spacing: -1.5px; @media (max-width: 768px){ font-size: 32px; } `;
-const HeroSection = styled.div` width: 100%; height: 400px; margin-bottom: 60px; overflow: hidden; `;
-const HeroImg = styled.img` width: 100%; height: 100%; object-fit: cover; `;
-const ContentContainer = styled.div` display: grid; grid-template-columns: 280px 1fr; gap: 60px; @media(max-width:900px){ grid-template-columns: 1fr; } `;
-const Sidebar = styled.aside` position: sticky; top: 100px; align-self: start; @media(max-width:900px){ display:none; } `;
-const TocLabel = styled.div` font-size: 14px; color: #999; margin-bottom: 24px; span{ color:#ccc; margin-right:5px; }`;
-const TocList = styled.div` display: flex; flex-direction: column; gap: 16px; `;
-const TocItem = styled.a<{ $active: boolean }>` font-size: 14px; color: ${p=>p.$active?'#2e5bff':'#999'}; cursor:pointer; &:hover{color:#2e5bff;} `;
-const ArticleBody = styled.div` font-size: 16px; line-height: 1.7; color: #444; max-width: 800px; p { margin-bottom: 24px; } `;
-const IntroText = styled.p` font-size: 16px; color: #333; margin-bottom: 30px; `;
-const LinkSpan = styled.span` text-decoration: underline; text-decoration-color: #ccc; text-underline-offset: 3px; color: #111; font-weight: 500; cursor: pointer; &:hover{ color:#2e5bff; text-decoration-color:#2e5bff; } `;
-const CustomList = styled.ul` margin: 30px 0; li{ display:flex; gap:16px; margin-bottom:20px; } .icon{ min-width:10px; margin-top:6px; color:#111; } `;
-const SectionHeading = styled.h2` font-size: 40px; font-weight: 400; line-height: 1.1; color: #111; margin: 60px 0 30px; letter-spacing: -1px; `;
-const NumberedList = styled.ol` margin: 30px 0; padding-left:0; counter-reset: item; li{ display:block; margin-bottom:24px; padding-left:24px; position:relative; &:before{ content:counter(item)". "; counter-increment:item; position:absolute; left:0; top:0; font-weight:700; color:#111; } } `;
-const StatsContainer = styled.div` display: flex; background: #fff; margin: 50px 0; padding: 20px 0; align-items: flex-start; @media(max-width:768px){ flex-direction:column; gap:30px; } .divider-line{ width:1px; background:#eee; margin:0 40px; align-self:stretch; } .stat-box{ flex:1; text-align:center; display:flex; flex-direction:column; align-items:center; } .stat-label{ font-size:14px; font-weight:700; margin-bottom:20px; max-width:280px; } .stat-sub{ font-size:13px; color:#666; margin-top:15px; font-weight:600; max-width:200px; } .chart-circle{ width:120px; height:120px; border-radius:50%; background:conic-gradient(#00e0ff 0% 35%, #f0f0f0 35% 100%); display:flex; align-items:center; justify-content:center; position:relative; &:after{ content:''; position:absolute; width:80px; height:80px; background:#fff; border-radius:50%; } span{ position:relative; z-index:2; font-size:24px; font-weight:700; color:#2e5bff; } } .top-val{ font-size:32px; font-weight:700; color:#2e5bff; margin-bottom:10px; } .tree-diagram{ display:flex; gap:10px; width:100%; justify-content:space-between; margin-top:20px; position:relative; &:before{ content:''; position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:1px; height:10px; background:#ccc; } &:after{ content:''; position:absolute; top:-10px; left:15%; right:15%; height:1px; background:#ccc; } .branch{ display:flex; flex-direction:column; align-items:center; position:relative; flex:1; &:before{ content:''; position:absolute; top:-10px; width:1px; height:10px; background:#ccc; } .val{ font-size:18px; font-weight:700; color:#2e5bff; margin-bottom:5px; } .desc{ font-size:11px; font-weight:700; line-height:1.2; } } } `;
-const WorkflowContainer = styled.div` margin:50px 0; h6{ text-align:center; font-size:14px; font-weight:700; text-transform:uppercase; margin-bottom:30px; } .grid{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; } .item{ display:flex; flex-direction:column; align-items:center; gap:12px; width:100px; text-align:center; span{ font-size:12px; font-weight:600; } } `;
 
-// Related & Slider Styles
-const RelatedSection = styled.div` background-color: #f7f8fa; padding: 80px 0 100px; margin-top: 80px; overflow: hidden; `;
-const SectionHeader = styled.div` margin-bottom: 50px; `;
-const BigHeading = styled.h2` font-size: 48px; font-weight: 400; line-height: 1.1; color: #1a1a1a; margin: 0; letter-spacing: -1.5px; .highlight { color: #2e5bff; } @media (max-width: 768px) { font-size: 36px; } `;
+const LoadingContainer = styled.div`
+  text-align: center; padding: 100px; font-size: 1.5rem; color: #555;
+`;
+
+const PageContainer = styled.div`
+  max-width: 1440px; margin: 0 auto; padding: 60px;
+  animation: ${fadeIn} 0.6s ease-out;
+  @media (max-width: 1024px) { padding: 40px 20px; }
+`;
+
+const HeaderWrapper = styled.header`
+  margin-bottom: 50px;
+  max-width: 1000px; 
+  margin-left: auto; margin-right: auto;
+`;
+
+const Breadcrumbs = styled.nav`
+  font-size: 13px; color: #888; display: flex; align-items: center; gap: 8px; margin-bottom: 24px;
+  a { transition: color 0.2s; &:hover { color: #28a665; } }
+  .divider { color: #ccc; }
+  .current { 
+    color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px; 
+  }
+`;
+
+const DateText = styled.div` 
+  font-size: 13px; color: #28a665; margin-bottom: 20px; 
+  text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+`;
+
+const HeaderGrid = styled.div`
+  display: flex; flex-direction: column; gap: 30px; align-items: flex-start;
+`;
+
+const AuthorBox = styled.div` display: flex; gap: 16px; align-items: center; `;
+const AuthorImg = styled.img` width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); `;
+const AuthorInfo = styled.div` display: flex; flex-direction: column; font-size: 14px; line-height: 1.3; `;
+const AuthorName = styled.span` font-weight: 700; color: #111; `;
+const AuthorRole = styled.span` color: #28a665; font-size: 12px; font-weight: 600; text-transform: uppercase; `;
+
+const MainTitle = styled.h1`
+  font-size: 52px; font-weight: 800; line-height: 1.1; color: #111; margin: 0; letter-spacing: -1.5px;
+  @media (max-width: 768px){ font-size: 36px; }
+`;
+
+const HeroSection = styled.div`
+  width: 100%; max-width: 1200px; height: 500px; margin: 0 auto 80px; 
+  overflow: hidden; border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15); /* Deep shadow */
+  @media (max-width: 768px){ height: 300px; margin-bottom: 40px; }
+`;
+
+const HeroImg = styled.img`
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.8s ease;
+  &:hover { transform: scale(1.03); } 
+`;
+
+const ContentContainer = styled.div`
+  display: flex; justify-content: center;
+`;
+
+const ArticleBody = styled.div`
+  max-width: 800px; width: 100%; padding-bottom: 60px;
+`;
+
+// --- Related Section Styles ---
+const RelatedSection = styled.div` 
+  /* Light mint background for related section */
+  background-color: #f2f9f5; 
+  padding: 100px 0 120px; 
+  margin-top: 40px; 
+  overflow: hidden; 
+  border-top: 1px solid #e1eadd;
+`;
+
+const SectionHeader = styled.div` margin-bottom: 60px; text-align: center; `;
+const BigHeading = styled.h2` 
+  font-size: 48px; font-weight: 700; line-height: 1.1; color: #1a1a1a; margin: 0; letter-spacing: -1px; 
+  .highlight { color: #28a665; position: relative; display: inline-block; }
+  .highlight::after {
+    content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 8px; 
+    background: rgba(40, 166, 101, 0.2); z-index: -1;
+  }
+  @media (max-width: 768px) { font-size: 32px; } 
+`;
+
 const SliderWrapper = styled.div` display: flex; flex-direction: column; align-items: center; `;
-const CardsContainer = styled.div` display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; width: 100%; padding-bottom: 20px; -ms-overflow-style: none; scrollbar-width: none; &::-webkit-scrollbar { display: none; } `;
-const BlogCard = styled.div` min-width: 500px; background: white; display: flex; height: 280px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s; cursor: pointer; &:hover { transform: translateY(-5px); } .card-img { width: 45%; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; } } .card-content { width: 55%; padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; } .tag { background: #eef2ff; color: #2e5bff; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 6px 12px; border-radius: 4px; margin-bottom: 16px; } h3 { font-size: 20px; font-weight: 700; color: #111; margin: 0 0 16px 0; line-height: 1.4; } .date { font-size: 13px; color: #999; margin-top: auto; } @media (max-width: 600px) { min-width: 300px; flex-direction: column; height: auto; .card-img { width: 100%; height: 180px; } .card-content { width: 100%; } } `;
-const SliderControls = styled.div` display: flex; gap: 12px; margin-top: 40px; `;
-const SliderButton = styled.button` width: 48px; height: 48px; border: 1px solid #ddd; background: white; color: #111; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; &:hover { background: #2e5bff; border-color: #2e5bff; color: white; } `;
+const CardsContainer = styled.div` 
+  display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; width: 100%; padding: 20px 0 40px; 
+  -ms-overflow-style: none; scrollbar-width: none; 
+  &::-webkit-scrollbar { display: none; } 
+`;
+
+const BlogCard = styled.div` 
+  min-width: 450px; background: white; display: flex; height: 260px; 
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+  transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent;
+
+  &:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 20px 40px rgba(40, 166, 101, 0.15); /* Green shadow on hover */
+    border-color: #28a665;
+  } 
+
+  .card-img { width: 45%; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; } } 
+  &:hover .card-img img { transform: scale(1.05); }
+
+  .card-content { width: 55%; padding: 25px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; } 
+  
+  .tag { 
+    background: #e6f7ee; color: #28a665; 
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 6px 12px; border-radius: 6px; margin-bottom: 16px; 
+  } 
+  
+  h3 { font-size: 20px; font-weight: 700; color: #111; margin: 0 0 16px 0; line-height: 1.4; transition: color 0.2s;} 
+  &:hover h3 { color: #28a665; }
+
+  .date { font-size: 13px; color: #999; margin-top: auto; } 
+
+  @media (max-width: 600px) { 
+    min-width: 300px; flex-direction: column; height: auto; 
+    .card-img { width: 100%; height: 180px; } 
+    .card-content { width: 100%; padding: 20px; } 
+  } 
+`;
+
+const SliderControls = styled.div` display: flex; gap: 16px; margin-top: 20px; `;
+const SliderButton = styled.button` 
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid #e1eadd; background: white; color: #111; 
+  display: flex; align-items: center; justify-content: center; 
+  cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+  &:hover { 
+    background: #28a665; border-color: #28a665; color: white; 
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(40, 166, 101, 0.3);
+  } 
+`;

@@ -17,8 +17,8 @@ import Portfolio from "./pages/portfolio/Portfolio";
 import ProjectDetail from "./pages/portfolio/ProjectDetail"; 
 
 // --- Blog Pages (New) ---
-// Assuming you placed these in src/blog/ or src/pages/blog/
-// Adjust path if your folder structure is different
+// Assuming you placed these in src/components/sections/Blog/
+// If your folder structure is different, adjust the paths accordingly.
 import BlogListing from "./components/sections/Blog/index";      // The list of all blogs
 import BlogPost from "./components/sections/Blog/BlogPost";      // The single blog detail page
 
@@ -41,7 +41,6 @@ const App: React.FC = () => {
   }, [pathname]);
 
   // Logic to hide the Global Contact Form on specific detail pages
-  // (e.g., Blog Post already has a CTA inside it, so we hide the footer form)
   const hideContactForm = pathname.includes('/portfolio/') || pathname.includes('/blog/');
 
   return (
@@ -76,11 +75,6 @@ const App: React.FC = () => {
       </main>
 
       {/* === GLOBAL CONTACT FORM === */}
-      {/* 
-          We render this on most pages, but hide it on Detail pages 
-          (Portfolio/Blog) if they have their own specific footer/CTA flow.
-          Remove the check if you want the form on EVERY page.
-      */}
       {!hideContactForm && (
         <div id="contact-us">
           <ContactForm />

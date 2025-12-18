@@ -1,82 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios'; 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { useNavigate } from 'react-router-dom'; // ✅ IMPORTED FOR NAVIGATION
+import { useNavigate } from 'react-router-dom';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-// --- Types ---
-interface BlogPost {
-  id: number;
-  tag: string;
-  title: string;
-  date: string;
-  image: string;
+// --- Types for WordPress Data ---
+interface WPRendered {
+  rendered: string;
 }
 
-// --- Data: Blog Posts ---
-const blogPosts: BlogPost[] = [
-  {
-    id: 1,
-    // ✅ Updated to match the specific Detail Page we created
-    tag: 'Construction',
-    title: 'How to implement construction time tracking software',
-    date: 'November 28, 2025',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 2,
-    tag: 'eCommerce',
-    title: 'Retail on cloud nine: A full guide to cloud modernization',
-    date: 'November 26, 2025',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 3,
-    tag: 'Construction',
-    title: 'How to launch an online marketplace for selling building materials',
-    date: 'November 24, 2025',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 4,
-    tag: 'Travel',
-    title: 'A complete guide to hotel mapping tools',
-    date: 'November 21, 2025',
-    image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 5,
-    tag: 'Healthcare',
-    title: 'Telemedicine App Development: Features & Cost',
-    date: 'November 18, 2025',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 6,
-    tag: 'Fintech',
-    title: 'The Future of Digital Banking: Trends to Watch',
-    date: 'November 15, 2025',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 7,
-    tag: 'eCommerce',
-    title: 'Optimizing User Experience in Mobile Shopping Apps',
-    date: 'November 12, 2025',
-    image: 'https://images.unsplash.com/photo-1512428559087-560fa0db79b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 8,
-    tag: 'Real Estate',
-    title: 'PropTech: How Technology is Changing Real Estate',
-    date: 'November 10, 2025',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-  },
-];
+interface WPPost {
+  id: number;
+  slug: string;
+  date: string;
+  title: WPRendered;
+  excerpt: WPRendered;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{ source_url: string }>;
+    'wp:term'?: Array<Array<{ name: string }>>; // For categories/tags
+  };
+}
 
 // --- BRAND SVG COMPONENTS ---
 const BmwLogo = () => (
@@ -178,100 +126,114 @@ const DiagonalArrow = () => (
 );
 
 // --- Main Component ---
-
 const BlogSection = () => {
+  const [posts, setPosts] = useState<WPPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
-  const navigate = useNavigate(); // ✅ Hook for navigation
+  const navigate = useNavigate();
 
-  // ✅ Helper: Convert Title to Slug & Navigate
-  const handleCardClick = (title: string) => {
-    // 1. Convert to lowercase
-    // 2. Remove special chars
-    // 3. Replace spaces with dashes
-    const slug = title
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/[\s_-]+/g, '-')
-      .replace(/^-+|-+$/g, '');
+  // FETCH DATA FROM WORDPRESS
+  useEffect(() => {
+    // ✅ CONNECTED TO YOUR NEW SUBDOMAIN
+    const wpUrl = 'https://blogs.codenest.us.com/wp-json/wp/v2/posts?_embed'; 
 
-    // Navigate to the specific blog page
-    navigate(`/blog/${slug}`);
+    axios.get(wpUrl)
+      .then(res => {
+        setPosts(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching blogs:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  // Helper to format date
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
   return (
     <SectionWrapper>
       <HeaderContainer>
         <MainTitle>Want to know more?</MainTitle>
-        {/* Clickable Header Link */}
         <LinkTitle onClick={() => navigate('/blog')} style={{ cursor: 'pointer' }}>
           Check our blog <DiagonalArrow />
         </LinkTitle>
       </HeaderContainer>
 
-      <SliderContainer>
-        <Swiper
-          modules={[Navigation]}
-          navigation={{ prevEl, nextEl }}
-          spaceBetween={30}
-          breakpoints={{
-            0: { slidesPerView: 1.1, slidesPerGroup: 1 },
-            768: { slidesPerView: 2, slidesPerGroup: 2 },
-            1024: { slidesPerView: 3, slidesPerGroup: 3 },
-          }}
-          style={{ paddingBottom: '20px' }}
-        >
-          {blogPosts.map((post) => (
-            <SwiperSlide key={post.id}>
-              {/* ✅ Added onClick event to the Card */}
-              <Card onClick={() => handleCardClick(post.title)}>
-                <ImageWrapper>
-                  <img src={post.image} alt={post.title} />
-                </ImageWrapper>
-                <CardContent>
-                  <TagBadge>{post.tag}</TagBadge>
-                  <CardTitle>{post.title}</CardTitle>
-                  <CardDate>{post.date}</CardDate>
-                </CardContent>
-              </Card>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </SliderContainer>
+      {loading ? (
+        <LoadingText>Loading Articles...</LoadingText>
+      ) : (
+        <>
+          <SliderContainer>
+            <Swiper
+              modules={[Navigation]}
+              navigation={{ prevEl, nextEl }}
+              spaceBetween={30}
+              breakpoints={{
+                0: { slidesPerView: 1.1, slidesPerGroup: 1 },
+                768: { slidesPerView: 2, slidesPerGroup: 2 },
+                1024: { slidesPerView: 3, slidesPerGroup: 3 },
+              }}
+              style={{ paddingBottom: '20px' }}
+            >
+              {posts.map((post) => {
+                // Safely extract image
+                const featuredImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url 
+                  || 'https://via.placeholder.com/800x600?text=No+Image'; // Fallback
+                
+                // Safely extract category
+                const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'News';
 
-      <NavContainer>
-        <NavButton ref={(node) => setPrevEl(node)}>
-          <ArrowLeftIcon />
-        </NavButton>
-        <NavButton ref={(node) => setNextEl(node)}>
-          <ArrowRightIcon />
-        </NavButton>
-      </NavContainer>
+                return (
+                  <SwiperSlide key={post.id}>
+                    {/* Navigate using the Slug provided by WordPress */}
+                    <Card onClick={() => navigate(`/blog/${post.slug}`)}>
+                      <ImageWrapper>
+                        <img src={featuredImg} alt={post.title.rendered} />
+                      </ImageWrapper>
+                      <CardContent>
+                        <TagBadge>{category}</TagBadge>
+                        {/* render HTML entities in title correctly */}
+                        <CardTitle dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+                        <CardDate>{formatDate(post.date)}</CardDate>
+                      </CardContent>
+                    </Card>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </SliderContainer>
+
+          <NavContainer>
+            <NavButton ref={(node) => setPrevEl(node)}>
+              <ArrowLeftIcon />
+            </NavButton>
+            <NavButton ref={(node) => setNextEl(node)}>
+              <ArrowRightIcon />
+            </NavButton>
+          </NavContainer>
+        </>
+      )}
 
       {/* --- INDUSTRY LEADERS --- */}
       <LeadersSection>
-        <LeadersTitle>
-          Industry leaders our <br /> clients work with
-        </LeadersTitle>
-        
+        <LeadersTitle>Industry leaders our <br /> clients work with</LeadersTitle>
         <LogosGridWrapper>
           <LogosRow>
             {topRowComponents.map(({ id, Comp }) => (
-              <LogoBox key={id}>
-                <LogoInner>
-                  <Comp />
-                </LogoInner>
-              </LogoBox>
+              <LogoBox key={id}><LogoInner><Comp /></LogoInner></LogoBox>
             ))}
           </LogosRow>
           <LogosRow>
             {bottomRowComponents.map(({ id, Comp }) => (
-              <LogoBox key={id}>
-                <LogoInner>
-                  <Comp />
-                </LogoInner>
-              </LogoBox>
+              <LogoBox key={id}><LogoInner><Comp /></LogoInner></LogoBox>
             ))}
           </LogosRow>
         </LogosGridWrapper>
@@ -284,7 +246,7 @@ const BlogSection = () => {
 export default BlogSection;
 
 // --- Styles ---
-
+const LoadingText = styled.div`text-align:center; padding: 40px; font-size: 1.2rem; color: #999;`;
 const SectionWrapper = styled.section`
   padding: 100px 20px;
   background-color: #f9f9fa; 
@@ -356,7 +318,6 @@ const Card = styled.div`
   border-radius: 4px;
   overflow: hidden;
 
-  /* Replicating the clean hover lift of Coaxsoft */
   &:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
     transform: translateY(-8px);
@@ -451,8 +412,6 @@ const NavButton = styled.button`
   
   &:disabled { opacity: 0.3; cursor: not-allowed; }
 `;
-
-/* --- STYLES FOR INDUSTRY LEADERS --- */
 
 const LeadersSection = styled.div`
   margin-top: 140px;
