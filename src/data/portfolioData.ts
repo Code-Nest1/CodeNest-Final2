@@ -11,10 +11,10 @@ export const projectsData = [
     subtitle: "Advanced Finance Calculator & Lead Capture Platform",
     
     // Header & Meta
-    heroImage: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop", // Replace with your Screenshot 1
+    heroImage: "/images/portfolio/heroImage.jpg",
     logoText: "Exclusive",
     logoSub: "Finance",
-    website: "exclusivecarfinance.co.uk", // Example URL
+    website: "exclusivecarfinance.com", 
     timeline: "3 Months",
     
     // Sidebar Data
@@ -52,31 +52,31 @@ export const projectsData = [
         id: 0,
         title: "Custom Finance Calculator",
         desc: "Real-time monthly payment projections, total credit charge, and total payable amount using bespoke JavaScript logic not possible with standard plugins.",
-        img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/calculator.jpg"
       },
       {
         id: 1,
         title: "Finance Application Workflow",
         desc: "Users can submit full application requests with necessary details rooted directly into the client's CRM system for immediate processing.",
-        img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/workflow.jpg"
       },
       {
         id: 2,
         title: "Lead Capture Automation",
         desc: "CRM integration allows for automated email responses, data organization, and streamlined follow-up workflows to close deals faster.",
-        img: "https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/lead capture.jpg"
       },
       {
         id: 3,
         title: "High-Performance Next.js",
         desc: "Ultra-fast load speeds, modern UI animations, and secure architecture without the limitations or security vulnerabilities of WordPress.",
-        img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/next.js.jpg"
       },
       {
         id: 4,
         title: "Conversion-Optimized UX",
         desc: "Clear CTAs, simplified forms, improved readability, and a trust-focused copy layout designed specifically for the UK finance industry.",
-        img: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/lead capture copy.jpg"
       }
     ],
 
