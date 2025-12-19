@@ -33,14 +33,13 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           
-          # We use ./build/ because you are using React (CRA)
+          # Your local build folder (React uses 'build')
           local-dir: ./build/
           
-          # CRITICAL FIX: Changed from ./public_html/ to ./ 
-          # This forces files to overwrite your current site directly.
-          server-dir: ./
+          # FIX: We point to the public_html folder specifically
+          server-dir: ./public_html/
           
-          # SAFETY LOCK: This ensures your blogs folder is NEVER deleted
+          # SAFETY LOCK: This protects your Blogs folders
           exclude: |
             **/.git*
             **/.git*/**
