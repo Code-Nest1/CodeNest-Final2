@@ -16,11 +16,9 @@ import ServicesPage from "./pages/Services";
 import Portfolio from "./pages/portfolio/Portfolio";
 import ProjectDetail from "./pages/portfolio/ProjectDetail"; 
 
-// --- Blog Pages (New) ---
-// Assuming you placed these in src/components/sections/Blog/
-// If your folder structure is different, adjust the paths accordingly.
-import BlogListing from "./components/sections/Blog/index";      // The list of all blogs
-import BlogPost from "./components/sections/Blog/BlogPost";      // The single blog detail page
+// --- Blog Pages ---
+import BlogListing from "./components/sections/Blog/index";      
+import BlogPost from "./components/sections/Blog/BlogPost";      
 
 // --- Sections ---
 import Industries from "./components/sections/Industries";
@@ -45,6 +43,12 @@ const App: React.FC = () => {
 
   return (
     <>
+      {/* === TEST BANNER: REMOVE THIS AFTER VERIFICATION === */}
+      <div style={{ backgroundColor: '#28a745', color: 'white', textAlign: 'center', padding: '10px', fontWeight: 'bold', position: 'sticky', top: 0, zIndex: 9999 }}>
+        🚀 UPDATE SUCCESSFUL: LIVE FROM GITHUB!
+      </div>
+      {/* =================================================== */}
+
       <Header />
 
       {/* === PAGE CONTENT === */}
@@ -64,11 +68,8 @@ const App: React.FC = () => {
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/:slug" element={<ProjectDetail />} />
 
-          {/* === BLOG ROUTES (New) === */}
-          {/* 1. Main Blog Feed (The layout with Swiper and Leaders) */}
+          {/* === BLOG ROUTES === */}
           <Route path="/blog" element={<BlogListing />} />
-          
-          {/* 2. Single Blog Post (The Coaxsoft replica) */}
           <Route path="/blog/:slug" element={<BlogPost />} />
 
         </Routes>
