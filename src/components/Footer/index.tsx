@@ -1,3 +1,4 @@
+// src/components/Footer.tsx
 import React from "react";
 import styled, { css } from "styled-components";
 import { FaLinkedinIn, FaFacebookF, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
@@ -6,7 +7,7 @@ import { FaLinkedinIn, FaFacebookF, FaTwitter, FaInstagram, FaGithub } from "rea
 const LinkedinIcon = FaLinkedinIn as React.ElementType;
 const FacebookIcon = FaFacebookF as React.ElementType;
 const GithubIcon = FaGithub as React.ElementType;
-const TwitterIcon = FaTwitter as React.ElementType;
+const TwitterIcon = FaTwitter as React.ElementType; // Available if needed later
 const InstagramIcon = FaInstagram as React.ElementType;
 
 // --- Custom SVGs for perfect match ---
@@ -86,7 +87,6 @@ export default function Footer() {
               </LinkItem>
               <LinkItem href="/portfolio">
                 <span>Portfolio</span>
-                {/* No icon for Portfolio usually, or add if needed */}
               </LinkItem>
               <LinkItem href="/blog">
                 <span>Blog</span>
@@ -179,10 +179,41 @@ export default function Footer() {
         {/* === FOOTER BOTTOM === */}
         <BottomBar>
           <SocialContainer>
-            <SocialIcon href="#" target="_blank"><LinkedinIcon /></SocialIcon>
-            <SocialIcon href="#" target="_blank"><FacebookIcon /></SocialIcon>
-            <SocialIcon href="#" target="_blank"><GithubIcon /></SocialIcon>
-            <SocialIcon href="#" target="_blank"><InstagramIcon /></SocialIcon>
+            {/* LinkedIn */}
+            <SocialIcon 
+              href="https://www.linkedin.com/company/codenestllc/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <LinkedinIcon />
+            </SocialIcon>
+
+            {/* Facebook */}
+            <SocialIcon 
+              href="https://www.facebook.com/profile.php?id=61580032506453" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <FacebookIcon />
+            </SocialIcon>
+            
+            {/* GitHub */}
+            <SocialIcon 
+              href="https://github.com/Code-Nest1" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <GithubIcon />
+            </SocialIcon>
+
+            {/* Instagram */}
+            <SocialIcon 
+              href="https://www.instagram.com/codenestllc/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <InstagramIcon />
+            </SocialIcon>
           </SocialContainer>
 
           <CopyrightRow>
@@ -201,7 +232,6 @@ export default function Footer() {
 
 // --- STYLES ---
 
-// The specific Coax Blue
 const BLUE_BG = "#28a665";
 const LIME_GREEN = "#FFFF";
 const WHITE = "#ffffff";
@@ -209,14 +239,13 @@ const WHITE = "#ffffff";
 const FooterWrapper = styled.footer`
   background-color: ${BLUE_BG};
   color: ${WHITE};
-  font-family: 'Inter', sans-serif; /* Ensure you have this font or similar sans-serif */
+  font-family: 'Inter', sans-serif;
   padding: 80px 0 20px;
   position: relative;
   overflow: hidden;
   z-index: 1;
 `;
 
-// Creates the "Light Leak" / Glass glow effect seen in screenshot
 const BackgroundGlow = styled.div`
   position: absolute;
   top: 0;
@@ -239,7 +268,6 @@ const MainContainer = styled.div`
   }
 `;
 
-// --- TOP ROW ---
 const TopRow = styled.div`
   display: flex;
   justify-content: space-between;
@@ -294,7 +322,7 @@ const EstimationBtn = styled.a`
   }
 
   .btn-icon {
-    background-color: #FFFF; /* Slightly darker shade for divider look */
+    background-color: #FFFF;
     width: 50px;
     display: flex;
     align-items: center;
@@ -335,10 +363,9 @@ const Phone = styled.div`
   font-weight: 400;
 `;
 
-// --- GRID LAYOUT ---
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr; /* Match exact ratio: About, Industries, Services(wide) */
+  grid-template-columns: 1fr 1fr 2fr;
   gap: 60px;
   padding-bottom: 80px;
 
@@ -392,16 +419,16 @@ const LinkItem = styled.a`
   text-decoration: none;
   color: ${WHITE};
   font-size: 12px;
-  font-weight: 800; /* Bold uppercase look */
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 18px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle glass border */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.2s ease;
 
   &:hover {
     color: ${LIME_GREEN};
-    padding-left: 5px; /* Slight movement */
+    padding-left: 5px;
   }
 
   svg {
@@ -416,10 +443,7 @@ const LinkItem = styled.a`
   }
 `;
 
-// --- BOTTOM BAR ---
-const BottomBar = styled.div`
-  /* Border top handled by the grid padding/margin relative visuals */
-`;
+const BottomBar = styled.div``;
 
 const SocialContainer = styled.div`
   display: flex;

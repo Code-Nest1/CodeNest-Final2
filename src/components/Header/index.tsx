@@ -1,3 +1,4 @@
+// src/components/Header.tsx (or wherever your file is located)
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
@@ -59,7 +60,8 @@ const Center = styled.ul`
   }
 `;
 
-const ContactBtn = styled.a`
+// --- CHANGE 1: Changed from styled.a to styled(Link) ---
+const ContactBtn = styled(Link)`
   background: #28a766;
   padding: 10px 20px;
   border-radius: 8px;
@@ -88,18 +90,12 @@ const Header = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Scroll to top on route change (optional)
+  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // 🔥 Scroll to contact section when navbar "Contact" is clicked
-  const handleScrollToContact = () => {
-    const el = document.getElementById("contact");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // Removed handleScrollToContact function as it is no longer needed
 
   return (
     <Nav scrolled={scrolled}>
@@ -116,8 +112,8 @@ const Header = () => {
         <li><Link to="/industries">Industries</Link></li>
       </Center>
 
-      {/* 🔥 Modified: now triggers smooth scroll instead of routing */}
-      <ContactBtn onClick={handleScrollToContact}>
+      {/* --- CHANGE 2: Used 'to' prop instead of onClick --- */}
+      <ContactBtn to="/contactform">
         Contact Us
       </ContactBtn>
     </Nav>

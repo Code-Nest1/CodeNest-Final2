@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import emailjs from "@emailjs/browser"; // ✅ 1. Imported EmailJS
+import emailjs from "@emailjs/browser"; 
 
 // --- Configuration & Colors ---
 const COAX_BLUE = "#28a665";
@@ -41,7 +41,7 @@ const CheckIcon = () => (
 
 export default function ContactForm() {
   const [activeTab, setActiveTab] = useState<'contact' | 'estimation'>('estimation');
-  const [isSending, setIsSending] = useState(false); // ✅ 2. Loading State
+  const [isSending, setIsSending] = useState(false);
   
   const [formData, setFormData] = useState({
     firstName: "",
@@ -68,19 +68,16 @@ export default function ContactForm() {
     setFormData(prev => ({ ...prev, budget: value }));
   };
 
-  // ✅ 3. The Function to Send Emails
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Basic Validation
     if (!formData.firstName || !formData.email || !formData.message) {
       alert("Please fill in First Name, Email, and Message.");
       return;
     }
 
-    setIsSending(true); // Start loading
+    setIsSending(true);
 
-    // Prepare data
     const templateParams = {
       firstName: formData.firstName,
       lastName: formData.lastName,
@@ -92,19 +89,16 @@ export default function ContactForm() {
       agreeTerms: formData.agreeTerms ? "Yes" : "No",
     };
 
-    // Send using your keys
     emailjs.send(
-      "service_v0bvgaj",      // Service ID
-      "template_9jp1jr8",     // Template ID
+      "service_v0bvgaj",      
+      "template_9jp1jr8",     
       templateParams,
-      "MNATOKAylaiM9uzxD"     // Public Key
+      "MNATOKAylaiM9uzxD"     
     )
     .then((response) => {
       console.log('SUCCESS!', response.status, response.text);
       alert("Message sent successfully!");
-      setIsSending(false); // Stop loading
-      
-      // Clear form
+      setIsSending(false);
       setFormData({
         firstName: "", lastName: "", email: "", phone: "", message: "", 
         budget: "", agreeFuture: false, agreeTerms: false,
@@ -112,21 +106,21 @@ export default function ContactForm() {
     }, (err) => {
       console.log('FAILED...', err);
       alert("Failed to send message. Please try again.");
-      setIsSending(false); // Stop loading even if failed
+      setIsSending(false);
     });
   };
 
   return (
     <SectionWrapper id="contact-section">
       <MainContainer
+        layout // ✅ 1. Enables smooth height animation for the whole container
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
       >
         {/* ================= LEFT SIDE ================= */}
         <LeftPanel>
-          {/* Tabs */}
           <TabsContainer>
             <TabButton 
               active={activeTab === 'contact'} 
@@ -142,14 +136,14 @@ export default function ContactForm() {
             </TabButton>
           </TabsContainer>
 
-          {/* Dynamic Content */}
           <AnimatePresence mode="wait">
             {activeTab === 'estimation' ? (
               <motion.div
                 key="estimation"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                layout // ✅ Smooth layout transition
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
                 <IntroText>
@@ -169,9 +163,10 @@ export default function ContactForm() {
             ) : (
               <motion.div
                 key="contact"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                layout // ✅ Smooth layout transition
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
                  <HeaderTitle>How can I help you?</HeaderTitle>
@@ -188,7 +183,6 @@ export default function ContactForm() {
             )}
           </AnimatePresence>
 
-          {/* Form Fields */}
           <Form>
             <SectionLabel>Contact details</SectionLabel>
 
@@ -215,10 +209,14 @@ export default function ContactForm() {
             </Row>
 
             {/* Budget Section (Conditional) */}
+            <AnimatePresence>
             {activeTab === 'estimation' && (
               <motion.div
+                layout // ✅ Smooth expansion
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
                 style={{ overflow: 'hidden' }}
               >
                 <SectionLabel>Budget</SectionLabel>
@@ -231,8 +229,8 @@ export default function ContactForm() {
                 </BudgetGrid>
               </motion.div>
             )}
+            </AnimatePresence>
 
-            {/* Checkboxes */}
             <CheckboxGroup>
               <CheckboxLabel>
                 <HiddenCheckbox name="agreeFuture" checked={formData.agreeFuture} onChange={handleChange} />
@@ -247,7 +245,6 @@ export default function ContactForm() {
               </CheckboxLabel>
             </CheckboxGroup>
 
-            {/* ✅ 4. Updated Submit Button with Logic */}
             <SubmitButton 
               whileHover={{ scale: isSending ? 1 : 1.02 }} 
               whileTap={{ scale: isSending ? 1 : 0.98 }}
@@ -288,7 +285,6 @@ export default function ContactForm() {
 
           {/* Bottom Card: Profile */}
           <RightBottomCard>
-            {/* ✅ BACKGROUND IMAGE from public/images/bg-star.svg */}
             <StarBackground />
             
             <ProfileInfo>
@@ -570,30 +566,38 @@ const RightPanel = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  /* Cut corner effect on the Top Right of the whole panel wrapper */
+  /* Cut corner effect on the Top Right */
   clip-path: polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 0 100%);
 `;
 
 // -- Top Card --
 const RightTopCard = styled.div`
-  padding: 60px 40px 40px 40px;
-  /* The white separator line is created by this border-bottom */
+  padding: 60px 40px 40px 40px; 
   border-bottom: 2px solid #fff;
-  flex: 0 0 auto;
+  
+  /* Flex settings to grow */
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Title stays at the top */
 `;
 
 const InfoTitle = styled.h3`
   font-size: 26px;
   color: ${TEXT_DARK};
-  margin-bottom: 35px;
+  margin-bottom: 0px; /* Removed bottom margin here, handled by StepsList */
   font-weight: 400;
   letter-spacing: -0.5px;
+  flex-shrink: 0;
 `;
 
 const StepsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  flex: 1; /* Takes up the remaining space inside the Top Card */
+  justify-content: center; /* Centers the whole list block vertically in that space */
+  gap: 24px; /* Increased gap to 24px for perfect spacing */
+  padding-top: 20px;
 `;
 
 const StepItem = styled.div`
@@ -630,25 +634,24 @@ const BlueText = styled.span` color: ${COAX_BLUE}; font-weight: 700; `;
 // -- Bottom Card --
 const RightBottomCard = styled.div`
   padding: 40px;
-  flex: 1; /* Takes remaining height */
+  flex: 0 0 auto; 
+  height: 340px; /* Fixed Height */
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Align content to bottom */
+  justify-content: flex-end; 
   overflow: hidden; 
 `;
 
-// Replaced CSS circle with your Image from public/images/bg-star.svg
 const StarBackground = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* Assuming path is public/images/bg-star.svg */
   background-image: url('/images/bg-star.svg'); 
   background-repeat: no-repeat;
-  background-position: center; /* Adjust if needed (e.g. center left) */
+  background-position: center; 
   background-size: cover;
   z-index: 1;
   opacity: 1;

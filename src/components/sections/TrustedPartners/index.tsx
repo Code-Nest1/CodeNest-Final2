@@ -116,12 +116,12 @@ export default function TrustedPartners() {
         {/* --- Header --- */}
         <HeaderWrapper>
           <HeaderIcon>
-             {/* Minimalist Blue Grid Icon */}
+             {/* UPDATED: Green Grid Icon to match #28a665 */}
              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-               <path d="M4 4H10V10H4V4Z" fill="#1C53D6"/>
-               <path d="M14 4H20V10H14V4Z" fill="#1C53D6" fillOpacity="0.25"/>
-               <path d="M4 14H10V20H4V14Z" fill="#1C53D6" fillOpacity="0.25"/>
-               <path d="M14 14H20V20H14V14Z" fill="#1C53D6"/>
+               <path d="M4 4H10V10H4V4Z" fill="#28a665"/>
+               <path d="M14 4H20V10H14V4Z" fill="#28a665" fillOpacity="0.25"/>
+               <path d="M4 14H10V20H4V14Z" fill="#28a665" fillOpacity="0.25"/>
+               <path d="M14 14H20V20H14V14Z" fill="#28a665"/>
              </svg>
           </HeaderIcon>
           <SectionTitle>Trusted software partner</SectionTitle>
@@ -180,7 +180,8 @@ const HeaderWrapper = styled.div`
 const HeaderIcon = styled.div`
   width: 50px;
   height: 50px;
-  background-color: #EEF4FF;
+  /* UPDATED: Changed background to match the badge light green for consistency */
+  background-color: #e6f7ef; 
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -200,7 +201,6 @@ const SectionTitle = styled.h2`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* Tighter gap as requested */
   gap: 15px;
   
   @media (max-width: 1100px) {
@@ -221,7 +221,6 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   
-  /* Smooth Hover */
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   &:hover {
     transform: translateY(-4px);
@@ -235,8 +234,8 @@ const Badge = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: #F0F5FF;
-  color: #3B82F6;
+  background-color: #e6f7ef;
+  color: #28a665;
   font-size: 10px;
   font-weight: 700;
   padding: 5px 10px;
@@ -254,7 +253,6 @@ const CardBody = styled.div`
 // --- The Visual Core: Folded Box ---
 const IconBox = styled.div`
   flex-shrink: 0;
-  /* Larger Box Size */
   width: 110px;
   height: 110px;
   background-color: #F7F7FA;
@@ -264,8 +262,6 @@ const IconBox = styled.div`
   justify-content: center;
   position: relative;
 
-  /* The "Dog Ear" Cut via Clip Path */
-  /* Cutting 18px from the corner for a distinct fold */
   clip-path: polygon(
     0 0, 
     100% 0, 
@@ -274,7 +270,6 @@ const IconBox = styled.div`
     0 100%
   );
 
-  /* The Fold Flap */
   &::before {
     content: '';
     position: absolute;
@@ -282,13 +277,12 @@ const IconBox = styled.div`
     right: 0;
     width: 18px;
     height: 18px;
-    background-color: #D8D8DF; /* Darker shadow color for the fold */
+    background-color: #D8D8DF; 
     border-top-left-radius: 6px;
   }
 `;
 
 const LogoImg = styled.img`
-  /* Logo fills 85% of the box now - significantly larger */
   max-width: 85%;
   max-height: 85%;
   width: auto;
@@ -299,7 +293,6 @@ const LogoImg = styled.img`
 const TextContent = styled.div`
   display: flex;
   flex-direction: column;
-  /* Align text top with the top of the box */
   padding-top: 4px; 
 `;
 

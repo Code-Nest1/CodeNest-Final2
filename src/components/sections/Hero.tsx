@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { COLORS } from "../../styles/global"; // Ensure this path is correct
+import { COLORS } from "../../styles/global"; 
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 // --- STYLED COMPONENTS ---
@@ -12,9 +12,8 @@ const HeroWrap = styled.section`
   display: flex;
   align-items: center;
   position: relative;
-  padding: 105px 20px;
+  padding: 20px 20px;
   overflow: hidden;
-  /* Darker base ensures the moving lights pop */
   background-color: #052e26; 
 `;
 
@@ -27,12 +26,10 @@ const AmbientBackground = styled.div`
   height: 100%;
   overflow: hidden;
   z-index: 0;
-  /* Optional: a subtle pattern overlay to add texture */
   background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 `;
 
-// The Moving Light Blob - ACCELERATED
 const LightBlob = styled(motion.div)<{ color: string; size: string; blur: string }>`
   position: absolute;
   background: ${(props) => props.color};
@@ -41,7 +38,7 @@ const LightBlob = styled(motion.div)<{ color: string; size: string; blur: string
   border-radius: 50%;
   filter: blur(${(props) => props.blur});
   opacity: 0.6;
-  mix-blend-mode: screen; /* Makes colors glow when they overlap */
+  mix-blend-mode: screen;
   will-change: transform;
 `;
 
@@ -56,7 +53,7 @@ const Inner = styled.div`
   justify-content: space-between;
   width: 100%;
   position: relative;
-  z-index: 10; /* Content sits firmly above the lights */
+  z-index: 10;
 `;
 
 const Left = styled.div`
@@ -107,7 +104,6 @@ const Right = styled.div`
   max-width: 48%;
   position: relative;
   
-  /* Glassy backing for the animation to sit on */
   &::before {
     content: '';
     position: absolute;
@@ -127,7 +123,7 @@ export default function Hero() {
       {/* 1. BACKGROUND: Fast Moving Aurora */}
       <AmbientBackground>
         
-        {/* Blob 1: The Bright Neon Energy (Moves Top-Left to Center) */}
+        {/* Blob 1 */}
         <LightBlob
           color="#2b945f" 
           size="55vw"
@@ -137,18 +133,18 @@ export default function Hero() {
             x: [0, 200, 0],
             y: [0, 100, 0],
             scale: [1, 1.2, 1],
-            rotate: [0, 90, 0] // Adds swirling motion
+            rotate: [0, 90, 0]
           }}
           transition={{ 
-            duration: 8, // Fast enough to see
+            duration: 8,
             repeat: Infinity, 
             ease: "easeInOut" 
           }}
         />
 
-        {/* Blob 2: The Deep Contrast (Moves Bottom-Right to Center) */}
+        {/* Blob 2 */}
         <LightBlob
-          color="#10b981" /* Brighter Emerald */
+          color="#10b981" 
           size="50vw"
           blur="120px"
           style={{ bottom: "-20%", right: "-20%" }}
@@ -164,9 +160,9 @@ export default function Hero() {
           }}
         />
 
-        {/* Blob 3: The "Wanderer" (Moves across the whole screen) */}
+        {/* Blob 3 */}
         <LightBlob
-          color="#064e3b" /* Darker Green for depth */
+          color="#064e3b" 
           size="40vw"
           blur="80px"
           style={{ top: "40%", left: "40%", opacity: 0.7 }}
@@ -205,8 +201,9 @@ export default function Hero() {
             create platforms that turn visitors into customers.
           </Subtitle>
 
+          {/* --- FIXED BUTTON LINK BELOW --- */}
           <CTA
-            href="#contact"
+            href="/contactform" 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}

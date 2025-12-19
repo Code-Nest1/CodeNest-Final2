@@ -7,10 +7,9 @@ import {
   AnimatePresence,
   Variants,
   PanInfo,
-  useAnimation,
-  Transition
+  useAnimation
 } from "framer-motion";
-import { ChevronLeft, ChevronRight, Play, ArrowRight } from "react-feather";
+import { ChevronLeft, ChevronRight, ArrowRight } from "react-feather";
 
 // --- Types ---
 type FeedbackItem = {
@@ -62,18 +61,13 @@ const feedbacks: FeedbackItem[] = [
 ];
 
 // --- ANIMATION CONFIGURATION ---
-
-// FIXED: Explicitly typed as a tuple of 4 numbers to satisfy Framer Motion types
 const TRANSITION_EASE: [number, number, number, number] = [0.25, 0.8, 0.25, 1];
 
-// 2. Inner Content Variants (The Wipe/Slide Effect)
 const contentVariants: Variants = {
   enter: (direction: number) => ({
-    // If Next: Start right (80px), opacity 0
-    // If Prev: Start left (-80px), opacity 0
     x: direction > 0 ? 80 : -80,
     opacity: 0,
-    scale: 0.98, // Slight shrink for depth
+    scale: 0.98,
     zIndex: 2,
   }),
   center: {
@@ -88,16 +82,44 @@ const contentVariants: Variants = {
   },
   exit: (direction: number) => ({
     zIndex: 1,
-    // If Next: Exit left (-80px)
-    // If Prev: Exit right (80px)
     x: direction < 0 ? 80 : -80,
     opacity: 0,
-    scale: 0.98, // Slight shrink for depth
+    scale: 0.98,
     transition: {
       duration: 0.5,
       ease: TRANSITION_EASE,
     },
   }),
+};
+
+// --- NEW BACKGROUND ANIMATIONS ---
+
+// Top-Left Orb (The Primary Green)
+const orbOneVariants: Variants = {
+  animate: {
+    y: [0, -50, 0],
+    x: [0, 30, 0],
+    scale: [1, 1.1, 1],
+    transition: {
+      duration: 15,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+// Bottom-Right Orb (A Darker/Teal Variant for Depth)
+const orbTwoVariants: Variants = {
+  animate: {
+    y: [0, 60, 0],
+    x: [0, -40, 0],
+    scale: [1, 1.2, 1],
+    transition: {
+      duration: 18,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
 };
 
 export default function ClientFeedback() {
@@ -108,7 +130,6 @@ export default function ClientFeedback() {
   const feedbackIndex = ((page % feedbacks.length) + feedbacks.length) % feedbacks.length;
   const current = feedbacks[feedbackIndex];
 
-  // --- Preloader ---
   useEffect(() => {
     feedbacks.forEach((item) => {
       const img = new Image();
@@ -124,17 +145,14 @@ export default function ClientFeedback() {
     setPage((prev) => [prev[0] + newDirection, newDirection]);
   }, []);
 
-  // --- Effect: Container "Micro-Interaction" Pulse ---
-  // This animates the CARD SHELL when the content changes
   useEffect(() => {
     cardControls.start({
-      scale: [0.98, 1], // The "thud" effect
-      y: [6, 0],       // Slight vertical movement
+      scale: [0.98, 1],
+      y: [6, 0],
       transition: { duration: 0.5, ease: "easeOut" }
     });
   }, [page, cardControls]);
 
-  // Drag Handler
   const handleDragEnd = (e: MouseEvent | TouchEvent | PointerEvent, { offset, velocity }: PanInfo) => {
     const swipe = Math.abs(offset.x) * velocity.x;
     if (swipe < -100 || offset.x < -80) {
@@ -146,8 +164,25 @@ export default function ClientFeedback() {
 
   return (
     <Section>
+      {/* --- NEW: Animated Background Layer --- */}
+      <BackgroundWrapper>
+        {/* The Dot Grid Pattern */}
+        <GridOverlay />
+        
+        {/* Floating Green Orb (Top Left) */}
+        <OrbOne 
+          variants={orbOneVariants}
+          animate="animate"
+        />
+        
+        {/* Floating Teal Orb (Bottom Right) */}
+        <OrbTwo 
+          variants={orbTwoVariants}
+          animate="animate"
+        />
+      </BackgroundWrapper>
+
       <Container>
-        {/* --- Header --- */}
         <HeaderWrapper>
           <SubHeader>Codenest Philosophy</SubHeader>
           <HeaderTitle>What our partners say about Codenest</HeaderTitle>
@@ -158,31 +193,13 @@ export default function ClientFeedback() {
         </HeaderWrapper>
 
         <SliderWrapper>
-          <DecorLine viewBox="0 0 400 200" fill="none">
-            <path
-              d="M10,180 C80,180 100,100 200,100 S 320,180 390,180"
-              stroke="#0b5cff"
-              strokeWidth="3"
-              fill="none"
-            />
-          </DecorLine>
-
-          {/* Background Layers */}
+          
+          {/* Background Layers for Card Depth (Kept Green as requested) */}
           <StackLayerOne />
           <StackLayerTwo />
 
           <CardWindow>
-            {/* 
-              CARD FRAME:
-              - Handles the "Micro Pulse" animation via cardControls
-              - Has overflow: hidden to mask the sliding content
-            */}
             <CardFrame animate={cardControls}>
-              {/* 
-                ANIMATE PRESENCE:
-                - mode="popLayout" ensures the new slide enters while the old one exits (wipe feel)
-                - custom={direction} passes direction to variants
-              */}
               <AnimatePresence initial={false} custom={direction} mode="popLayout">
                 <InnerGrid
                   key={page}
@@ -191,7 +208,6 @@ export default function ClientFeedback() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  // Drag Logic
                   drag="x"
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={0.05}
@@ -206,11 +222,6 @@ export default function ClientFeedback() {
                       alt={current.name}
                       draggable="false"
                     />
-                    {current.hasVideo && (
-                      <VideoBtn>
-                        Watch video <Play size={12} fill="currentColor" style={{ marginLeft: 6 }} />
-                      </VideoBtn>
-                    )}
                   </ImageSide>
 
                   <ContentSide>
@@ -236,7 +247,6 @@ export default function ClientFeedback() {
             </CardFrame>
           </CardWindow>
 
-          {/* Controls */}
           <Controls>
             <NavBtn onClick={() => paginate(-1)}>
               <ChevronLeft size={20} />
@@ -254,20 +264,72 @@ export default function ClientFeedback() {
 /* --- Styled Components --- */
 
 const Section = styled.section`
-  padding: 100px 0 140px;
-  background-color: #ffffff;
+  padding: 120px 0 160px;
+  /* Changed from plain white to a very subtle mint-white base */
+  background-color: #f8fdfa; 
   overflow: hidden; 
   font-family: 'Inter', sans-serif;
+  position: relative;
 `;
+
+// --- NEW BACKGROUND STYLES ---
+
+const BackgroundWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Behind everything */
+  overflow: hidden;
+  pointer-events: none;
+`;
+
+const GridOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  /* Creates a subtle technical dot pattern */
+  background-image: radial-gradient(#28a665 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.07;
+  z-index: 2;
+`;
+
+const OrbOne = styled(motion.div)`
+  position: absolute;
+  top: -10%;
+  left: -5%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(40, 166, 101, 0.25) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 1;
+`;
+
+const OrbTwo = styled(motion.div)`
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 800px;
+  height: 800px;
+  /* Slightly darker teal/green for contrast */
+  background: radial-gradient(circle, rgba(11, 54, 61, 0.15) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 1;
+`;
+
+// --- END BACKGROUND STYLES ---
 
 const Container = styled.div`
   max-width: 1080px; 
   margin: 0 auto;
   padding: 0 24px;
   position: relative;
+  z-index: 2; /* Sits above the animated background */
 `;
 
-// --- Header ---
 const HeaderWrapper = styled.div`
   text-align: center;
   max-width: 700px;
@@ -301,7 +363,6 @@ const HeaderDesc = styled.p`
   line-height: 1.6;
 `;
 
-// --- Slider ---
 const SliderWrapper = styled.div`
   position: relative;
   width: 100%;
@@ -315,17 +376,6 @@ const SliderWrapper = styled.div`
   }
 `;
 
-const DecorLine = styled.svg`
-  position: absolute;
-  bottom: -80px;
-  right: -150px;
-  width: 500px;
-  height: 300px;
-  z-index: 0;
-  opacity: 1;
-  pointer-events: none;
-`;
-
 const StackLayerOne = styled.div`
   position: absolute;
   top: 10px;
@@ -333,7 +383,7 @@ const StackLayerOne = styled.div`
   right: -10px;
   bottom: -10px;
   height: 100%;
-  background: rgba(164, 224, 64, 0.3); 
+  background: rgba(40, 166, 101, 0.2); 
   border-radius: 4px;
   z-index: 1;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 93% 100%, 0 100%);
@@ -358,21 +408,17 @@ const CardWindow = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 4px;
-  /* Do not use overflow hidden here if using custom stack layers, 
-     but helpful for container alignment */
 `;
 
-// VISUAL SHELL - Fixed
 const CardFrame = styled(motion.div)`
   background-color: #ffffff;
   width: 100%;
   height: 100%;
   position: relative;
-  box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-  /* The shape */
+  /* Stronger shadow to make it pop against the new background */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%);
   border-radius: 4px;
-  /* CRITICAL: Masks the sliding inner content */
   overflow: hidden;
 
   @media (max-width: 850px) {
@@ -381,20 +427,17 @@ const CardFrame = styled(motion.div)`
   }
 `;
 
-// ANIMATED CONTENT - Swaps Inside
 const InnerGrid = styled(motion.div)`
-  /* Position Absolute + W/H 100% ensures perfect overlap during wipe */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  
   display: grid;
   grid-template-columns: 42% 58%;
   cursor: grab;
   will-change: transform, opacity;
-  background-color: #ffffff; /* Ensure opacity fades work against white */
+  background-color: #ffffff;
 
   &:active {
     cursor: grabbing;
@@ -434,28 +477,7 @@ const LogoOverlay = styled.img`
   padding: 8px;
   border-radius: 4px;
   pointer-events: none;
-`;
-
-const VideoBtn = styled.button`
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  background: #ffffff;
-  color: #0b5cff;
-  border: none;
-  padding: 10px 16px;
-  font-size: 13px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 2;
-  transition: transform 0.2s;
-
-  &:hover {
-    transform: scale(1.05);
-  }
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 `;
 
 const ContentSide = styled.div`
@@ -484,6 +506,7 @@ const QuoteIcon = styled.div`
   color: #28a665; 
   font-family: serif;
   margin-bottom: 16px;
+  opacity: 0.8;
 `;
 
 const QuoteText = styled.p`
@@ -536,10 +559,13 @@ const CtaButton = styled.button`
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
-  transition: background 0.2s;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(11, 54, 61, 0.2);
 
   &:hover {
     background: #28a665;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(40, 166, 101, 0.3);
   }
 `;
 
@@ -565,12 +591,15 @@ const NavBtn = styled.button`
   justify-content: center;
   cursor: pointer;
   color: #888;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
   border-radius: 50%; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 
   &:hover {
     border-color: #28a665;
-    color: #28a665;
+    background-color: #28a665;
+    color: #ffffff;
     transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(40, 166, 101, 0.4);
   }
 `;

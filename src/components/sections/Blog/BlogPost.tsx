@@ -1,173 +1,170 @@
-import React, { useEffect, useState, useRef } from 'react';
-import styled, { createGlobalStyle, keyframes } from 'styled-components';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { Facebook, Twitter, Linkedin, Share2, ArrowLeft, ArrowRight } from 'react-feather';
 
-// --- Global Styles & Theme ---
+// ==========================================
+// 1. GLOBAL STYLES (Coaxsoft Blue Theme)
+// ==========================================
 const GlobalStyle = createGlobalStyle`
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0; padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #1a202c;
     -webkit-font-smoothing: antialiased;
-    color: #111;
-    /* Subtle gradient background for a modern feel */
-    background: linear-gradient(180deg, #ffffff 0%, #f8fbf9 100%);
-    overflow-x: hidden;
   }
-  
-  ::selection { background: #28a665; color: white; }
 
-  /* --- WORDPRESS CONTENT STYLING (Green Theme) --- */
+  /* --- WORDPRESS CONTENT TYPOGRAPHY --- */
   .wp-content {
-    font-family: 'Manrope', sans-serif;
-    color: #333;
-    font-size: 18px;
-    line-height: 1.8;
+    font-size: 19px; line-height: 1.8; color: #4a5568; font-weight: 400;
+  }
+  .wp-content h2 {
+    font-size: 42px; font-weight: 800; color: #111;
+    margin-top: 80px; margin-bottom: 30px; line-height: 1.1; letter-spacing: -1.5px;
+    scroll-margin-top: 140px; position: relative;
+  }
+  .wp-content h3 {
+    font-size: 26px; font-weight: 700; color: #2d3748;
+    margin-top: 50px; margin-bottom: 20px; scroll-margin-top: 140px;
+  }
+  .wp-content p { margin-bottom: 32px; }
+
+  /* Blue Triangle Bullets */
+  .wp-content ul { margin-bottom: 40px; padding-left: 0; list-style: none; }
+  .wp-content li { margin-bottom: 16px; padding-left: 30px; position: relative; }
+  .wp-content li::before {
+    content: ''; position: absolute; left: 0; top: 10px; width: 0; height: 0; 
+    border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+    border-left: 10px solid #2563eb; 
   }
 
-  /* HEADINGS */
-  .wp-content h2, .wp-content h3, .wp-content h4 {
-    color: #1a1a1a;
-    font-weight: 700;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    line-height: 1.3;
-    letter-spacing: -0.5px;
-  }
-  .wp-content h2 { font-size: 32px; }
-  .wp-content h3 { font-size: 26px; }
-
-  /* PARAGRAPHS */
-  .wp-content p { margin-bottom: 24px; color: #444; }
-
-  /* IMAGES */
-  .wp-content img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 40px auto;
-    border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(40, 166, 101, 0.1); /* Subtle green shadow */
-  }
-
-  /* LISTS */
-  .wp-content ul, .wp-content ol { margin-bottom: 30px; padding-left: 20px; }
-  .wp-content li { margin-bottom: 12px; }
-  .wp-content ul { list-style: disc; }
-  .wp-content ol { list-style: decimal; }
-  /* Custom bullet color */
-  .wp-content li::marker { color: #28a665; }
-
-  /* BLOCKQUOTES */
-  .wp-content blockquote {
-    border-left: 4px solid #28a665; /* Green Accent */
-    background: #f0fdf4; /* Very light green bg */
-    padding: 30px 40px;
-    margin: 40px 0;
-    border-radius: 0 12px 12px 0;
-    font-style: italic;
-    font-size: 20px;
-    color: #1a4d33;
-  }
-
-  /* LINKS */
-  .wp-content a {
-    color: #28a665;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    font-weight: 600;
-    transition: color 0.2s ease;
-  }
-  .wp-content a:hover { color: #1e8550; }
+  .wp-content a { color: #2563eb; text-decoration: underline; text-underline-offset: 4px; font-weight: 500; }
+  .wp-content img { width: 100%; height: auto; border-radius: 12px; margin: 40px 0; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
   
-  /* CODE BLOCKS */
-  .wp-content pre {
-    background: #1e293b;
-    color: #e2e8f0;
-    padding: 20px;
-    border-radius: 8px;
-    overflow-x: auto;
+  .wp-content blockquote {
+    border-left: 4px solid #2563eb; background: #f8fafc; padding: 24px 32px; margin: 40px 0;
+    font-size: 20px; font-style: italic; color: #1e3a8a;
   }
 `;
 
 // --- Types ---
-interface WPRendered { rendered: string; }
 interface WPPostData {
   id: number;
   date: string;
   slug: string;
-  title: WPRendered;
-  content: WPRendered;
+  title: { rendered: string };
+  content: { rendered: string };
+  excerpt?: { rendered: string };
   _embedded?: {
     'wp:featuredmedia'?: Array<{ source_url: string }>;
     'author'?: Array<{ name: string; avatar_urls?: { '96': string } }>;
   };
 }
 
-// --- Icons ---
-const ArrowLeftBtn = () => (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>);
-const ArrowRightBtn = () => (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>);
-
-// --- Hardcoded Related Posts Data ---
-const relatedPosts = [
-  {
-    id: 1,
-    tag: 'UI Development',
-    title: 'Data orchestration: How to automate data pipelines?',
-    date: 'December 3, 2024',
-    image: 'https://img.freepik.com/free-vector/gradient-ui-ux-background_23-2149052117.jpg?w=740',
-  },
-  {
-    id: 2,
-    tag: 'Development',
-    title: 'Build your strategy right: Construction supply chain...',
-    date: 'November 15, 2024',
-    image: 'https://img.freepik.com/free-vector/construction-worker-concept-illustration_114360-3536.jpg?w=740',
-  },
-  {
-    id: 3,
-    tag: 'SaaS',
-    title: 'Top 5 Trends in Cloud Computing for 2025',
-    date: 'October 28, 2024',
-    image: 'https://img.freepik.com/free-vector/cloud-computing-security-abstract-concept-illustration_335657-2105.jpg?w=740',
-  }
-];
-
-// --- Main Component ---
+// ==========================================
+// MAIN COMPONENT
+// ==========================================
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<WPPostData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const location = useLocation();
   const sliderRef = useRef<HTMLDivElement>(null); 
 
-  useEffect(() => {
-    if (!slug) { setLoading(false); return; }
-    
-    // Fetch from your specific subdomain
-    const wpUrl = `https://blogs.codenest.us.com/wp-json/wp/v2/posts?slug=${slug}&_embed`;
+  const [post, setPost] = useState<WPPostData | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<WPPostData[]>([]); // New State for dynamic related posts
+  const [loading, setLoading] = useState(true);
+  
+  // TOC State
+  const [headings, setHeadings] = useState<{ id: string; text: string; tagName: string }[]>([]);
+  const [activeId, setActiveId] = useState<string>('');
+  
+  const contentRef = useRef<HTMLDivElement>(null);
 
-    axios.get(wpUrl)
+  // 1. Force Scroll Top on Load
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug, location.pathname]); 
+
+  // 2. Fetch Main Post AND Related Posts
+  useEffect(() => {
+    if (!slug) return;
+    setLoading(true);
+    setHeadings([]); 
+    
+    const wpBase = `https://blogs.codenest.us.com/wp-json/wp/v2/posts`;
+
+    // Fetch Current Post
+    axios.get(`${wpBase}?slug=${slug}&_embed`)
       .then(res => {
-        if (res.data && res.data.length > 0) {
-          setPost(res.data[0]);
-        } else {
-          setPost(null);
+        const currentPost = res.data[0];
+        setPost(currentPost || null);
+        
+        // After getting current post, fetch 4 latest posts for "Related" section
+        // We fetch 4, then filter out the current one to show 3
+        if (currentPost) {
+          return axios.get(`${wpBase}?per_page=5&_embed`);
+        }
+      })
+      .then(res => {
+        if (res && res.data && post) {
+          // Filter out the current post ID so it doesn't show in related
+          const others = res.data.filter((p: WPPostData) => p.id !== post.id).slice(0, 5); 
+          setRelatedPosts(others);
         }
         setLoading(false);
       })
       .catch(err => {
-        console.error("Error fetching post:", err);
+        console.error(err);
         setLoading(false);
-        setPost(null);
       });
   }, [slug]);
 
-  // Slider Logic
+  // 3. Robust Heading Parser (Retry Logic)
+  useEffect(() => {
+    if (!loading && post && contentRef.current) {
+      const parseHeadings = () => {
+        if (!contentRef.current) return false;
+        const elements = Array.from(contentRef.current.querySelectorAll('h2, h3'));
+        if (elements.length === 0) return false; 
+
+        const headingData = elements.map((elem, index) => {
+          const id = elem.id || `toc-section-${index}`;
+          elem.id = id; 
+          return { 
+            id, 
+            text: (elem as HTMLElement).innerText,
+            tagName: elem.tagName.toLowerCase() 
+          };
+        });
+        setHeadings(headingData);
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) setActiveId(entry.target.id);
+            });
+          },
+          { rootMargin: '-10% 0px -60% 0px', threshold: 0 }
+        );
+        elements.forEach((elem) => observer.observe(elem));
+        return true; 
+      };
+
+      if (!parseHeadings()) {
+        const timer = setTimeout(() => {
+          if (!parseHeadings()) setTimeout(parseHeadings, 500);
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [loading, post]);
+
+  // 4. Slider Logic
   const scrollSlider = (direction: 'left' | 'right') => {
     if (sliderRef.current) {
-      const scrollAmount = 400; 
+      const scrollAmount = 450; 
       if (direction === 'left') {
         sliderRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       } else {
@@ -176,59 +173,105 @@ const BlogPost = () => {
     }
   };
 
-  if (loading) return <LoadingContainer>Loading Article...</LoadingContainer>;
-  if (!post) return <LoadingContainer>Article not found.</LoadingContainer>;
+  if (loading) return <LoadingScreen>Loading Article...</LoadingScreen>;
+  if (!post) return <LoadingScreen>Article not found.</LoadingScreen>;
 
-  // Extract Data
-  const title = post.title.rendered;
-  const content = post.content.rendered;
-  const date = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  const featureImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
-  const authorName = post._embedded?.['author']?.[0]?.name || 'Editor';
-  const authorImg = post._embedded?.['author']?.[0]?.avatar_urls?.['96'] || 'https://via.placeholder.com/96';
+  const { title, content, date, _embedded } = post;
+  const featureImg = _embedded?.['wp:featuredmedia']?.[0]?.source_url;
+  const authorName = _embedded?.['author']?.[0]?.name || 'Team';
+  const authorImg = _embedded?.['author']?.[0]?.avatar_urls?.['96'];
+  const formattedDate = new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
     <>
       <GlobalStyle />
-      <PageContainer>
-        {/* Header & Breadcrumbs */}
-        <HeaderWrapper>
-          <Breadcrumbs>
-            <Link to="/">Home</Link><span className="divider">/</span>
-            <Link to="/blog">Blog</Link><span className="divider">/</span>
-            <span className="current" dangerouslySetInnerHTML={{ __html: title }} />
-          </Breadcrumbs>
-          
-          <DateText>{date}</DateText>
-          
-          <HeaderGrid>
-            <AuthorBox>
-              <AuthorImg src={authorImg} alt={authorName} />
-              <AuthorInfo>
-                <AuthorName>{authorName}</AuthorName>
-                <AuthorRole>Author</AuthorRole>
-              </AuthorInfo>
-            </AuthorBox>
-            <MainTitle dangerouslySetInnerHTML={{ __html: title }} />
-          </HeaderGrid>
-        </HeaderWrapper>
+      
+      {/* HEADER */}
+      <HeaderWrapper>
+        <Container>
+          <NavRow>
+            <Breadcrumbs>
+              <Link to="/">Home</Link> <span className="arrow">›</span> <Link to="/blog">Blog</Link>
+            </Breadcrumbs>
+          </NavRow>
 
-        {/* Hero Image */}
-        {featureImg && (
-          <HeroSection>
-            <HeroImg src={featureImg} alt="Cover" />
-          </HeroSection>
-        )}
+          <TitleRow>
+            <MetaColumn>
+               <DateBadge>{formattedDate}</DateBadge>
+               <AuthorBlock>
+                 {authorImg && <img src={authorImg} alt={authorName} />}
+                 <div>
+                   <strong>{authorName}</strong>
+                   <span>on Development</span>
+                 </div>
+               </AuthorBlock>
+            </MetaColumn>
+            <MainTitle dangerouslySetInnerHTML={{ __html: title.rendered }} />
+          </TitleRow>
 
-        {/* Main Content Area */}
-        <ContentContainer>
-          <ArticleBody className="wp-content" dangerouslySetInnerHTML={{ __html: content }} />
-        </ContentContainer>
-      </PageContainer>
+          {featureImg && (
+            <HeroImage>
+              <img src={featureImg} alt="Cover" />
+            </HeroImage>
+          )}
+        </Container>
+      </HeaderWrapper>
 
-      {/* --- Related Blogs Slider (Updated Color Theme) --- */}
+      {/* CONTENT GRID */}
+      <MainSection>
+        <Container>
+          <Grid>
+            {/* LEFT: TOC */}
+            <SidebarColumn>
+              <StickyWrapper>
+                <TOCHeader>/ Table of Contents</TOCHeader>
+                {headings.length > 0 ? (
+                  <TOCList>
+                    {headings.map((heading) => (
+                      <TOCItem 
+                        key={heading.id} 
+                        $isActive={activeId === heading.id}
+                        $isH3={heading.tagName === 'h3'}
+                      >
+                        <a 
+                          href={`#${heading.id}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById(heading.id)?.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                        >
+                          {heading.text}
+                        </a>
+                      </TOCItem>
+                    ))}
+                  </TOCList>
+                ) : (
+                  <EmptyTOC>Waiting for content...</EmptyTOC>
+                )}
+                <SidebarFooter>
+                   <span>Share</span>
+                   <div className="icons">
+                     <Share2 size={16} /> <Linkedin size={16} /> <Twitter size={16} />
+                   </div>
+                </SidebarFooter>
+              </StickyWrapper>
+            </SidebarColumn>
+
+            {/* RIGHT: CONTENT */}
+            <ContentColumn>
+              <div 
+                className="wp-content" 
+                ref={contentRef}
+                dangerouslySetInnerHTML={{ __html: content.rendered }} 
+              />
+            </ContentColumn>
+          </Grid>
+        </Container>
+      </MainSection>
+
+      {/* --- RELATED SECTION (Added from your Design) --- */}
       <RelatedSection>
-        <PageContainer>
+        <Container>
           <SectionHeader>
             <BigHeading>
               Want to know more?<br />
@@ -238,26 +281,36 @@ const BlogPost = () => {
           
           <SliderWrapper>
             <CardsContainer ref={sliderRef}>
-              {relatedPosts.map((post) => (
-                <BlogCard key={post.id}>
-                  <div className="card-img">
-                    <img src={post.image} alt={post.title} />
-                  </div>
-                  <div className="card-content">
-                    <span className="tag">{post.tag}</span>
-                    <h3>{post.title}</h3>
-                    <span className="date">{post.date}</span>
-                  </div>
-                </BlogCard>
-              ))}
+              {relatedPosts.map((related) => {
+                 const relImg = related._embedded?.['wp:featuredmedia']?.[0]?.source_url 
+                                || 'https://via.placeholder.com/450x300';
+                 const relDate = new Date(related.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                 
+                 return (
+                  <BlogCard key={related.id} as={Link} to={`/blog/${related.slug}`}>
+                    <div className="card-img">
+                      <img src={relImg} alt={related.title.rendered} />
+                    </div>
+                    <div className="card-content">
+                      <span className="tag">Recent</span>
+                      <h3 dangerouslySetInnerHTML={{__html: related.title.rendered}} />
+                      <span className="date">{relDate}</span>
+                    </div>
+                  </BlogCard>
+                 );
+              })}
             </CardsContainer>
             
             <SliderControls>
-              <SliderButton onClick={() => scrollSlider('left')} aria-label="Previous"><ArrowLeftBtn /></SliderButton>
-              <SliderButton onClick={() => scrollSlider('right')} aria-label="Next"><ArrowRightBtn /></SliderButton>
+              <SliderButton onClick={() => scrollSlider('left')} aria-label="Previous">
+                <ArrowLeft size={20} />
+              </SliderButton>
+              <SliderButton onClick={() => scrollSlider('right')} aria-label="Next">
+                <ArrowRight size={20} />
+              </SliderButton>
             </SliderControls>
           </SliderWrapper>
-        </PageContainer>
+        </Container>
       </RelatedSection>
     </>
   );
@@ -266,81 +319,110 @@ const BlogPost = () => {
 export default BlogPost;
 
 // ==========================================
-// STYLED COMPONENTS (Green Theme: #28a665)
+// STYLED COMPONENTS
 // ==========================================
 
-const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+const LoadingScreen = styled.div`
+  height: 90vh; display: flex; align-items: center; justify-content: center; 
+  font-size: 1.5rem; color: #718096; font-weight: 500;
 `;
 
-const LoadingContainer = styled.div`
-  text-align: center; padding: 100px; font-size: 1.5rem; color: #555;
-`;
-
-const PageContainer = styled.div`
-  max-width: 1440px; margin: 0 auto; padding: 60px;
-  animation: ${fadeIn} 0.6s ease-out;
-  @media (max-width: 1024px) { padding: 40px 20px; }
+const Container = styled.div`
+  max-width: 1280px; margin: 0 auto; padding: 0 40px;
+  @media (max-width: 768px) { padding: 0 24px; }
 `;
 
 const HeaderWrapper = styled.header`
-  margin-bottom: 50px;
-  max-width: 1000px; 
-  margin-left: auto; margin-right: auto;
+  padding-top: 60px; padding-bottom: 60px; background: #fff;
 `;
 
-const Breadcrumbs = styled.nav`
-  font-size: 13px; color: #888; display: flex; align-items: center; gap: 8px; margin-bottom: 24px;
-  a { transition: color 0.2s; &:hover { color: #28a665; } }
-  .divider { color: #ccc; }
-  .current { 
-    color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px; 
-  }
+const NavRow = styled.div` margin-bottom: 40px; `;
+const Breadcrumbs = styled.div`
+  font-size: 14px; color: #718096;
+  a { text-decoration: none; color: inherit; transition: color 0.2s;}
+  a:hover { color: #2563eb; }
+  .arrow { margin: 0 8px; color: #cbd5e0; }
 `;
 
-const DateText = styled.div` 
-  font-size: 13px; color: #28a665; margin-bottom: 20px; 
-  text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+const TitleRow = styled.div`
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 50px;
+  @media (max-width: 900px) { flex-direction: column-reverse; gap: 20px; }
 `;
 
-const HeaderGrid = styled.div`
-  display: flex; flex-direction: column; gap: 30px; align-items: flex-start;
+const MetaColumn = styled.div`
+  width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px; padding-top: 10px;
+  @media (max-width: 900px) { width: 100%; flex-direction: row; align-items: center; }
 `;
 
-const AuthorBox = styled.div` display: flex; gap: 16px; align-items: center; `;
-const AuthorImg = styled.img` width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.1); `;
-const AuthorInfo = styled.div` display: flex; flex-direction: column; font-size: 14px; line-height: 1.3; `;
-const AuthorName = styled.span` font-weight: 700; color: #111; `;
-const AuthorRole = styled.span` color: #28a665; font-size: 12px; font-weight: 600; text-transform: uppercase; `;
+const DateBadge = styled.span` font-size: 14px; color: #a0aec0; `;
+const AuthorBlock = styled.div`
+  display: flex; align-items: center; gap: 12px;
+  img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+  div { display: flex; flex-direction: column; line-height: 1.3; }
+  strong { font-size: 15px; color: #2563eb; font-weight: 700; }
+  span { font-size: 13px; color: #718096; }
+`;
 
 const MainTitle = styled.h1`
-  font-size: 52px; font-weight: 800; line-height: 1.1; color: #111; margin: 0; letter-spacing: -1.5px;
-  @media (max-width: 768px){ font-size: 36px; }
+  flex: 1; font-size: 56px; font-weight: 500; line-height: 1.1; color: #1a202c; margin: 0; letter-spacing: -1.5px; max-width: 900px;
+  @media (max-width: 1024px) { font-size: 42px; }
+  @media (max-width: 768px) { font-size: 32px; }
 `;
 
-const HeroSection = styled.div`
-  width: 100%; max-width: 1200px; height: 500px; margin: 0 auto 80px; 
-  overflow: hidden; border-radius: 20px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.15); /* Deep shadow */
-  @media (max-width: 768px){ height: 300px; margin-bottom: 40px; }
+const HeroImage = styled.div`
+  width: 100%; border-radius: 4px; overflow: hidden; margin-bottom: 40px;
+  img { width: 100%; height: auto; display: block; max-height: 600px; object-fit: cover; }
 `;
 
-const HeroImg = styled.img`
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.8s ease;
-  &:hover { transform: scale(1.03); } 
+const MainSection = styled.div` padding-bottom: 80px; `;
+const Grid = styled.div`
+  display: grid; grid-template-columns: 280px 1fr; gap: 80px;
+  @media (max-width: 900px) { grid-template-columns: 1fr; gap: 40px; }
 `;
 
-const ContentContainer = styled.div`
-  display: flex; justify-content: center;
+const SidebarColumn = styled.aside`
+  position: relative;
+  @media (max-width: 900px) { display: none; } 
 `;
 
-const ArticleBody = styled.div`
-  max-width: 800px; width: 100%; padding-bottom: 60px;
+const StickyWrapper = styled.div`
+  position: sticky; top: 100px; display: flex; flex-direction: column;
 `;
 
-// --- Related Section Styles ---
+const TOCHeader = styled.div` font-size: 14px; color: #a0aec0; margin-bottom: 24px; `;
+
+const TOCList = styled.ul`
+  list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px;
+`;
+
+const TOCItem = styled.li<{ $isActive: boolean; $isH3?: boolean }>`
+  padding-left: ${props => props.$isH3 ? '16px' : '0'}; 
+  a {
+    display: block; text-decoration: none; font-size: 15px; line-height: 1.5; transition: all 0.3s ease;
+    color: ${props => props.$isActive ? '#2563eb' : '#a0aec0'};
+    font-weight: ${props => props.$isActive ? '600' : '400'};
+    border-left: 2px solid ${props => props.$isActive ? '#2563eb' : 'transparent'};
+    padding-left: ${props => props.$isActive ? '16px' : '0'};
+    margin-left: ${props => props.$isActive ? '-18px' : '0'};
+  }
+  a:hover { color: #2563eb; }
+`;
+
+const EmptyTOC = styled.div` font-size: 13px; color: #cbd5e0; font-style: italic; `;
+
+const SidebarFooter = styled.div`
+  margin-top: 60px; border-top: 1px solid #edf2f7; padding-top: 20px;
+  span { display: block; font-size: 13px; color: #a0aec0; margin-bottom: 12px; }
+  .icons { display: flex; gap: 16px; color: #718096; }
+  svg { cursor: pointer; transition: color 0.2s; }
+  svg:hover { color: #2563eb; }
+`;
+
+const ContentColumn = styled.div` min-width: 0; max-width: 820px; `;
+
+/* ==========================================
+   RELATED SECTION STYLES (FROM YOUR DESIGN)
+   ========================================== */
 const RelatedSection = styled.div` 
   /* Light mint background for related section */
   background-color: #f2f9f5; 
@@ -363,13 +445,13 @@ const BigHeading = styled.h2`
 
 const SliderWrapper = styled.div` display: flex; flex-direction: column; align-items: center; `;
 const CardsContainer = styled.div` 
-  display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; width: 100%; padding: 20px 0 40px; 
+  display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; width: 100%; padding: 20px 20px 40px; 
   -ms-overflow-style: none; scrollbar-width: none; 
   &::-webkit-scrollbar { display: none; } 
 `;
 
 const BlogCard = styled.div` 
-  min-width: 450px; background: white; display: flex; height: 260px; 
+  min-width: 450px; background: white; display: flex; height: 260px; text-decoration: none;
   border-radius: 16px; overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
   transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent;
