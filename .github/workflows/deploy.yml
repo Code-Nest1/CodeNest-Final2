@@ -32,14 +32,12 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          
-          # Your local build folder (React uses 'build')
           local-dir: ./build/
           
-          # FIX: We point to the public_html folder specifically
+          # FIX: Since you have no 'domains' folder, this IS the correct path.
           server-dir: ./public_html/
           
-          # SAFETY LOCK: This protects your Blogs folders
+          # SAFETY LOCK
           exclude: |
             **/.git*
             **/.git*/**
