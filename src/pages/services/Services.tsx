@@ -1,21 +1,38 @@
+// src/pages/services/Services.tsx
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-// --- Colors & Variables ---
+// --- Design Tokens (Code Nest Brand Palette) ---
 const COLORS = {
-  black: "#0a343d",
-  textDark: "#111111",
-  textGrey: "#555555",
-  textLight: "#888888",
-  bgRight: "#f0f2f8", // The exact light blue-grey for the right panel
-  white: "#ffffff",
-  blueAccent: "#28a665",
-  limeAccent: "#0a343d",
-  bgPage: "#fcfcfc",
+  primary: "#2b945f",   // Light Green
+  secondary: "#0c3740", // Dark Green (Text & BG accents)
+  black: "#000000",
+  white: "#feffff",
+  textGrey: "#5a5a5a",
+  bgRight: "#f4fcf8",   // Subtle minty white for Art Panels
+  bgPage: "#feffff",
 };
 
-// --- Data: Code Nest Services Mapped to Design ---
+// --- ROUTING LOGIC ---
+// This connects the text in the list to the pages you created
+const getServiceRoute = (item: string) => {
+  switch (item) {
+    case "WordPress Solutions":
+      return "/services/wordpress-solutions";
+      
+    case "Shopify E-commerce":
+      return "/services/shopify-ecommerce";
+      
+    // Placeholders for future pages
+    // case "Custom Web Websites": return "/services/custom-web";
+    
+    default:
+      return "#"; // Stays on page if no link exists yet
+  }
+};
+
 const servicesData = [
   {
     id: 1,
@@ -91,60 +108,53 @@ const servicesData = [
   },
 ];
 
-// --- Geometric Art Components ---
-// These replicate the abstract shapes in the screenshot using SVG
+// --- Abstract Art Components (Updated Colors) ---
 const AbstractArt = ({ variant }: { variant: number }) => {
   return (
     <ArtContainer>
       {variant === 1 && (
         <svg viewBox="0 0 100 100" width="120" height="120">
-          <circle cx="30" cy="50" r="30" fill={COLORS.black} />
-          <circle cx="60" cy="40" r="30" fill={COLORS.blueAccent} style={{ mixBlendMode: 'multiply' }} />
-          <rect x="50" y="50" width="15" height="15" fill={COLORS.limeAccent} />
+          <circle cx="30" cy="50" r="30" fill={COLORS.secondary} />
+          <circle cx="60" cy="40" r="30" fill={COLORS.primary} style={{ mixBlendMode: 'multiply' }} />
+          <rect x="50" y="50" width="15" height="15" fill={COLORS.secondary} />
         </svg>
       )}
       {variant === 2 && (
         <svg viewBox="0 0 100 100" width="120" height="120">
-          <path d="M20 20 V80 L50 50 Z" fill={COLORS.black} />
-          <path d="M50 20 A 30 30 0 0 1 50 80 Z" fill={COLORS.blueAccent} transform="translate(10, 0)" />
-          <path d="M55 45 L65 50 L55 55 Z" fill={COLORS.limeAccent} />
+          <path d="M20 20 V80 L50 50 Z" fill={COLORS.secondary} />
+          <path d="M50 20 A 30 30 0 0 1 50 80 Z" fill={COLORS.primary} transform="translate(10, 0)" />
+          <path d="M55 45 L65 50 L55 55 Z" fill={COLORS.secondary} />
         </svg>
       )}
       {variant === 3 && (
         <svg viewBox="0 0 100 100" width="120" height="120">
-           <path d="M30 30 A 20 20 0 0 0 70 70" fill={COLORS.black} stroke={COLORS.black} strokeWidth="20" />
-           <circle cx="65" cy="65" r="25" fill={COLORS.blueAccent} />
-           <circle cx="35" cy="65" r="25" fill={COLORS.blueAccent} />
-           <path d="M30 50 L70 50" stroke={COLORS.limeAccent} strokeWidth="5" />
+           <path d="M30 30 A 20 20 0 0 0 70 70" fill={COLORS.secondary} stroke={COLORS.secondary} strokeWidth="20" fillOpacity="0" />
+           <circle cx="65" cy="65" r="25" fill={COLORS.primary} />
+           <path d="M30 50 L70 50" stroke={COLORS.secondary} strokeWidth="5" />
         </svg>
       )}
       {variant === 4 && (
         <svg viewBox="0 0 100 100" width="120" height="120">
-          <circle cx="50" cy="50" r="40" fill={COLORS.bgRight} /> {/* Mask */}
-          <path d="M50 10 L90 50 L50 90 L10 50 Z" fill={COLORS.black} transform="scale(0.8) translate(12,12)" />
-          <circle cx="70" cy="70" r="20" fill={COLORS.blueAccent} />
+          <rect x="20" y="20" width="60" height="60" fill={COLORS.secondary} rx="8" />
+          <circle cx="50" cy="50" r="20" fill={COLORS.primary} />
         </svg>
       )}
       {variant === 5 && (
         <svg viewBox="0 0 100 100" width="120" height="120">
-           <path d="M20 80 L50 30 L80 80 Z" fill={COLORS.black} style={{borderRadius: 20}} />
-           <circle cx="65" cy="65" r="25" fill={COLORS.blueAccent} style={{ mixBlendMode: 'screen' }} />
+           <path d="M20 80 L50 30 L80 80 Z" fill={COLORS.secondary} />
+           <circle cx="65" cy="65" r="25" fill={COLORS.primary} style={{ mixBlendMode: 'screen' }} />
         </svg>
       )}
       {variant === 6 && (
         <svg viewBox="0 0 100 100" width="120" height="120">
-           <circle cx="30" cy="30" r="15" fill={COLORS.blueAccent} />
-           <circle cx="70" cy="30" r="15" fill={COLORS.black} />
-           <circle cx="30" cy="70" r="15" fill={COLORS.blueAccent} />
-           <circle cx="70" cy="70" r="15" fill={COLORS.black} />
-           <circle cx="70" cy="70" r="6" fill={COLORS.limeAccent} />
+           <circle cx="30" cy="30" r="15" fill={COLORS.primary} />
+           <circle cx="70" cy="70" r="15" fill={COLORS.secondary} />
+           <rect x="40" y="40" width="20" height="20" fill={COLORS.secondary} />
         </svg>
       )}
     </ArtContainer>
   );
 };
-
-// --- Page Component ---
 
 export default function Services() {
   return (
@@ -156,7 +166,13 @@ export default function Services() {
           <span className="dot"></span> 6 main categories
         </TopBadge>
         
-        <Title>Services</Title>
+        <Title
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+        >
+            Services
+        </Title>
         
         <Subtitle>
           We help companies transform their organization into progressive growth 
@@ -169,9 +185,9 @@ export default function Services() {
         {servicesData.map((service, index) => (
           <Card 
             key={service.id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             {/* LEFT CONTENT */}
@@ -180,15 +196,20 @@ export default function Services() {
               
               <ItemsList>
                 {service.items.map((item, idx) => (
-                  <Item key={idx}>{item}</Item>
+                  <Item 
+                    key={idx} 
+                    as={Link} 
+                    to={getServiceRoute(item)}
+                  >
+                    {item}
+                  </Item>
                 ))}
               </ItemsList>
             </CardContent>
 
-            {/* RIGHT ART */}
+            {/* RIGHT ART PANEL */}
             <CardVisual>
               <AbstractArt variant={service.artVariant} />
-              {/* This pseudo-element creates the white fold if needed, but clip-path handles the cut */}
             </CardVisual>
           </Card>
         ))}
@@ -198,74 +219,64 @@ export default function Services() {
   );
 }
 
-// --- STYLES ---
+// --- STYLED COMPONENTS ---
 
 const PageWrapper = styled.div`
   background-color: ${COLORS.bgPage};
   min-height: 100vh;
-  padding: 100px 40px;
+  padding: 140px 6% 100px;
   font-family: 'Inter', sans-serif;
-  color: ${COLORS.textDark};
+  color: ${COLORS.secondary};
 
   @media (max-width: 768px) {
-    padding: 60px 20px;
+    padding: 100px 20px;
   }
 `;
 
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   margin-bottom: 120px;
   position: relative;
 `;
 
 const TopBadge = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
   background-color: #f0f0f5;
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 4px;
   font-size: 11px;
-  font-weight: 600;
-  color: ${COLORS.blueAccent};
-  display: flex;
+  font-weight: 700;
+  color: ${COLORS.primary};
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
 
   .dot {
-    width: 4px;
-    height: 4px;
-    background-color: ${COLORS.blueAccent};
+    width: 6px;
+    height: 6px;
+    background-color: ${COLORS.primary};
     border-radius: 50%;
-  }
-
-  @media (max-width: 900px) {
-    position: relative;
-    margin-bottom: 20px;
-    align-self: flex-start;
   }
 `;
 
-const Title = styled.h1`
-  font-size: 80px;
-  font-weight: 400; /* Thin look like screenshot */
-  letter-spacing: -2px;
-  margin: 0 0 30px 0;
-  color: ${COLORS.textDark};
-
-  @media (max-width: 768px) {
-    font-size: 48px;
-  }
+const Title = styled(motion.h1)`
+  font-size: clamp(60px, 8vw, 110px);
+  font-weight: 400; 
+  letter-spacing: -3px;
+  margin: 0 0 40px 0;
+  color: ${COLORS.secondary}; /* Dark Green Title */
+  line-height: 1;
 `;
 
 const Subtitle = styled.p`
-  max-width: 500px;
-  font-size: 14px;
+  max-width: 550px;
+  font-size: 16px;
   line-height: 1.6;
-  color: #888;
+  color: ${COLORS.textGrey};
   margin: 0;
 `;
 
@@ -274,9 +285,9 @@ const Subtitle = styled.p`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 40px;
-  row-gap: 40px;
-  max-width: 1400px;
+  column-gap: 30px;
+  row-gap: 30px;
+  max-width: 1440px;
   margin: 0 auto;
 
   @media (max-width: 1024px) {
@@ -287,79 +298,80 @@ const Grid = styled.div`
 const Card = styled(motion.div)`
   display: flex;
   background-color: ${COLORS.white};
-  min-height: 420px; /* Fixed height for consistency */
-  box-shadow: 0 0 0 1px #eee; /* Subtle border */
+  min-height: 480px; 
+  box-shadow: 0 4px 30px rgba(0,0,0,0.02);
+  border: 1px solid #e0ebe5; /* Subtle border */
+  overflow: hidden;
+  border-radius: 4px;
   
-  @media (max-width: 600px) {
+  @media (max-width: 650px) {
     flex-direction: column;
     min-height: auto;
   }
 `;
 
 const CardContent = styled.div`
-  flex: 1.2;
-  padding: 40px;
+  flex: 1.3;
+  padding: 60px 50px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
 const CategoryText = styled.div`
-  font-size: 13px;
-  color: #9ca3af; /* Light grey */
-  margin-bottom: 40px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #a0aec0;
+  margin-bottom: 60px;
+  font-weight: 600;
 `;
 
 const ItemsList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 `;
 
-const Item = styled.div`
-  font-size: 20px; /* Larger text for list */
+// "as={Link}" creates a proper React Router anchor tag
+const Item = styled.a`
+  font-size: 22px; 
   font-weight: 400;
-  color: ${COLORS.textDark};
+  color: ${COLORS.secondary};
+  text-decoration: none;
+  transition: all 0.3s ease;
+  line-height: 1.3;
+  width: fit-content;
   cursor: pointer;
-  transition: color 0.2s;
-  line-height: 1.4;
 
   &:hover {
-    color: ${COLORS.blueAccent};
+    color: ${COLORS.primary}; /* Green hover effect */
+    transform: translateX(5px);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 18px;
   }
 `;
 
 const CardVisual = styled.div`
-  flex: 0.8;
+  flex: 0.7;
   background-color: ${COLORS.bgRight};
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* THE DOG-EAR FOLD EFFECT */
+  /* THE COAX DOG-EAR FOLD EFFECT */
   clip-path: polygon(
     0 0, 
     100% 0, 
-    100% calc(100% - 50px), 
-    calc(100% - 50px) 100%, 
+    100% calc(100% - 60px), 
+    calc(100% - 60px) 100%, 
     0 100%
   );
 
-  /* Optional: If you want the white triangle overlay visual like a real paper fold */
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.05) 50%);
-    pointer-events: none;
-  }
-
-  @media (max-width: 600px) {
-    min-height: 200px;
+  @media (max-width: 650px) {
+    min-height: 250px;
     clip-path: none;
   }
 `;
@@ -372,6 +384,11 @@ const ArtContainer = styled.div`
   justify-content: center;
   
   svg {
-    filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.05));
+    filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.08));
+    transition: transform 0.5s ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.05) rotate(3deg);
   }
 `;

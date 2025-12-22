@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Facebook, Twitter, Linkedin, Share2, ArrowLeft, ArrowRight } from 'react-feather';
 
 // ==========================================
-// 1. GLOBAL STYLES (Coaxsoft Blue Theme)
+// 1. GLOBAL STYLES (CodeNest Blue Theme)
 // ==========================================
 const GlobalStyle = createGlobalStyle`
   html { scroll-behavior: smooth; }
