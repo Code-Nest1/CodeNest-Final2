@@ -25,7 +25,7 @@ import {
   Minus
 } from "react-feather";
 
-// --- Design Tokens (Same as WordPress File) ---
+// --- Design Tokens (Consistent with System) ---
 const COLORS = {
   coaxBlue: "#1a41e6",
   darkerBlue: "#091db1",
@@ -39,51 +39,51 @@ const COLORS = {
   borderColor: "#e1e5f0",
 };
 
-// --- DATA: SHOPIFY CONTEXT ---
-const SHOPIFY_STANDARDS = [
-  { id: "LIQUID", title: "Liquid & Theme Standards", desc: "Optimized Liquid architecture ensuring strict separation of data and display logic for 2.0 theme compatibility." },
-  { id: "API", title: "Shopify Storefront API", desc: "Advanced usage of the Storefront API to build headless experiences and custom mobile apps tied to your store." },
-  { id: "SEC", title: "PCI & Data Security", desc: "Compliance with PCI DSS standards and secure handling of customer data through vetted app integrations." },
-  { id: "CWV", title: "Core Web Vitals (Speed)", desc: "Performance optimization targeting Largest Contentful Paint (LCP) and First Input Delay (FID) on mobile devices." }
+// --- DATA: CUSTOM WEB CONTEXT ---
+const CUSTOM_STANDARDS = [
+  { id: "SOLID", title: "SOLID Architecture", desc: "We adhere to SOLID coding principles to ensure your custom application is scalable, maintainable, and free of spaghetti code." },
+  { id: "SEC", title: "OWASP Top 10 Security", desc: "Rigorous defense protocols against injection attacks, cross-site scripting, and data breaches for enterprise-grade security." },
+  { id: "API", title: "RESTful & GraphQL API", desc: "Building documented, type-safe API layers that allow your web platform to communicate seamlessly with mobile apps and 3rd party tools." },
+  { id: "DB", title: "Database Normalization", desc: "Optimized SQL and NoSQL database schemas designed to handle millions of records without latency or redundancy." }
 ];
 
 const BENEFITS_DATA = [
   {
-    title: "High-Converting Store Speed",
-    desc: "We eliminate 'App bloat' by coding custom functionalities directly into the theme. By prioritizing critical assets and minimizing JavaScript execution, we achieve superior mobile scores that drive lower bounce rates and higher sales."
+    title: "No CMS Limitations",
+    desc: "CMS platforms confine you to their box. Our custom solutions are built ground-up to fit your exact business workflows, ensuring the software adapts to you, not the other way around."
   },
   {
-    title: "SaaS Reliability + Custom Power",
-    desc: "Leverage Shopify's banking-grade security and 99.99% uptime while we engineer custom checkout flows, unique product configurators, and bespoke functionality that standard themes simply cannot handle."
+    title: "High-Performance Speed",
+    desc: "By removing the bloat of generic page builders and unused libraries, our custom-engineered sites load efficiently, processing complex logic in milliseconds."
   },
   {
-    title: "Shopify Online Store 2.0",
-    desc: "We build modular, section-everywhere themes. This gives your merchant team full control to drag-and-drop sections and create diverse landing pages without needing a developer for every marketing campaign."
+    title: "Full Intellectual Property",
+    desc: "Unlike subscribing to a SaaS product, you own 100% of your source code and database. This increases your company's valuation and ensures you are never vendor-locked."
   },
   {
-    title: "Headless & Hydrogen Ready",
-    desc: "Pushing boundaries? We build Headless commerce solutions using React and Hydrogen. This uncouples your frontend from the backend, allowing for sub-second page transitions and complete design freedom."
+    title: "Scalability for Enterprise",
+    desc: "We design cloud-native architectures (AWS/Azure) that can auto-scale horizontally. Whether you have 100 users or 1 million, your application stability remains rock solid."
   },
   {
-    title: "Clean Technical Architecture",
-    desc: "Spaghetti code from dozens of apps slows down stores. We audit and refactor your setup, replacing slow apps with lightweight custom code. This minimizes monthly fees and reduces technical conflict points."
+    title: "Seamless 3rd-Party Integration",
+    desc: "Need to connect to a legacy CRM, a logistic provider, or a payment gateway? We build robust middleware and custom connectors to unify your entire digital ecosystem."
   },
   {
-    title: "Seamless Global Expansion",
-    desc: "Scale easily with Shopify Markets. We architect your store to handle multi-currency, multi-language, and international domains (i18n), ensuring a localized buying experience for customers everywhere."
+    title: "Advanced Data Security",
+    desc: "Custom development allows for fine-grained role-based access control (RBAC), end-to-end encryption, and specific compliance handling (GDPR, HIPAA, etc.)."
   }
 ];
 
 const WHY_CHOOSE_CN_DATA = [
-  { num: "/ 01", title: "Shopify Plus Experts", desc: "We specialize in high-volume implementations, utilizing Plus-exclusive features like checkout extensibility, B2B logic, and sophisticated scripts to increase AOV." },
-  { num: "/ 02", title: "Conversion-Led Design", desc: "We don't just code; we design for sales. Every UX decision is backed by e-commerce data to minimize friction from the homepage landing to the final 'Thank You' page." },
-  { num: "/ 03", title: "Advanced App Development", desc: "When the App Store falls short, we build custom private apps. We automate your backend logistics, inventory syncing, and ERP integrations securely." },
-  { num: "/ 04", title: "Performance-First Metrics", desc: "Speed is revenue. Our CI/CD pipelines automatically test for speed regressions, ensuring your store remains fast even after new feature deployments or high-traffic holiday sales." },
-  { num: "/ 05", title: "Enterprise Grade Migration", desc: "Moving from Magento or Woo? We handle complex data migrations including products, customers, and order history with zero downtime and strict URL redirects (SEO safety)." },
-  { num: "/ 06", title: "Growth Partnership", desc: "An online store is never 'finished'. We act as your ongoing technical partner, providing CRO audits, feature roadmaps, and 24/7 support during Black Friday/Cyber Monday." }
+  { num: "/ 01", title: "Senior Engineering Talent", desc: "No junior freelancers. Your project is architected by senior developers with experience in complex enterprise environments and high-availability systems." },
+  { num: "/ 02", title: "Technology Agnostic", desc: "We don't force one language on you. We select the best stack for your specific problem—whether that's Python (Django), Node.js, Go, or PHP (Laravel)." },
+  { num: "/ 03", title: "DevOps & CI/CD Integrated", desc: "We automate deployment pipelines. Every commit runs through automated testing to ensure regression-free releases, allowing for daily production updates." },
+  { num: "/ 04", title: "Solution Architecture", desc: "Before writing a line of code, we blueprint the system. This saves money by preventing scope creep and ensuring structural integrity from Day 1." },
+  { num: "/ 05", title: "Focus on Business Logic", desc: "We understand that code must serve revenue. We specialize in building complex dashboards, SaaS products, and booking engines that drive business operations." },
+  { num: "/ 06", title: "Long-term Maintenance", desc: "Custom software requires care. We offer retained teams that act as your internal IT department, managing updates, security patches, and feature rollouts." }
 ];
 
-// Reusing same feedback structure, updated service tags for Context
+// Reusing same feedback structure
 type FeedbackItem = {
   id: number;
   name: string;
@@ -103,9 +103,9 @@ const FEEDBACKS: FeedbackItem[] = [
     name: "Bohdan Zabawskyj",
     role: "Co-founder and CPO at Fortay.ai",
     company: "Fortay.ai",
-    quote: "Codenest revamped our e-commerce presence completely. The custom Shopify 2.0 theme they built increased our conversion rate by 30% in the first month. Essential partners.",
+    quote: "We needed a bespoke algorithmic platform for our HR tech. Code Nest delivered a secure, high-performance web app that processes complex data in real-time. Simply brilliant.",
     imgSrc: "/assets/feedback/bohdan.jpg",
-    serviceTag: "Shopify Plus Development",
+    serviceTag: "SaaS Development",
     hasVideo: true,
   },
   {
@@ -113,10 +113,10 @@ const FEEDBACKS: FeedbackItem[] = [
     name: "Dan Brooks",
     role: "President, Krytter",
     company: "Krytter",
-    quote: "Our previous store was sluggish due to app overload. They migrated us to a cleaner architecture and handled our complex inventory logic. Traffic value skyrocketed.",
+    quote: "Our operational needs exceeded what any off-the-shelf software could do. Code Nest engineered a custom portal that automated 80% of our manual administrative workflows.",
     imgSrc: "/assets/feedback/dan.jpg",
     logoSrc: "/assets/feedback/krytter-logo.png",
-    serviceTag: "Store Optimization & SEO",
+    serviceTag: "Custom Portal Design",
     ctaText: "View Case Study",
   },
   {
@@ -124,56 +124,56 @@ const FEEDBACKS: FeedbackItem[] = [
     name: "Michael Smith",
     role: "Product Owner",
     company: "TechFlow",
-    quote: "We needed a headless solution to integrate with our mobile app. The Code Nest team leveraged Shopify's API perfectly to create a seamless omni-channel experience.",
+    quote: "Building our customer dashboard required strict API integrations. The team's knowledge of backend architecture and frontend UX provided a seamless solution for our clients.",
     imgSrc: "/assets/feedback/michael.jpg",
-    serviceTag: "Headless Commerce",
-    ctaText: "See the Store",
+    serviceTag: "Enterprise Web App",
+    ctaText: "See the App",
   },
 ];
 
 const AUDIT_STEPS = [
   {
     icon: <Star size={28} />,
-    title: "Store Assessment",
-    desc: "We analyze your current theme architecture, installed apps, and conversion funnels. We identify high-cost low-value apps and point out UX friction points killing your sales."
+    title: "Discovery & Blueprint",
+    desc: "We analyze your business requirements and legacy systems. We map out the data models, user flows, and technical stack required to solve your specific challenges efficiently."
   },
   {
     icon: <LinkIcon size={28} />,
-    title: "Code & Liquid Analysis",
-    desc: "We dive deep into your Liquid files and JavaScript assets. We look for unoptimized loops, blocking scripts from third parties, and legacy code that hurts your Core Web Vitals."
+    title: "Code Architecture",
+    desc: "For existing projects, we review the code for security holes and 'technical debt'. For new builds, we set up a scalable folder structure, selecting the right database and framework."
   },
   {
     icon: <FileText size={28} />,
-    title: "Actionable Reporting",
-    desc: "You receive a prioritized roadmap. It classifies issues by 'Impact on Revenue' vs 'Effort'. We provide clear instructions: which apps to remove, which images to compress, and what code to refactor."
+    title: "Technical Roadmap",
+    desc: "You get a detailed specification document (SRS) and a development timeline. This breaks the complex project into manageable sprints with clear deliverables and milestones."
   },
   {
     icon: <Headphones size={28} />,
-    title: "Implementation & CRO",
-    desc: "Beyond fixing bugs, we help implement the changes. Whether it's upgrading to OS 2.0 or tweaking the cart drawer, we ensure the improvements lead to measurable growth."
+    title: "Agile Development",
+    desc: "We move into execution using Scrum methodology. Two-week sprints ensure you see continuous progress and can adapt features based on real user feedback during development."
   }
 ];
 
 const FAQ_DATA = [
     {
-        question: "How long does a migration to Shopify typically take?",
-        answer: "For most brands moving from WooCommerce or Magento, a full data and design migration takes 8 to 14 weeks. This includes product data transfer, SEO redirect mapping, custom theme setup, and payment gateway integration."
+        question: "When should I choose custom development over a CMS like WordPress?",
+        answer: "Choose custom development when you have unique functionality that a plugin cannot solve (e.g., a SaaS product, a complex booking system, a customer portal, or an intranet). If your business model depends on unique logic, custom is the only viable path."
     },
     {
-        question: "Do you work with existing themes or build from scratch?",
-        answer: "We do both. For startups, we can customize premium themes to keep costs low. For scaling brands and enterprise (Shopify Plus), we engineer bespoke custom themes from scratch to ensure maximum performance and brand uniqueness."
+        question: "How much longer does a custom website take to build?",
+        answer: "A custom web application generally takes 3 to 6 months depending on complexity. However, we accelerate this by using modern frameworks and our own pre-built internal component libraries to hit the ground running."
     },
     {
-        question: "Can you help improve my store's page speed?",
-        answer: "Absolutely. Speed optimization is our core service. We minimize HTTP requests, defer non-critical JS, optimize Liquid rendering, and compress assets to get your mobile store loading in under 2 seconds."
+        question: "Do you provide documentation for the code?",
+        answer: "Yes, extensive documentation is part of our deliverables. This includes API documentation (Swagger), architecture diagrams, and inline code comments so any future developer can easily pick up the project."
     },
     {
-        question: "Do you support Headless Shopify development?",
-        answer: "Yes. For brands needing complete frontend freedom, we build Headless stacks using Hydrogen, Next.js, or Gatsby, connecting to Shopify's backend via the Storefront API for the ultimate flexible experience."
+        question: "Who owns the code after the project is finished?",
+        answer: "You do. Unlike renting software (SaaS), you possess full Intellectual Property (IP) rights to the source code, database, and design assets upon final payment. You are free to host it wherever you like."
     },
     {
-        question: "What maintenance does a Shopify store need?",
-        answer: "While Shopify hosts the server, your store needs 'app hygiene', theme updates, and ongoing CRO (Conversion Rate Optimization). We provide monthly retainers to handle feature drops, API updates, and speed checks."
+        question: "Can you take over an existing project built by another agency?",
+        answer: "Yes, this is common. We start with a 'Code Audit' to assess the state of the existing codebase. If it meets our quality standards, we can proceed with maintenance; otherwise, we may suggest a partial refactor for stability."
     }
 ];
 
@@ -216,11 +216,10 @@ interface WPPost {
     };
 }
 
-// --- COMPONENT START ---
-export default function ShopifyEcommerce() {
+export default function CustomWebDevelopment() {
   const navigate = useNavigate();
 
-  const [openStandard, setOpenStandard] = useState<string | null>("LIQUID");
+  const [openStandard, setOpenStandard] = useState<string | null>("SOLID");
   
   const [[page, direction], setPage] = useState([0, 0]);
   const cardControls = useAnimation();
@@ -240,7 +239,6 @@ export default function ShopifyEcommerce() {
       if (item.logoSrc) { const logo = new Image(); logo.src = item.logoSrc; }
     });
 
-    // Kept the blog fetch as-is (assuming general tech/ecommerce blogs are here)
     const fetchBlogs = async () => {
         try {
             const res = await fetch('https://blogs.codenest.us.com/wp-json/wp/v2/posts?_embed&per_page=6');
@@ -300,32 +298,31 @@ export default function ShopifyEcommerce() {
       <HeroSection>
         <HeroInner>
           <HeroContent>
-            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Shopify E-commerce</strong></Breadcrumbs>
-            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Shopify <br /> development service</motion.h1>
+            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Custom Web Development</strong></Breadcrumbs>
+            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Custom web <br /> application service</motion.h1>
             <ButtonGroup>
               <MainBtn>Get an Estimate</MainBtn>
               <IconBtn><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg></IconBtn>
             </ButtonGroup>
-            <HeroPara>Build high-converting, scalable, and custom-branded stores using Shopify Plus and Headless frameworks.</HeroPara>
+            <HeroPara>Bespoke web engineering for complex business logic, SaaS platforms, and enterprise portals.</HeroPara>
             <RatingsRow>
               <RatingItem><span className="brand">Clutch</span><div className="stars">★★★★★ <span className="val">4.9 / 5</span></div></RatingItem>
               <RatingItem><span className="brand">GoodFirms</span><div className="stars">★★★★★ <span className="val">5 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">( Shopify Partners )</span><div className="stars">★★★★★ <span className="val">10 / 10</span></div></RatingItem>
+              <RatingItem><span className="brand">( Verified Partner )</span><div className="stars">★★★★★ <span className="val">100% Quality</span></div></RatingItem>
             </RatingsRow>
           </HeroContent>
-          {/* Changed Graphic Colors slightly conceptually, but keeping structure */}
           <HeroGraphic><AbstractGraphicSVG /></HeroGraphic>
         </HeroInner>
       </HeroSection>
 
       {/* --- 2. SECONDARY INTRO SECTION --- */}
       <IntroContainer>
-        <BadgeWrapper><span className="dot"></span> Shopify Audit & Optimize</BadgeWrapper>
+        <BadgeWrapper><span className="dot"></span> Custom Engineering</BadgeWrapper>
         <LayoutGrid>
-          <motion.h2 className="audit-heading">Get a complete <br /> e-commerce store <br /> analysis to <br /> unlock growth</motion.h2>
+          <motion.h2 className="audit-heading">Build scalable <br /> software assets <br /> designed for your <br /> unique workflow</motion.h2>
           <RightContentBlock>
-            <p>Our audit scans your store for app bloat, unoptimized Liquid code, and UX friction. We provide clear technical fixes to boost your conversion rate and Average Order Value.</p>
-            <BlueButtonGroup><BlueTextBtn>Audit my store performance now</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
+            <p>Off-the-shelf software often fails at scale. We audit your technical needs to build custom, cloud-native applications that streamline operations and offer full intellectual property ownership.</p>
+            <BlueButtonGroup><BlueTextBtn>Discuss your project idea</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
           </RightContentBlock>
         </LayoutGrid>
       </IntroContainer>
@@ -333,9 +330,9 @@ export default function ShopifyEcommerce() {
       {/* --- 3. STANDARDS ACCORDION SECTION --- */}
       <StandardsContainer>
         <StandardsInner>
-            <h2 className="section-title">Development standards <br /> applied by our <br /> Shopify experts</h2>
+            <h2 className="section-title">Engineering standards <br /> we apply to every <br /> custom project</h2>
             <AccordionList>
-                {SHOPIFY_STANDARDS.map((item) => (
+                {CUSTOM_STANDARDS.map((item) => (
                     <AccordionItem key={item.id} isOpen={openStandard === item.id}>
                         <div className="header" onClick={() => setOpenStandard(openStandard === item.id ? null : item.id)}>
                             <div className="btn-box">{openStandard === item.id ? '-' : '+'}</div>
@@ -359,12 +356,12 @@ export default function ShopifyEcommerce() {
         <SectionHeader white>What to expect</SectionHeader>
         <CardsGrid>
           {[
-            { id: "01.", title: "Codebase Purity", desc: "Clean, modular Liquid code with zero reliance on unnecessary 3rd party apps." },
-            { id: "02.", title: "Mobile Velocity", desc: "Focus on sub-second interactions for mobile shoppers to prevent bounce." },
-            { id: "03.", title: "Secure Checkout", desc: "Customized Plus checkout experiences ensuring safety and branding consistency." },
-            { id: "04.", title: "Admin Simplicity", desc: "Store setup designed for easy inventory and content management by your team." },
-            { id: "05.", title: "Sections Everywhere", desc: "Utilizing Shopify 2.0 standards for drag-and-drop flexibility across all pages." },
-            { id: "06.", title: "Scalable Architecture", desc: "Infrastructure ready to handle traffic spikes like Black Friday with ease." }
+            { id: "01.", title: "Codebase Ownership", desc: "No vendor lock-in. You own the repository and the IP rights entirely." },
+            { id: "02.", title: "Lightning Performance", desc: "Lean architectures without the bloat of CMS themes ensures instant load times." },
+            { id: "03.", title: "Scalable Database", desc: "Designed to handle millions of records and complex queries effortlessly." },
+            { id: "04.", title: "Secure APIs", desc: "Encryption at rest and in transit, with JWT authentication standards." },
+            { id: "05.", title: "Tailored Admin", desc: "We build custom dashboards that exactly match your staff's workflow." },
+            { id: "06.", title: "Third-party Integrations", desc: "Seamless connection to your CRM, ERP, Payment Gateway, or AI tools." }
           ].map((item, i) => (
             <DogEarCard key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
               <span className="card-num">{item.id}</span>
@@ -383,7 +380,7 @@ export default function ShopifyEcommerce() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Why choose our custom <br /> Shopify solutions?
+            Why choose bespoke <br /> web development?
           </motion.h2>
         </div>
 
@@ -410,7 +407,7 @@ export default function ShopifyEcommerce() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
         >
-          Why choose Code Nest for your <br /> E-commerce Growth?
+          Why choose Code Nest for your <br /> software solution?
         </motion.h2>
         <ChooseCardsGrid>
           {WHY_CHOOSE_CN_DATA.map((card, i) => (
@@ -435,10 +432,10 @@ export default function ShopifyEcommerce() {
               </svg>
             </DecoCircles>
 
-            <BannerText>Want to check your store health?</BannerText>
+            <BannerText>Have a complex project idea?</BannerText>
             
             <DownloadBtn>
-              Download E-commerce CRO checklist
+              Download Requirement Checklist
               <ArrowDown size={18} style={{ marginLeft: "auto", color: '#000' }} /> 
             </DownloadBtn>
 
@@ -461,10 +458,10 @@ export default function ShopifyEcommerce() {
 
         <Container8>
           <HeaderWrapper>
-            <SubHeader>CodeNest Philosophy</SubHeader>
-            <HeaderTitle>What our merchants say</HeaderTitle>
+            <SubHeader>CodeNest Success Stories</SubHeader>
+            <HeaderTitle>What our clients say about the build</HeaderTitle>
             <HeaderDesc>
-              Partnering with brands to drive sales through superior technology and design.
+              Real experiences from companies that scaled using our custom engineered solutions.
             </HeaderDesc>
           </HeaderWrapper>
 
@@ -533,7 +530,7 @@ export default function ShopifyEcommerce() {
         </Container8>
       </Section8>
 
-      {/* --- 9. HOW AUDIT WORKS --- */}
+      {/* --- 9. PROCESS SECTION --- */}
       <AuditProcessSection>
         <AuditContainer>
            <motion.h2 
@@ -542,7 +539,7 @@ export default function ShopifyEcommerce() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              How our optimization process works
+              How we build custom software
            </motion.h2>
 
            <ProcessGrid>
@@ -577,10 +574,10 @@ export default function ShopifyEcommerce() {
                          </svg>
                     </DecoCircles>
                     <BannerTitle10>
-                        Don't lose customers <br /> get expert help
+                        Ready to digitize <br /> your operations?
                     </BannerTitle10>
                     <ConsultBtn>
-                        Book a Shopify consultation 
+                        Book a discovery call
                         <ArrowDown size={18} style={{ color: '#000', transform: 'rotate(-45deg)' }} /> 
                     </ConsultBtn>
                     <DecoStar>
@@ -595,7 +592,7 @@ export default function ShopifyEcommerce() {
                 <BackgroundCurve />
                 <FAQContent>
                     <FAQLeft>
-                        <h2>Common questions <br /> about our Shopify services</h2>
+                        <h2>Common questions <br /> about custom apps</h2>
                     </FAQLeft>
                     <FAQRight>
                         {FAQ_DATA.map((item, index) => (
@@ -636,7 +633,7 @@ export default function ShopifyEcommerce() {
           <BlogContainer>
              <BlogHeaderWrapper>
                 <BlogTitle>
-                  E-commerce Insights<br />
+                  Tech Insights<br />
                   <BlogLink onClick={() => navigate('/blog')} role="button" tabIndex={0}>
                      Check our blog <ArrowUpRight size={32} />
                   </BlogLink>
@@ -653,7 +650,7 @@ export default function ShopifyEcommerce() {
                        {blogPosts.map(post => {
                            const featuredImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url 
                                || 'https://via.placeholder.com/600x400?text=No+Image';
-                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Insights';
+                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Development';
                            
                            return (
                               <BlogCard key={post.id} onClick={() => navigate(`/blog/${post.slug}`)}>
@@ -683,7 +680,7 @@ export default function ShopifyEcommerce() {
 };
 
 // ==========================================
-// STYLES (Identical to WordPressSolutions)
+// STYLES
 // ==========================================
 const PageWrapper = styled.div`
   background: white; 

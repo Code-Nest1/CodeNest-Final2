@@ -16,27 +16,27 @@ const COLORS = {
 };
 
 // --- ROUTING LOGIC ---
-// This connects the text in the list to the pages you created
 const getServiceRoute = (item: string) => {
   switch (item) {
-    case "WordPress Solutions":
+    case "WordPress Solutions": 
       return "/services/wordpress-solutions";
-      
-    case "Shopify E-commerce":
+    case "Shopify E-commerce": 
       return "/services/shopify-ecommerce";
-      
-    // Placeholders for future pages
-    // case "Custom Web Websites": return "/services/custom-web";
-    
-    default:
-      return "#"; // Stays on page if no link exists yet
+    case "Custom Web Websites": 
+      return "/services/custom-web-development";
+    case "React & Next.js Development":
+      return "/services/react-next-development";
+    case "UI/UX Implementation":
+      return "/services/ui-ux-implementation";
+    default: 
+      return "#"; 
   }
 };
 
 const servicesData = [
   {
     id: 1,
-    category: "/Web Design & Development",
+    category: "/ Web Design & Development",
     items: [
       "WordPress Solutions",
       "Shopify E-commerce",
@@ -48,7 +48,7 @@ const servicesData = [
   },
   {
     id: 2,
-    category: "/App Development",
+    category: "/ App Development",
     items: [
       "iOS Native Apps",
       "Android Native Apps",
@@ -60,7 +60,7 @@ const servicesData = [
   },
   {
     id: 3,
-    category: "/Digital Marketing",
+    category: "/ Digital Marketing",
     items: [
       "Search Engine Optimization (SEO)",
       "Google Ads (PPC)",
@@ -72,7 +72,7 @@ const servicesData = [
   },
   {
     id: 4,
-    category: "/Managed Services",
+    category: "/ Managed Services",
     items: [
       "Website Maintenance",
       "Speed Optimization",
@@ -84,7 +84,7 @@ const servicesData = [
   },
   {
     id: 5,
-    category: "/Creative Services",
+    category: "/ Creative Services",
     items: [
       "Brand Identity & Logo",
       "Graphic Design",
@@ -96,7 +96,7 @@ const servicesData = [
   },
   {
     id: 6,
-    category: "/Our Top Services",
+    category: "/ Our Top Services",
     items: [
       "Full Content Strategy",
       "Email Marketing Automation",
@@ -108,45 +108,45 @@ const servicesData = [
   },
 ];
 
-// --- Abstract Art Components (Updated Colors) ---
+// --- Abstract Art Components ---
 const AbstractArt = ({ variant }: { variant: number }) => {
   return (
     <ArtContainer>
       {variant === 1 && (
-        <svg viewBox="0 0 100 100" width="120" height="120">
+        <svg viewBox="0 0 100 100">
           <circle cx="30" cy="50" r="30" fill={COLORS.secondary} />
           <circle cx="60" cy="40" r="30" fill={COLORS.primary} style={{ mixBlendMode: 'multiply' }} />
           <rect x="50" y="50" width="15" height="15" fill={COLORS.secondary} />
         </svg>
       )}
       {variant === 2 && (
-        <svg viewBox="0 0 100 100" width="120" height="120">
+        <svg viewBox="0 0 100 100">
           <path d="M20 20 V80 L50 50 Z" fill={COLORS.secondary} />
           <path d="M50 20 A 30 30 0 0 1 50 80 Z" fill={COLORS.primary} transform="translate(10, 0)" />
           <path d="M55 45 L65 50 L55 55 Z" fill={COLORS.secondary} />
         </svg>
       )}
       {variant === 3 && (
-        <svg viewBox="0 0 100 100" width="120" height="120">
+        <svg viewBox="0 0 100 100">
            <path d="M30 30 A 20 20 0 0 0 70 70" fill={COLORS.secondary} stroke={COLORS.secondary} strokeWidth="20" fillOpacity="0" />
            <circle cx="65" cy="65" r="25" fill={COLORS.primary} />
            <path d="M30 50 L70 50" stroke={COLORS.secondary} strokeWidth="5" />
         </svg>
       )}
       {variant === 4 && (
-        <svg viewBox="0 0 100 100" width="120" height="120">
+        <svg viewBox="0 0 100 100">
           <rect x="20" y="20" width="60" height="60" fill={COLORS.secondary} rx="8" />
           <circle cx="50" cy="50" r="20" fill={COLORS.primary} />
         </svg>
       )}
       {variant === 5 && (
-        <svg viewBox="0 0 100 100" width="120" height="120">
+        <svg viewBox="0 0 100 100">
            <path d="M20 80 L50 30 L80 80 Z" fill={COLORS.secondary} />
            <circle cx="65" cy="65" r="25" fill={COLORS.primary} style={{ mixBlendMode: 'screen' }} />
         </svg>
       )}
       {variant === 6 && (
-        <svg viewBox="0 0 100 100" width="120" height="120">
+        <svg viewBox="0 0 100 100">
            <circle cx="30" cy="30" r="15" fill={COLORS.primary} />
            <circle cx="70" cy="70" r="15" fill={COLORS.secondary} />
            <rect x="40" y="40" width="20" height="20" fill={COLORS.secondary} />
@@ -224,12 +224,18 @@ export default function Services() {
 const PageWrapper = styled.div`
   background-color: ${COLORS.bgPage};
   min-height: 100vh;
+  /* Laptop Padding (Maintained) */
   padding: 140px 6% 100px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: ${COLORS.secondary};
+  overflow-x: hidden;
 
-  @media (max-width: 768px) {
-    padding: 100px 20px;
+  /* Mobile/Tablet Padding Adjustment */
+  @media (max-width: 960px) {
+    padding: 100px 5% 60px;
+  }
+  @media (max-width: 480px) {
+    padding: 80px 20px 50px; /* Reduced for smaller phones */
   }
 `;
 
@@ -238,6 +244,12 @@ const HeaderWrapper = styled.div`
   flex-direction: column;
   margin-bottom: 120px;
   position: relative;
+  max-width: 1440px;
+
+  /* Mobile Spacing */
+  @media (max-width: 768px) {
+    margin-bottom: 60px;
+  }
 `;
 
 const TopBadge = styled.div`
@@ -261,15 +273,29 @@ const TopBadge = styled.div`
     background-color: ${COLORS.primary};
     border-radius: 50%;
   }
+
+  /* Mobile tweak */
+  @media (max-width: 480px) {
+    margin-bottom: 24px;
+    font-size: 10px;
+    padding: 6px 12px;
+  }
 `;
 
 const Title = styled(motion.h1)`
-  font-size: clamp(60px, 8vw, 110px);
+  /* Using clamp() so it's perfect on desktop AND mobile automatically */
+  font-size: clamp(48px, 8vw, 110px);
   font-weight: 400; 
   letter-spacing: -3px;
   margin: 0 0 40px 0;
-  color: ${COLORS.secondary}; /* Dark Green Title */
+  color: ${COLORS.secondary}; 
   line-height: 1;
+
+  /* Specific mobile override for extreme screens */
+  @media (max-width: 480px) {
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -278,20 +304,28 @@ const Subtitle = styled.p`
   line-height: 1.6;
   color: ${COLORS.textGrey};
   margin: 0;
+  
+  /* Prevent width issues on mobile */
+  @media (max-width: 600px) {
+    width: 100%;
+    font-size: 15px;
+  }
 `;
 
 // --- GRID LAYOUT ---
 
 const Grid = styled.div`
   display: grid;
+  /* Laptop Grid (2 columns) */
   grid-template-columns: 1fr 1fr;
   column-gap: 30px;
   row-gap: 30px;
   max-width: 1440px;
   margin: 0 auto;
 
+  /* Tablet: 2 columns is usually okay, but often 1 is better for cards this big */
   @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stack vertically on tablet/mobile */
   }
 `;
 
@@ -300,12 +334,19 @@ const Card = styled(motion.div)`
   background-color: ${COLORS.white};
   min-height: 480px; 
   box-shadow: 0 4px 30px rgba(0,0,0,0.02);
-  border: 1px solid #e0ebe5; /* Subtle border */
+  border: 1px solid #e0ebe5;
   overflow: hidden;
   border-radius: 4px;
-  
+  transition: transform 0.3s ease;
+
+  &:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+
+  /* Mobile Stacking Logic */
   @media (max-width: 650px) {
-    flex-direction: column;
+    flex-direction: column; /* Content first, then Image */
     min-height: auto;
   }
 `;
@@ -315,6 +356,14 @@ const CardContent = styled.div`
   padding: 60px 50px;
   display: flex;
   flex-direction: column;
+
+  /* Adaptive Padding for Smaller Screens */
+  @media (max-width: 960px) {
+    padding: 50px 40px;
+  }
+  @media (max-width: 480px) {
+    padding: 30px 24px; /* Much tighter padding for phones */
+  }
 `;
 
 const CategoryText = styled.div`
@@ -323,16 +372,24 @@ const CategoryText = styled.div`
   letter-spacing: 1.5px;
   color: #a0aec0;
   margin-bottom: 60px;
-  font-weight: 600;
+  font-weight: 700;
+  
+  @media (max-width: 480px) {
+    margin-bottom: 30px; /* Reduced margin */
+  }
 `;
 
 const ItemsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  
+  /* Tap targets for mobile */
+  @media (max-width: 480px) {
+    gap: 14px;
+  }
 `;
 
-// "as={Link}" creates a proper React Router anchor tag
 const Item = styled.a`
   font-size: 22px; 
   font-weight: 400;
@@ -344,12 +401,17 @@ const Item = styled.a`
   cursor: pointer;
 
   &:hover {
-    color: ${COLORS.primary}; /* Green hover effect */
+    color: ${COLORS.primary}; 
     transform: translateX(5px);
   }
 
-  @media (max-width: 768px) {
-    font-size: 18px;
+  /* Responsive Font Sizes */
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+  @media (max-width: 480px) {
+    font-size: 18px; 
+    font-weight: 500; /* Slightly thicker for better reading on small screens */
   }
 `;
 
@@ -361,7 +423,7 @@ const CardVisual = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* THE COAX DOG-EAR FOLD EFFECT */
+  /* Laptop Dog-Ear Clip Path */
   clip-path: polygon(
     0 0, 
     100% 0, 
@@ -370,9 +432,12 @@ const CardVisual = styled.div`
     0 100%
   );
 
+  /* Mobile Updates */
   @media (max-width: 650px) {
-    min-height: 250px;
-    clip-path: none;
+    min-height: 200px;
+    height: 200px;
+    clip-path: none; /* Remove clip path on mobile for clean footer look */
+    border-top: 1px solid #f0f0f5; /* Subtle separator line */
   }
 `;
 
@@ -384,11 +449,22 @@ const ArtContainer = styled.div`
   justify-content: center;
   
   svg {
+    /* Fluid width with max constraint */
+    width: 120px; 
+    height: 120px;
     filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.08));
     transition: transform 0.5s ease;
   }
 
   &:hover svg {
     transform: scale(1.05) rotate(3deg);
+  }
+  
+  /* SVG scaling on small mobile */
+  @media (max-width: 480px) {
+    svg {
+        width: 100px;
+        height: 100px;
+    }
   }
 `;

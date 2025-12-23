@@ -25,7 +25,7 @@ import {
   Minus
 } from "react-feather";
 
-// --- Design Tokens (Same as WordPress File) ---
+// --- Design Tokens ---
 const COLORS = {
   coaxBlue: "#1a41e6",
   darkerBlue: "#091db1",
@@ -39,51 +39,51 @@ const COLORS = {
   borderColor: "#e1e5f0",
 };
 
-// --- DATA: SHOPIFY CONTEXT ---
-const SHOPIFY_STANDARDS = [
-  { id: "LIQUID", title: "Liquid & Theme Standards", desc: "Optimized Liquid architecture ensuring strict separation of data and display logic for 2.0 theme compatibility." },
-  { id: "API", title: "Shopify Storefront API", desc: "Advanced usage of the Storefront API to build headless experiences and custom mobile apps tied to your store." },
-  { id: "SEC", title: "PCI & Data Security", desc: "Compliance with PCI DSS standards and secure handling of customer data through vetted app integrations." },
-  { id: "CWV", title: "Core Web Vitals (Speed)", desc: "Performance optimization targeting Largest Contentful Paint (LCP) and First Input Delay (FID) on mobile devices." }
+// --- DATA: REACT/NEXT.JS CONTEXT ---
+const REACT_STANDARDS = [
+  { id: "SSR", title: "Server-Side Rendering (SSR)", desc: "Leveraging Next.js SSR and ISR to render pages on the server, ensuring perfect SEO indexing and lightning-fast initial load times." },
+  { id: "TS", title: "Strict TypeScript", desc: "We enforce strict type-checking across the entire application to catch bugs during development and ensure code reliability." },
+  { id: "STATE", title: "Modern State Management", desc: "Efficient data flow using React Context, Zustand, or Redux Toolkit to manage complex application states without prop-drilling." },
+  { id: "CWV", title: "Edge Performance", desc: "Optimizing Core Web Vitals by utilizing Vercel's Edge Network for caching and global content delivery." }
 ];
 
 const BENEFITS_DATA = [
   {
-    title: "High-Converting Store Speed",
-    desc: "We eliminate 'App bloat' by coding custom functionalities directly into the theme. By prioritizing critical assets and minimizing JavaScript execution, we achieve superior mobile scores that drive lower bounce rates and higher sales."
+    title: "Google-Loved SEO",
+    desc: "Single Page Applications (SPAs) historically struggled with SEO. Our Next.js architecture provides pre-rendered HTML that Google bots can read instantly, boosting your organic rankings significantly."
   },
   {
-    title: "SaaS Reliability + Custom Power",
-    desc: "Leverage Shopify's banking-grade security and 99.99% uptime while we engineer custom checkout flows, unique product configurators, and bespoke functionality that standard themes simply cannot handle."
+    title: "Blazing Fast Interactions",
+    desc: "React's Virtual DOM allows the UI to update instantly without reloading the page. We optimize this further with code-splitting, so users only download the code they need for the current page."
   },
   {
-    title: "Shopify Online Store 2.0",
-    desc: "We build modular, section-everywhere themes. This gives your merchant team full control to drag-and-drop sections and create diverse landing pages without needing a developer for every marketing campaign."
+    title: "Component Reusability",
+    desc: "We build atomic design systems. This means buttons, forms, and cards are coded once and reused everywhere, making future updates faster and keeping visual consistency perfect."
   },
   {
-    title: "Headless & Hydrogen Ready",
-    desc: "Pushing boundaries? We build Headless commerce solutions using React and Hydrogen. This uncouples your frontend from the backend, allowing for sub-second page transitions and complete design freedom."
+    title: "Headless Scalability",
+    desc: "Decouple your frontend from your backend. Connect your React interface to Shopify, WordPress, or custom Python APIs seamlessly via REST or GraphQL."
   },
   {
-    title: "Clean Technical Architecture",
-    desc: "Spaghetti code from dozens of apps slows down stores. We audit and refactor your setup, replacing slow apps with lightweight custom code. This minimizes monthly fees and reduces technical conflict points."
+    title: "Instant Page Transitions",
+    desc: "By pre-fetching links in the viewport, Next.js makes navigation feel instantaneous. No white flash between pages—just a fluid, app-like experience on the web."
   },
   {
-    title: "Seamless Global Expansion",
-    desc: "Scale easily with Shopify Markets. We architect your store to handle multi-currency, multi-language, and international domains (i18n), ensuring a localized buying experience for customers everywhere."
+    title: "Enterprise Security",
+    desc: "With Next.js API routes, we mask critical private keys and database logic on the server side, keeping your sensitive data invisible to client-side browsers."
   }
 ];
 
 const WHY_CHOOSE_CN_DATA = [
-  { num: "/ 01", title: "Shopify Plus Experts", desc: "We specialize in high-volume implementations, utilizing Plus-exclusive features like checkout extensibility, B2B logic, and sophisticated scripts to increase AOV." },
-  { num: "/ 02", title: "Conversion-Led Design", desc: "We don't just code; we design for sales. Every UX decision is backed by e-commerce data to minimize friction from the homepage landing to the final 'Thank You' page." },
-  { num: "/ 03", title: "Advanced App Development", desc: "When the App Store falls short, we build custom private apps. We automate your backend logistics, inventory syncing, and ERP integrations securely." },
-  { num: "/ 04", title: "Performance-First Metrics", desc: "Speed is revenue. Our CI/CD pipelines automatically test for speed regressions, ensuring your store remains fast even after new feature deployments or high-traffic holiday sales." },
-  { num: "/ 05", title: "Enterprise Grade Migration", desc: "Moving from Magento or Woo? We handle complex data migrations including products, customers, and order history with zero downtime and strict URL redirects (SEO safety)." },
-  { num: "/ 06", title: "Growth Partnership", desc: "An online store is never 'finished'. We act as your ongoing technical partner, providing CRO audits, feature roadmaps, and 24/7 support during Black Friday/Cyber Monday." }
+  { num: "/ 01", title: "Senior React Engineers", desc: "Our team doesn't just know React; we master the lifecycle. We avoid common pitfalls like excessive re-renders and memory leaks to keep apps smooth." },
+  { num: "/ 02", title: "Next.js 14+ Expertise", desc: "We stay on the bleeding edge, utilizing the App Router, Server Components, and Streaming technologies to deliver the most modern web experience possible." },
+  { num: "/ 03", title: "Optimized Asset Loading", desc: "We utilize next/image and font optimization to prevent Layout Shift (CLS), ensuring your site feels stable and professional on every network speed." },
+  { num: "/ 04", title: "Testing & Reliability", desc: "We employ Cypress and Jest to test critical user flows. Your application undergoes automated rigorous testing before any deployment to production." },
+  { num: "/ 05", title: "Full-Stack Capabilities", desc: "Need a backend? We use Next.js as a full-stack solution or integrate with Node/Express backends to handle heavy computation and database storage." },
+  { num: "/ 06", title: "Future-Proof Code", desc: "The React ecosystem changes fast. We write clean, modular hooks and functional components that are easy to upgrade as new versions of React are released." }
 ];
 
-// Reusing same feedback structure, updated service tags for Context
+// Reusing same feedback structure
 type FeedbackItem = {
   id: number;
   name: string;
@@ -103,9 +103,9 @@ const FEEDBACKS: FeedbackItem[] = [
     name: "Bohdan Zabawskyj",
     role: "Co-founder and CPO at Fortay.ai",
     company: "Fortay.ai",
-    quote: "Codenest revamped our e-commerce presence completely. The custom Shopify 2.0 theme they built increased our conversion rate by 30% in the first month. Essential partners.",
+    quote: "Migrating from a legacy PHP app to Next.js was a game changer. The speed improvement was immediate, and our developer velocity increased twofold thanks to Code Nest.",
     imgSrc: "/assets/feedback/bohdan.jpg",
-    serviceTag: "Shopify Plus Development",
+    serviceTag: "Next.js Migration",
     hasVideo: true,
   },
   {
@@ -113,10 +113,10 @@ const FEEDBACKS: FeedbackItem[] = [
     name: "Dan Brooks",
     role: "President, Krytter",
     company: "Krytter",
-    quote: "Our previous store was sluggish due to app overload. They migrated us to a cleaner architecture and handled our complex inventory logic. Traffic value skyrocketed.",
+    quote: "We needed a dynamic dashboard for our customers. The React application they built handles thousands of real-time updates without stuttering. incredible work.",
     imgSrc: "/assets/feedback/dan.jpg",
     logoSrc: "/assets/feedback/krytter-logo.png",
-    serviceTag: "Store Optimization & SEO",
+    serviceTag: "React Dashboard",
     ctaText: "View Case Study",
   },
   {
@@ -124,56 +124,56 @@ const FEEDBACKS: FeedbackItem[] = [
     name: "Michael Smith",
     role: "Product Owner",
     company: "TechFlow",
-    quote: "We needed a headless solution to integrate with our mobile app. The Code Nest team leveraged Shopify's API perfectly to create a seamless omni-channel experience.",
+    quote: "Code Nest's expertise in Headless architectures helped us build a global storefront that loads in under a second worldwide. Their Next.js optimization is unmatched.",
     imgSrc: "/assets/feedback/michael.jpg",
-    serviceTag: "Headless Commerce",
-    ctaText: "See the Store",
+    serviceTag: "Headless Frontend",
+    ctaText: "See the Site",
   },
 ];
 
 const AUDIT_STEPS = [
   {
     icon: <Star size={28} />,
-    title: "Store Assessment",
-    desc: "We analyze your current theme architecture, installed apps, and conversion funnels. We identify high-cost low-value apps and point out UX friction points killing your sales."
+    title: "Architecture Planning",
+    desc: "We select the right rendering strategy (SSR, SSG, or ISR) for each page type. Marketing pages get static generation for speed; dashboards get client-side fetching for interactivity."
   },
   {
     icon: <LinkIcon size={28} />,
-    title: "Code & Liquid Analysis",
-    desc: "We dive deep into your Liquid files and JavaScript assets. We look for unoptimized loops, blocking scripts from third parties, and legacy code that hurts your Core Web Vitals."
+    title: "Component Design",
+    desc: "We break down your UI into atomic components (Atoms, Molecules, Organisms). This creates a 'Lego set' for your brand that ensures design consistency across the entire platform."
   },
   {
     icon: <FileText size={28} />,
-    title: "Actionable Reporting",
-    desc: "You receive a prioritized roadmap. It classifies issues by 'Impact on Revenue' vs 'Effort'. We provide clear instructions: which apps to remove, which images to compress, and what code to refactor."
+    title: "Performance Audit",
+    desc: "For existing React apps, we run profilers to detect wasted renders and large bundle sizes. We implement code-splitting and memoization to trim the fat."
   },
   {
     icon: <Headphones size={28} />,
-    title: "Implementation & CRO",
-    desc: "Beyond fixing bugs, we help implement the changes. Whether it's upgrading to OS 2.0 or tweaking the cart drawer, we ensure the improvements lead to measurable growth."
+    title: "CI/CD Deployment",
+    desc: "We set up automated pipelines via Vercel or AWS Amplify. Every GitHub push generates a preview URL, allowing stakeholders to test features before they go live."
   }
 ];
 
 const FAQ_DATA = [
     {
-        question: "How long does a migration to Shopify typically take?",
-        answer: "For most brands moving from WooCommerce or Magento, a full data and design migration takes 8 to 14 weeks. This includes product data transfer, SEO redirect mapping, custom theme setup, and payment gateway integration."
+        question: "Why should I use Next.js instead of just plain React?",
+        answer: "Plain React is client-side only, meaning Google bots often struggle to read the content (bad for SEO) and users see a white screen initially. Next.js fixes this with Server-Side Rendering, giving you great SEO and faster load times out of the box."
     },
     {
-        question: "Do you work with existing themes or build from scratch?",
-        answer: "We do both. For startups, we can customize premium themes to keep costs low. For scaling brands and enterprise (Shopify Plus), we engineer bespoke custom themes from scratch to ensure maximum performance and brand uniqueness."
+        question: "Can you migrate my existing website to React?",
+        answer: "Yes. We often rewrite legacy PHP or jQuery sites into React. This not only makes the site faster but also makes it easier to maintain and add modern features like dark mode, real-time notifications, and smooth animations."
     },
     {
-        question: "Can you help improve my store's page speed?",
-        answer: "Absolutely. Speed optimization is our core service. We minimize HTTP requests, defer non-critical JS, optimize Liquid rendering, and compress assets to get your mobile store loading in under 2 seconds."
+        question: "Is Next.js good for large-scale enterprise apps?",
+        answer: "Absolutely. Giants like Netflix, TikTok, and Hulu use Next.js. It offers incremental static regeneration, meaning you can update a 100,000-page website in seconds without rebuilding the whole site."
     },
     {
-        question: "Do you support Headless Shopify development?",
-        answer: "Yes. For brands needing complete frontend freedom, we build Headless stacks using Hydrogen, Next.js, or Gatsby, connecting to Shopify's backend via the Storefront API for the ultimate flexible experience."
+        question: "How does Headless CMS work with Next.js?",
+        answer: "We treat your backend (like WordPress or Contentful) purely as a data source. Next.js fetches the content via API and renders it. This gives you the security of a static site with the easy editing experience of a CMS."
     },
     {
-        question: "What maintenance does a Shopify store need?",
-        answer: "While Shopify hosts the server, your store needs 'app hygiene', theme updates, and ongoing CRO (Conversion Rate Optimization). We provide monthly retainers to handle feature drops, API updates, and speed checks."
+        question: "Do you use TypeScript?",
+        answer: "Yes, by default. TypeScript reduces production bugs by roughly 40%. It provides 'documentation' within the code itself, helping future developers understand exactly how data is structured in your app."
     }
 ];
 
@@ -216,11 +216,10 @@ interface WPPost {
     };
 }
 
-// --- COMPONENT START ---
-export default function ShopifyEcommerce() {
+export default function ReactNextDevelopment() {
   const navigate = useNavigate();
 
-  const [openStandard, setOpenStandard] = useState<string | null>("LIQUID");
+  const [openStandard, setOpenStandard] = useState<string | null>("SSR");
   
   const [[page, direction], setPage] = useState([0, 0]);
   const cardControls = useAnimation();
@@ -240,7 +239,6 @@ export default function ShopifyEcommerce() {
       if (item.logoSrc) { const logo = new Image(); logo.src = item.logoSrc; }
     });
 
-    // Kept the blog fetch as-is (assuming general tech/ecommerce blogs are here)
     const fetchBlogs = async () => {
         try {
             const res = await fetch('https://blogs.codenest.us.com/wp-json/wp/v2/posts?_embed&per_page=6');
@@ -300,32 +298,31 @@ export default function ShopifyEcommerce() {
       <HeroSection>
         <HeroInner>
           <HeroContent>
-            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Shopify E-commerce</strong></Breadcrumbs>
-            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Shopify <br /> development service</motion.h1>
+            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>React & Next.js Development</strong></Breadcrumbs>
+            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>React & Next.js <br /> development service</motion.h1>
             <ButtonGroup>
               <MainBtn>Get an Estimate</MainBtn>
               <IconBtn><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg></IconBtn>
             </ButtonGroup>
-            <HeroPara>Build high-converting, scalable, and custom-branded stores using Shopify Plus and Headless frameworks.</HeroPara>
+            <HeroPara>Build blazing fast, SEO-friendly, and futuristic web applications using the modern React stack.</HeroPara>
             <RatingsRow>
               <RatingItem><span className="brand">Clutch</span><div className="stars">★★★★★ <span className="val">4.9 / 5</span></div></RatingItem>
               <RatingItem><span className="brand">GoodFirms</span><div className="stars">★★★★★ <span className="val">5 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">( Shopify Partners )</span><div className="stars">★★★★★ <span className="val">10 / 10</span></div></RatingItem>
+              <RatingItem><span className="brand">( Next.js Experts )</span><div className="stars">★★★★★ <span className="val">Vercel Partners</span></div></RatingItem>
             </RatingsRow>
           </HeroContent>
-          {/* Changed Graphic Colors slightly conceptually, but keeping structure */}
           <HeroGraphic><AbstractGraphicSVG /></HeroGraphic>
         </HeroInner>
       </HeroSection>
 
       {/* --- 2. SECONDARY INTRO SECTION --- */}
       <IntroContainer>
-        <BadgeWrapper><span className="dot"></span> Shopify Audit & Optimize</BadgeWrapper>
+        <BadgeWrapper><span className="dot"></span> Modern Frontend Audit</BadgeWrapper>
         <LayoutGrid>
-          <motion.h2 className="audit-heading">Get a complete <br /> e-commerce store <br /> analysis to <br /> unlock growth</motion.h2>
+          <motion.h2 className="audit-heading">Get a frontend <br /> architecture review <br /> to improve <br /> Core Web Vitals</motion.h2>
           <RightContentBlock>
-            <p>Our audit scans your store for app bloat, unoptimized Liquid code, and UX friction. We provide clear technical fixes to boost your conversion rate and Average Order Value.</p>
-            <BlueButtonGroup><BlueTextBtn>Audit my store performance now</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
+            <p>Slow LCP or high Cumulative Layout Shift (CLS) kills user retention. We audit your existing React application for performance bottlenecks, re-rendering issues, and unoptimized bundles.</p>
+            <BlueButtonGroup><BlueTextBtn>Analyze my app performance</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
           </RightContentBlock>
         </LayoutGrid>
       </IntroContainer>
@@ -333,9 +330,9 @@ export default function ShopifyEcommerce() {
       {/* --- 3. STANDARDS ACCORDION SECTION --- */}
       <StandardsContainer>
         <StandardsInner>
-            <h2 className="section-title">Development standards <br /> applied by our <br /> Shopify experts</h2>
+            <h2 className="section-title">Frontend standards <br /> covered by our <br /> React specialists</h2>
             <AccordionList>
-                {SHOPIFY_STANDARDS.map((item) => (
+                {REACT_STANDARDS.map((item) => (
                     <AccordionItem key={item.id} isOpen={openStandard === item.id}>
                         <div className="header" onClick={() => setOpenStandard(openStandard === item.id ? null : item.id)}>
                             <div className="btn-box">{openStandard === item.id ? '-' : '+'}</div>
@@ -359,12 +356,12 @@ export default function ShopifyEcommerce() {
         <SectionHeader white>What to expect</SectionHeader>
         <CardsGrid>
           {[
-            { id: "01.", title: "Codebase Purity", desc: "Clean, modular Liquid code with zero reliance on unnecessary 3rd party apps." },
-            { id: "02.", title: "Mobile Velocity", desc: "Focus on sub-second interactions for mobile shoppers to prevent bounce." },
-            { id: "03.", title: "Secure Checkout", desc: "Customized Plus checkout experiences ensuring safety and branding consistency." },
-            { id: "04.", title: "Admin Simplicity", desc: "Store setup designed for easy inventory and content management by your team." },
-            { id: "05.", title: "Sections Everywhere", desc: "Utilizing Shopify 2.0 standards for drag-and-drop flexibility across all pages." },
-            { id: "06.", title: "Scalable Architecture", desc: "Infrastructure ready to handle traffic spikes like Black Friday with ease." }
+            { id: "01.", title: "Lightning Speed", desc: "Static generation means your pages load faster than the user can blink." },
+            { id: "02.", title: "SEO Dominance", desc: "Server-rendered content ensures Google ranks your app higher than basic SPAs." },
+            { id: "03.", title: "Type Safety", desc: "TypeScript integration prevents runtime crashes and messy bugs." },
+            { id: "04.", title: "Smooth UI", desc: "Framer Motion animations for app-like transitions on the web." },
+            { id: "05.", title: "Secure Data", desc: "Backend logic hidden in API routes keeps keys safe from the browser." },
+            { id: "06.", title: "Scalability", desc: "Architecture designed to handle millions of requests via Serverless functions." }
           ].map((item, i) => (
             <DogEarCard key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
               <span className="card-num">{item.id}</span>
@@ -383,7 +380,7 @@ export default function ShopifyEcommerce() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Why choose our custom <br /> Shopify solutions?
+            Why choose Next.js & <br /> React solutions?
           </motion.h2>
         </div>
 
@@ -410,7 +407,7 @@ export default function ShopifyEcommerce() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
         >
-          Why choose Code Nest for your <br /> E-commerce Growth?
+          Why choose Code Nest for <br /> React Development?
         </motion.h2>
         <ChooseCardsGrid>
           {WHY_CHOOSE_CN_DATA.map((card, i) => (
@@ -435,10 +432,10 @@ export default function ShopifyEcommerce() {
               </svg>
             </DecoCircles>
 
-            <BannerText>Want to check your store health?</BannerText>
+            <BannerText>Ready for a modern web stack?</BannerText>
             
             <DownloadBtn>
-              Download E-commerce CRO checklist
+              Download Tech Stack Checklist
               <ArrowDown size={18} style={{ marginLeft: "auto", color: '#000' }} /> 
             </DownloadBtn>
 
@@ -461,10 +458,10 @@ export default function ShopifyEcommerce() {
 
         <Container8>
           <HeaderWrapper>
-            <SubHeader>CodeNest Philosophy</SubHeader>
-            <HeaderTitle>What our merchants say</HeaderTitle>
+            <SubHeader>CodeNest Feedback</SubHeader>
+            <HeaderTitle>What clients say about our apps</HeaderTitle>
             <HeaderDesc>
-              Partnering with brands to drive sales through superior technology and design.
+              Real success stories powered by modern JavaScript frameworks.
             </HeaderDesc>
           </HeaderWrapper>
 
@@ -533,7 +530,7 @@ export default function ShopifyEcommerce() {
         </Container8>
       </Section8>
 
-      {/* --- 9. HOW AUDIT WORKS --- */}
+      {/* --- 9. PROCESS SECTION --- */}
       <AuditProcessSection>
         <AuditContainer>
            <motion.h2 
@@ -542,7 +539,7 @@ export default function ShopifyEcommerce() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              How our optimization process works
+              How we build Next.js Apps
            </motion.h2>
 
            <ProcessGrid>
@@ -577,10 +574,10 @@ export default function ShopifyEcommerce() {
                          </svg>
                     </DecoCircles>
                     <BannerTitle10>
-                        Don't lose customers <br /> get expert help
+                        Boost your speed & <br /> SEO rankings
                     </BannerTitle10>
                     <ConsultBtn>
-                        Book a Shopify consultation 
+                        Talk to a Next.js Expert
                         <ArrowDown size={18} style={{ color: '#000', transform: 'rotate(-45deg)' }} /> 
                     </ConsultBtn>
                     <DecoStar>
@@ -595,7 +592,7 @@ export default function ShopifyEcommerce() {
                 <BackgroundCurve />
                 <FAQContent>
                     <FAQLeft>
-                        <h2>Common questions <br /> about our Shopify services</h2>
+                        <h2>Common questions <br /> about Next.js</h2>
                     </FAQLeft>
                     <FAQRight>
                         {FAQ_DATA.map((item, index) => (
@@ -636,7 +633,7 @@ export default function ShopifyEcommerce() {
           <BlogContainer>
              <BlogHeaderWrapper>
                 <BlogTitle>
-                  E-commerce Insights<br />
+                  Development Insights<br />
                   <BlogLink onClick={() => navigate('/blog')} role="button" tabIndex={0}>
                      Check our blog <ArrowUpRight size={32} />
                   </BlogLink>
@@ -653,7 +650,7 @@ export default function ShopifyEcommerce() {
                        {blogPosts.map(post => {
                            const featuredImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url 
                                || 'https://via.placeholder.com/600x400?text=No+Image';
-                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Insights';
+                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Development';
                            
                            return (
                               <BlogCard key={post.id} onClick={() => navigate(`/blog/${post.slug}`)}>
@@ -683,7 +680,7 @@ export default function ShopifyEcommerce() {
 };
 
 // ==========================================
-// STYLES (Identical to WordPressSolutions)
+// STYLES
 // ==========================================
 const PageWrapper = styled.div`
   background: white; 
