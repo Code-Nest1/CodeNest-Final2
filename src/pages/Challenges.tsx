@@ -9,6 +9,15 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  overflow: hidden; /* CRITICAL: Prevents horizontal scroll from transforms */
+
+  @media (max-width: 1024px) {
+    padding: 100px 0;
+  }
+
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+  }
 `;
 
 const MainHeading = styled.h2`
@@ -19,8 +28,18 @@ const MainHeading = styled.h2`
   max-width: 900px;
   margin-bottom: 60px;
 
+  /* Responsive Font Sizes */
+  @media (max-width: 1024px) {
+    font-size: 56px;
+  }
+
   @media (max-width: 768px) {
-    font-size: 48px;
+    font-size: 42px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 32px;
   }
 `;
 
@@ -32,18 +51,19 @@ const ContentArea = styled.div`
   grid-template-columns: 340px 1fr;
   gap: 70px;
 
-  @media (max-width: 1100px) {
-    grid-template-columns: 1fr;
-    text-align: center;
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr; /* Stack left text and grid vertically */
+    gap: 40px;
+    padding: 0 20px;
   }
 `;
 
 const LeftText = styled.div`
   text-align: left;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
     text-align: center;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
   }
 `;
@@ -54,6 +74,10 @@ const SubText = styled.p`
   opacity: 0.9;
   line-height: 1.7;
   max-width: 340px;
+
+  @media (max-width: 1200px) {
+    max-width: 100%;
+  }
 `;
 
 const Grid = styled.div`
@@ -62,8 +86,15 @@ const Grid = styled.div`
   gap: 45px;
   position: relative;
 
+  @media (max-width: 1100px) {
+    gap: 30px;
+  }
+
+  /* Single column stack for tablet and mobile */
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
   }
 `;
 
@@ -74,41 +105,50 @@ const Card = styled.div`
   transition: 0.3s ease;
   text-align: left;
   cursor: pointer;
-  margin-bottom: -35px;
 
   &:hover {
     background: #ffff url("/images/bg-star.svg");
     background-size: cover;
-    opacity: 10;
+  }
+
+  /* Reduced padding on small screens so text fits */
+  @media (max-width: 768px) {
+    padding: 40px 30px;
+    margin-bottom: 0 !important; /* Reset overlap on mobile */
   }
 `;
 
-/* ⭐ NEW — Custom styling for Card #2 */
+/* ⭐ Card #2: Left-aligned for stagger on desktop */
 const Card02 = styled(Card)`
-  /* CHANGE POSITION OF CARD #2 HERE */
   transform: translateX(-35px);
 
   @media (max-width: 1100px) {
-    transform: none;
+    transform: none; /* Reset transform so card stays inside screen */
   }
 `;
 
-/* PERFECT LEFT SHIFT FOR BOTTOM CARDS */
+/* PERFECT LEFT SHIFT FOR BOTTOM CARDS (ONLY FOR LARGE SCREENS) */
 const Card03 = styled(Card)`
   grid-column: 1 / 2;
   transform: translateX(-402px);
+  margin-bottom: -35px; /* Added desktop overlap back */
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
+    grid-column: auto;
     transform: none;
+    margin-bottom: 0;
   }
 `;
 
 const Card04 = styled(Card)`
   grid-column: 2 / 3;
   transform: translateX(-438px);
+  margin-bottom: -35px;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
+    grid-column: auto;
     transform: none;
+    margin-bottom: 0;
   }
 `;
 
@@ -125,6 +165,10 @@ const Title = styled.h4`
   font-weight: 800;
   margin-bottom: 16px;
   color: #09353d;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 const Desc = styled.p`
@@ -137,13 +181,11 @@ const Desc = styled.p`
 export default function Challenges() {
   return (
     <Wrapper>
-
       <MainHeading>
         Simplifying your toughest tech challenges
       </MainHeading>
 
       <ContentArea>
-
         {/* LEFT SECTION */}
         <LeftText>
           <SubText>
@@ -195,7 +237,6 @@ export default function Challenges() {
             </Desc>
           </Card04>
         </Grid>
-
       </ContentArea>
     </Wrapper>
   );

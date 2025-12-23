@@ -28,75 +28,60 @@ const ContentBlock = ({
 }: ContentBlockProps) => {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id) as HTMLDivElement;
-    element.scrollIntoView({
-      behavior: "smooth",
-    });
+    if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+        });
+    }
   };
 
   return (
     <ContentSection>
-      <Fade direction={direction} triggerOnce>
+      <Fade direction={direction === "left" ? "left" : "right"} triggerOnce>
         <StyledRow
           justify="space-between"
           align="middle"
           id={id}
           direction={direction}
         >
-          <Col lg={11} md={11} sm={12} xs={24}>
+          {/* Main Icon Col */}
+          <Col lg={11} md={11} sm={24} xs={24}>
             <SvgIcon src={icon} width="100%" height="100%" />
           </Col>
-          <Col lg={11} md={11} sm={11} xs={24}>
+          
+          {/* Text Content Col */}
+          <Col lg={11} md={11} sm={24} xs={24}>
             <ContentWrapper>
               <h6>{t(title)}</h6>
               <Content>{t(content)}</Content>
               {direction === "right" ? (
                 <ButtonWrapper>
-                  {typeof button === "object" &&
+                  {Array.isArray(button) &&
                     button.map(
-                      (
-                        item: {
-                          color?: string;
-                          title: string;
-                        },
-                        id: number
-                      ) => {
-                        return (
-                          <Button
-                            key={id}
-                            color={item.color}
-                            onClick={() => scrollTo("about")}
-                          >
-                            {t(item.title)}
-                          </Button>
-                        );
-                      }
+                      (item: { color?: string; title: string }, id: number) => (
+                        <Button
+                          key={id}
+                          color={item.color}
+                          onClick={() => scrollTo("about")}
+                        >
+                          {t(item.title)}
+                        </Button>
+                      )
                     )}
                 </ButtonWrapper>
               ) : (
                 <ServiceWrapper>
                   <Row justify="space-between">
-                    {typeof section === "object" &&
+                    {Array.isArray(section) &&
                       section.map(
-                        (
-                          item: {
-                            title: string;
-                            content: string;
-                            icon: string;
-                          },
-                          id: number
-                        ) => {
-                          return (
-                            <Col key={id} span={11}>
-                              <SvgIcon
-                                src={item.icon}
-                                width="60px"
-                                height="60px"
-                              />
-                              <MinTitle>{t(item.title)}</MinTitle>
-                              <MinPara>{t(item.content)}</MinPara>
-                            </Col>
-                          );
-                        }
+                        (item: { title: string; content: string; icon: string }, id: number) => (
+                          /* FIXED: On small phones, services take 24 spans (100%), on tablets/desktop they take 11 spans (~50%) */
+                          <Col key={id} lg={11} md={11} sm={11} xs={24} style={{ marginBottom: "2rem" }}>
+                            <SvgIcon src={item.icon} width="60px" height="60px" />
+                            <MinTitle>{t(item.title)}</MinTitle>
+                            <MinPara>{t(item.content)}</MinPara>
+                          </Col>
+                        )
                       )}
                   </Row>
                 </ServiceWrapper>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../styles/global";
 
+// ... servicesData stays exactly as you provided (no changes needed there)
 const servicesData = [
   {
     title: "Web Design & Development",
@@ -128,7 +129,6 @@ const ServicesPage = () => {
                       src={section.image} 
                       alt={section.title} 
                       onError={(e) => {
-                        // Fallback in case image isn't found yet
                         e.currentTarget.src = "https://placehold.co/400x400/e0f2f1/004d40?text=Image+Missing"; 
                       }}
                     />
@@ -143,26 +143,38 @@ const ServicesPage = () => {
   );
 };
 
-export default ServicesPage;
-
 // ------------------- STYLES -------------------
 
 const Wrapper = styled.section`
   display: grid;
   grid-template-columns: 40% 60%;
-  padding: 80px 5%;
+  padding: 120px 5%;
   background: #feffff;
   min-height: 100vh;
-  gap: 60px; /* Increased gap slightly for better spacing */
+  gap: 60px;
   align-items: start;
+
+  /* RESPONSIVE FIX: Stack elements vertically on smaller screens */
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    padding: 100px 5% 60px;
+    gap: 40px;
+  }
 `;
 
 const Left = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: sticky; /* Keeps the title visible while scrolling accordion */
+  position: sticky;
   top: 100px;
+
+  /* Reset sticky for mobile */
+  @media (max-width: 1024px) {
+    position: static;
+    text-align: center;
+    align-items: center;
+  }
 `;
 
 const Title = styled.h1`
@@ -170,6 +182,10 @@ const Title = styled.h1`
   color: ${COLORS.darkGreen};
   margin-bottom: 25px;
   line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 32px; /* Smaller title for Samsung/Infinix */
+  }
 `;
 
 const Subtitle = styled.p`
@@ -177,15 +193,30 @@ const Subtitle = styled.p`
   color: ${COLORS.grey};
   max-width: 90%;
   line-height: 1.6;
+
+  @media (max-width: 1024px) {
+    max-width: 100%;
+    font-size: 16px;
+  }
 `;
 
 const Right = styled.div`
   border-left: 2px solid ${COLORS.lightGreen};
   padding-left: 50px;
+
+  /* Remove side border and padding on mobile */
+  @media (max-width: 768px) {
+    border-left: none;
+    padding-left: 0;
+  }
 `;
 
 const Accordion = styled.div`
   margin-bottom: 30px;
+  @media (max-width: 768px) {
+    border-bottom: 1px solid #f0f0f0; /* Simple separator on mobile */
+    padding-bottom: 15px;
+  }
 `;
 
 const AccordionHeader = styled.div`
@@ -201,6 +232,7 @@ const AccordionHeader = styled.div`
     transition: transform 0.3s ease;
     display: block;
     line-height: 1;
+    min-width: 25px;
   }
 
   span.open {
@@ -211,15 +243,19 @@ const AccordionHeader = styled.div`
     color: ${COLORS.darkGreen};
     font-size: 24px;
     font-weight: 700;
+    
+    @media (max-width: 768px) {
+        font-size: 19px;
+    }
   }
 `;
 
-/* SMOOTH ACCORDION ANIMATION */
 const AccordionBody: any = styled.div<{ open: boolean }>`
-  max-height: ${({ open }) => (open ? "800px" : "0px")}; /* Increased max-height for content */
+  /* Use auto height logic combined with opacity */
+  max-height: ${({ open }) => (open ? "1200px" : "0px")};
   opacity: ${({ open }) => (open ? 1 : 0)};
   overflow: hidden;
-  transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out;
+  transition: max-height 0.6s ease-in-out, opacity 0.5s ease;
 `;
 
 const BodyInner = styled.div`
@@ -229,27 +265,26 @@ const BodyInner = styled.div`
   padding-bottom: 25px;
   border-bottom: 1px solid rgba(0,0,0,0.05);
   gap: 20px;
+
+  /* FIX: Single column inside the accordion for mobile */
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const BodyLeft = styled.div`
   .item {
     margin-bottom: 25px;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
     h4 {
       color: ${COLORS.darkGreen};
       font-size: 19px;
-      font-weight: 600;
       margin-bottom: 8px;
     }
 
     p {
       color: ${COLORS.grey};
       font-size: 15px;
-      line-height: 1.5;
     }
   }
 `;
@@ -257,8 +292,14 @@ const BodyLeft = styled.div`
 const BodyRight = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Aligns image to top, change to 'center' if you prefer */
+  align-items: flex-start;
   padding-top: 10px;
+
+  /* Allow image to take proper width on stack */
+  @media (max-width: 768px) {
+    padding-top: 0;
+    justify-content: center;
+  }
 `;
 
 const ServiceImage = styled.img`
@@ -267,9 +308,10 @@ const ServiceImage = styled.img`
   height: auto;
   object-fit: contain;
   border-radius: 12px;
-  transition: transform 0.3s ease;
 
-  &:hover {
-    transform: scale(1.02);
+  @media (max-width: 768px) {
+    max-width: 200px;
   }
 `;
+
+export default ServicesPage;

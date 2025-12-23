@@ -1,95 +1,129 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { MenuOutlined } from "@ant-design/icons";
 
-export const HeaderSection = styled("header")`
-  padding: 1rem 0.5rem;
-
-  .ant-row-space-between {
-    align-items: center;
-    text-align: center;
-  }
-`;
-
-export const LogoContainer = styled(Link)`
+export const Nav = styled.nav<{ scrolled: boolean }>`
+  width: 100%;
+  height: 80px;
+  padding: 0 40px;
   display: flex;
-`;
-
-export const NavLink = styled("div")`
-  display: inline-block;
-  text-align: center;
-`;
-
-export const CustomNavLink = styled("div")`
-  width: 203px;
-  display: inline-block;
-
-  @media only screen and (max-width: 411px) {
-    width: 150px;
-  }
-
-  @media only screen and (max-width: 320px) {
-    width: 118px;
-  }
-`;
-
-export const Burger = styled("div")`
-  @media only screen and (max-width: 890px) {
-    display: block;
-  }
-
-  display: none;
-
-  svg {
-    fill: #2e186a;
-  }
-`;
-
-export const NotHidden = styled("div")`
-  @media only screen and (max-width: 890px) {
-    display: none;
-  }
-`;
-
-export const Menu = styled("h5")`
-  font-size: 1.5rem;
-  font-weight: 600;
-  text-align: center;
-`;
-
-export const CustomNavLinkSmall = styled(NavLink)`
-  font-size: 1.2rem;
-  color: #18216d;
-  transition: color 0.2s ease-in;
-  margin: 0.5rem 2rem;
-
-  @media only screen and (max-width: 768px) {
-    margin: 1.25rem 2rem;
-  }
-`;
-
-export const Label = styled("span")`
-  font-weight: 500;
-  color: #404041;
-  text-align: right;
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: baseline;
-`;
-
-export const Outline = styled(MenuOutlined)`
-  font-size: 22px;
-`;
-
-export const Span = styled("span")`
-  cursor: pointer;
+  background: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
   transition: all 0.3s ease-in-out;
+  border-bottom: ${({ scrolled }) => (scrolled ? "1px solid #e8e8e8" : "1px solid transparent")};
+  box-shadow: ${({ scrolled }) => (scrolled ? "0 4px 18px rgba(0,0,0,0.08)" : "none")};
 
-  &:hover,
-  &:active,
-  &:focus {
-    color: rgb(255, 130, 92);
-    text-underline-position: under;
-    text-decoration: rgb(255, 130, 92) wavy underline;
+  @media (max-width: 768px) {
+    padding: 0 20px;
+    height: 70px;
+  }
+`;
+
+export const Left = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  z-index: 10001; /* Stay above mobile menu */
+`;
+
+export const LogoImg = styled.img`
+  width: 40px;
+  @media (max-width: 768px) { width: 35px; }
+`;
+
+export const LogoText = styled.h2`
+  font-size: 20px;
+  font-weight: 700;
+  color: #04323f;
+  margin: 0;
+  white-space: nowrap;
+`;
+
+export const NavLinksContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  @media (max-width: 1000px) {
+    display: none; /* Hide standard nav on mobile/tablets */
+  }
+`;
+
+export const Center = styled.ul`
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li a {
+    text-decoration: none;
+    color: #073442;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.25s ease;
+  }
+
+  li a:hover {
+    color: #28a766;
+  }
+`;
+
+export const ContactBtn = styled(Link)`
+  background: #28a766;
+  padding: 10px 22px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid #28a766;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: white;
+    color: #28a766;
+  }
+`;
+
+export const Burger = styled.div`
+  display: none;
+  cursor: pointer;
+  z-index: 10001;
+  color: #04323f;
+
+  @media (max-width: 1000px) {
+    display: block; /* Show burger on mobile */
+  }
+`;
+
+export const MobileMenu = styled.ul<{ isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 280px;
+  background: #ffffff;
+  box-shadow: -10px 0 20px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 100px 40px;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  transition: transform 0.3s ease-in-out;
+  transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(100%)")};
+  z-index: 10000;
+
+  li a {
+    text-decoration: none;
+    color: #073442;
+    font-size: 18px;
+    font-weight: 600;
   }
 `;

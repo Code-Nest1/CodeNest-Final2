@@ -1,18 +1,16 @@
-// src/components/sections/AboutUs/index.tsx
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { ArrowRight } from "react-feather";
 
-/* --- Custom Counter Component (No External Libraries) --- */
+/* --- Custom Counter Component --- */
 const AnimatedCounter = ({ end, suffix = "", duration = 2000 }: { end: number, suffix?: string, duration?: number }) => {
   const [count, setCount] = useState(0);
   const countRef = useRef<HTMLSpanElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    // Simple intersection observer to start animation when visible
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasAnimated) {
@@ -22,25 +20,16 @@ const AnimatedCounter = ({ end, suffix = "", duration = 2000 }: { end: number, s
           const step = (timestamp: number) => {
             if (!startTime) startTime = timestamp;
             const progress = Math.min((timestamp - startTime) / duration, 1);
-            // Easing function (easeOutQuad) for smooth effect
             const easeProgress = 1 - (1 - progress) * (1 - progress);
-            
             setCount(Math.floor(easeProgress * end));
-
-            if (progress < 1) {
-              window.requestAnimationFrame(step);
-            }
+            if (progress < 1) window.requestAnimationFrame(step);
           };
           window.requestAnimationFrame(step);
         }
       },
       { threshold: 0.1 }
     );
-
-    if (countRef.current) {
-      observer.observe(countRef.current);
-    }
-
+    if (countRef.current) observer.observe(countRef.current);
     return () => observer.disconnect();
   }, [end, duration, hasAnimated]);
 
@@ -53,12 +42,11 @@ export default function AboutUs() {
   return (
     <Section>
       <Container>
-        {/* --- Top Header Section --- */}
+        {/* --- Header Section --- */}
         <HeaderRow>
           <MainTitle>
             We are
             <VideoCircle>
-              {/* Ensure your video is in public/assets/videos/office.mp4 */}
               <video
                 src="assets/videos/office.mp4" 
                 autoPlay
@@ -79,8 +67,8 @@ export default function AboutUs() {
               <span>✦ Since 2024</span>
             </TopBadge>
             <MissionText>
-              The CODE NEST mission <br />
-              is to help our customers <br />
+              The CODE NEST mission <br className="desktop-br" />
+              is to help our customers <br className="desktop-br" />
               and teammates grow
             </MissionText>
             <LearnMoreBtn>
@@ -93,7 +81,7 @@ export default function AboutUs() {
 
           {/* Column 2: Team */}
           <StatColumn>
-            <StatLabel>Team</StatLabel>
+            <StatLabel>Team Members</StatLabel>
             <StatNumber>
               <AnimatedCounter end={25} suffix="+" />
             </StatNumber>
@@ -102,7 +90,7 @@ export default function AboutUs() {
           {/* Column 3: Projects */}
           <StatColumn>
             <StatLabel>
-              Projects in the last <br /> 2 years
+              Projects completed <br /> in the last 2 years
             </StatLabel>
             <StatNumber>
               <AnimatedCounter end={119} />
@@ -111,7 +99,7 @@ export default function AboutUs() {
 
           {/* Column 4: Dev Centers */}
           <StatColumn className="last-col">
-            <StatLabel>Dev centers</StatLabel>
+            <StatLabel>Global dev centers</StatLabel>
             <StatNumber>
               <AnimatedCounter end={2} />
             </StatNumber>
@@ -122,13 +110,17 @@ export default function AboutUs() {
   );
 }
 
-/* ========== Styled Components ========== */
+/* ========== Styled Components (Updated for Total Responsiveness) ========== */
 
 const Section = styled.section`
   background-color: #ffffff;
   color: #121212;
   padding: 100px 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden; /* Important for preventing mobile horizontal overflow */
+
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
 `;
 
 const Container = styled.div`
@@ -137,39 +129,32 @@ const Container = styled.div`
   padding: 0 40px;
 
   @media (max-width: 768px) {
-    padding: 0 24px;
+    padding: 0 20px;
   }
 `;
 
-/* --- Header Row --- */
-
 const HeaderRow = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   margin-bottom: 80px;
-  padding-left: 0;
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+  }
 `;
 
 const MainTitle = styled.h2`
-  font-size: 92px;
+  font-size: clamp(38px, 8vw, 92px); /* FLUID: Scales from 38px to 92px automatically */
   font-weight: 500;
   letter-spacing: -2.5px;
   color: #09353d;
   display: flex;
   align-items: center;
-  gap: 30px;
+  flex-wrap: wrap; /* CRITICAL: Allows "CODE NEST" to wrap to the next line on narrow phones */
+  gap: 15px 30px; 
   margin: 0;
-  line-height: 1;
+  line-height: 1.1;
 
-  @media (max-width: 1200px) {
-    font-size: 64px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
   @media (max-width: 768px) {
-    font-size: 42px;
-    gap: 15px;
+    letter-spacing: -1px;
+    justify-content: flex-start;
   }
 `;
 
@@ -179,79 +164,58 @@ const VideoCircle = styled.div`
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(0,0,0,0.05); 
+  background: #000;
   flex-shrink: 0;
-  background: #000; /* Fallback color */
 
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  video { width: 100%; height: 100%; object-fit: cover; }
 
-  @media (max-width: 1200px) {
-    width: 90px;
-    height: 90px;
-  }
-  @media (max-width: 768px) {
-    width: 60px;
-    height: 60px;
-  }
+  @media (max-width: 1024px) { width: 100px; height: 100px; }
+  @media (max-width: 768px) { width: 70px; height: 70px; }
+  @media (max-width: 480px) { width: 55px; height: 55px; }
 `;
-
-/* --- Stats Grid Layout --- */
 
 const StatsGrid = styled.div`
   display: grid;
-  /* Columns: 1 large (Mission) + 3 Stats */
   grid-template-columns: 1.4fr 1fr 1fr 1fr; 
   border-top: 1px solid #e1e1e1; 
   
   @media (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
-    border-bottom: 1px solid #e1e1e1;
   }
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr; /* Stack everything on small phones */
   }
 `;
 
-/* --- Mission Column (Left) --- */
-
 const MissionColumn = styled.div`
-  padding: 40px 40px 0 0; 
+  padding: 40px 40px 40px 0; 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   border-right: 1px solid #e1e1e1;
   min-height: 400px; 
 
   @media (max-width: 1024px) {
     border-right: none;
-    padding-right: 0;
-    margin-bottom: 40px;
+    grid-column: span 2; /* Mission statement takes full width on tablets */
+    border-bottom: 1px solid #e1e1e1;
     min-height: auto;
+    padding-right: 0;
+  }
+
+  @media (max-width: 640px) {
+    grid-column: span 1;
+    padding: 30px 0;
   }
 `;
 
 const TopBadge = styled.div`
-  display: inline-block;
   background-color: #eff3ff; 
   padding: 6px 12px;
   border-radius: 6px;
+  width: fit-content;
   margin-bottom: 24px;
-
-  span {
-    color: #28a665; 
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  span { color: #28a665; font-size: 13px; font-weight: 600; }
 `;
 
 const MissionText = styled.h3`
@@ -260,13 +224,13 @@ const MissionText = styled.h3`
   font-weight: 500;
   color: #1c1c1c;
   letter-spacing: -1px;
-  margin: 0 0 auto 0; 
-  max-width: 420px;
+  margin-bottom: 30px;
 
-  @media (max-width: 768px) {
-    font-size: 28px;
-    margin-bottom: 30px;
+  .desktop-br {
+    @media (max-width: 1024px) { display: none; } /* Better text wrapping on mobile */
   }
+
+  @media (max-width: 768px) { font-size: 26px; }
 `;
 
 const LearnMoreBtn = styled.button`
@@ -277,55 +241,54 @@ const LearnMoreBtn = styled.button`
   font-size: 15px;
   font-weight: 600;
   border-radius: 6px;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  margin-top: 40px;
-  transition: background 0.2s;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: fit-content;
 
-  &:hover {
-    background: #09353d;
+  &:hover { background: #09353d; }
+  
+  @media (max-width: 480px) {
+    width: 100%;
+    justify-content: center; /* Thumb-friendly full width on small phones */
   }
 `;
 
-const ArrowIcon = styled.span`
-  display: flex;
-  align-items: center;
-`;
-
-/* --- Stat Columns (Right) --- */
+const ArrowIcon = styled.span` display: flex; align-items: center; `;
 
 const StatColumn = styled.div`
-  padding: 40px 0 0 40px;
+  padding: 40px 0 40px 40px;
   border-right: 1px solid #e1e1e1;
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
-  min-height: 380px;
+  min-height: 300px;
 
-  &.last-col {
-    border-right: none;
-  }
+  &.last-col { border-right: none; }
 
   @media (max-width: 1024px) {
-    padding: 30px 0;
-    min-height: 200px;
-    border-right: none; 
-    border-bottom: 1px solid #efefef;
+    padding: 30px 10px;
+    min-height: 180px;
+    border-bottom: 1px solid #f0f0f0;
     
-    &.last-col {
-      border-bottom: none;
-    }
+    /* Small layout change for tablets: Every 2nd item has no right border */
+    &:nth-child(even) { border-right: none; }
+  }
+
+  @media (max-width: 640px) {
+    padding: 30px 0;
+    border-right: none;
+    min-height: auto;
+    gap: 15px;
   }
 `;
 
 const StatLabel = styled.p`
-  font-size: 17px;
+  font-size: 16px;
   color: #8c8c8c;
-  margin: 0;
-  line-height: 1.5;
-  font-weight: 400;
+  line-height: 1.4;
 `;
 
 const StatNumber = styled.div`
@@ -334,9 +297,7 @@ const StatNumber = styled.div`
   font-weight: 500;
   letter-spacing: -2px;
   line-height: 1;
-  margin-bottom: 10px;
 
-  @media (max-width: 1200px) {
-    font-size: 56px;
-  }
+  @media (max-width: 1200px) { font-size: 52px; }
+  @media (max-width: 768px) { font-size: 46px; }
 `;
