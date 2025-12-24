@@ -51,16 +51,11 @@ export default function Footer() {
                 STE R ALBUQUERQUE, NM 87110, USA
               </Address>
               <Phone>+1 805 399 2436</Phone>
-            </AddressGroup>
-
-            <AddressGroup>
-              <Label>Delivery center</Label>
-              <Address>
-                Remote Engineering Hub <br />
-                Global Teams
-              </Address>
+              {/* MOVED EMAIL HERE */}
               <Phone>contact@codenest.us.com</Phone>
             </AddressGroup>
+
+            {/* Delivery Center Block REMOVED */}
           </AddressColumn>
         </TopRow>
 
@@ -200,21 +195,23 @@ const BrandColumn = styled.div`
 `;
 
 const Logo = styled.h2`
+  color: #ffffff; /* Enforce Pure White */
   /* Clamp: Min 28px, Max 34px */
   font-size: clamp(28px, 4vw, 34px);
-  font-weight: 800;
+  font-weight: 800; /* Already bold, keeps it strong */
   letter-spacing: 0.5px;
   margin: 0 0 20px 0;
   text-transform: uppercase;
 `;
 
 const Tagline = styled.p`
+  color: #ffffff; /* Enforce Pure White */
   /* Clamp: Min 20px, Max 28px */
   font-size: clamp(20px, 3vw, 28px);
   line-height: 1.3;
-  font-weight: 400;
+  font-weight: 500; /* Minor increment: 400 -> 500 */
   margin: 0 0 35px 0;
-  opacity: 0.95;
+  opacity: 1; /* Removed opacity for pure white look */
 
   @media (max-width: 768px) {
     margin-bottom: 25px;
@@ -310,6 +307,7 @@ const Phone = styled.div`
   font-size: 15px;
   font-weight: 400;
   opacity: 0.9;
+  margin-bottom: 2px; /* Small spacing for email below */
 `;
 
 // --- MAIN GRID ---
@@ -355,8 +353,9 @@ const ServicesInnerGrid = styled.div`
 `;
 
 const SectionTitle = styled.h3`
+  color: #ffffff; /* Enforce Pure White */
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 600; /* Minor increment: 500 -> 600 */
   margin-bottom: 25px;
   letter-spacing: -0.5px;
   

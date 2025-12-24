@@ -1,7 +1,6 @@
-// src/App.tsx
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation, useParams } from "react-router-dom";
-import ReactGA from "react-ga4"; // IMPORTS GOOGLE ANALYTICS LIBRARY
+import ReactGA from "react-ga4"; 
 
 // --- Components ---
 import Header from "./components/Header";
@@ -13,18 +12,23 @@ import Home from "./pages/Home";
 import Challenges from "./pages/Challenges";
 import ServicesPage from "./pages/services/Services";
 
-// --- SERVICE DETAIL PAGES ---
+// --- SERVICE DETAIL PAGES (Web) ---
 import WordPressSolutions from "./pages/services/service-details/WordPressSolutions";
 import ShopifyEcommerce from "./pages/services/service-details/ShopifyEcommerce"; 
 import CustomWebDevelopment from "./pages/services/service-details/CustomWebDevelopment";
 import ReactNextDevelopment from "./pages/services/service-details/ReactNextDevelopment";
 import UiUxImplementation from "./pages/services/service-details/UiUxImplementation";
 
-// --- Portfolio Pages ---
+// --- SERVICE DETAIL PAGES (App Development) ---
+import IOSNativeApps from "./pages/services/service-details/IOSNativeApps";
+import AndroidNativeApps from "./pages/services/service-details/AndroidNativeApps";
+import FlutterDevelopment from "./pages/services/service-details/FlutterDevelopment";
+import AppMaintenance from "./pages/services/service-details/AppMaintenance";
+import MobileStrategy from "./pages/services/service-details/MobileStrategy";
+
+// --- Portfolio & Blog Pages ---
 import Portfolio from "./pages/portfolio/Portfolio";
 import ProjectDetail from "./pages/portfolio/ProjectDetail"; 
-
-// --- Blog Pages ---
 import BlogListing from "./components/sections/Blog/index";      
 import BlogPost from "./components/sections/Blog/BlogPost";      
 
@@ -32,7 +36,6 @@ import BlogPost from "./components/sections/Blog/BlogPost";
 import Industries from "./components/sections/Industries";
 import About from "./components/sections/AboutUs/index"; 
 
-// 1. Initialize GA4 with your ID outside the component (Runs once)
 ReactGA.initialize("G-NWL003NKPK");
 
 const HomeScrollWrapper = () => {
@@ -44,16 +47,10 @@ const App: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Existing logic: Scroll to top on route change
     window.scrollTo(0, 0);
-    
-    // 2. Add On: Send Page View to Google Analytics on route change
-    // We add 'window.location.search' to include URL parameters if needed
     ReactGA.send({ hitType: "pageview", page: pathname + window.location.search });
-    
   }, [pathname]);
 
-  // Hide Contact Form on detailed Project/Blog views to match Coax clean-style
   const hideContactForm = pathname.includes('/portfolio/') || pathname.includes('/blog/');
 
   return (
@@ -68,12 +65,19 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/industries" element={<Industries />} />
           
-          {/* === SERVICE DETAIL ROUTES (All 5 connected) === */}
+          {/* === WEB SERVICES === */}
           <Route path="/services/wordpress-solutions" element={<WordPressSolutions />} />
           <Route path="/services/shopify-ecommerce" element={<ShopifyEcommerce />} />
           <Route path="/services/custom-web-development" element={<CustomWebDevelopment />} />
           <Route path="/services/react-next-development" element={<ReactNextDevelopment />} />
           <Route path="/services/ui-ux-implementation" element={<UiUxImplementation />} />
+
+          {/* === APP DEVELOPMENT SERVICES (New) === */}
+          <Route path="/services/ios-native-apps" element={<IOSNativeApps />} />
+          <Route path="/services/android-native-apps" element={<AndroidNativeApps />} />
+          <Route path="/services/flutter-development" element={<FlutterDevelopment />} />
+          <Route path="/services/app-maintenance" element={<AppMaintenance />} />
+          <Route path="/services/mobile-strategy" element={<MobileStrategy />} />
 
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/:slug" element={<ProjectDetail />} />

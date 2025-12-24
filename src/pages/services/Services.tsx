@@ -15,9 +15,10 @@ const COLORS = {
   bgPage: "#feffff",
 };
 
-// --- ROUTING LOGIC ---
+// --- ROUTING LOGIC (UPDATED) ---
 const getServiceRoute = (item: string) => {
   switch (item) {
+    // 1. Web Development
     case "WordPress Solutions": 
       return "/services/wordpress-solutions";
     case "Shopify E-commerce": 
@@ -28,6 +29,20 @@ const getServiceRoute = (item: string) => {
       return "/services/react-next-development";
     case "UI/UX Implementation":
       return "/services/ui-ux-implementation";
+
+    // 2. App Development (NEW LINKS ADDED HERE)
+    case "iOS Native Apps":
+      return "/services/ios-native-apps";
+    case "Android Native Apps":
+      return "/services/android-native-apps";
+    case "Cross-Platform (Flutter)":
+      return "/services/flutter-development";
+    case "App Maintenance":
+      return "/services/app-maintenance";
+    case "Mobile Strategy":
+      return "/services/mobile-strategy";
+
+    // 3. Fallback for others not yet created
     default: 
       return "#"; 
   }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+   <!-- Home Page -->
+   <url>
+      <loc>https://codenest.us.com/</loc>
+      <lastmod>2025-01-01</lastmod>
+      <priority>1.00</priority>
+      <changefreq>weekly</changefreq>
+   </url>
+
+   <!-- Main Pages -->
+   <url>
+      <loc>https://codenest.us.com/about</loc>
+      <lastmod>2025-01-01</lastmod>
+      <priority>0.80</priority>
+      <changefreq>monthly</changefreq>
+   </url>
+
+   <url>
+      <loc>https://codenest.us.com/services</loc>
+      <lastmod>2025-01-01</lastmod>
+      <priority>0.90</priority>
+      <changefreq>monthly</changefreq>
+   </url>
+
+   <url>
+      <loc>https://codenest.us.com/portfolio</loc>
+      <lastmod>2025-01-01</lastmod>
+      <priority>0.80</priority>
+      <changefreq>monthly</changefreq>
+   </url>
+
+   <url>
+      <loc>https://codenest.us.com/blog</loc>
+      <lastmod>2025-01-01</lastmod>
+      <priority>0.70</priority>
+      <changefreq>weekly</changefreq>
+   </url>
+
+   <url>
+      <loc>https://codenest.us.com/contact</loc>
+      <lastmod>2025-01-01</lastmod>
+      <priority>0.80</priority>
+      <changefreq>yearly</changefreq>
+   </url>
+
+   <!-- Additional Footer Pages (Common on your type of site) -->
+   <url>
+      <loc>https://codenest.us.com/pricing</loc>
+      <priority>0.80</priority>
+   </url>
+   <url>
+      <loc>https://codenest.us.com/how-it-works</loc>
+      <priority>0.70</priority>
+   </url>
+
+</urlset>
