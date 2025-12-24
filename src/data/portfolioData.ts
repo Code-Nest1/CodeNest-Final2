@@ -11,7 +11,7 @@ export const projectsData = [
     subtitle: "Advanced Finance Calculator & Lead Capture Platform",
     
     // Header & Meta
-    heroImage: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop", // Replace with your Screenshot 1
+    heroImage: "/images/portfolio/Hero.png", // Replace with your Screenshot 1
     logoText: "Exclusive",
     logoSub: "Finance",
     website: "exclusivecarfinance.co.uk", // Example URL
@@ -52,31 +52,31 @@ export const projectsData = [
         id: 0,
         title: "Custom Finance Calculator",
         desc: "Real-time monthly payment projections, total credit charge, and total payable amount using bespoke JavaScript logic not possible with standard plugins.",
-        img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/calculator.png"
       },
       {
         id: 1,
         title: "Finance Application Workflow",
         desc: "Users can submit full application requests with necessary details rooted directly into the client's CRM system for immediate processing.",
-        img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/2.png"
       },
       {
         id: 2,
         title: "Lead Capture Automation",
         desc: "CRM integration allows for automated email responses, data organization, and streamlined follow-up workflows to close deals faster.",
-        img: "https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/good.png"
       },
       {
         id: 3,
         title: "High-Performance Next.js",
         desc: "Ultra-fast load speeds, modern UI animations, and secure architecture without the limitations or security vulnerabilities of WordPress.",
-        img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/perfect.png"
       },
       {
         id: 4,
         title: "Conversion-Optimized UX",
         desc: "Clear CTAs, simplified forms, improved readability, and a trust-focused copy layout designed specifically for the UK finance industry.",
-        img: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/11.png"
       }
     ],
 
@@ -92,7 +92,7 @@ export const projectsData = [
     title: "Intuit Interactive Album Platform",
     subtitle: "Feature Enhancements & System Upgrade",
     
-    heroImage: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1200&auto=format&fit=crop",
+    heroImage: "/images/portfolio/intuitmain.png",
     logoText: "Intuit",
     logoSub: "Album",
     website: "Internal Platform",
@@ -120,25 +120,25 @@ export const projectsData = [
         id: 0,
         title: "AI Generation via Replicate",
         desc: "Migration from DALL·E to Replicate API to ensure smoother, high-quality, and more reliable AI album cover generation.",
-        img: "https://images.unsplash.com/photo-1617791160505-6f00504e3519?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/ai-generation.png"
       },
       {
         id: 1,
         title: "Smart Leaderboard",
         desc: "Redesigned sorting logic to accurately highlight top creators and real-time rankings, fixing previous inaccuracies.",
-        img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/smart-leaderboard.png"
       },
       {
         id: 2,
         title: "OIDC Authentication",
         desc: "Implementation of OpenID Connect login to restrict unauthorized access and protect routes like /customize-album and /image-published.",
-        img: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/oidc-authentication.png"
       },
       {
         id: 3,
         title: "Stable Like System",
         desc: "Rebuilt the like system with database persistence (tracking user_id or IP) to prevent spam and ensure accurate engagement metrics.",
-        img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/stable-like-system.png"
       }
     ],
 
@@ -153,7 +153,7 @@ export const projectsData = [
     title: "Texas Young Autism Project",
     subtitle: "Full WordPress Redesign & Custom UX",
     
-    heroImage: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?q=80&w=1200&auto=format&fit=crop",
+    heroImage: "/images/portfolio/tyaphero.png",
     logoText: "TYAP",
     logoSub: "Healthcare",
     website: "tyap.com", // Example
@@ -181,25 +181,25 @@ export const projectsData = [
         id: 0,
         title: "Service Directory & Icons",
         desc: "Custom service modules with illustrated icons for each offering, presenting services clearly with structured information architecture.",
-        img: "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/service-directory.png"
       },
       {
         id: 1,
         title: "Multi-Step Inquiry Form",
         desc: "Optimized consultation form with service selection dropdowns, reducing user effort and increasing lead quality.",
-        img: "https://images.unsplash.com/photo-1555421689-d68471e189f2?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/multi-step-form.png"
       },
       {
         id: 2,
         title: "Mission-Driven Storytelling",
         desc: "About pages, staff profiles with photos, and testimonial sliders build a warm, trustworthy brand presence.",
-        img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/mission-storytelling.png"
       },
       {
         id: 3,
         title: "Mobile Accessibility",
         desc: "Full mobile and tablet responsiveness ensuring parents can access information easily on any device.",
-        img: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/mobile-accessibility.png"
       }
     ],
 
@@ -214,7 +214,7 @@ export const projectsData = [
     title: "The Choice Alliance Group",
     subtitle: "Full Website Rebuild & Security Hardening",
     
-    heroImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
+    heroImage: "/images/portfolio/choicehero.png",
     logoText: "Choice",
     logoSub: "Alliance",
     website: "choicealliance.com", // Example
@@ -242,25 +242,25 @@ export const projectsData = [
         id: 0,
         title: "Security Hardening",
         desc: "Backend setup, security upgrades, and environment hardening to prevent hacks and ensure long-term stability.",
-        img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/security-hardening.png"
       },
       {
         id: 1,
         title: "Dynamic Service Pages",
         desc: "Tailored layouts for specific services like UK Pensions and Swiss Planning, each with optimized content blocks.",
-        img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/dynamic-service-pages.png"
       },
       {
         id: 2,
         title: "Scalable Blog Module",
         desc: "A custom blog system with categories, metadata, and featured images to drive financial education and engagement.",
-        img: "https://images.unsplash.com/photo-1434626881859-a944d330d940?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/scalable-blog-module.png"
       },
       {
         id: 3,
         title: "Performance Optimization",
         desc: "Reduced load times and improved SEO structure leading to increased traffic and better search rankings.",
-        img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop"
+        img: "/images/portfolio/performance-optimization.png"
       }
     ],
 

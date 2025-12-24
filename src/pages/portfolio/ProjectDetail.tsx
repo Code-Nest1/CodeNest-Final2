@@ -255,9 +255,9 @@ export default function ProjectDetail() {
                   ))}
                 </FeatureTabsList>
 
-                <FeatureCardWrapper>
-                  {/* Left: White Card with Text & Arrows */}
-                  <FeatureContentSide>
+                <FeatureCardWrapper> {/* Adjusted height here */}
+                  {/* Left: White Card with Text & Arrows - UPDATED FOR SMOOTHNESS */}
+                  <FeatureContentSide> {/* Adjusted height and overflow */}
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={featureIdx}
@@ -265,11 +265,19 @@ export default function ProjectDetail() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 10 }}
                         transition={{ duration: 0.3 }}
-                        style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+                        style={{ 
+                          height: '100%', 
+                          display: 'flex', 
+                          flexDirection: 'column', 
+                          justifyContent: 'space-between',
+                          overflowY: 'auto', // Allow scrolling for long descriptions
+                          paddingRight: '10px' // Add padding for scrollbar
+                        }}
                       >
                         <div>
                           <h3 className="feat-title">{project.features[featureIdx].title}</h3>
-                          <p className="feat-desc">{project.features[featureIdx].desc}</p>
+                          {/* Removed margin-bottom from feat-desc to allow for flex growth/shrink */}
+                          <p className="feat-desc" style={{ marginBottom: '0' }}>{project.features[featureIdx].desc}</p> 
                         </div>
 
                         {/* Arrows */}
@@ -286,21 +294,21 @@ export default function ProjectDetail() {
                     </AnimatePresence>
                   </FeatureContentSide>
 
-                  {/* Right: Gold Card with Image */}
-                  <FeatureVisualSide>
+                  {/* Right: Image Card - Already smooth from previous update */}
+                  <FeatureVisualSide> {/* Adjusted height */}
                      <AnimatePresence mode="wait">
                       <motion.div 
-                        className="phone-mockup"
+                        className="image-wrapper" 
                         key={featureIdx}
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }} 
+                        animate={{ opacity: 1 }} 
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.4 }}
                       >
                         <img src={project.features[featureIdx].img} alt="Feature Visual" />
                       </motion.div>
                      </AnimatePresence>
-                     <div className="corner-label">/ {project.features[featureIdx].title}</div>
+                     <div className="corner-label" style={{ color: 'rgba(255,255,255,0.9)', textShadow: '0 0 4px rgba(0,0,0,0.6)' }}>/ {project.features[featureIdx].title}</div>
                   </FeatureVisualSide>
                 </FeatureCardWrapper>
               </div>
@@ -510,9 +518,12 @@ const FeatureCardWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   align-items: stretch;
+  height: 500px; /* IMPORTANT: Set a fixed height here */
+  overflow: hidden; /* Hide any overflow if content tries to push outside */
 
   @media(max-width: 900px) { 
     grid-template-columns: 1fr; 
+    height: auto; /* Allow height to be auto on mobile if cards stack */
   }
 `;
 
@@ -522,8 +533,9 @@ const FeatureContentSide = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 500px;
+  height: 100%; /* IMPORTANT: Take 100% of parent's fixed height */
   border-radius: 12px;
+  overflow: hidden; 
 
   .feat-title {
     font-size: 32px;
@@ -536,8 +548,21 @@ const FeatureContentSide = styled.div`
     font-size: 16px;
     line-height: 1.7;
     color: #6B7280;
-    margin-bottom: 40px;
+    /* Removed fixed margin-bottom here to allow flex to manage spacing */
   }
+
+  /* Target the container for the actual text content for internal scrolling */
+  & > div:first-child { /* This targets the motion.div's direct child that holds title/desc */
+    flex-grow: 1; /* Allow text content to take up available space */
+    overflow-y: auto; /* Enable internal scrolling for text if it overflows */
+    padding-right: 15px; /* Add some padding to prevent scrollbar from touching text */
+    /* Custom scrollbar for better aesthetics */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #e0e0e0; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+  }
+
   @media(max-width: 768px) { padding: 30px; }
 `;
 
@@ -569,25 +594,31 @@ const NavButton = styled.button`
 `;
 
 const FeatureVisualSide = styled.div`
-  background: ${THEME.gold};
   border-radius: 12px;
-  height: 100%;
-  min-height: 500px;
+  height: 100%; /* IMPORTANT: Take 100% of parent's fixed height */
+  /* min-height is no longer strictly needed here, as parent has fixed height */
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
   overflow: hidden;
-  
-  .phone-mockup {
+  background-color: #1a1a1a; 
+
+  .image-wrapper { 
     width: 100%;
-    max-width: 350px;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.2);
-    border-radius: 12px;
-    overflow: hidden;
-    background: #111;
-    img { display: block; width: 100%; height: auto; }
+    height: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+    
+    img { 
+      display: block; 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      border-radius: 12px; 
+    }
   }
 
   .corner-label {
@@ -597,6 +628,8 @@ const FeatureVisualSide = styled.div`
     color: rgba(255,255,255,0.9);
     font-size: 14px;
     font-weight: 500;
+    text-shadow: 0px 1px 3px rgba(0,0,0,0.6); 
+    z-index: 10; 
   }
 `;
 
