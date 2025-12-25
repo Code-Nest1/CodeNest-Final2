@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // --- Types ---
@@ -110,6 +110,8 @@ const partners: PartnerItem[] = [
 ];
 
 export default function TrustedPartners() {
+  const [showAll, setShowAll] = useState(false);
+
   return (
     <Section>
       <Container>
@@ -128,8 +130,8 @@ export default function TrustedPartners() {
 
         {/* --- Grid Layout --- */}
         <Grid>
-          {partners.map((p) => (
-            <Card key={p.id}>
+          {partners.map((p, index) => (
+            <Card key={p.id} $isHiddenMobile={!showAll && index >= 5}>
               {p.badge && <Badge>{p.badge}</Badge>}
 
               <CardBody>
@@ -145,6 +147,13 @@ export default function TrustedPartners() {
             </Card>
           ))}
         </Grid>
+
+        {/* --- Toggle Button Wrapper --- */}
+        <ToggleWrapper>
+          <ToggleButton onClick={() => setShowAll(!showAll)}>
+            {showAll ? "Show Less" : "Load More"}
+          </ToggleButton>
+        </ToggleWrapper>
       </Container>
     </Section>
   );
@@ -168,13 +177,11 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 0 24px;
   
-  /* Reduced side padding for small phones to allow cards more width */
   @media (max-width: 480px) {
     padding: 0 16px;
   }
 `;
 
-// --- Header ---
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -200,35 +207,30 @@ const HeaderIcon = styled.div`
 `;
 
 const SectionTitle = styled.h2`
-  /* Using clamp to automatically scale between mobile (28px) and desktop (44px) */
   font-size: clamp(28px, 5vw, 44px);
   color: #121212;
-  font-weight: 600; /* Increased slightly for mobile legibility */
+  font-weight: 600;
   margin: 0;
   letter-spacing: -1px;
   line-height: 1.2;
 `;
 
-// --- Grid System ---
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 
-  /* Tablet */
   @media (max-width: 1100px) {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  /* Mobile Landscape / Small Tablets */
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 `;
 
-// --- Card Component ---
-const Card = styled.div`
+const Card = styled.div<{ $isHiddenMobile: boolean }>`
   background-color: #ffffff;
   border: 1px solid #eaeaea;
   border-radius: 6px;
@@ -236,8 +238,10 @@ const Card = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-
+  
+  /* Initial transition for Hover Effect (Kept as original) */
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
@@ -245,13 +249,19 @@ const Card = styled.div`
     z-index: 2;
   }
 
-  /* Responsive Padding */
   @media (max-width: 1024px) {
-    padding: 24px; /* More compact on tablet */
+    padding: 24px;
   }
 
-  @media (max-width: 480px) {
-    padding: 20px; /* Maximize internal space on mobile */
+  /* Smooth Entry Transition for Load More on Mobile */
+  @media (max-width: 768px) {
+    padding: 20px;
+    
+    /* Logic to Hide/Show with smoothness */
+    display: ${(props) => (props.$isHiddenMobile ? "none" : "flex")};
+    opacity: ${(props) => (props.$isHiddenMobile ? "0" : "1")};
+    transform: ${(props) => (props.$isHiddenMobile ? "translateY(10px)" : "translateY(0)")};
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
 `;
 
@@ -280,20 +290,17 @@ const CardBody = styled.div`
   align-items: flex-start;
   gap: 24px;
   
-  /* On very small screens, reducing the gap prevents text squeezing */
   @media (max-width: 480px) {
     gap: 16px;
     align-items: flex-start; 
   }
 `;
 
-// --- The Visual Core: Folded Box ---
 const IconBox = styled.div`
   flex-shrink: 0;
   width: 110px;
   height: 110px;
   background-color: #f7f7fa;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -318,21 +325,18 @@ const IconBox = styled.div`
     border-top-left-radius: 6px;
   }
   
-  /* Resize Icon box on Tablets */
   @media (max-width: 1200px) {
     width: 90px;
     height: 90px;
   }
   
-  /* Resize Icon Box on Mobile for proportion */
   @media (max-width: 480px) {
     width: 70px;
     height: 70px;
-    
     clip-path: polygon(
       0 0,
       100% 0,
-      100% calc(100% - 14px), /* Slightly smaller fold */
+      100% calc(100% - 14px),
       calc(100% - 14px) 100%,
       0 100%
     );
@@ -356,7 +360,7 @@ const TextContent = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 4px;
-  flex: 1; /* Ensures text takes up remaining width */
+  flex: 1;
 `;
 
 const CardTitle = styled.h3`
@@ -380,7 +384,36 @@ const CardDesc = styled.p`
   font-weight: 400;
 
   @media (max-width: 480px) {
-    font-size: 13px; /* Minor tweak for tight layouts */
+    font-size: 13px;
     line-height: 1.5;
+  }
+`;
+
+// --- UPDATED TOGGLE WRAPPER (MOBILE ONLY) ---
+const ToggleWrapper = styled.div`
+  display: none; 
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+`;
+
+const ToggleButton = styled.button`
+  background-color: #28a665;
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(40, 166, 101, 0.2);
+
+  &:active {
+    background-color: #1f8551;
+    transform: scale(0.96);
   }
 `;

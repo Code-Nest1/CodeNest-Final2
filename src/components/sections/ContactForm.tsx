@@ -178,13 +178,36 @@ export default function ContactForm() {
                 style={{ overflow: 'hidden' }}
               >
                 <SectionLabel>Budget</SectionLabel>
-                <BudgetGrid>
-                  <RadioOption label="$25k - $50k" name="budget" value="25-50" checked={formData.budget === "25-50"} onChange={handleBudgetChange} />
-                  <RadioOption label="$50k - $100k" name="budget" value="50-100" checked={formData.budget === "50-100"} onChange={handleBudgetChange} />
-                  <RadioOption label="$100k - $200k" name="budget" value="100-200" checked={formData.budget === "100-200"} onChange={handleBudgetChange} />
-                  <RadioOption label="> $200k" name="budget" value="200+" checked={formData.budget === "200+"} onChange={handleBudgetChange} />
-                  <RadioOption label="Unsure" name="budget" value="unknown" checked={formData.budget === "unknown"} onChange={handleBudgetChange} />
-                </BudgetGrid>
+<BudgetGrid>
+  <RadioOption 
+    label="$1k - $3k" 
+    name="budget" 
+    value="1-3" 
+    checked={formData.budget === "1-3"} 
+    onChange={handleBudgetChange} 
+  />
+  <RadioOption 
+    label="$3k - $5k" 
+    name="budget" 
+    value="3-5" 
+    checked={formData.budget === "3-5"} 
+    onChange={handleBudgetChange} 
+  />
+  <RadioOption 
+    label="$5k - $10k" 
+    name="budget" 
+    value="5-10" 
+    checked={formData.budget === "5-10"} 
+    onChange={handleBudgetChange} 
+  />
+  <RadioOption 
+    label="> $20k" 
+    name="budget" 
+    value="20+" 
+    checked={formData.budget === "20+"} 
+    onChange={handleBudgetChange} 
+  />
+</BudgetGrid>
               </motion.div>
             )}
             </AnimatePresence>
@@ -252,7 +275,7 @@ export default function ContactForm() {
               
               <PhoneInfo>
                 <span><strong>US:</strong> +1 805 399 2436</span>
-                <span><strong>UA:</strong> +1 805 399 2436</span>
+                {/* <span><strong>UA:</strong> +1 805 399 2436</span> */}
               </PhoneInfo>
             </ProfileInfo>
             

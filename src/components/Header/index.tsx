@@ -46,6 +46,7 @@ const Header = () => {
         <Center>
           <li><Link to="/services">Services</Link></li>
           <li><Link to="/challenges">Challenges</Link></li>
+          <li><Link to="/blog">Blogs</Link></li>
           <li><Link to="/portfolio">Portfolio</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/industries">Industries</Link></li>
@@ -62,6 +63,7 @@ const Header = () => {
       <MobileMenu isOpen={isMenuOpen}>
         <li><Link to="/services">Services</Link></li>
         <li><Link to="/challenges">Challenges</Link></li>
+        <li><Link to="/blogs">Blogs</Link></li>
         <li><Link to="/portfolio">Portfolio</Link></li>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/industries">Industries</Link></li>

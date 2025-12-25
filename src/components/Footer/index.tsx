@@ -1,7 +1,6 @@
-// src/components/Footer.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaLinkedinIn, FaFacebookF, FaGithub, FaInstagram } from "react-icons/fa";
 
@@ -51,11 +50,28 @@ export default function Footer() {
                 STE R ALBUQUERQUE, NM 87110, USA
               </Address>
               <Phone>+1 805 399 2436</Phone>
-              {/* MOVED EMAIL HERE */}
               <Phone>contact@codenest.us.com</Phone>
             </AddressGroup>
 
-            {/* Delivery Center Block REMOVED */}
+            {/* --- ADDED: NEWSLETTER SECTION --- */}
+            <NewsletterGroup>
+              <Label>Subscribe to our newsletter</Label>
+              <NewsletterForm onSubmit={(e) => e.preventDefault()}>
+                <InputWrapper>
+                  <NewsletterInput 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    required 
+                  />
+                  <NewsletterButton type="submit">
+                    Subscribe
+                  </NewsletterButton>
+                </InputWrapper>
+              </NewsletterForm>
+              <PrivacyNote>
+                Stay updated with the latest software trends and news.
+              </PrivacyNote>
+            </NewsletterGroup>
           </AddressColumn>
         </TopRow>
 
@@ -157,7 +173,6 @@ const FooterWrapper = styled.footer`
 const BackgroundGlow = styled.div`
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  /* Updated gradient for smoother blend on all screens */
   background: radial-gradient(circle at 10% 20%, #2fbd76, ${BLUE_BG} 50%),
               radial-gradient(circle at 90% 90%, #2fbd76 0%, ${BLUE_BG} 60%);
   z-index: -1;
@@ -195,27 +210,25 @@ const BrandColumn = styled.div`
 `;
 
 const Logo = styled.h2`
-  color: #ffffff; /* Enforce Pure White */
-  /* Clamp: Min 28px, Max 34px */
+  color: #ffffff;
   font-size: clamp(28px, 4vw, 34px);
-  font-weight: 800; /* Already bold, keeps it strong */
+  font-weight: 800;
   letter-spacing: 0.5px;
   margin: 0 0 20px 0;
   text-transform: uppercase;
 `;
 
 const Tagline = styled.p`
-  color: #ffffff; /* Enforce Pure White */
-  /* Clamp: Min 20px, Max 28px */
+  color: #ffffff;
   font-size: clamp(20px, 3vw, 28px);
   line-height: 1.3;
-  font-weight: 500; /* Minor increment: 400 -> 500 */
+  font-weight: 500;
   margin: 0 0 35px 0;
-  opacity: 1; /* Removed opacity for pure white look */
+  opacity: 1;
 
   @media (max-width: 768px) {
     margin-bottom: 25px;
-    br { display: none; } /* Let text flow naturally on mobile */
+    br { display: none; }
   }
 `;
 
@@ -223,7 +236,7 @@ const EstimationBtn = styled.a`
   display: inline-flex;
   text-decoration: none;
   background-color: ${LIME_GREEN};
-  color: #1a5c3d; /* Dark green for contrast */
+  color: #1a5c3d;
   font-weight: 700;
   font-size: 15px;
   border-radius: 4px;
@@ -238,7 +251,7 @@ const EstimationBtn = styled.a`
   }
 
   @media (max-width: 500px) {
-    width: 100%; /* Full width on mobile for easier tap */
+    width: 100%;
     display: flex;
   }
 
@@ -252,7 +265,6 @@ const EstimationBtn = styled.a`
 
   .btn-icon {
     background-color: rgba(255, 255, 255, 0.5); 
-    /* Subtly different shade for separator illusion */
     border-left: 1px solid rgba(0,0,0,0.08);
     width: 54px;
     height: 100%;
@@ -272,12 +284,12 @@ const AddressColumn = styled.div`
   @media (max-width: 900px) {
     text-align: left;
     width: 100%;
-    flex-direction: row; /* Side by side on tablet */
+    flex-direction: row;
     justify-content: space-between;
   }
   
   @media (max-width: 600px) {
-    flex-direction: column; /* Stack on phone */
+    flex-direction: column;
     gap: 25px;
   }
 `;
@@ -307,7 +319,78 @@ const Phone = styled.div`
   font-size: 15px;
   font-weight: 400;
   opacity: 0.9;
-  margin-bottom: 2px; /* Small spacing for email below */
+  margin-bottom: 2px;
+`;
+
+// --- ADDED: NEWSLETTER STYLED COMPONENTS ---
+
+const NewsletterGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
+  align-self: flex-end;
+
+  @media (max-width: 900px) {
+    align-self: flex-start;
+  }
+`;
+
+const NewsletterForm = styled.form`
+  width: 100%;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid ${BORDER_DIM};
+  padding: 4px;
+  border-radius: 4px;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: ${LIME_GREEN};
+  }
+`;
+
+const NewsletterInput = styled.input`
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+`;
+
+const NewsletterButton = styled.button`
+  background: ${LIME_GREEN};
+  color: #1a5c3d;
+  border: none;
+  border-radius: 2px;
+  padding: 0 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+const PrivacyNote = styled.p`
+  font-size: 11px;
+  color: ${TEXT_DIM};
+  line-height: 1.4;
+  margin: 0;
 `;
 
 // --- MAIN GRID ---
@@ -317,7 +400,7 @@ const GridContainer = styled.div`
   grid-template-columns: 1fr 1fr 2fr;
   gap: 60px;
   padding-bottom: 80px;
-  border-bottom: 1px solid rgba(255,255,255,0.15); /* Separator line */
+  border-bottom: 1px solid rgba(255,255,255,0.15);
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr 1fr;
@@ -345,7 +428,6 @@ const ServicesInnerGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 60px;
 
-  /* On tablet/mobile, stacking prevents narrow columns */
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
     gap: 0;
@@ -353,13 +435,12 @@ const ServicesInnerGrid = styled.div`
 `;
 
 const SectionTitle = styled.h3`
-  color: #ffffff; /* Enforce Pure White */
+  color: #ffffff;
   font-size: 30px;
-  font-weight: 600; /* Minor increment: 500 -> 600 */
+  font-weight: 600;
   margin-bottom: 25px;
   letter-spacing: -0.5px;
   
-  /* Scale title down on mobile */
   @media (max-width: 768px) {
     font-size: 24px;
     margin-bottom: 20px;
@@ -378,24 +459,22 @@ const LinkItem = styled.a`
   text-decoration: none;
   color: ${TEXT_COLOR};
   font-size: 12px;
-  font-weight: 800; /* Bold links per design */
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   padding: 16px 0;
   border-bottom: 1px solid ${BORDER_DIM};
   transition: all 0.25s ease;
 
-  /* Adjust vertical spacing on mobile to reduce height */
   @media (max-width: 768px) {
     padding: 14px 0;
   }
 
   &:hover {
     color: ${LIME_GREEN};
-    padding-left: 8px; /* Slight nudge effect */
+    padding-left: 8px;
   }
 
-  /* Target the SVG icon inside */
   svg {
     opacity: 0.6;
     transition: all 0.3s ease;
@@ -407,8 +486,6 @@ const LinkItem = styled.a`
     color: ${LIME_GREEN};
   }
 `;
-
-// --- BOTTOM BAR ---
 
 const BottomBar = styled.div`
   padding-top: 40px;
@@ -440,7 +517,7 @@ const SocialIcon = styled.a`
 
   &:hover {
     background: ${LIME_GREEN};
-    color: #1a5c3d; /* Icon dark on hover */
+    color: #1a5c3d;
     transform: translateY(-3px);
   }
 `;
@@ -457,12 +534,12 @@ const CopyrightRow = styled.div`
   }
 
   @media (max-width: 768px) {
-    flex-direction: column-reverse; /* Put links above text on mobile */
+    flex-direction: column-reverse;
     gap: 20px;
     align-items: flex-start;
     
     .mobile-only {
-        display: block; /* Break line on mobile */
+        display: block;
     }
   }
 `;
