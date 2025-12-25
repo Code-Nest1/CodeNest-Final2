@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation, useParams } from "react-router-dom";
-import ReactGA from "react-ga4"; 
+import ReactGA from "react-ga4";
 
 // --- Components ---
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import ContactForm from "./components/sections/ContactForm"; 
+import ContactForm from "./components/sections/ContactForm";
+
+// ✅ ADD THE SCROLL BUTTON IMPORT HERE
+import ScrollToTop from "./components/ScrollToTop";
 
 // --- Pages ---
 import Home from "./pages/Home";
@@ -14,7 +17,7 @@ import ServicesPage from "./pages/services/Services";
 
 // --- SERVICE DETAIL PAGES (Web) ---
 import WordPressSolutions from "./pages/services/service-details/WordPressSolutions";
-import ShopifyEcommerce from "./pages/services/service-details/ShopifyEcommerce"; 
+import ShopifyEcommerce from "./pages/services/service-details/ShopifyEcommerce";
 import CustomWebDevelopment from "./pages/services/service-details/CustomWebDevelopment";
 import ReactNextDevelopment from "./pages/services/service-details/ReactNextDevelopment";
 import UiUxImplementation from "./pages/services/service-details/UiUxImplementation";
@@ -28,13 +31,13 @@ import MobileStrategy from "./pages/services/service-details/MobileStrategy";
 
 // --- Portfolio & Blog Pages ---
 import Portfolio from "./pages/portfolio/Portfolio";
-import ProjectDetail from "./pages/portfolio/ProjectDetail"; 
-import BlogListing from "./components/sections/Blog/index";      
-import BlogPost from "./components/sections/Blog/BlogPost";      
+import ProjectDetail from "./pages/portfolio/ProjectDetail";
+import BlogListing from "./components/sections/Blog/index";
+import BlogPost from "./components/sections/Blog/BlogPost";
 
 // --- Sections ---
 import Industries from "./components/sections/Industries";
-import About from "./components/sections/AboutUs/index"; 
+import About from "./components/sections/AboutUs/index";
 
 ReactGA.initialize("G-NWL003NKPK");
 
@@ -64,7 +67,7 @@ const App: React.FC = () => {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/industries" element={<Industries />} />
-          
+
           {/* === WEB SERVICES === */}
           <Route path="/services/wordpress-solutions" element={<WordPressSolutions />} />
           <Route path="/services/shopify-ecommerce" element={<ShopifyEcommerce />} />
@@ -91,7 +94,15 @@ const App: React.FC = () => {
           <ContactForm />
         </div>
       )}
+
       <Footer />
+
+      {/* 
+         ✅ SCROLL TO TOP COMPONENT 
+         The key={pathname} forces the button logic to reset correctly 
+         every time you navigate to a new page.
+      */}
+      <ScrollToTop key={pathname} />
     </>
   );
 };

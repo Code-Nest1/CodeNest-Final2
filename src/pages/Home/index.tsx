@@ -13,9 +13,6 @@ import TrustedPartners from "../../components/sections/TrustedPartners";
 import ClientFeedback from "../../components/sections/ClientFeedback";
 import BlogSection from '../../components/sections/Blog';
 
-// ✅ IMPORT THE SCROLL BUTTON
-import ScrollToTop from "../../components/ScrollToTop";
-
 const Page = styled.main`
   overflow-x: hidden;
   width: 100%;
@@ -95,8 +92,6 @@ export default function Home({ scrollTo }: HomeProps) {
       </SectionWrap> */}
 
       {/* ✅ ADD THE BUTTON HERE AT THE BOTTOM */}
-      <ScrollToTop />
-
     </Page>
   );
 }

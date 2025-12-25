@@ -8,57 +8,60 @@ const ARROW_COLOR = "#28a665";
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
-  // --- 1. Logic to Show/Hide based on "Industries" section ---
+  // --- 1. Universal Logic: Show after scrolling 2.5 sections (vh) ---
   useEffect(() => {
     const toggleVisibility = () => {
-      // Find the industries section
-      const industriesSection = document.getElementById("industries");
-      
-      if (industriesSection) {
-        // Get the position of the industries section
-        const sectionTop = industriesSection.offsetTop;
-        const currentScroll = window.scrollY + window.innerHeight; // Bottom of viewport
-
-        // Show button if we have scrolled past the start of the Industries section
-        if (window.scrollY > sectionTop - 400) { 
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
+      // Logic: Appear after scrolling down more than 2.5 times the screen height
+      // This works on EVERY page regardless of IDs like "industries"
+      if (window.scrollY > window.innerHeight * 2.5) {
+        setIsVisible(true);
       } else {
-        // Fallback: Show if scrolled down 1000px if section not found
-        if (window.scrollY > 1000) setIsVisible(true);
+        setIsVisible(false);
       }
     };
 
     window.addEventListener("scroll", toggleVisibility);
+    
+    // Clean up listener
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  // --- 2. Scroll to Hero Function ---
-  const scrollToHero = () => {
-    const heroSection = document.getElementById("hero");
-    if (heroSection) {
-      heroSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+  // --- 2. Universal Scroll Function ---
+  const scrollToTop = () => {
+    // Hide immediately when clicked for a better feel
+    setIsVisible(false);
+    
+    // Standard scroll to absolute top of any page
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
     <AnimatePresence>
       {isVisible && (
         <BubbleButton
-          onClick={scrollToHero}
+          onClick={scrollToTop}
           initial={{ opacity: 0, scale: 0, y: 50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0, y: 50 }}
-          whileHover={{ scale: 1.15, y: -5 }} // Bubbly hover effect
+          whileHover={{ scale: 1.1, y: -5 }} 
           whileTap={{ scale: 0.9 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          aria-label="Scroll to top"
         >
           {/* Simple Up Arrow SVG */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg 
+            width="28" 
+            height="28" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="white" 
+            strokeWidth="3" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
             <path d="M18 15l-6-6-6 6"/>
           </svg>
         </BubbleButton>
@@ -67,41 +70,54 @@ export default function ScrollToTop() {
   );
 }
 
-// --- 3. Styles ---
+// --- 3. Responsive Styles ---
 const BubbleButton = styled(motion.button)`
   position: fixed;
+  z-index: 9999; /* Higher z-index to stay above Footer and Forms */
+  background-color: ${ARROW_COLOR};
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  
+  /* DESKTOP SETTINGS */
   bottom: 40px;
   right: 40px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: ${ARROW_COLOR};
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 25px rgba(11, 50, 61, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 999; /* Ensures it stays on top of everything */
-  outline: none;
-  
-  /* Glassmorphism subtle shine */
-  &::after {
+
+  /* Glassmorphism shine effect */
+  &::before {
     content: '';
     position: absolute;
     top: 5px;
-    left: 12px;
-    width: 20px;
-    height: 10px;
+    left: 10px;
+    width: 25px;
+    height: 12px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    transform: rotate(-45deg);
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(-35deg);
   }
 
+  /* MOBILE SETTINGS */
   @media (max-width: 768px) {
-    bottom: 20px;
+    bottom: 30px;
     right: 20px;
     width: 50px;
     height: 50px;
+    
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+    
+    &::before {
+        width: 15px;
+        height: 8px;
+    }
   }
 `;
