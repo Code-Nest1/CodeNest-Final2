@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Facebook, Twitter, Linkedin, Share2, ArrowLeft, ArrowRight } from 'react-feather';
-import { Helmet } from 'react-helmet-async'; // <--- NEW IMPORT FOR SEO
+import { Helmet } from 'react-helmet-async'; // <--- NEW SEO IMPORT
 
 // ==========================================
 // 1. GLOBAL STYLES (CodeNest Blue Theme)
@@ -182,40 +182,43 @@ const BlogPost = () => {
   const authorName = _embedded?.['author']?.[0]?.name || 'Team';
   const authorImg = _embedded?.['author']?.[0]?.avatar_urls?.['96'];
   const formattedDate = new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  // ----------------------------------------
+  // ✅ NEW SEO VARIABLES & HELMET
+  // ----------------------------------------
+  const plainTitle = title.rendered.replace(/<\/?[^>]+(>|$)/g, ""); // Remove HTML tags
+  // Fix undefined description crash and clean HTML tags
+  const rawExcerpt = excerpt?.rendered || "Read this article on CodeNest.";
+  const plainDescription = rawExcerpt.replace(/<\/?[^>]+(>|$)/g, "");
   
-  // -- SEO HELPER VARIABLES --
-  // Decode HTML entities in title (e.g. &amp; -> &)
-  const plainTitle = title.rendered.replace(/<\/?[^>]+(>|$)/g, ""); 
-  const plainDescription = excerpt?.rendered.replace(/<\/?[^>]+(>|$)/g, "") || "Read this article on CodeNest.";
-  const canonicalUrl = `https://codenest.us.com/blog/${slug}`;
+  // This explicitly sets the Canonical URL for THIS specific blog post
+  const currentCanonicalUrl = `https://codenest.us.com/blog/${slug}`;
 
   return (
     <>
       <GlobalStyle />
       
       {/* 
-          =======================================
-          SEO & METADATA INJECTION
-          =======================================
+        ✅ THIS HELMET BLOCK IS THE CRITICAL SEO FIX
+        It overwrites the 'Default' tags from App.tsx with the
+        Specific Title and Description for this exact article.
       */}
       <Helmet>
-        {/* Dynamic Title */}
+        {/* Title Tag */}
         <title>{plainTitle} | Code Nest</title>
-        
-        {/* Dynamic Meta Description */}
+
+        {/* Standard Metadata */}
         <meta name="description" content={plainDescription.substring(0, 160)} />
+        <link rel="canonical" href={currentCanonicalUrl} />
 
-        {/* Canonical Link - CRITICAL for SEO */}
-        <link rel="canonical" href={canonicalUrl} />
-
-        {/* Open Graph (Facebook / LinkedIn) */}
+        {/* Facebook / Open Graph */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content={plainTitle} />
         <meta property="og:description" content={plainDescription.substring(0, 160)} />
-        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:url" content={currentCanonicalUrl} />
         {featureImg && <meta property="og:image" content={featureImg} />}
 
-        {/* Twitter Card */}
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={plainTitle} />
         <meta name="twitter:description" content={plainDescription.substring(0, 160)} />

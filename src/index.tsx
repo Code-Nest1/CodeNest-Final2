@@ -1,14 +1,13 @@
-// src/index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { GlobalStyle } from './styles/global';
 import { BrowserRouter } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async'; // <--- NEW IMPORT
+import { HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HelmetProvider> {/* <--- WRAPPED APP FOR SEO */}
+    <HelmetProvider>
       <BrowserRouter>
         <GlobalStyle />
         <App />

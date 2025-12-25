@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation, useParams } from "react-router-dom";
 import ReactGA from "react-ga4";
+import { Helmet } from "react-helmet-async"; // <--- NEW: Import for SEO
 
 // --- Components ---
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ContactForm from "./components/sections/ContactForm";
 
-// ✅ ADD THE SCROLL BUTTON IMPORT HERE
+// ✅ 1. INTEGRATED THE NEW SCROLL LOGIC
+import useScrollRestore from "./hooks/useScrollRestore"; 
+
+// ✅ SCROLL BUTTON IMPORT
 import ScrollToTop from "./components/ScrollToTop";
 
 // --- Pages ---
@@ -49,15 +53,33 @@ const HomeScrollWrapper = () => {
 const App: React.FC = () => {
   const { pathname } = useLocation();
 
+  // ✅ 2. INITIALIZE GLOBAL SCROLL RESTORATION
+  useScrollRestore();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Analytics remains exactly the same
     ReactGA.send({ hitType: "pageview", page: pathname + window.location.search });
   }, [pathname]);
 
   const hideContactForm = pathname.includes('/portfolio/') || pathname.includes('/blog/');
 
+  // Define the base domain (ensure no trailing slash)
+  const siteDomain = "https://codenest.us.com";
+  // Create clean canonical URL (removes trailing slashes from logic if needed, but pathname usually safe)
+  const canonicalUrl = `${siteDomain}${pathname === '/' ? '' : pathname}`;
+
   return (
     <>
+      {/* 
+        ✅ GLOBAL SEO FIX 
+        This automatically creates a Canonical Tag for EVERY page using the current route.
+        The BlogPost.tsx will override this with its specific details where needed.
+      */}
+      <Helmet>
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:url" content={canonicalUrl} />
+      </Helmet>
+
       <Header />
       <main>
         <Routes>
@@ -97,11 +119,7 @@ const App: React.FC = () => {
 
       <Footer />
 
-      {/* 
-         ✅ SCROLL TO TOP COMPONENT 
-         The key={pathname} forces the button logic to reset correctly 
-         every time you navigate to a new page.
-      */}
+      {/* The key={pathname} is important for your ScrollToTop visibility reset */}
       <ScrollToTop key={pathname} />
     </>
   );
