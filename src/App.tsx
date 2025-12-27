@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation, useParams } from "react-router-dom";
 import ReactGA from "react-ga4";
-import { Helmet } from "react-helmet-async"; // <--- NEW: Import for SEO
+import { Helmet } from "react-helmet-async";
 
 // --- Components ---
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ContactForm from "./components/sections/ContactForm";
 
-// ✅ 1. INTEGRATED THE NEW SCROLL LOGIC
-import useScrollRestore from "./hooks/useScrollRestore"; 
-
-// ✅ SCROLL BUTTON IMPORT
+// Scroll logic
+import useScrollRestore from "./hooks/useScrollRestore";
 import ScrollToTop from "./components/ScrollToTop";
 
 // --- Pages ---
@@ -35,17 +33,9 @@ import MobileStrategy from "./pages/services/service-details/MobileStrategy";
 
 // --- Portfolio & Blog Pages ---
 import Portfolio from "./pages/portfolio/Portfolio";
-<<<<<<< HEAD
 import ProjectDetail from "./pages/portfolio/ProjectDetail";
 import BlogListing from "./components/sections/Blog/index";
 import BlogPost from "./components/sections/Blog/BlogPost";
-=======
-import ProjectDetail from "./pages/portfolio/ProjectDetail"; 
-
-// --- Blog Pages ---
-import BlogListing from "./components/sections/Blog/index";      
-import BlogPost from "./components/sections/Blog/BlogPost";      
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
 
 // --- Sections ---
 import Industries from "./components/sections/Industries";
@@ -61,44 +51,31 @@ const HomeScrollWrapper = () => {
 const App: React.FC = () => {
   const { pathname } = useLocation();
 
-  // ✅ 2. INITIALIZE GLOBAL SCROLL RESTORATION
   useScrollRestore();
 
   useEffect(() => {
-    // Analytics remains exactly the same
-    ReactGA.send({ hitType: "pageview", page: pathname + window.location.search });
+    ReactGA.send({
+      hitType: "pageview",
+      page: pathname + window.location.search,
+    });
   }, [pathname]);
 
-  const hideContactForm = pathname.includes('/portfolio/') || pathname.includes('/blog/');
+  const hideContactForm =
+    pathname.includes("/portfolio/") || pathname.includes("/blog/");
 
-  // Define the base domain (ensure no trailing slash)
   const siteDomain = "https://codenest.us.com";
-  // Create clean canonical URL (removes trailing slashes from logic if needed, but pathname usually safe)
-  const canonicalUrl = `${siteDomain}${pathname === '/' ? '' : pathname}`;
+  const canonicalUrl = `${siteDomain}${pathname === "/" ? "" : pathname}`;
 
   return (
     <>
-<<<<<<< HEAD
-      {/* 
-        ✅ GLOBAL SEO FIX 
-        This automatically creates a Canonical Tag for EVERY page using the current route.
-        The BlogPost.tsx will override this with its specific details where needed.
-      */}
+      {/* GLOBAL SEO CANONICAL */}
       <Helmet>
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:url" content={canonicalUrl} />
       </Helmet>
-=======
-      {/* === TEST BANNER: REMOVE THIS AFTER VERIFICATION === */}
-      <div style={{ backgroundColor: '#28a745', color: 'white', textAlign: 'center', padding: '10px', fontWeight: 'bold', position: 'sticky', top: 0, zIndex: 9999 }}>
-        🚀 UPDATE SUCCESSFUL: LIVE FROM GITHUB!
-      </div>
-      {/* =================================================== */}
 
       <Header />
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
 
-      <Header />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -108,27 +85,54 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/industries" element={<Industries />} />
 
-          {/* === WEB SERVICES === */}
-          <Route path="/services/wordpress-solutions" element={<WordPressSolutions />} />
-          <Route path="/services/shopify-ecommerce" element={<ShopifyEcommerce />} />
-          <Route path="/services/custom-web-development" element={<CustomWebDevelopment />} />
-          <Route path="/services/react-next-development" element={<ReactNextDevelopment />} />
-          <Route path="/services/ui-ux-implementation" element={<UiUxImplementation />} />
+          {/* WEB SERVICES */}
+          <Route
+            path="/services/wordpress-solutions"
+            element={<WordPressSolutions />}
+          />
+          <Route
+            path="/services/shopify-ecommerce"
+            element={<ShopifyEcommerce />}
+          />
+          <Route
+            path="/services/custom-web-development"
+            element={<CustomWebDevelopment />}
+          />
+          <Route
+            path="/services/react-next-development"
+            element={<ReactNextDevelopment />}
+          />
+          <Route
+            path="/services/ui-ux-implementation"
+            element={<UiUxImplementation />}
+          />
 
-          {/* === APP DEVELOPMENT SERVICES (New) === */}
-          <Route path="/services/ios-native-apps" element={<IOSNativeApps />} />
-          <Route path="/services/android-native-apps" element={<AndroidNativeApps />} />
-          <Route path="/services/flutter-development" element={<FlutterDevelopment />} />
-          <Route path="/services/app-maintenance" element={<AppMaintenance />} />
-          <Route path="/services/mobile-strategy" element={<MobileStrategy />} />
+          {/* APP DEVELOPMENT SERVICES */}
+          <Route
+            path="/services/ios-native-apps"
+            element={<IOSNativeApps />}
+          />
+          <Route
+            path="/services/android-native-apps"
+            element={<AndroidNativeApps />}
+          />
+          <Route
+            path="/services/flutter-development"
+            element={<FlutterDevelopment />}
+          />
+          <Route
+            path="/services/app-maintenance"
+            element={<AppMaintenance />}
+          />
+          <Route
+            path="/services/mobile-strategy"
+            element={<MobileStrategy />}
+          />
 
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/:slug" element={<ProjectDetail />} />
-<<<<<<< HEAD
-=======
 
-          {/* === BLOG ROUTES === */}
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
+          {/* BLOG ROUTES */}
           <Route path="/blog" element={<BlogListing />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
@@ -142,7 +146,6 @@ const App: React.FC = () => {
 
       <Footer />
 
-      {/* The key={pathname} is important for your ScrollToTop visibility reset */}
       <ScrollToTop key={pathname} />
     </>
   );
