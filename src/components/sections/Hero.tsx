@@ -244,10 +244,14 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
+<<<<<<< HEAD
             {/* The Magic Break Lines: Desktop Only */}
             Launch, Scale & <DesktopBr />
             Succeed with <DesktopBr />
             Code Nest
+=======
+            DEPLOYMENT FIXED: HELLO HOSTINGER!
+>>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
           </Title>
 
           <Subtitle

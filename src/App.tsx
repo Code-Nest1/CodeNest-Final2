@@ -35,9 +35,17 @@ import MobileStrategy from "./pages/services/service-details/MobileStrategy";
 
 // --- Portfolio & Blog Pages ---
 import Portfolio from "./pages/portfolio/Portfolio";
+<<<<<<< HEAD
 import ProjectDetail from "./pages/portfolio/ProjectDetail";
 import BlogListing from "./components/sections/Blog/index";
 import BlogPost from "./components/sections/Blog/BlogPost";
+=======
+import ProjectDetail from "./pages/portfolio/ProjectDetail"; 
+
+// --- Blog Pages ---
+import BlogListing from "./components/sections/Blog/index";      
+import BlogPost from "./components/sections/Blog/BlogPost";      
+>>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
 
 // --- Sections ---
 import Industries from "./components/sections/Industries";
@@ -70,6 +78,7 @@ const App: React.FC = () => {
 
   return (
     <>
+<<<<<<< HEAD
       {/* 
         ✅ GLOBAL SEO FIX 
         This automatically creates a Canonical Tag for EVERY page using the current route.
@@ -79,6 +88,15 @@ const App: React.FC = () => {
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:url" content={canonicalUrl} />
       </Helmet>
+=======
+      {/* === TEST BANNER: REMOVE THIS AFTER VERIFICATION === */}
+      <div style={{ backgroundColor: '#28a745', color: 'white', textAlign: 'center', padding: '10px', fontWeight: 'bold', position: 'sticky', top: 0, zIndex: 9999 }}>
+        🚀 UPDATE SUCCESSFUL: LIVE FROM GITHUB!
+      </div>
+      {/* =================================================== */}
+
+      <Header />
+>>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
 
       <Header />
       <main>
@@ -106,6 +124,11 @@ const App: React.FC = () => {
 
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/:slug" element={<ProjectDetail />} />
+<<<<<<< HEAD
+=======
+
+          {/* === BLOG ROUTES === */}
+>>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
           <Route path="/blog" element={<BlogListing />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>

@@ -6,7 +6,11 @@ import { Facebook, Twitter, Linkedin, Share2, ArrowLeft, ArrowRight } from 'reac
 import { Helmet } from 'react-helmet-async'; // <--- NEW SEO IMPORT
 
 // ==========================================
+<<<<<<< HEAD
 // 1. GLOBAL STYLES (CodeNest Blue Theme)
+=======
+// 1. GLOBAL STYLES (Codnest Blue Theme)
+>>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
 // ==========================================
 const GlobalStyle = createGlobalStyle`
   html { scroll-behavior: smooth; }
