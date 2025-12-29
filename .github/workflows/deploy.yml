@@ -34,7 +34,7 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
         # Using double quotes here because of the spaces in the folder name
-        server-dir: "public_html/Code Nest Website/" 
+        server-dir: "public_html" 
         dangerous-clean-slate: false
         exclude: |
           **/.htaccess**
