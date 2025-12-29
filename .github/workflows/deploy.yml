@@ -33,4 +33,12 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
-        server-dir: ""
+        server-dir: ./
+        dangerous-clean-slate: false
+        exclude: |
+          **/.htaccess**
+          **/blog/**
+          **/blogs/**
+          **/Blogs/**
+          **/code-nest-system/**
+          **/managmentsystem/**
