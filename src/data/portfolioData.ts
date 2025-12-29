@@ -11,11 +11,7 @@ export const projectsData = [
     subtitle: "Advanced Finance Calculator & Lead Capture Platform",
     
     // Header & Meta
-<<<<<<< HEAD
-    heroImage: "/images/portfolio/Hero.png", // Replace with your Screenshot 1
-=======
-    heroImage: "/images/portfolio/heroImage.jpg",
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
+    heroImage: "/images/portfolio/Hero.png", 
     logoText: "Exclusive",
     logoSub: "Finance",
     website: "exclusivecarfinance.com", 
@@ -56,51 +52,31 @@ export const projectsData = [
         id: 0,
         title: "Custom Finance Calculator",
         desc: "Real-time monthly payment projections, total credit charge, and total payable amount using bespoke JavaScript logic not possible with standard plugins.",
-<<<<<<< HEAD
         img: "/images/portfolio/calculator.png"
-=======
-        img: "/images/portfolio/calculator.jpg"
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
       },
       {
         id: 1,
         title: "Finance Application Workflow",
         desc: "Users can submit full application requests with necessary details rooted directly into the client's CRM system for immediate processing.",
-<<<<<<< HEAD
         img: "/images/portfolio/2.png"
-=======
-        img: "/images/portfolio/workflow.jpg"
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
       },
       {
         id: 2,
         title: "Lead Capture Automation",
         desc: "CRM integration allows for automated email responses, data organization, and streamlined follow-up workflows to close deals faster.",
-<<<<<<< HEAD
         img: "/images/portfolio/good.png"
-=======
-        img: "/images/portfolio/lead capture.jpg"
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
       },
       {
         id: 3,
         title: "High-Performance Next.js",
         desc: "Ultra-fast load speeds, modern UI animations, and secure architecture without the limitations or security vulnerabilities of WordPress.",
-<<<<<<< HEAD
         img: "/images/portfolio/perfect.png"
-=======
-        img: "/images/portfolio/next.js.jpg"
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
       },
       {
         id: 4,
         title: "Conversion-Optimized UX",
         desc: "Clear CTAs, simplified forms, improved readability, and a trust-focused copy layout designed specifically for the UK finance industry.",
-<<<<<<< HEAD
         img: "/images/portfolio/11.png"
-=======
-        img: "/images/portfolio/lead capture copy.jpg"
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
       }
     ],
 
@@ -180,7 +156,7 @@ export const projectsData = [
     heroImage: "/images/portfolio/tyaphero.png",
     logoText: "TYAP",
     logoSub: "Healthcare",
-    website: "tyap.com", // Example
+    website: "tyap.com", 
     timeline: "6 Weeks",
 
     services: ["UX/UI Design", "WordPress Dev", "Elementor Customization", "Content Strategy"],
@@ -241,7 +217,7 @@ export const projectsData = [
     heroImage: "/images/portfolio/choicehero.png",
     logoText: "Choice",
     logoSub: "Alliance",
-    website: "choicealliance.com", // Example
+    website: "choicealliance.com", 
     timeline: "4 Weeks (Urgent)",
 
     services: ["Security Audit", "WordPress Rebuild", "Backend Hardening", "Blog System"],

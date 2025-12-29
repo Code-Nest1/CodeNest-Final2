@@ -6,11 +6,7 @@ import { Facebook, Twitter, Linkedin, Share2, ArrowLeft, ArrowRight } from 'reac
 import { Helmet } from 'react-helmet-async'; // <--- NEW SEO IMPORT
 
 // ==========================================
-<<<<<<< HEAD
 // 1. GLOBAL STYLES (CodeNest Blue Theme)
-=======
-// 1. GLOBAL STYLES (Codnest Blue Theme)
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
 // ==========================================
 const GlobalStyle = createGlobalStyle`
   html { scroll-behavior: smooth; }
@@ -107,7 +103,6 @@ const BlogPost = () => {
         setPost(currentPost || null);
         
         // After getting current post, fetch 4 latest posts for "Related" section
-        // We fetch 4, then filter out the current one to show 3
         if (currentPost) {
           return axios.get(`${wpBase}?per_page=5&_embed`);
         }
@@ -126,7 +121,7 @@ const BlogPost = () => {
       });
   }, [slug]);
 
-  // 3. Robust Heading Parser (Retry Logic)
+  // 3. Robust Heading Parser
   useEffect(() => {
     if (!loading && post && contentRef.current) {
       const parseHeadings = () => {
@@ -188,41 +183,26 @@ const BlogPost = () => {
   const formattedDate = new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   // ----------------------------------------
-  // ✅ NEW SEO VARIABLES & HELMET
+  // ✅ SEO VARIABLES & HELMET
   // ----------------------------------------
-  const plainTitle = title.rendered.replace(/<\/?[^>]+(>|$)/g, ""); // Remove HTML tags
-  // Fix undefined description crash and clean HTML tags
+  const plainTitle = title.rendered.replace(/<\/?[^>]+(>|$)/g, ""); 
   const rawExcerpt = excerpt?.rendered || "Read this article on CodeNest.";
   const plainDescription = rawExcerpt.replace(/<\/?[^>]+(>|$)/g, "");
-  
-  // This explicitly sets the Canonical URL for THIS specific blog post
   const currentCanonicalUrl = `https://codenest.us.com/blog/${slug}`;
 
   return (
     <>
       <GlobalStyle />
       
-      {/* 
-        ✅ THIS HELMET BLOCK IS THE CRITICAL SEO FIX
-        It overwrites the 'Default' tags from App.tsx with the
-        Specific Title and Description for this exact article.
-      */}
       <Helmet>
-        {/* Title Tag */}
         <title>{plainTitle} | Code Nest</title>
-
-        {/* Standard Metadata */}
         <meta name="description" content={plainDescription.substring(0, 160)} />
         <link rel="canonical" href={currentCanonicalUrl} />
-
-        {/* Facebook / Open Graph */}
         <meta property="og:type" content="article" />
         <meta property="og:title" content={plainTitle} />
         <meta property="og:description" content={plainDescription.substring(0, 160)} />
         <meta property="og:url" content={currentCanonicalUrl} />
         {featureImg && <meta property="og:image" content={featureImg} />}
-
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={plainTitle} />
         <meta name="twitter:description" content={plainDescription.substring(0, 160)} />
@@ -312,7 +292,7 @@ const BlogPost = () => {
         </Container>
       </MainSection>
 
-      {/* --- RELATED SECTION (Added from your Design) --- */}
+      {/* --- RELATED SECTION --- */}
       <RelatedSection>
         <Container>
           <SectionHeader>
@@ -463,11 +443,7 @@ const SidebarFooter = styled.div`
 
 const ContentColumn = styled.div` min-width: 0; max-width: 820px; `;
 
-/* ==========================================
-   RELATED SECTION STYLES (FROM YOUR DESIGN)
-   ========================================== */
 const RelatedSection = styled.div` 
-  /* Light mint background for related section */
   background-color: #f2f9f5; 
   padding: 100px 0 120px; 
   margin-top: 40px; 
@@ -501,7 +477,7 @@ const BlogCard = styled.div`
 
   &:hover { 
     transform: translateY(-8px); 
-    box-shadow: 0 20px 40px rgba(40, 166, 101, 0.15); /* Green shadow on hover */
+    box-shadow: 0 20px 40px rgba(40, 166, 101, 0.15); 
     border-color: #28a665;
   } 
 

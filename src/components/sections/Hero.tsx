@@ -7,26 +7,21 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 // --- STYLED COMPONENTS ---
 
 const HeroWrap = styled.section`
-  /* "Fixed not too much, not too less" - 80vh is the sweet spot for laptops */
   min-height: 80vh; 
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  /* drastically reduced padding to fix the "too much gap" issue */
   padding: 40px 20px 40px; 
   overflow: hidden;
   background-color: #052e26; 
 
-  /* Mobile: content flows naturally, slightly more space top for nav */
   @media (max-width: 991px) {
     min-height: auto;
     padding-top: 100px;
     padding-bottom: 60px;
   }
 `;
-
-// --- BACKGROUND LAYERS (UNCHANGED) ---
 
 const AmbientBackground = styled.div`
   position: absolute;
@@ -51,10 +46,8 @@ const LightBlob = styled(motion.div)<{ color: string; size: string; blur: string
   will-change: transform;
 `;
 
-// --- CONTENT LAYOUT ---
-
 const Inner = styled.div`
-  max-width: 1150px; /* Reduced width slightly to tighten the center cluster */
+  max-width: 1150px; 
   margin: 0 auto;
   display: flex;
   align-items: center; 
@@ -64,7 +57,6 @@ const Inner = styled.div`
   z-index: 10;
   gap: 20px;
 
-  /* STACK ON MOBILE */
   @media (max-width: 991px) {
     flex-direction: column;
     text-align: center;
@@ -76,22 +68,19 @@ const Left = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* KEY: Content aligns strictly left on desktop to match screenshot */
   align-items: flex-start;
   z-index: 2;
 
   @media (max-width: 991px) {
     width: 100%;
-    align-items: center; /* Center everything on mobile */
+    align-items: center; 
   }
 `;
 
 const Title = styled(motion.h1)`
-  /* Perfected Size: 56px (Not too big, not too small) */
   font-size: 56px; 
   line-height: 1.1; 
   margin: 0 0 20px 0;
-  /* Adjusted weight: 800 is solid, but not 'blocky' black */
   font-weight: 800; 
   color: ${COLORS.white};
   text-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -107,7 +96,6 @@ const Title = styled(motion.h1)`
   }
 `;
 
-// "Magic" Break component for Desktop Only (Forces screenshot layout)
 const DesktopBr = styled.br`
   display: block;
   @media (max-width: 991px) {
@@ -121,7 +109,7 @@ const Subtitle = styled(motion.p)`
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 32px;
-  text-align: left; /* Strict Left Align */
+  text-align: left;
 
   @media (max-width: 991px) {
     text-align: center;
@@ -154,17 +142,12 @@ const CTA = styled(motion.a)`
     color: #207549;
     transform: translateY(-2px);
   }
-
-  @media (max-width: 768px) {
-    width: auto; 
-    padding: 15px 40px;
-  }
 `;
 
 const Right = styled.div`
   flex: 1; 
   display: flex;
-  justify-content: flex-end; /* Pushes image slightly right for balance */
+  justify-content: flex-end; 
   align-items: center;
   position: relative;
   
@@ -174,7 +157,7 @@ const Right = styled.div`
 
   @media (max-width: 991px) {
     width: 100%;
-    order: -1; /* Image top on Mobile */
+    order: -1; 
     justify-content: center;
     margin-bottom: 20px;
   }
@@ -195,6 +178,8 @@ const LottieContainer = styled(motion.div)`
   }
 `;
 
+// --- COMPONENT ---
+
 export default function Hero() {
   return (
     <HeroWrap>
@@ -211,11 +196,7 @@ export default function Hero() {
             scale: [1, 1.2, 1],
             rotate: [0, 90, 0]
           }}
-          transition={{ 
-            duration: 8,
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
 
         <LightBlob
@@ -228,11 +209,7 @@ export default function Hero() {
             y: [0, -150, 0],
             scale: [1, 1.3, 1],
           }}
-          transition={{ 
-            duration: 10, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
       </AmbientBackground>
 
@@ -244,14 +221,10 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-<<<<<<< HEAD
-            {/* The Magic Break Lines: Desktop Only */}
-            Launch, Scale & <DesktopBr />
+            {/* Kept marketing text & removed conflict markers */}
+            Testing, Scale & <DesktopBr />
             Succeed with <DesktopBr />
             Code Nest
-=======
-            DEPLOYMENT FIXED: HELLO HOSTINGER!
->>>>>>> 8061b4202c4edd643b85d8b1fe5a9fb3d780ee25
           </Title>
 
           <Subtitle
