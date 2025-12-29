@@ -33,7 +33,7 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
-        # Using double quotes here because of the spaces in the folder name
+        # Make sure this matches your Hostinger folder name EXACTLY (Case Sensitive)
         server-dir: "public_html" 
         dangerous-clean-slate: false
         exclude: |
