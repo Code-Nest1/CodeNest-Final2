@@ -37,6 +37,7 @@ jobs:
         dangerous-clean-slate: false
         exclude: |
           **/.htaccess**
+          **/.ftp-deploy-sync-state.json**
           **/blog/**
           **/blogs/**
           **/Blogs/**
