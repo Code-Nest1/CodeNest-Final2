@@ -1,10 +1,9 @@
-name: Deploy to Hostinger via FTP
+name: Deploy React to Hostinger
 
 on:
   push:
     branches:
-      - main
-      - master
+      - main  # Make sure your branch is named 'main'
 
 jobs:
   web-deploy:
@@ -34,19 +33,13 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
-        # Use public_html/ (Standard for Hostinger main domain)
         server-dir: ./public_html/
-        dangerous-clean-slate: false
-        # Critical Connection Settings to avoid "Timeout"
-        protocol: ftp
-        port: 21
-        timeout: 60000
+        # This part is CRITICAL: It prevents the action from deleting your WordPress blogs
+        dangerous-clean-slate: false 
         exclude: |
-          **/.htaccess**
-          **/.ftp-deploy-sync-state.json**
           **/blog/**
           **/blogs/**
           **/Blogs/**
-          **/code-nest-system/**
-          **/managmentsystem/**
-          **/Code Nest Website/**
+          **/.htaccess**
+          **/.git*/**
+          **/.github*/**
