@@ -34,8 +34,13 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
+        # Use public_html/ (Standard for Hostinger main domain)
         server-dir: ./public_html/
         dangerous-clean-slate: false
+        # Critical Connection Settings to avoid "Timeout"
+        protocol: ftp
+        port: 21
+        timeout: 60000
         exclude: |
           **/.htaccess**
           **/.ftp-deploy-sync-state.json**
