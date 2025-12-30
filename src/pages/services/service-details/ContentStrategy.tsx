@@ -63,51 +63,50 @@ const COLORS = {
   borderColor: "#ebf2ee",  
 };
 
-// --- DATA: CUSTOM WEB CONTEXT ---
-const CUSTOM_STANDARDS = [
-  { id: "SOLID", title: "SOLID Architecture", desc: "We adhere to SOLID coding principles to ensure your custom application is scalable, maintainable, and free of spaghetti code." },
-  { id: "SEC", title: "OWASP Top 10 Security", desc: "Rigorous defense protocols against injection attacks, cross-site scripting, and data breaches for enterprise-grade security." },
-  { id: "API", title: "RESTful & GraphQL API", desc: "Building documented, type-safe API layers that allow your web platform to communicate seamlessly with mobile apps and 3rd party tools." },
-  { id: "DB", title: "Database Normalization", desc: "Optimized SQL and NoSQL database schemas designed to handle millions of records without latency or redundancy." }
+// --- DATA: CONTENT STRATEGY SPECIFIC ---
+const STRATEGY_STANDARDS = [
+  { id: "PILLAR", title: "Pillar & Cluster Model", desc: "We structure your ecosystem around deep authority hubs (Pillars) supported by specific tactical sub-topics (Clusters) to dominate topical authority and SEO." },
+  { id: "TONE", title: "Brand Voice Governance", desc: "Creating a centralized style guide ensuring your voice remains consistent across LinkedIn, whitepapers, and blogs—eliminating brand fragmentation." },
+  { id: "JOURNEY", title: "Full-Funnel Mapping", desc: "Developing assets tailored for every stage: Educational Top-of-Funnel (TOFU), Comparative Middle (MOFU), and High-Conversion Bottom (BOFU) assets." },
+  { id: "METRICS", title: "Data-Led Distribution", desc: "We don't just 'post.' We analyze engagement depth and bounce rates to pivot editorial calendars based on what your audience actually consumes." }
 ];
 
 const BENEFITS_DATA = [
   {
-    title: "No CMS Limitations",
-    desc: "CMS platforms confine you to their box. Our custom solutions are built ground-up to fit your exact business workflows, ensuring the software adapts to you, not the other way around."
+    title: "Established Market Authority",
+    desc: "Quality content turns your brand from a vendor into a thought leader. We help you own the conversation in your industry."
   },
   {
-    title: "High-Performance Speed",
-    desc: "By removing the bloat of generic page builders and unused libraries, our custom-engineered sites load efficiently, processing complex logic in milliseconds."
+    title: "Compounds Search Traffic",
+    desc: "Strategically written content lives forever. Each piece acts as a 24/7 digital asset that acquires leads long after the initial publish date."
   },
   {
-    title: "Full Intellectual Property",
-    desc: "Unlike subscribing to a SaaS product, you own 100% of your source code and database. This increases your company's valuation and ensures you are never vendor-locked."
+    title: "Shortened Sales Cycles",
+    desc: "When leads consume your content before a sales call, they are already 70% sold. Strategy-led content answers objections before they are raised."
   },
   {
-    title: "Scalability for Enterprise",
-    desc: "We design cloud-native architectures (AWS/Azure) that can auto-scale horizontally. Whether you have 100 users or 1 million, your application stability remains rock solid."
+    title: "Omni-Channel Reusability",
+    desc: "One pillar whitepaper can be turned into 10 blogs, 20 social snippets, and a webinar script. We maximize the ROI of every word written."
   },
   {
-    title: "Seamless 3rd-Party Integration",
-    desc: "Need to connect to a legacy CRM, a logistic provider, or a payment gateway? We build robust middleware and custom connectors to unify your entire digital ecosystem."
+    title: "Deeper Customer Trust",
+    desc: "By solving problems through educational content, you build an 'equity of trust' that makes your product the obvious choice when buying time arrives."
   },
   {
-    title: "Advanced Data Security",
-    desc: "Custom development allows for fine-grained role-based access control (RBAC), end-to-end encryption, and specific compliance handling (GDPR, HIPAA, etc.)."
+    title: "Unified Brand Story",
+    desc: "Stop disjointed messaging. We ensure every article, email, and social caption pulls in the same direction toward your core mission."
   }
 ];
 
 const WHY_CHOOSE_CN_DATA = [
-  { num: "/ 01", title: "Senior Engineering Talent", desc: "No junior freelancers. Your project is architected by senior developers with experience in complex enterprise environments and high-availability systems." },
-  { num: "/ 02", title: "Technology Agnostic", desc: "We don't force one language on you. We select the best stack for your specific problem—whether that's Python (Django), Node.js, Go, or PHP (Laravel)." },
-  { num: "/ 03", title: "DevOps & CI/CD Integrated", desc: "We automate deployment pipelines. Every commit runs through automated testing to ensure regression-free releases, allowing for daily production updates." },
-  { num: "/ 04", title: "Solution Architecture", desc: "Before writing a line of code, we blueprint the system. This saves money by preventing scope creep and ensuring structural integrity from Day 1." },
-  { num: "/ 05", title: "Focus on Business Logic", desc: "We understand that code must serve revenue. We specialize in building complex dashboards, SaaS products, and booking engines that drive business operations." },
-  { num: "/ 06", title: "Long-term Maintenance", desc: "Custom software requires care. We offer retained teams that act as your internal IT department, managing updates, security patches, and feature rollouts." }
+  { num: "/ 01", title: "Editorial Precision", desc: "Our writers aren't just 'content creators.' They are subject matter experts who understand technical industries and deep-niche verticals." },
+  { num: "/ 02", title: "SEO-Tech Integration", desc: "Most agencies write for humans. We write for humans but build for the algorithm, ensuring high search intent meets perfect on-page optimization." },
+  { num: "/ 03", title: "Velocity of Scale", desc: "Need high-volume production without sacrificing quality? Our workflow management ensures consistent output even for aggressive growth targets." },
+  { num: "/ 04", title: "Performance Creative", desc: "We pair strong writing with design fidelity. Your blogs will look like high-end digital publications, keeping users on the page longer." },
+  { num: "/ 05", title: "Strategic Agility", desc: "The market moves fast. We pivot editorial calendars based on real-time news cycles and industry shifts, keeping you relevant every week." },
+  { num: "/ 06", title: "Zero Fluff Policy", desc: "We value your reader's time. Every piece we produce is designed to provide actionable value or unique insights, never generic filler." }
 ];
 
-// Reusing same feedback structure
 type FeedbackItem = {
   id: number;
   name: string;
@@ -124,84 +123,83 @@ type FeedbackItem = {
 const FEEDBACKS: FeedbackItem[] = [
   {
     id: 1,
-    name: "Bohdan Zabawskyj",
-    role: "Co-founder and CPO at Fortay.ai",
-    company: "Fortay.ai",
-    quote: "We needed a bespoke algorithmic platform for our HR tech. Code Nest delivered a secure, high-performance web app that processes complex data in real-time. Simply brilliant.",
-    imgSrc: "/assets/feedback/bohdan.jpg",
-    serviceTag: "SaaS Development",
+    name: "Marcus Thorne",
+    role: "VP of Marketing",
+    company: "ScaleSync",
+    quote: "Code Nest didn't just write blogs; they built a knowledge base. Our demo requests increased by 40% after implementing their pillar/cluster content model.",
+    imgSrc: "/assets/feedback/bohdan.jpg", 
+    serviceTag: "Content Strategy",
     hasVideo: true,
   },
   {
     id: 2,
-    name: "Dan Brooks",
-    role: "President, Krytter",
-    company: "Krytter",
-    quote: "Our operational needs exceeded what any off-the-shelf software could do. Code Nest engineered a custom portal that automated 80% of our manual administrative workflows.",
+    name: "Elena Rossi",
+    role: "CEO",
+    company: "NeoVista Tech",
+    quote: "Finally, an agency that understands the nuances of B2B SaaS content. Their distribution strategy ensured our best whitepapers actually reached the C-Suite.",
     imgSrc: "/assets/feedback/dan.jpg",
     logoSrc: "/assets/feedback/krytter-logo.png",
-    serviceTag: "Custom Portal Design",
-    ctaText: "View Case Study",
+    serviceTag: "Full-Funnel Content",
+    ctaText: "View Performance",
   },
   {
     id: 3,
-    name: "Michael Smith",
-    role: "Product Owner",
-    company: "TechFlow",
-    quote: "Building our customer dashboard required strict API integrations. The team's knowledge of backend architecture and frontend UX provided a seamless solution for our clients.",
+    name: "Julian Webb",
+    role: "Content Manager",
+    company: "EduTrack",
+    quote: "The ability to scale high-quality editorial pieces without me needing to babysit the process was the biggest win. Their editorial governance is top-tier.",
     imgSrc: "/assets/feedback/michael.jpg",
-    serviceTag: "Enterprise Web App",
-    ctaText: "See the App",
+    serviceTag: "Thought Leadership",
+    ctaText: "Check Assets",
   },
 ];
 
 const AUDIT_STEPS = [
   {
     icon: <Star size={28} />,
-    title: "Discovery & Blueprint",
-    desc: "We analyze your business requirements and legacy systems. We map out the data models, user flows, and technical stack required to solve your specific challenges efficiently."
+    title: "Thematic Audit",
+    desc: "We analyze your current content gaps compared to your competitors and identify 'Authority Vacuum' areas you can dominate immediately."
   },
   {
     icon: <LinkIcon size={28} />,
-    title: "Code Architecture",
-    desc: "For existing projects, we review the code for security holes and 'technical debt'. For new builds, we set up a scalable folder structure, selecting the right database and framework."
+    title: "Calendar Logic",
+    desc: "Mapping out a 12-month editorial calendar that aligns with your product launches, industry events, and primary SEO objectives."
   },
   {
     icon: <FileText size={28} />,
-    title: "Technical Roadmap",
-    desc: "You get a detailed specification document (SRS) and a development timeline. This breaks the complex project into manageable sprints with clear deliverables and milestones."
+    title: "High-Fidelity Drafts",
+    desc: "Our senior editors craft high-value assets. We handle the interviews with your SMEs and the technical research needed for expert status."
   },
   {
     icon: <Headphones size={28} />,
-    title: "Agile Development",
-    desc: "We move into execution using Scrum methodology. Two-week sprints ensure you see continuous progress and can adapt features based on real user feedback during development."
+    title: "Multi-Channel Push",
+    desc: "Distributing the content across optimized landing pages, newsletter sequences, and targeted social feeds for maximum brand reach."
   }
 ];
 
 const FAQ_DATA = [
     {
-        question: "When should I choose custom development over a CMS like WordPress?",
-        answer: "Choose custom development when you have unique functionality that a plugin cannot solve (e.g., a SaaS product, a complex booking system, a customer portal, or an intranet). If your business model depends on unique logic, custom is the only viable path."
+        question: "How long until content impacts my SEO?",
+        answer: "Content strategy is a long-game. Typically, consistent high-quality posting begins to impact organic authority within 3 months, with peak ROI often occurring between 6-12 months."
     },
     {
-        question: "How much longer does a custom website take to build?",
-        answer: "A custom web application generally takes 3 to 6 months depending on complexity. However, we accelerate this by using modern frameworks and our own pre-built internal component libraries to hit the ground running."
+        question: "Who writes the content?",
+        answer: "We have a dedicated team of editorial specialists. We assign writers who have experience or background knowledge in your specific industry vertical."
     },
     {
-        question: "Do you provide documentation for the code?",
-        answer: "Yes, extensive documentation is part of our deliverables. This includes API documentation (Swagger), architecture diagrams, and inline code comments so any future developer can easily pick up the project."
+        question: "Do you create graphics for the blogs too?",
+        answer: "Yes. Every strategy piece comes with bespoke featured images and 'content-specific' graphics to help explain complex points and increase shares."
     },
     {
-        question: "Who owns the code after the project is finished?",
-        answer: "You do. Unlike renting software (SaaS), you possess full Intellectual Property (IP) rights to the source code, database, and design assets upon final payment. You are free to host it wherever you like."
+        question: "How is the content ROI measured?",
+        answer: "We look beyond views. We track conversions, demo signups from specific blog paths, assisted conversions, and keyword ranking growth."
     },
     {
-        question: "Can you take over an existing project built by another agency?",
-        answer: "Yes, this is common. We start with a 'Code Audit' to assess the state of the existing codebase. If it meets our quality standards, we can proceed with maintenance; otherwise, we may suggest a partial refactor for stability."
+        question: "Can you help with Whitepapers and E-books?",
+        answer: "Absolutely. We specialize in deep-form, gated assets designed for lead generation, including data-rich whitepapers and high-conversion case studies."
     }
 ];
 
-// --- Animations & Config ---
 const TRANSITION_EASE: [number, number, number, number] = [0.25, 0.8, 0.25, 1];
 const contentVariants: Variants = {
   enter: (direction: number) => ({
@@ -240,10 +238,10 @@ interface WPPost {
     };
 }
 
-export default function CustomWebDevelopment() {
+export default function ContentStrategy() {
   const navigate = useNavigate();
 
-  const [openStandard, setOpenStandard] = useState<string | null>("SOLID");
+  const [openStandard, setOpenStandard] = useState<string | null>("PILLAR");
   
   const [[page, direction], setPage] = useState([0, 0]);
   const cardControls = useAnimation();
@@ -322,17 +320,17 @@ export default function CustomWebDevelopment() {
       <HeroSection>
         <HeroInner>
           <HeroContent>
-            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Custom Web Development</strong></Breadcrumbs>
-            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Custom web <br /> application service</motion.h1>
+            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Content Strategy</strong></Breadcrumbs>
+            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Full Content <br /> Strategy Solution</motion.h1>
             <ButtonGroup>
-              <MainBtn>Get an Estimate</MainBtn>
+              <MainBtn>Build my Strategy</MainBtn>
               <IconBtn><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg></IconBtn>
             </ButtonGroup>
-            <HeroPara>Bespoke web engineering for complex business logic, SaaS platforms, and enterprise portals.</HeroPara>
+            <HeroPara>Stop publishing into the void. Turn your digital assets into a powerful growth machine through data-backed editorial strategy.</HeroPara>
             <RatingsRow>
-              <RatingItem><span className="brand">Clutch</span><div className="stars">★★★★★ <span className="val">4.9 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">GoodFirms</span><div className="stars">★★★★★ <span className="val">5 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">( Verified Partner )</span><div className="stars">★★★★★ <span className="val">100% Quality</span></div></RatingItem>
+              <RatingItem><span className="brand">HubSpot</span><div className="stars">★★★★★ <span className="val">Top Tier</span></div></RatingItem>
+              <RatingItem><span className="brand">Authority</span><div className="stars">★★★★★ <span className="val">5 / 5 Experts</span></div></RatingItem>
+              <RatingItem><span className="brand">( Result )</span><div className="stars">★★★★★ <span className="val">2x Reach</span></div></RatingItem>
             </RatingsRow>
           </HeroContent>
           <HeroGraphic><AbstractGraphicSVG /></HeroGraphic>
@@ -341,12 +339,12 @@ export default function CustomWebDevelopment() {
 
       {/* --- 2. SECONDARY INTRO SECTION --- */}
       <IntroContainer>
-        <BadgeWrapper><span className="dot"></span> Custom Engineering</BadgeWrapper>
+        <BadgeWrapper><span className="dot"></span> Digital Editorial Audit</BadgeWrapper>
         <LayoutGrid>
-          <motion.h2 className="audit-heading">Build scalable <br /> software assets <br /> designed for your <br /> unique workflow</motion.h2>
+          <motion.h2 className="audit-heading">Map your content <br /> to your customer’s <br /> complex buying path</motion.h2>
           <RightContentBlock>
-            <p>Off-the-shelf software often fails at scale. We audit your technical needs to build custom, cloud-native applications that streamline operations and offer full intellectual property ownership.</p>
-            <BlueButtonGroup><BlueTextBtn>Discuss your project idea</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
+            <p>Publishing high-volume low-value content kills brand authority. Our Content Audit uncovers precisely what your audience wants to read, allowing you to dominate their trust through elite-level information.</p>
+            <BlueButtonGroup><BlueTextBtn>Analyze my Pipeline</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
           </RightContentBlock>
         </LayoutGrid>
       </IntroContainer>
@@ -354,9 +352,9 @@ export default function CustomWebDevelopment() {
       {/* --- 3. STANDARDS ACCORDION SECTION --- */}
       <StandardsContainer>
         <StandardsInner>
-            <h2 className="section-title">Engineering standards <br /> we apply to every <br /> custom project</h2>
+            <h2 className="section-title">Global Editorial <br /> Authority standards</h2>
             <AccordionList>
-                {CUSTOM_STANDARDS.map((item) => (
+                {STRATEGY_STANDARDS.map((item) => (
                     <AccordionItem key={item.id} isOpen={openStandard === item.id}>
                         <div className="header" onClick={() => setOpenStandard(openStandard === item.id ? null : item.id)}>
                             <div className="btn-box">{openStandard === item.id ? '-' : '+'}</div>
@@ -380,12 +378,12 @@ export default function CustomWebDevelopment() {
         <SectionHeader white>What to expect</SectionHeader>
         <CardsGrid>
           {[
-            { id: "01.", title: "Codebase Ownership", desc: "No vendor lock-in. You own the repository and the IP rights entirely." },
-            { id: "02.", title: "Lightning Performance", desc: "Lean architectures without the bloat of CMS themes ensures instant load times." },
-            { id: "03.", title: "Scalable Database", desc: "Designed to handle millions of records and complex queries effortlessly." },
-            { id: "04.", title: "Secure APIs", desc: "Encryption at rest and in transit, with JWT authentication standards." },
-            { id: "05.", title: "Tailored Admin", desc: "We build custom dashboards that exactly match your staff's workflow." },
-            { id: "06.", title: "Third-party Integrations", desc: "Seamless connection to your CRM, ERP, Payment Gateway, or AI tools." }
+            { id: "01.", title: "Keyword Integrity", desc: "Targeting intent clusters that ensure your traffic is relevant to your revenue." },
+            { id: "02.", title: "Elite Craftmanship", desc: "Expert-led writing that resonates with decision makers and C-Suite leads." },
+            { id: "03.", title: "Scalable Funnels", desc: "A constant flow of leads guided through educational, logic-driven assets." },
+            { id: "04.", title: "Distribution Maps", desc: "Ensuring every piece hits LinkedIn, Email, and News Cycles for max exposure." },
+            { id: "05.", title: "SEO compounding", desc: "High authority content that only grows more powerful in rank over time." },
+            { id: "06.", title: "Unique Brand Voice", desc: "Developing a tone that separates you from generic industry competitors." }
           ].map((item, i) => (
             <DogEarCard key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
               <span className="card-num">{item.id}</span>
@@ -404,7 +402,7 @@ export default function CustomWebDevelopment() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Why choose bespoke <br /> web development?
+            Why build an elite <br /> content strategy?
           </motion.h2>
         </div>
 
@@ -431,7 +429,7 @@ export default function CustomWebDevelopment() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
         >
-          Why choose Code Nest for your <br /> software solution?
+          Why choose Code Nest for your <br /> content architecture?
         </motion.h2>
         <ChooseCardsGrid>
           {WHY_CHOOSE_CN_DATA.map((card, i) => (
@@ -444,7 +442,7 @@ export default function CustomWebDevelopment() {
         </ChooseCardsGrid>
       </BlueCardSection>
 
-      {/* --- 7. SELF ASSESSMENT BANNER --- */}
+      {/* --- 7. SELF ASSESSMENT BANNER (PAGE 7) --- */}
       <PageSevenContainer>
         <BannerWrapper>
           <BannerContent>
@@ -456,10 +454,10 @@ export default function CustomWebDevelopment() {
               </svg>
             </DecoCircles>
 
-            <BannerText>Have a complex project idea?</BannerText>
+            <BannerText>Evaluate your Blog Pipeline?</BannerText>
             
             <DownloadBtn>
-              Download Requirement Checklist
+              Download strategy audit framework
               <ArrowDown size={18} style={{ marginLeft: "auto", color: '#000' }} /> 
             </DownloadBtn>
 
@@ -472,7 +470,7 @@ export default function CustomWebDevelopment() {
         </BannerWrapper>
       </PageSevenContainer>
 
-      {/* --- 8. CLIENT FEEDBACK --- */}
+      {/* --- 8. CLIENT FEEDBACK (PAGE 8) --- */}
       <Section8>
         <BackgroundWrapper>
           <GridOverlay />
@@ -482,10 +480,10 @@ export default function CustomWebDevelopment() {
 
         <Container8>
           <HeaderWrapper>
-            <SubHeader>CodeNest Success Stories</SubHeader>
-            <HeaderTitle>What our clients say about the build</HeaderTitle>
+            <SubHeader>Strategy Reviews</SubHeader>
+            <HeaderTitle>Influence via Content</HeaderTitle>
             <HeaderDesc>
-              Real experiences from companies that scaled using our custom engineered solutions.
+              See how we built thought leadership machines for industry giants.
             </HeaderDesc>
           </HeaderWrapper>
 
@@ -554,7 +552,7 @@ export default function CustomWebDevelopment() {
         </Container8>
       </Section8>
 
-      {/* --- 9. PROCESS SECTION --- */}
+      {/* --- 9. HOW PROCESS WORKS --- */}
       <AuditProcessSection>
         <AuditContainer>
            <motion.h2 
@@ -563,7 +561,7 @@ export default function CustomWebDevelopment() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              How we build custom software
+              Editorial Flow
            </motion.h2>
 
            <ProcessGrid>
@@ -585,7 +583,7 @@ export default function CustomWebDevelopment() {
         </AuditContainer>
       </AuditProcessSection>
 
-      {/* --- 10. PROMO BANNER & FAQ --- */}
+      {/* --- 10. PROMO BANNER & FAQ (PAGE 10) --- */}
       <PageTenSection>
         <PageTenInner>
             <CTABanner10>
@@ -598,10 +596,10 @@ export default function CustomWebDevelopment() {
                          </svg>
                     </DecoCircles>
                     <BannerTitle10>
-                        Ready to digitize <br /> your operations?
+                        Scale your Content Velocity?
                     </BannerTitle10>
                     <ConsultBtn>
-                        Book a discovery call
+                        Content Strategy Consult 
                         <ArrowDown size={18} style={{ color: '#000', transform: 'rotate(-45deg)' }} /> 
                     </ConsultBtn>
                     <DecoStar>
@@ -616,7 +614,7 @@ export default function CustomWebDevelopment() {
                 <BackgroundCurve />
                 <FAQContent>
                     <FAQLeft>
-                        <h2>Common questions <br /> about custom apps</h2>
+                        <h2>Full-Service <br /> Content Q&A</h2>
                     </FAQLeft>
                     <FAQRight>
                         {FAQ_DATA.map((item, index) => (
@@ -652,12 +650,12 @@ export default function CustomWebDevelopment() {
         </PageTenInner>
       </PageTenSection>
 
-      {/* --- 11. BLOG SLIDER --- */}
+      {/* --- 11. BLOG SLIDER (PAGE 11) --- */}
       <BlogSection>
           <BlogContainer>
              <BlogHeaderWrapper>
                 <BlogTitle>
-                  Tech Insights<br />
+                  Editorial Tech Blog<br />
                   <BlogLink onClick={() => navigate('/blog')} role="button" tabIndex={0}>
                      Check our blog <ArrowUpRight size={32} />
                   </BlogLink>
@@ -674,7 +672,7 @@ export default function CustomWebDevelopment() {
                        {blogPosts.map(post => {
                            const featuredImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url 
                                || 'https://via.placeholder.com/600x400?text=No+Image';
-                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Development';
+                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Editorial';
                            
                            return (
                               <BlogCard key={post.id} onClick={() => navigate(`/blog/${post.slug}`)}>
@@ -721,9 +719,10 @@ const HeroSection = styled.section`
   display: flex; 
   align-items: center;
 
-    @media (max-width: 600px) {
+  @media (max-width: 600px) {
        font-size: 42px;
        letter-spacing: -1.5px;
+  }
 `;
 const HeroInner = styled.div`
   max-width: 1440px; 
@@ -733,10 +732,11 @@ const HeroInner = styled.div`
   grid-template-columns: 1.1fr 0.9fr; 
   gap: 50px;
    h1 { 
-    color: #ffffff;
+    color: #ffffff;  
     font-size: clamp(50px, 6.5vw, 92px); 
     line-height: 1.05; 
     letter-spacing: -2px; 
+  }
 
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
@@ -751,7 +751,6 @@ const HeroContent = styled.div`
     font-size: clamp(50px, 6.5vw, 92px); 
     line-height: 1.05; 
     letter-spacing: -2px; 
-    /* Mobile tweaks */
     @media (max-width: 600px) {
        font-size: 42px;
        letter-spacing: -1.5px;
@@ -845,19 +844,16 @@ const BenefitsGridWrapper = styled.div`
 const BenefitCell = styled.div<{ isLeft: boolean, index?: number }>`
   padding: 80px 10%; display: flex; flex-direction: column; gap: 24px; 
   border-right: ${props => props.isLeft ? "1px solid #eee" : "none"}; border-bottom: 1px solid #eee;
-  /* Laptop bottom row correction */
   &:nth-last-child(1), &:nth-last-child(2) { border-bottom: none; }
   
   h4 { font-size: 24px; font-weight: 600; color: ${COLORS.coaxBlue}; } 
   p { font-size: 16px; line-height: 1.7; color: ${COLORS.textGray}; max-width: 480px; }
 
   @media (max-width: 900px) {
-    /* Stack logic on mobile */
     padding: 50px 24px;
     border-right: none !important;
     border-bottom: 1px solid #eee !important;
     &:last-child { border-bottom: none !important; }
-    /* Correct border reset from laptop logic */
     &:nth-last-child(2) { border-bottom: 1px solid #eee; }
   }
 `;
@@ -866,11 +862,13 @@ const BenefitCell = styled.div<{ isLeft: boolean, index?: number }>`
 const BlueCardSection = styled.section`padding: 140px 10%; background-color: ${COLORS.coaxBlue}; display: flex; flex-direction: column; align-items: center; .centered-header { font-size: clamp(36px, 4vw, 62px); font-weight: 500; color: white; text-align: center; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 80px; } @media (max-width: 768px) { padding: 80px 24px; .centered-header { text-align: left; align-self: flex-start; margin-bottom: 50px; } }`;
 const ChooseCardsGrid = styled.div`display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); } @media (max-width: 650px) { grid-template-columns: 1fr; }`;
 const WhyChooseCard = styled(motion.div)`background-color: ${COLORS.lime}; padding: 40px; min-height: 400px; position: relative; display: flex; flex-direction: column; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); .card-index { font-size: 11px; color: ${COLORS.textDark}; opacity: 0.6; font-weight: 600; margin-bottom: 40px; } .card-title { font-size: 24px; color: ${COLORS.textDark}; font-weight: 600; margin-bottom: 25px; line-height: 1.2; } .card-text { font-size: 15.5px; color: rgba(10, 31, 68, 0.85); line-height: 1.6; } @media (max-width: 600px) { min-height: auto; padding: 30px 24px 60px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%); }`;
+
 const AbstractGraphicSVG = () => (
   <motion.svg viewBox="0 0 500 500" width="100%" height="100%">
-    <path d="M100 240 Q 100 80, 260 80 V 240 H 100 Z" fill="#2d60ff" />
-    <rect x="220" y="240" width="80" height="200" fill={COLORS.lime} />
-    <circle cx="160" cy="380" r="70" fill="#00d2ff" /><circle cx="380" cy="150" r="40" stroke={COLORS.lime} strokeWidth="15" />
+    <path d="M50 400 L450 400 L450 380 L50 380 Z" fill={COLORS.lime} />
+    <circle cx="120" cy="150" r="80" fill="#2d60ff" />
+    <path d="M250 50 L400 350 L100 350 Z" fill={COLORS.darkerBlue} opacity="0.6" />
+    <rect x="300" y="80" width="60" height="200" fill={COLORS.lime} rx="10" />
   </motion.svg>
 );
 
@@ -915,14 +913,14 @@ const CtaButton = styled.button`margin-top: 24px; background: #0b363d; color: #f
 const Controls = styled.div`display: flex; gap: 12px; justify-content: center; margin-top: 40px; position: absolute; bottom: -70px; left: 0; right: 0; z-index: 20; @media (max-width: 850px) { bottom: -80px; }`;
 const NavBtn = styled.button`width: 48px; height: 48px; border: 1px solid #e1e1e1; background: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #888; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.05); &:hover { border-color: #28a665; background-color: #28a665; color: #ffffff; transform: scale(1.1); box-shadow: 0 6px 16px rgba(40, 166, 101, 0.4); }`;
 
-/* Page 9 (Audit) */
+/* Page 9 (Process) */
 const AuditProcessSection = styled.section`padding: 140px 0 160px; background-color: #F8FAFD; font-family: 'Inter', sans-serif; @media (max-width: 800px) { padding: 80px 0 100px; }`;
 const AuditContainer = styled.div`max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; .audit-title { font-size: clamp(38px, 4.5vw, 62px); font-weight: 400; text-align: center; color: #1a1b1e; letter-spacing: -1.5px; margin-bottom: 80px; }`;
 const ProcessGrid = styled.div`display: grid; grid-template-columns: 1fr 1fr; width: 100%; border-top: 1px solid ${COLORS.borderColor}; border-bottom: 1px solid ${COLORS.borderColor}; @media (max-width: 800px) { grid-template-columns: 1fr; border-top: none; border-bottom: none; }`;
 const ProcessCard = styled(motion.div)<{ idx: number }>`padding: 60px 50px; display: flex; flex-direction: column; align-items: flex-start; border-right: ${props => (props.idx % 2 === 0 ? `1px solid ${COLORS.borderColor}` : 'none')}; border-bottom: ${props => (props.idx < 2 ? `1px solid ${COLORS.borderColor}` : 'none')}; @media (max-width: 800px) { border-right: none; border-bottom: 1px solid ${COLORS.borderColor}; &:last-child { border-bottom: none; } padding: 40px 24px; } h3 { color: ${COLORS.coaxBlue}; font-size: 26px; font-weight: 500; margin-bottom: 24px; letter-spacing: -0.5px; } p { font-size: 16px; line-height: 1.6; color: ${COLORS.textGray}; font-weight: 400; }`;
 const IconBox = styled.div`color: ${COLORS.coaxBlue}; margin-bottom: 24px;`;
 
-/* Page 10 */
+/* Page 10 (Consult) */
 const PageTenSection = styled.section`padding: 100px 0 160px; background: #ffffff; font-family: 'Inter', sans-serif; @media (max-width: 900px) { padding: 60px 0 100px; }`;
 const PageTenInner = styled.div`max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 120px; @media (max-width: 900px) { gap: 60px; }`;
 const CTABanner10 = styled(BannerWrapper)``;
@@ -1065,7 +1063,7 @@ const BlogCard = styled.div`
 
   /* Mobile Stack */
   @media (max-width: 600px) { 
-    min-width: 85vw;
+    min-width: 85vw; 
     flex-direction: column; 
     height: auto; 
     

@@ -63,51 +63,50 @@ const COLORS = {
   borderColor: "#ebf2ee",  
 };
 
-// --- DATA: CUSTOM WEB CONTEXT ---
-const CUSTOM_STANDARDS = [
-  { id: "SOLID", title: "SOLID Architecture", desc: "We adhere to SOLID coding principles to ensure your custom application is scalable, maintainable, and free of spaghetti code." },
-  { id: "SEC", title: "OWASP Top 10 Security", desc: "Rigorous defense protocols against injection attacks, cross-site scripting, and data breaches for enterprise-grade security." },
-  { id: "API", title: "RESTful & GraphQL API", desc: "Building documented, type-safe API layers that allow your web platform to communicate seamlessly with mobile apps and 3rd party tools." },
-  { id: "DB", title: "Database Normalization", desc: "Optimized SQL and NoSQL database schemas designed to handle millions of records without latency or redundancy." }
+// --- DATA: SEO SPECIFIC ---
+const SEO_STANDARDS = [
+  { id: "TECHNICAL", title: "Technical Foundation", desc: "We optimize your site’s crawling and indexing by refining XML sitemaps, robots.txt, and canonical tags to ensure Google’s bots understand your architecture perfectly." },
+  { id: "CWV", title: "Core Web Vitals Mastery", desc: "Speed is a primary ranking factor. We optimize LCP, FID, and CLS scores to ensure your pages load instantly and feel stable to users and search engines alike." },
+  { id: "SEMANTIC", title: "Semantic Content Mapping", desc: "We target search intent rather than just keywords. We structure your content to answer the complex questions your customers are actually searching for." },
+  { id: "AUTHORITY", title: "Authority & E-E-A-T", desc: "Building Experience, Expertise, Authoritativeness, and Trustworthiness through high-quality backlink profiles and expert-led on-page optimization." }
 ];
 
 const BENEFITS_DATA = [
   {
-    title: "No CMS Limitations",
-    desc: "CMS platforms confine you to their box. Our custom solutions are built ground-up to fit your exact business workflows, ensuring the software adapts to you, not the other way around."
+    title: "Sustained Organic Growth",
+    desc: "Unlike paid advertising, SEO provides compounding returns. As your domain authority grows, your cost-per-lead effectively decreases over time."
   },
   {
-    title: "High-Performance Speed",
-    desc: "By removing the bloat of generic page builders and unused libraries, our custom-engineered sites load efficiently, processing complex logic in milliseconds."
+    title: "High-Intent Traffic",
+    desc: "We target users who are actively searching for solutions. This leads to higher conversion rates because the visitors are pre-qualified and ready to act."
   },
   {
-    title: "Full Intellectual Property",
-    desc: "Unlike subscribing to a SaaS product, you own 100% of your source code and database. This increases your company's valuation and ensures you are never vendor-locked."
+    title: "Global Brand Credibility",
+    desc: "Appearing at the top of organic search results immediately establishes your brand as an industry leader and a trusted authority in your niche."
   },
   {
-    title: "Scalability for Enterprise",
-    desc: "We design cloud-native architectures (AWS/Azure) that can auto-scale horizontally. Whether you have 100 users or 1 million, your application stability remains rock solid."
+    title: "Long-Term Cost Efficiency",
+    desc: "While PPC stops working the moment you turn off the budget, SEO content continues to drive traffic 24/7 without a direct cost-per-click fee."
   },
   {
-    title: "Seamless 3rd-Party Integration",
-    desc: "Need to connect to a legacy CRM, a logistic provider, or a payment gateway? We build robust middleware and custom connectors to unify your entire digital ecosystem."
+    title: "Improved User Experience",
+    desc: "Google rewards sites that are easy to use. By optimizing for search, we inherently make your site more accessible and intuitive for human visitors."
   },
   {
-    title: "Advanced Data Security",
-    desc: "Custom development allows for fine-grained role-based access control (RBAC), end-to-end encryption, and specific compliance handling (GDPR, HIPAA, etc.)."
+    title: "Market Domain Influence",
+    desc: "Owning the first page for key industry terms means you are the first brand your target audience sees, pushing competitors out of sight."
   }
 ];
 
 const WHY_CHOOSE_CN_DATA = [
-  { num: "/ 01", title: "Senior Engineering Talent", desc: "No junior freelancers. Your project is architected by senior developers with experience in complex enterprise environments and high-availability systems." },
-  { num: "/ 02", title: "Technology Agnostic", desc: "We don't force one language on you. We select the best stack for your specific problem—whether that's Python (Django), Node.js, Go, or PHP (Laravel)." },
-  { num: "/ 03", title: "DevOps & CI/CD Integrated", desc: "We automate deployment pipelines. Every commit runs through automated testing to ensure regression-free releases, allowing for daily production updates." },
-  { num: "/ 04", title: "Solution Architecture", desc: "Before writing a line of code, we blueprint the system. This saves money by preventing scope creep and ensuring structural integrity from Day 1." },
-  { num: "/ 05", title: "Focus on Business Logic", desc: "We understand that code must serve revenue. We specialize in building complex dashboards, SaaS products, and booking engines that drive business operations." },
-  { num: "/ 06", title: "Long-term Maintenance", desc: "Custom software requires care. We offer retained teams that act as your internal IT department, managing updates, security patches, and feature rollouts." }
+  { num: "/ 01", title: "Data-First Approach", desc: "We don't guess. We use advanced tools like Ahrefs and Search Console to drive strategy based on hard keyword volume and difficulty data." },
+  { num: "/ 02", title: "Dev-Driven SEO", desc: "Because we are a development house, we fix the complex technical scripts and server-side issues that traditional marketing agencies cannot handle." },
+  { num: "/ 03", title: "Ethical White-Hat Only", desc: "We follow Google’s E-E-A-T guidelines strictly. Our methods are built for long-term ranking stability, protecting you from future algorithm penalties." },
+  { num: "/ 04", title: "Content That Converts", desc: "SEO isn't just about traffic; it's about business. We craft copy that satisfies both the algorithm and your customer's need to click 'Contact'." },
+  { num: "/ 05", title: "Transparent ROI Tracking", desc: "Get monthly reports focused on what matters: conversions and revenue, not just vanity rankings. We show exactly where your money is growing." },
+  { num: "/ 06", title: "Performance Engineering", desc: "Our team strictly monitors server response times and script execution, ensuring your SEO results aren't held back by technical bloat." }
 ];
 
-// Reusing same feedback structure
 type FeedbackItem = {
   id: number;
   name: string;
@@ -124,84 +123,83 @@ type FeedbackItem = {
 const FEEDBACKS: FeedbackItem[] = [
   {
     id: 1,
-    name: "Bohdan Zabawskyj",
-    role: "Co-founder and CPO at Fortay.ai",
-    company: "Fortay.ai",
-    quote: "We needed a bespoke algorithmic platform for our HR tech. Code Nest delivered a secure, high-performance web app that processes complex data in real-time. Simply brilliant.",
-    imgSrc: "/assets/feedback/bohdan.jpg",
-    serviceTag: "SaaS Development",
+    name: "James Whitaker",
+    role: "Marketing Director",
+    company: "GlobaTrade",
+    quote: "Code Nest transformed our organic visibility. Within 4 months, our non-brand organic traffic increased by 200%, resulting in our best sales quarter ever.",
+    imgSrc: "/assets/feedback/bohdan.jpg", 
+    serviceTag: "SEO Strategy",
     hasVideo: true,
   },
   {
     id: 2,
-    name: "Dan Brooks",
-    role: "President, Krytter",
-    company: "Krytter",
-    quote: "Our operational needs exceeded what any off-the-shelf software could do. Code Nest engineered a custom portal that automated 80% of our manual administrative workflows.",
+    name: "Avery Sterling",
+    role: "Founder",
+    company: "BioHealth Pro",
+    quote: "Most SEO agencies gave us fluff. Code Nest gave us a technical roadmap that actually worked. Our rankings for high-competition keywords stabilized on Page 1.",
     imgSrc: "/assets/feedback/dan.jpg",
     logoSrc: "/assets/feedback/krytter-logo.png",
-    serviceTag: "Custom Portal Design",
+    serviceTag: "Technical SEO",
     ctaText: "View Case Study",
   },
   {
     id: 3,
-    name: "Michael Smith",
-    role: "Product Owner",
-    company: "TechFlow",
-    quote: "Building our customer dashboard required strict API integrations. The team's knowledge of backend architecture and frontend UX provided a seamless solution for our clients.",
+    name: "Daniel Kwon",
+    role: "Ops Lead",
+    company: "Zenify SaaS",
+    quote: "The intersection of development expertise and SEO strategy is what makes Code Nest unique. They fixed our site speed issues which instantly boosted our rank.",
     imgSrc: "/assets/feedback/michael.jpg",
-    serviceTag: "Enterprise Web App",
-    ctaText: "See the App",
+    serviceTag: "Organic Audit",
+    ctaText: "See Results",
   },
 ];
 
 const AUDIT_STEPS = [
   {
     icon: <Star size={28} />,
-    title: "Discovery & Blueprint",
-    desc: "We analyze your business requirements and legacy systems. We map out the data models, user flows, and technical stack required to solve your specific challenges efficiently."
+    title: "On-Page Audit",
+    desc: "We analyze your site's content structure, metadata, and keyword density to ensure your primary landing pages are perfectly aligned with user intent."
   },
   {
     icon: <LinkIcon size={28} />,
-    title: "Code Architecture",
-    desc: "For existing projects, we review the code for security holes and 'technical debt'. For new builds, we set up a scalable folder structure, selecting the right database and framework."
+    title: "Off-Page Growth",
+    desc: "Building a high-quality backlink profile through strategic outreach and authority mentions, telling search engines your brand is worth talking about."
   },
   {
     icon: <FileText size={28} />,
-    title: "Technical Roadmap",
-    desc: "You get a detailed specification document (SRS) and a development timeline. This breaks the complex project into manageable sprints with clear deliverables and milestones."
+    title: "Semantic Analysis",
+    desc: "Drafting data-driven content calendars that target the exact questions and topics your audience is searching for during the buying journey."
   },
   {
     icon: <Headphones size={28} />,
-    title: "Agile Development",
-    desc: "We move into execution using Scrum methodology. Two-week sprints ensure you see continuous progress and can adapt features based on real user feedback during development."
+    title: "Technical Review",
+    desc: "Continuous monitoring of server logs, core web vitals, and indexing errors to maintain your technical edge over your market competitors."
   }
 ];
 
 const FAQ_DATA = [
     {
-        question: "When should I choose custom development over a CMS like WordPress?",
-        answer: "Choose custom development when you have unique functionality that a plugin cannot solve (e.g., a SaaS product, a complex booking system, a customer portal, or an intranet). If your business model depends on unique logic, custom is the only viable path."
+        question: "How long does it take to see results from SEO?",
+        answer: "Typically, you will see initial indexing improvements within 4-6 weeks. Significant revenue-generating organic traffic usually begins to compound after 3–6 months of consistent work."
     },
     {
-        question: "How much longer does a custom website take to build?",
-        answer: "A custom web application generally takes 3 to 6 months depending on complexity. However, we accelerate this by using modern frameworks and our own pre-built internal component libraries to hit the ground running."
+        question: "Do you guarantee a Number 1 spot on Google?",
+        answer: "No ethical agency can guarantee #1, as the algorithm belongs to Google. However, we guarantee an increase in organic authority and visibility for your target high-value terms."
     },
     {
-        question: "Do you provide documentation for the code?",
-        answer: "Yes, extensive documentation is part of our deliverables. This includes API documentation (Swagger), architecture diagrams, and inline code comments so any future developer can easily pick up the project."
+        question: "Is SEO better than Google Ads?",
+        answer: "They serve different purposes. Google Ads is 'renting' space for immediate traffic. SEO is 'owning' your space for long-term compounding growth. We usually recommend a mix."
     },
     {
-        question: "Who owns the code after the project is finished?",
-        answer: "You do. Unlike renting software (SaaS), you possess full Intellectual Property (IP) rights to the source code, database, and design assets upon final payment. You are free to host it wherever you like."
+        question: "How do you choose the right keywords?",
+        answer: "We look at a combination of search volume, difficulty, and business intent. We target keywords that don't just drive traffic, but actually convert into paying customers."
     },
     {
-        question: "Can you take over an existing project built by another agency?",
-        answer: "Yes, this is common. We start with a 'Code Audit' to assess the state of the existing codebase. If it meets our quality standards, we can proceed with maintenance; otherwise, we may suggest a partial refactor for stability."
+        question: "Do I need monthly SEO service?",
+        answer: "Search algorithms and your competitors change daily. Ongoing maintenance is required to maintain your rankings and capture new growth opportunities in the market."
     }
 ];
 
-// --- Animations & Config ---
 const TRANSITION_EASE: [number, number, number, number] = [0.25, 0.8, 0.25, 1];
 const contentVariants: Variants = {
   enter: (direction: number) => ({
@@ -240,10 +238,10 @@ interface WPPost {
     };
 }
 
-export default function CustomWebDevelopment() {
+export default function SEO() {
   const navigate = useNavigate();
 
-  const [openStandard, setOpenStandard] = useState<string | null>("SOLID");
+  const [openStandard, setOpenStandard] = useState<string | null>("TECHNICAL");
   
   const [[page, direction], setPage] = useState([0, 0]);
   const cardControls = useAnimation();
@@ -322,17 +320,17 @@ export default function CustomWebDevelopment() {
       <HeroSection>
         <HeroInner>
           <HeroContent>
-            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Custom Web Development</strong></Breadcrumbs>
-            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Custom web <br /> application service</motion.h1>
+            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Search Engine Optimization</strong></Breadcrumbs>
+            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Organic Traffic <br /> (SEO) Strategy</motion.h1>
             <ButtonGroup>
-              <MainBtn>Get an Estimate</MainBtn>
+              <MainBtn>Analyze My Site</MainBtn>
               <IconBtn><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg></IconBtn>
             </ButtonGroup>
-            <HeroPara>Bespoke web engineering for complex business logic, SaaS platforms, and enterprise portals.</HeroPara>
+            <HeroPara>Dominate the search results and turn intent into profit with our technical-first Search Engine Optimization experts.</HeroPara>
             <RatingsRow>
-              <RatingItem><span className="brand">Clutch</span><div className="stars">★★★★★ <span className="val">4.9 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">GoodFirms</span><div className="stars">★★★★★ <span className="val">5 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">( Verified Partner )</span><div className="stars">★★★★★ <span className="val">100% Quality</span></div></RatingItem>
+              <RatingItem><span className="brand">Analytics</span><div className="stars">★★★★★ <span className="val">ROI Driven</span></div></RatingItem>
+              <RatingItem><span className="brand">Clutch</span><div className="stars">★★★★★ <span className="val">5 / 5 Top Rated</span></div></RatingItem>
+              <RatingItem><span className="brand">( Result )</span><div className="stars">★★★★★ <span className="val">Top Rankings</span></div></RatingItem>
             </RatingsRow>
           </HeroContent>
           <HeroGraphic><AbstractGraphicSVG /></HeroGraphic>
@@ -341,12 +339,12 @@ export default function CustomWebDevelopment() {
 
       {/* --- 2. SECONDARY INTRO SECTION --- */}
       <IntroContainer>
-        <BadgeWrapper><span className="dot"></span> Custom Engineering</BadgeWrapper>
+        <BadgeWrapper><span className="dot"></span> Technical Search Audit</BadgeWrapper>
         <LayoutGrid>
-          <motion.h2 className="audit-heading">Build scalable <br /> software assets <br /> designed for your <br /> unique workflow</motion.h2>
+          <motion.h2 className="audit-heading">Turn searchers into <br /> loyal customers with <br /> deep organic intent</motion.h2>
           <RightContentBlock>
-            <p>Off-the-shelf software often fails at scale. We audit your technical needs to build custom, cloud-native applications that streamline operations and offer full intellectual property ownership.</p>
-            <BlueButtonGroup><BlueTextBtn>Discuss your project idea</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
+            <p>Traffic is only valuable if it converts. Our comprehensive organic audit identifies high-intent keyword opportunities that your competitors have overlooked, providing you with a roadmap for long-term revenue growth.</p>
+            <BlueButtonGroup><BlueTextBtn>Audit my Rankings</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
           </RightContentBlock>
         </LayoutGrid>
       </IntroContainer>
@@ -354,9 +352,9 @@ export default function CustomWebDevelopment() {
       {/* --- 3. STANDARDS ACCORDION SECTION --- */}
       <StandardsContainer>
         <StandardsInner>
-            <h2 className="section-title">Engineering standards <br /> we apply to every <br /> custom project</h2>
+            <h2 className="section-title">Google Performance <br /> & Indexing Standards</h2>
             <AccordionList>
-                {CUSTOM_STANDARDS.map((item) => (
+                {SEO_STANDARDS.map((item) => (
                     <AccordionItem key={item.id} isOpen={openStandard === item.id}>
                         <div className="header" onClick={() => setOpenStandard(openStandard === item.id ? null : item.id)}>
                             <div className="btn-box">{openStandard === item.id ? '-' : '+'}</div>
@@ -380,12 +378,12 @@ export default function CustomWebDevelopment() {
         <SectionHeader white>What to expect</SectionHeader>
         <CardsGrid>
           {[
-            { id: "01.", title: "Codebase Ownership", desc: "No vendor lock-in. You own the repository and the IP rights entirely." },
-            { id: "02.", title: "Lightning Performance", desc: "Lean architectures without the bloat of CMS themes ensures instant load times." },
-            { id: "03.", title: "Scalable Database", desc: "Designed to handle millions of records and complex queries effortlessly." },
-            { id: "04.", title: "Secure APIs", desc: "Encryption at rest and in transit, with JWT authentication standards." },
-            { id: "05.", title: "Tailored Admin", desc: "We build custom dashboards that exactly match your staff's workflow." },
-            { id: "06.", title: "Third-party Integrations", desc: "Seamless connection to your CRM, ERP, Payment Gateway, or AI tools." }
+            { id: "01.", title: "Keyword Research", desc: "Data-driven selection of high-value search terms your buyers actually use." },
+            { id: "02.", title: "Speed Optimization", desc: "Fast-loading pages that satisfy Core Web Vitals and search algorithms." },
+            { id: "03.", title: "High Authority", desc: "Building credible mentions and backlinks to increase domain trust." },
+            { id: "04.", title: "Strategic Copy", desc: "Engaging on-page content written for both search bots and human humans." },
+            { id: "05.", title: "Zero Penalties", desc: "100% white-hat techniques that protect your brand’s future visibility." },
+            { id: "06.", title: "Revenue Focused", desc: "Our SEO goals are tied directly to your sales pipeline, not just traffic hits." }
           ].map((item, i) => (
             <DogEarCard key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
               <span className="card-num">{item.id}</span>
@@ -404,7 +402,7 @@ export default function CustomWebDevelopment() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Why choose bespoke <br /> web development?
+            Why choose Organic Search <br /> for your brand?
           </motion.h2>
         </div>
 
@@ -431,7 +429,7 @@ export default function CustomWebDevelopment() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
         >
-          Why choose Code Nest for your <br /> software solution?
+          Why choose Code Nest for your <br /> SEO partnership?
         </motion.h2>
         <ChooseCardsGrid>
           {WHY_CHOOSE_CN_DATA.map((card, i) => (
@@ -444,7 +442,7 @@ export default function CustomWebDevelopment() {
         </ChooseCardsGrid>
       </BlueCardSection>
 
-      {/* --- 7. SELF ASSESSMENT BANNER --- */}
+      {/* --- 7. SELF ASSESSMENT BANNER (PAGE 7) --- */}
       <PageSevenContainer>
         <BannerWrapper>
           <BannerContent>
@@ -456,10 +454,10 @@ export default function CustomWebDevelopment() {
               </svg>
             </DecoCircles>
 
-            <BannerText>Have a complex project idea?</BannerText>
+            <BannerText>Assess your Organic Ranking?</BannerText>
             
             <DownloadBtn>
-              Download Requirement Checklist
+              Download SEO health checklist
               <ArrowDown size={18} style={{ marginLeft: "auto", color: '#000' }} /> 
             </DownloadBtn>
 
@@ -472,7 +470,7 @@ export default function CustomWebDevelopment() {
         </BannerWrapper>
       </PageSevenContainer>
 
-      {/* --- 8. CLIENT FEEDBACK --- */}
+      {/* --- 8. CLIENT FEEDBACK (PAGE 8) --- */}
       <Section8>
         <BackgroundWrapper>
           <GridOverlay />
@@ -482,10 +480,10 @@ export default function CustomWebDevelopment() {
 
         <Container8>
           <HeaderWrapper>
-            <SubHeader>CodeNest Success Stories</SubHeader>
-            <HeaderTitle>What our clients say about the build</HeaderTitle>
+            <SubHeader>Search Success</SubHeader>
+            <HeaderTitle>Case Studies in Growth</HeaderTitle>
             <HeaderDesc>
-              Real experiences from companies that scaled using our custom engineered solutions.
+              Explore how we have pushed brands to Page 1 for the highest competition terms.
             </HeaderDesc>
           </HeaderWrapper>
 
@@ -554,7 +552,7 @@ export default function CustomWebDevelopment() {
         </Container8>
       </Section8>
 
-      {/* --- 9. PROCESS SECTION --- */}
+      {/* --- 9. HOW PROCESS WORKS --- */}
       <AuditProcessSection>
         <AuditContainer>
            <motion.h2 
@@ -563,7 +561,7 @@ export default function CustomWebDevelopment() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              How we build custom software
+              SEO Project Lifecycle
            </motion.h2>
 
            <ProcessGrid>
@@ -585,7 +583,7 @@ export default function CustomWebDevelopment() {
         </AuditContainer>
       </AuditProcessSection>
 
-      {/* --- 10. PROMO BANNER & FAQ --- */}
+      {/* --- 10. PROMO BANNER & FAQ (PAGE 10) --- */}
       <PageTenSection>
         <PageTenInner>
             <CTABanner10>
@@ -598,10 +596,10 @@ export default function CustomWebDevelopment() {
                          </svg>
                     </DecoCircles>
                     <BannerTitle10>
-                        Ready to digitize <br /> your operations?
+                        Ready to Own Page 1?
                     </BannerTitle10>
                     <ConsultBtn>
-                        Book a discovery call
+                        Free Ranking Consult 
                         <ArrowDown size={18} style={{ color: '#000', transform: 'rotate(-45deg)' }} /> 
                     </ConsultBtn>
                     <DecoStar>
@@ -616,7 +614,7 @@ export default function CustomWebDevelopment() {
                 <BackgroundCurve />
                 <FAQContent>
                     <FAQLeft>
-                        <h2>Common questions <br /> about custom apps</h2>
+                        <h2>Search Optimization <br /> Q&A</h2>
                     </FAQLeft>
                     <FAQRight>
                         {FAQ_DATA.map((item, index) => (
@@ -652,12 +650,12 @@ export default function CustomWebDevelopment() {
         </PageTenInner>
       </PageTenSection>
 
-      {/* --- 11. BLOG SLIDER --- */}
+      {/* --- 11. BLOG SLIDER (PAGE 11) --- */}
       <BlogSection>
           <BlogContainer>
              <BlogHeaderWrapper>
                 <BlogTitle>
-                  Tech Insights<br />
+                  Digital Strategy Blog<br />
                   <BlogLink onClick={() => navigate('/blog')} role="button" tabIndex={0}>
                      Check our blog <ArrowUpRight size={32} />
                   </BlogLink>
@@ -674,7 +672,7 @@ export default function CustomWebDevelopment() {
                        {blogPosts.map(post => {
                            const featuredImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url 
                                || 'https://via.placeholder.com/600x400?text=No+Image';
-                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Development';
+                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'SEO';
                            
                            return (
                               <BlogCard key={post.id} onClick={() => navigate(`/blog/${post.slug}`)}>
@@ -704,7 +702,7 @@ export default function CustomWebDevelopment() {
 };
 
 // ==========================================
-// STYLES
+// STYLES (Identical Logic maintained)
 // ==========================================
 const PageWrapper = styled.div`
   background: white; 
@@ -733,7 +731,7 @@ const HeroInner = styled.div`
   grid-template-columns: 1.1fr 0.9fr; 
   gap: 50px;
    h1 { 
-    color: #ffffff;
+    color: #ffffff;  
     font-size: clamp(50px, 6.5vw, 92px); 
     line-height: 1.05; 
     letter-spacing: -2px; 
@@ -751,7 +749,6 @@ const HeroContent = styled.div`
     font-size: clamp(50px, 6.5vw, 92px); 
     line-height: 1.05; 
     letter-spacing: -2px; 
-    /* Mobile tweaks */
     @media (max-width: 600px) {
        font-size: 42px;
        letter-spacing: -1.5px;
@@ -765,7 +762,7 @@ const Breadcrumbs = styled.div`
   gap: 10px; 
   .star { color: ${COLORS.starGold}; } 
   a { color: white; text-decoration: none; opacity: 0.7; }
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 `;
 const ButtonGroup = styled.div`display: flex; height: 62px; width: fit-content;`;
 const MainBtn = styled.button`background: ${COLORS.lime}; color: black; border: none; padding: 0 45px; font-weight: 600; font-size: 16px; border-radius: 4px 0 0 4px; cursor: pointer;`;
@@ -845,19 +842,15 @@ const BenefitsGridWrapper = styled.div`
 const BenefitCell = styled.div<{ isLeft: boolean, index?: number }>`
   padding: 80px 10%; display: flex; flex-direction: column; gap: 24px; 
   border-right: ${props => props.isLeft ? "1px solid #eee" : "none"}; border-bottom: 1px solid #eee;
-  /* Laptop bottom row correction */
   &:nth-last-child(1), &:nth-last-child(2) { border-bottom: none; }
-  
   h4 { font-size: 24px; font-weight: 600; color: ${COLORS.coaxBlue}; } 
   p { font-size: 16px; line-height: 1.7; color: ${COLORS.textGray}; max-width: 480px; }
 
   @media (max-width: 900px) {
-    /* Stack logic on mobile */
     padding: 50px 24px;
     border-right: none !important;
     border-bottom: 1px solid #eee !important;
     &:last-child { border-bottom: none !important; }
-    /* Correct border reset from laptop logic */
     &:nth-last-child(2) { border-bottom: 1px solid #eee; }
   }
 `;
@@ -868,13 +861,13 @@ const ChooseCardsGrid = styled.div`display: grid; grid-template-columns: repeat(
 const WhyChooseCard = styled(motion.div)`background-color: ${COLORS.lime}; padding: 40px; min-height: 400px; position: relative; display: flex; flex-direction: column; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); .card-index { font-size: 11px; color: ${COLORS.textDark}; opacity: 0.6; font-weight: 600; margin-bottom: 40px; } .card-title { font-size: 24px; color: ${COLORS.textDark}; font-weight: 600; margin-bottom: 25px; line-height: 1.2; } .card-text { font-size: 15.5px; color: rgba(10, 31, 68, 0.85); line-height: 1.6; } @media (max-width: 600px) { min-height: auto; padding: 30px 24px 60px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%); }`;
 const AbstractGraphicSVG = () => (
   <motion.svg viewBox="0 0 500 500" width="100%" height="100%">
-    <path d="M100 240 Q 100 80, 260 80 V 240 H 100 Z" fill="#2d60ff" />
-    <rect x="220" y="240" width="80" height="200" fill={COLORS.lime} />
-    <circle cx="160" cy="380" r="70" fill="#00d2ff" /><circle cx="380" cy="150" r="40" stroke={COLORS.lime} strokeWidth="15" />
+    <path d="M150 150 L350 150 L250 350 Z" fill="#2d60ff" />
+    <circle cx="250" cy="180" r="60" fill={COLORS.lime} />
+    <rect x="200" y="360" width="100" height="20" fill={COLORS.lime} />
   </motion.svg>
 );
 
-/* Page 7 */
+/* Page 7 (Self Audit) */
 const PageSevenContainer = styled.div`width: 100%; max-width: 1440px; margin: 0 auto; padding: 80px 24px; font-family: 'Inter', sans-serif; @media (max-width: 600px) { padding: 40px 16px; }`;
 const BannerWrapper = styled.div`width: 100%; height: auto; min-height: 240px; background: linear-gradient(100deg, #1d4ed8 0%, #3b82f6 100%); clip-path: polygon(0 0, 100% 0, 100% 80%, 95% 100%, 0 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25); @media (max-width: 850px) { clip-path: none; border-radius: 12px; padding: 30px; }`;
 const BannerContent = styled.div`display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 40px; position: relative; z-index: 5; width: 100%; max-width: 800px; padding: 60px 20px; @media (max-width: 850px) { flex-direction: column; text-align: center; gap: 24px; padding: 40px 20px; }`;
@@ -883,8 +876,8 @@ const DownloadBtn = styled.button`background-color: ${COLORS.lime}; color: #0000
 const DecoCircles = styled.div`position: absolute; top: 0; left: 0; pointer-events: none; width: 250px; height: 200px; z-index: 0;`;
 const DecoStar = styled.div`position: absolute; top: 40px; right: 80px; pointer-events: none; opacity: 0.9; z-index: 1; @media (max-width: 850px) { top: 20px; right: 20px; transform: scale(0.6); }`;
 
-/* Page 8 (Feedback) */
-const Section8 = styled.section`padding: 120px 0 160px; background-color: #f8fdfa; overflow: hidden; font-family: 'Inter', sans-serif; position: relative; @media (max-width: 850px) { padding: 80px 0 120px; }`;
+/* Page 8 (Reviews) */
+const Section8 = styled.section`padding: 120px 0 160px; background-color: #f8fdfa; overflow: hidden; font-family: 'Inter', sans-serif; position: relative;`;
 const BackgroundWrapper = styled.div`position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none;`;
 const GridOverlay = styled.div`position: absolute; inset: 0; background-image: radial-gradient(#28a665 1px, transparent 1px); background-size: 40px 40px; opacity: 0.07; z-index: 2;`;
 const OrbOne = styled(motion.div)`position: absolute; top: -10%; left: -5%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(40, 166, 101, 0.25) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; filter: blur(60px); z-index: 1;`;
@@ -895,190 +888,55 @@ const SubHeader = styled.h4`color: #28a665; font-size: 14px; text-transform: upp
 const HeaderTitle = styled.h2`font-size: 48px; font-weight: 600; color: #09323b; margin-bottom: 24px; line-height: 1.1; @media (max-width: 768px) { font-size: 32px; }`;
 const HeaderDesc = styled.p`font-size: 18px; color: #555; line-height: 1.6;`;
 const SliderWrapper = styled.div`position: relative; width: 100%; max-width: 980px; margin: 0 auto; height: 480px; @media (max-width: 850px) { height: auto; min-height: 800px; }`;
-const StackLayerOne = styled.div`position: absolute; top: 10px; left: 10px; right: -10px; bottom: -10px; height: 100%; background: rgba(40, 166, 101, 0.2); border-radius: 4px; z-index: 1; clip-path: polygon(0 0, 100% 0, 100% 85%, 93% 100%, 0 100%); @media (max-width: 850px) { display: none; }`;
-const StackLayerTwo = styled.div`position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; height: 100%; background: #28a665; border-radius: 4px; z-index: 0; clip-path: polygon(0 0, 100% 0, 100% 85%, 93% 100%, 0 100%); @media (max-width: 850px) { display: none; }`;
+const StackLayerOne = styled.div`position: absolute; top: 10px; left: 10px; right: -10px; bottom: -10px; height: 100%; background: rgba(40, 166, 101, 0.2); border-radius: 4px; z-index: 1; clip-path: polygon(0 0, 100% 0, 100% 85%, 93% 100%, 0 100%);`;
+const StackLayerTwo = styled.div`position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; height: 100%; background: #28a665; border-radius: 4px; z-index: 0; clip-path: polygon(0 0, 100% 0, 100% 85%, 93% 100%, 0 100%);`;
 const CardWindow = styled.div`position: relative; z-index: 10; width: 100%; height: 100%; border-radius: 4px;`;
 const CardFrame = styled(motion.div)`background-color: #ffffff; width: 100%; height: 100%; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%); border-radius: 4px; overflow: hidden; @media (max-width: 850px) { clip-path: none; border-radius: 12px; height: auto; padding-bottom: 40px; }`;
-const InnerGrid = styled(motion.div)`position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: grid; grid-template-columns: 42% 58%; cursor: grab; will-change: transform, opacity; background-color: #ffffff; &:active { cursor: grabbing; } @media (max-width: 850px) { position: relative; grid-template-columns: 1fr; height: auto; display: flex; flex-direction: column; }`;
-const ImageSide = styled.div`position: relative; background-color: #f0f0f0; height: 100%; width: 100%; @media (max-width: 850px) { height: 280px; flex-shrink: 0; }`;
-const ProfileImg = styled.img`width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; pointer-events: none;`;
-const LogoOverlay = styled.img`position: absolute; top: 24px; right: 24px; width: 100px; height: auto; object-fit: contain; z-index: 2; background: #fff; padding: 8px; border-radius: 4px; pointer-events: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05);`;
-const ContentSide = styled.div`padding: 60px 50px 80px; display: flex; flex-direction: column; justify-content: flex-start; @media (max-width: 850px) { padding: 30px 24px; }`;
-const ServiceTag = styled.div`font-size: 12px; font-weight: 700; text-transform: uppercase; color: #28a665; margin-bottom: 20px; letter-spacing: 0.5px;`;
-const QuoteIcon = styled.div`font-size: 60px; line-height: 1; color: #28a665; font-family: serif; margin-bottom: 16px; opacity: 0.8;`;
-const QuoteText = styled.p`font-size: 20px; line-height: 1.5; color: #121212; font-weight: 400; margin-bottom: 32px;`;
+const InnerGrid = styled(motion.div)`position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: grid; grid-template-columns: 42% 58%; cursor: grab; background-color: #ffffff; &:active { cursor: grabbing; } @media (max-width: 850px) { position: relative; grid-template-columns: 1fr; height: auto; display: flex; flex-direction: column; }`;
+const ImageSide = styled.div`position: relative; background-color: #f0f0f0; height: 100%; width: 100%; @media (max-width: 850px) { height: 280px; }`;
+const ProfileImg = styled.img`width: 100%; height: 100%; object-fit: cover; pointer-events: none;`;
+const LogoOverlay = styled.img`position: absolute; top: 24px; right: 24px; width: 100px; background: #fff; padding: 8px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);`;
+const ContentSide = styled.div`padding: 60px 50px 80px; display: flex; flex-direction: column; @media (max-width: 850px) { padding: 30px 24px; }`;
+const ServiceTag = styled.div`font-size: 12px; font-weight: 700; text-transform: uppercase; color: #28a665; margin-bottom: 20px;`;
+const QuoteIcon = styled.div`font-size: 60px; color: #28a665; font-family: serif; line-height: 1;`;
+const QuoteText = styled.p`font-size: 20px; line-height: 1.5; color: #121212; margin-bottom: 32px;`;
 const AuthorBlock = styled.div`margin-top: auto;`;
-const AuthorName = styled.div`font-size: 18px; font-weight: 700; color: #121212; margin-bottom: 4px;`;
+const AuthorName = styled.div`font-size: 18px; font-weight: 700; color: #121212;`;
 const AuthorRole = styled.span`font-size: 14px; color: #444;`;
 const AuthorCompany = styled.span`font-size: 14px; color: #28a665; font-weight: 600; margin-left: 6px; &:before { content: "|"; margin-right: 6px; color: #ccc; }`;
-const CtaButton = styled.button`margin-top: 24px; background: #0b363d; color: #fff; border: none; padding: 12px 24px; font-size: 14px; font-weight: 600; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; align-self: flex-start; transition: all 0.3s; box-shadow: 0 4px 15px rgba(11, 54, 61, 0.2); &:hover { background: #28a665; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(40, 166, 101, 0.3); }`;
-const Controls = styled.div`display: flex; gap: 12px; justify-content: center; margin-top: 40px; position: absolute; bottom: -70px; left: 0; right: 0; z-index: 20; @media (max-width: 850px) { bottom: -80px; }`;
-const NavBtn = styled.button`width: 48px; height: 48px; border: 1px solid #e1e1e1; background: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #888; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.05); &:hover { border-color: #28a665; background-color: #28a665; color: #ffffff; transform: scale(1.1); box-shadow: 0 6px 16px rgba(40, 166, 101, 0.4); }`;
+const CtaButton = styled.button`margin-top: 24px; background: #0b363d; color: #fff; border: none; padding: 12px 24px; font-size: 14px; font-weight: 600; border-radius: 4px; cursor: pointer; transition: 0.3s; &:hover { background: #28a665; transform: translateY(-2px); }`;
+const Controls = styled.div`display: flex; gap: 12px; justify-content: center; margin-top: 40px; position: absolute; bottom: -70px; left: 0; right: 0;`;
+const NavBtn = styled.button`width: 48px; height: 48px; border: 1px solid #e1e1e1; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; &:hover { border-color: #28a665; background-color: #28a665; color: #fff; transform: scale(1.1); }`;
 
-/* Page 9 (Audit) */
-const AuditProcessSection = styled.section`padding: 140px 0 160px; background-color: #F8FAFD; font-family: 'Inter', sans-serif; @media (max-width: 800px) { padding: 80px 0 100px; }`;
-const AuditContainer = styled.div`max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; .audit-title { font-size: clamp(38px, 4.5vw, 62px); font-weight: 400; text-align: center; color: #1a1b1e; letter-spacing: -1.5px; margin-bottom: 80px; }`;
-const ProcessGrid = styled.div`display: grid; grid-template-columns: 1fr 1fr; width: 100%; border-top: 1px solid ${COLORS.borderColor}; border-bottom: 1px solid ${COLORS.borderColor}; @media (max-width: 800px) { grid-template-columns: 1fr; border-top: none; border-bottom: none; }`;
-const ProcessCard = styled(motion.div)<{ idx: number }>`padding: 60px 50px; display: flex; flex-direction: column; align-items: flex-start; border-right: ${props => (props.idx % 2 === 0 ? `1px solid ${COLORS.borderColor}` : 'none')}; border-bottom: ${props => (props.idx < 2 ? `1px solid ${COLORS.borderColor}` : 'none')}; @media (max-width: 800px) { border-right: none; border-bottom: 1px solid ${COLORS.borderColor}; &:last-child { border-bottom: none; } padding: 40px 24px; } h3 { color: ${COLORS.coaxBlue}; font-size: 26px; font-weight: 500; margin-bottom: 24px; letter-spacing: -0.5px; } p { font-size: 16px; line-height: 1.6; color: ${COLORS.textGray}; font-weight: 400; }`;
+/* Page 9 (Process) */
+const AuditProcessSection = styled.section`padding: 140px 0 160px; background-color: #F8FAFD;`;
+const AuditContainer = styled.div`max-width: 1080px; margin: 0 auto; padding: 0 24px; .audit-title { font-size: clamp(38px, 4.5vw, 62px); text-align: center; margin-bottom: 80px; }`;
+const ProcessGrid = styled.div`display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid ${COLORS.borderColor}; border-bottom: 1px solid ${COLORS.borderColor}; @media (max-width: 800px) { grid-template-columns: 1fr; border-top: none; }`;
+const ProcessCard = styled(motion.div)<{ idx: number }>`padding: 60px 50px; border-right: ${props => (props.idx % 2 === 0 ? `1px solid ${COLORS.borderColor}` : 'none')}; border-bottom: ${props => (props.idx < 2 ? `1px solid ${COLORS.borderColor}` : 'none')}; @media (max-width: 800px) { border-right: none; border-bottom: 1px solid ${COLORS.borderColor}; padding: 40px 24px; } h3 { color: ${COLORS.coaxBlue}; font-size: 26px; margin-bottom: 24px; } p { font-size: 16px; color: ${COLORS.textGray}; }`;
 const IconBox = styled.div`color: ${COLORS.coaxBlue}; margin-bottom: 24px;`;
 
-/* Page 10 */
-const PageTenSection = styled.section`padding: 100px 0 160px; background: #ffffff; font-family: 'Inter', sans-serif; @media (max-width: 900px) { padding: 60px 0 100px; }`;
-const PageTenInner = styled.div`max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 120px; @media (max-width: 900px) { gap: 60px; }`;
+/* Page 10 (Consult) */
+const PageTenSection = styled.section`padding: 100px 0 160px; background: #ffffff;`;
+const PageTenInner = styled.div`max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 120px;`;
 const CTABanner10 = styled(BannerWrapper)``;
-const BannerContent10 = styled(BannerContent)`justify-content: center; gap: 30px; text-align: center; @media (min-width: 850px) { flex-direction: row; text-align: left; justify-content: space-between; }`;
+const BannerContent10 = styled(BannerContent)`justify-content: center; text-align: center;`;
 const BannerTitle10 = styled(BannerText)`font-size: clamp(28px, 4vw, 42px); max-width: 550px;`;
 const ConsultBtn = styled(DownloadBtn)`padding: 16px 32px;`;
 const FAQSectionWrapper = styled.div`position: relative; width: 100%;`;
-const BackgroundCurve = styled.div`position: absolute; top: 50%; left: -20%; width: 60%; height: 120%; background: radial-gradient(circle, rgba(235,240,255,0.7) 0%, rgba(255,255,255,0) 60%); transform: translateY(-50%); pointer-events: none; z-index: 0;`;
-const FAQContent = styled.div`position: relative; z-index: 1; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: flex-start; @media (max-width: 900px) { grid-template-columns: 1fr; gap: 40px; }`;
-const FAQLeft = styled.div`h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 400; letter-spacing: -1.5px; color: #1a1b1e; line-height: 1.15; }`;
+const BackgroundCurve = styled.div`position: absolute; top: 50%; left: -20%; width: 60%; height: 120%; background: radial-gradient(circle, rgba(235,240,255,0.7) 0%, rgba(255,255,255,0) 60%); pointer-events: none;`;
+const FAQContent = styled.div`position: relative; z-index: 1; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; @media (max-width: 900px) { grid-template-columns: 1fr; gap: 40px; }`;
+const FAQLeft = styled.div`h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 400; line-height: 1.15; }`;
 const FAQRight = styled.div`display: flex; flex-direction: column; width: 100%;`;
-const FAQItem = styled.div<{ isOpen: boolean }>`border-top: 1px solid #eee; padding: 24px 0; cursor: pointer; &:last-child { border-bottom: 1px solid #eee; } .q-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; h3 { font-size: 17px; font-weight: 500; color: ${props => props.isOpen ? COLORS.coaxBlue : COLORS.textDark}; transition: color 0.3s; margin: 0; line-height: 1.5; } .icon-box { color: ${props => props.isOpen ? COLORS.coaxBlue : '#ccc'}; flex-shrink: 0; width: 24px; height: 24px; border: 1px solid ${props => props.isOpen ? COLORS.coaxBlue : '#e0e0e0'}; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s; } } .a-body { overflow: hidden; p { margin-top: 24px; margin-bottom: 8px; font-size: 15px; line-height: 1.7; color: ${COLORS.textGray}; max-width: 90%; } } &:hover .icon-box { border-color: ${COLORS.coaxBlue}; color: ${COLORS.coaxBlue}; }`;
+const FAQItem = styled.div<{ isOpen: boolean }>`border-top: 1px solid #eee; padding: 24px 0; cursor: pointer; &:last-child { border-bottom: 1px solid #eee; } .q-header { display: flex; align-items: center; justify-content: space-between; h3 { font-size: 17px; color: ${props => props.isOpen ? COLORS.coaxBlue : COLORS.textDark}; transition: 0.3s; } .icon-box { color: ${props => props.isOpen ? COLORS.coaxBlue : '#ccc'}; border: 1px solid #e0e0e0; padding: 4px; border-radius: 4px; } } .a-body { overflow: hidden; p { margin-top: 24px; color: ${COLORS.textGray}; } }`;
 
 /* Page 11 (Blog) */
-const BlogSection = styled.div`
-  background-color: #f2f9f5;
-  padding: 100px 0 120px;
-  border-top: 1px solid #e1eadd;
-  font-family: 'Inter', sans-serif;
-  overflow: hidden;
-  @media (max-width: 768px) { padding: 60px 0 80px; }
-`;
-const BlogContainer = styled.div`
-  max-width: 1280px; 
-  margin: 0 auto; 
-  padding: 0 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (max-width: 768px) { padding: 0 24px; }
-`;
-const BlogHeaderWrapper = styled.div` 
-  margin-bottom: 60px; 
-  text-align: center;
-  width: 100%;
-`;
-const BlogTitle = styled.h2` 
-  font-size: 48px; 
-  font-weight: 600; 
-  line-height: 1.1; 
-  color: #1a1a1a; 
-  margin: 0; 
-  letter-spacing: -1px; 
-  display: flex; 
-  flex-direction: column;
-  gap: 12px;
-  @media (max-width: 768px) { font-size: 32px; } 
-`;
-const BlogLink = styled.span`
-  color: ${COLORS.coaxBlue};
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  transition: gap 0.2s ease;
-  cursor: pointer;
-  outline: none;
-  &:hover { gap: 16px; }
-  svg { transform: translateY(2px); }
-`;
-const BlogSliderOuter = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-`;
-const BlogCardsContainer = styled.div`
-  display: flex; 
-  gap: 30px; 
-  overflow-x: auto; 
-  scroll-behavior: smooth; 
-  width: 100%; 
-  padding: 20px 20px 40px; 
-  -ms-overflow-style: none; scrollbar-width: none; 
-  &::-webkit-scrollbar { display: none; }
-`;
-const BlogCard = styled.div` 
-  min-width: 450px; 
-  background: white; 
-  display: flex; 
-  height: 260px; 
-  border-radius: 16px; 
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-  border: 1px solid transparent;
-  transition: all 0.3s ease; 
-  cursor: pointer; 
-  flex-shrink: 0;
-
-  &:hover { 
-    transform: translateY(-8px); 
-    box-shadow: 0 20px 40px rgba(40, 166, 101, 0.15); 
-    border-color: ${COLORS.lime};
-  } 
-
-  .card-img { 
-     width: 40%; 
-     background: #f1f1f1; 
-     overflow: hidden;
-     position: relative;
-     
-     img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-  } 
-  
-  &:hover .card-img img { transform: scale(1.05); }
-
-  .card-content { 
-      width: 60%; 
-      padding: 30px; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: flex-start; 
-  } 
-  
-  .tag { 
-    background: #e6f7ee; 
-    color: #28a665; 
-    font-size: 11px; 
-    font-weight: 700; 
-    text-transform: uppercase; 
-    letter-spacing: 0.5px;
-    padding: 6px 12px; 
-    border-radius: 6px; 
-    margin-bottom: 16px; 
-  } 
-  
-  h3 { 
-      font-size: 20px; 
-      font-weight: 700; 
-      color: #111; 
-      margin: 0 0 16px 0; 
-      line-height: 1.4; 
-      transition: color 0.2s;
-  } 
-  
-  &:hover h3 { color: #28a665; }
-
-  .date { font-size: 13px; color: #999; margin-top: auto; } 
-
-  /* Mobile Stack */
-  @media (max-width: 600px) { 
-    min-width: 85vw;
-    flex-direction: column; 
-    height: auto; 
-    
-    .card-img { width: 100%; height: 200px; } 
-    .card-content { width: 100%; padding: 24px; } 
-  } 
-`;
-const SliderControls = styled.div` display: flex; gap: 16px; margin-top: 20px; `;
-const SliderButton = styled.button` 
-  width: 56px; height: 56px; border-radius: 50%;
-  border: 1px solid #e1eadd; background: white; color: #111; 
-  display: flex; align-items: center; justify-content: center; 
-  cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  &:hover { background: #28a665; border-color: #28a665; color: white; transform: scale(1.1); box-shadow: 0 8px 20px rgba(40, 166, 101, 0.3); } 
-`;
+const BlogSection = styled.div`background-color: #f2f9f5; padding: 100px 0 120px; border-top: 1px solid #e1eadd; font-family: 'Inter', sans-serif; overflow: hidden;`;
+const BlogContainer = styled.div`max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; align-items: center;`;
+const BlogHeaderWrapper = styled.div`margin-bottom: 60px; text-align: center; width: 100%;`;
+const BlogTitle = styled.h2`font-size: 48px; font-weight: 600; line-height: 1.1; display: flex; flex-direction: column; gap: 12px;`;
+const BlogLink = styled.span`color: ${COLORS.coaxBlue}; display: inline-flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; transition: 0.2s; &:hover { gap: 16px; }`;
+const BlogSliderOuter = styled.div`display: flex; flex-direction: column; align-items: center; width: 100%;`;
+const BlogCardsContainer = styled.div`display: flex; gap: 30px; overflow-x: auto; width: 100%; padding: 20px 20px 40px; -ms-overflow-style: none; scrollbar-width: none; &::-webkit-scrollbar { display: none; }`;
+const BlogCard = styled.div`min-width: 450px; background: #fff; height: 260px; border-radius: 16px; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; &:hover { transform: translateY(-8px); border-color: ${COLORS.lime}; } .card-img { width: 40%; img { width: 100%; height: 100%; object-fit: cover; } } .card-content { width: 60%; padding: 30px; display: flex; flex-direction: column; justify-content: center; } .tag { color: #28a665; background: #e6f7ee; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; width: fit-content; margin-bottom: 12px; } h3 { font-size: 19px; line-height: 1.4; margin: 0 0 10px 0; } .date { font-size: 12px; color: #999; } @media (max-width: 600px) { min-width: 85vw; flex-direction: column; height: auto; .card-img { width: 100%; height: 180px; } .card-content { width: 100%; } }`;
+const SliderControls = styled.div`display: flex; gap: 16px; margin-top: 20px;`;
+const SliderButton = styled.button`width: 56px; height: 56px; border-radius: 50%; border: 1px solid #e1eadd; background: #fff; cursor: pointer; transition: 0.3s; &:hover { background: #28a665; color: #fff; }`;

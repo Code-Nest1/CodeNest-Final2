@@ -25,18 +25,42 @@ import {
   Minus
 } from "react-feather";
 
-// --- Design Tokens (Coax Precise) ---
+/**
+ * --- Design Tokens (Code Nest "Elite Glow" Edition) ---
+ * Brighter. Sharper. Beautifully synchronized with your Green/White brand.
+ */
 const COLORS = {
-  coaxBlue: "#1a41e6",
-  darkerBlue: "#091db1",
-  lime: "#ccff00",
-  starGold: "#ffc107",
-  white: "#ffffff",
-  textDark: "#0a1f44",
-  textGray: "#555b6d",
-  textLight: "rgba(255, 255, 255, 0.8)",
-  bgSection: "#f8faff",
-  borderColor: "#e1e5f0",
+  // Brand Forest: Replaces coaxBlue (Main elements like header backgrounds, active states)
+  coaxBlue: "#2b945f", 
+  
+  // Brand Prestige: Replaces darkerBlue (For depth, icons on bright backgrounds, hero subtexts)
+  darkerBlue: "#0c3740",   
+  
+  // Electric Mint: Replaces Lime (This is your High-Contrast "Wow" color for CTAs & Highlights)
+  // This color GLOWS against your Dark Green background sections.
+  lime: "#4dffa6",         
+  
+  // Vivid Gold: Polished accent for premium reviews (matches green tones perfectly)
+  starGold: "#ffcf12",     
+  
+  // Crisp Snow: The absolute white base of Code Nest
+  white: "#feffff",
+  
+  // True Deep: Use black for headlines to ensure ultra-sharp readability
+  textDark: "#000000",     
+  
+  // Mineral Grey: A cleaner grey for paragraphs that doesn't look "dirty"
+  textGray: "#5c6660",     
+  
+  // Glass Tint: Light semi-transparent text for overlapping elements
+  textLight: "rgba(254, 255, 255, 0.9)",
+  
+  // Crystal Canvas: Replaces bgSection. 
+  // It is brighter than previous mints, keeping the site looking "Airy."
+  bgSection: "#f8fffc",    
+  
+  // Fresh Border: Very light and subtle to keep sections distinct but clean
+  borderColor: "#ebf2ee",  
 };
 
 // --- DATA: iOS SPECIFIC ---

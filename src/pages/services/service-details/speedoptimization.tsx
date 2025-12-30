@@ -62,52 +62,50 @@ const COLORS = {
   // Fresh Border: Very light and subtle to keep sections distinct but clean
   borderColor: "#ebf2ee",  
 };
-
-// --- DATA: CUSTOM WEB CONTEXT ---
-const CUSTOM_STANDARDS = [
-  { id: "SOLID", title: "SOLID Architecture", desc: "We adhere to SOLID coding principles to ensure your custom application is scalable, maintainable, and free of spaghetti code." },
-  { id: "SEC", title: "OWASP Top 10 Security", desc: "Rigorous defense protocols against injection attacks, cross-site scripting, and data breaches for enterprise-grade security." },
-  { id: "API", title: "RESTful & GraphQL API", desc: "Building documented, type-safe API layers that allow your web platform to communicate seamlessly with mobile apps and 3rd party tools." },
-  { id: "DB", title: "Database Normalization", desc: "Optimized SQL and NoSQL database schemas designed to handle millions of records without latency or redundancy." }
+// --- DATA ---
+const STANDARDS = [
+  { id: "LCP", title: "LCP < 2.5s Standard", desc: "Optimizing the Largest Contentful Paint to ensure the main content of your page renders almost instantly for the user." },
+  { id: "CLS", title: "Zero Layout Shift (CLS)", desc: "Eliminating annoying visual jumps by strictly defining aspect ratios and prioritizing font-loading sequences." },
+  { id: "FID", title: "First Input Delay Optimization", desc: "Minimizing main-thread blocking time so your interactive elements (buttons, inputs) respond in under 100ms." },
+  { id: "TBT", title: "Total Blocking Time Reduction", desc: "Reducing heavy JavaScript execution cycles to free up browser resources for a smoother scrolling experience." }
 ];
 
 const BENEFITS_DATA = [
   {
-    title: "No CMS Limitations",
-    desc: "CMS platforms confine you to their box. Our custom solutions are built ground-up to fit your exact business workflows, ensuring the software adapts to you, not the other way around."
+    title: "Enhanced SEO rankings",
+    desc: "Since the Core Web Vitals update, speed is a direct ranking factor. A fast site doesn't just improve UX; it tells Google your site is technically superior, giving you a competitive edge in SERPs."
   },
   {
-    title: "High-Performance Speed",
-    desc: "By removing the bloat of generic page builders and unused libraries, our custom-engineered sites load efficiently, processing complex logic in milliseconds."
+    title: "Drastically lower bounce rates",
+    desc: "Seconds matter. Most users leave if a site takes longer than 3 seconds to load. We aim for sub-second responses, keeping users engaged and preventing lead leakage in your funnel."
   },
   {
-    title: "Full Intellectual Property",
-    desc: "Unlike subscribing to a SaaS product, you own 100% of your source code and database. This increases your company's valuation and ensures you are never vendor-locked."
+    title: "Increased conversion efficiency",
+    desc: "Speed is synonymous with trust. Fast loading pages reduce friction during the checkout or sign-up process, directly correlating to a higher return on ad spend (ROAS)."
   },
   {
-    title: "Scalability for Enterprise",
-    desc: "We design cloud-native architectures (AWS/Azure) that can auto-scale horizontally. Whether you have 100 users or 1 million, your application stability remains rock solid."
+    title: "Reduced server bandwidth costs",
+    desc: "Optimized code and assets consume less power and bandwidth. By minifying resources and implementing efficient caching, we reduce your infrastructure overhead and environmental footprint."
   },
   {
-    title: "Seamless 3rd-Party Integration",
-    desc: "Need to connect to a legacy CRM, a logistic provider, or a payment gateway? We build robust middleware and custom connectors to unify your entire digital ecosystem."
+    title: "Mobile-first performance",
+    desc: "Most traffic is mobile, often on 4G or inconsistent networks. We optimize for the 'weakest link,' ensuring your site is lightning fast even on low-tier mobile hardware and connections."
   },
   {
-    title: "Advanced Data Security",
-    desc: "Custom development allows for fine-grained role-based access control (RBAC), end-to-end encryption, and specific compliance handling (GDPR, HIPAA, etc.)."
+    title: "Future-proof scalability",
+    desc: "Clean, performant code handles traffic spikes better. By removing the 'bloat,' your server can handle 3x more concurrent users without needing expensive hardware upgrades."
   }
 ];
 
 const WHY_CHOOSE_CN_DATA = [
-  { num: "/ 01", title: "Senior Engineering Talent", desc: "No junior freelancers. Your project is architected by senior developers with experience in complex enterprise environments and high-availability systems." },
-  { num: "/ 02", title: "Technology Agnostic", desc: "We don't force one language on you. We select the best stack for your specific problem—whether that's Python (Django), Node.js, Go, or PHP (Laravel)." },
-  { num: "/ 03", title: "DevOps & CI/CD Integrated", desc: "We automate deployment pipelines. Every commit runs through automated testing to ensure regression-free releases, allowing for daily production updates." },
-  { num: "/ 04", title: "Solution Architecture", desc: "Before writing a line of code, we blueprint the system. This saves money by preventing scope creep and ensuring structural integrity from Day 1." },
-  { num: "/ 05", title: "Focus on Business Logic", desc: "We understand that code must serve revenue. We specialize in building complex dashboards, SaaS products, and booking engines that drive business operations." },
-  { num: "/ 06", title: "Long-term Maintenance", desc: "Custom software requires care. We offer retained teams that act as your internal IT department, managing updates, security patches, and feature rollouts." }
+  { num: "/ 01", title: "Engineering-Led approach", desc: "We don't just install 'optimizer' plugins that hide problems. We rewrite inefficient loops, optimize database queries, and fix the root architectural causes of slowness." },
+  { num: "/ 02", title: "Advanced Edge Caching", desc: "We deploy global Content Delivery Networks (CDNs) and edge-computing solutions to serve your static and dynamic assets from the server closest to your user." },
+  { num: "/ 03", title: "Real-Device Testing", desc: "Our optimizations are validated on actual mobile devices and varying network speeds, not just synthetic Lighthouse scores, ensuring a real-world speed boost for your customers." },
+  { num: "/ 04", title: "Precision Asset Budgeting", desc: "We implement strict performance budgets. Every byte of CSS and JavaScript is audited for necessity, ensuring only the minimum required code is delivered to the client." },
+  { num: "/ 05", title: "Database Query Tuning", desc: "Slow sites are often the result of heavy backends. We profile your database calls, adding indexes and caching layers to ensure even complex data loads are instantaneous." },
+  { num: "/ 06", title: "Transparent ROI tracking", desc: "We provide 'Before vs. After' speed reports linked to conversion metrics. You'll see exactly how every millisecond we saved translates into better business performance." }
 ];
 
-// Reusing same feedback structure
 type FeedbackItem = {
   id: number;
   name: string;
@@ -124,84 +122,83 @@ type FeedbackItem = {
 const FEEDBACKS: FeedbackItem[] = [
   {
     id: 1,
-    name: "Bohdan Zabawskyj",
-    role: "Co-founder and CPO at Fortay.ai",
-    company: "Fortay.ai",
-    quote: "We needed a bespoke algorithmic platform for our HR tech. Code Nest delivered a secure, high-performance web app that processes complex data in real-time. Simply brilliant.",
-    imgSrc: "/assets/feedback/bohdan.jpg",
-    serviceTag: "SaaS Development",
-    hasVideo: true,
+    name: "Alex Thorne",
+    role: "E-commerce Director, AuraShop",
+    company: "AuraShop",
+    quote: "We went from a 32 Lighthouse mobile score to 96. Our mobile checkout conversion rate jumped by 22% in the first month following the Code Nest speed optimization. The results were measurable and immediate.",
+    imgSrc: "/assets/feedback/person4.jpg",
+    serviceTag: "Performance Engineering",
+    hasVideo: false,
   },
   {
     id: 2,
-    name: "Dan Brooks",
-    role: "President, Krytter",
-    company: "Krytter",
-    quote: "Our operational needs exceeded what any off-the-shelf software could do. Code Nest engineered a custom portal that automated 80% of our manual administrative workflows.",
-    imgSrc: "/assets/feedback/dan.jpg",
-    logoSrc: "/assets/feedback/krytter-logo.png",
-    serviceTag: "Custom Portal Design",
+    name: "Samantha Reed",
+    role: "CEO, ReedMedia",
+    company: "ReedMedia",
+    quote: "As a media company, page speed is our lifeblood. Code Nest solved layout shifts and asset delivery issues that had plagued us for years. The site now feels instant across three different continents.",
+    imgSrc: "/assets/feedback/person5.jpg",
+    logoSrc: "/assets/feedback/logo2.png",
+    serviceTag: "Speed Optimization",
     ctaText: "View Case Study",
   },
   {
     id: 3,
-    name: "Michael Smith",
-    role: "Product Owner",
-    company: "TechFlow",
-    quote: "Building our customer dashboard required strict API integrations. The team's knowledge of backend architecture and frontend UX provided a seamless solution for our clients.",
-    imgSrc: "/assets/feedback/michael.jpg",
-    serviceTag: "Enterprise Web App",
-    ctaText: "See the App",
+    name: "David Kim",
+    role: "Head of Growth, Finscale",
+    company: "Finscale",
+    quote: "Technical debt was slowing our SaaS application down. Code Nest performed a deep-level code split that reduced our initial JS bundle by 60%. Highly recommend for any complex React application.",
+    imgSrc: "/assets/feedback/person6.jpg",
+    serviceTag: "Architecture Tuning",
+    ctaText: "See Results",
   },
 ];
 
 const AUDIT_STEPS = [
   {
     icon: <Star size={28} />,
-    title: "Discovery & Blueprint",
-    desc: "We analyze your business requirements and legacy systems. We map out the data models, user flows, and technical stack required to solve your specific challenges efficiently."
+    title: "Diagnostic Profiling",
+    desc: "We perform a deep dive using Chrome DevTools, WebPageTest, and RUM (Real User Monitoring) to map out every millisecond of the Critical Rendering Path and identify exactly what's blocking the load."
   },
   {
     icon: <LinkIcon size={28} />,
-    title: "Code Architecture",
-    desc: "For existing projects, we review the code for security holes and 'technical debt'. For new builds, we set up a scalable folder structure, selecting the right database and framework."
+    title: "Asset Modernization",
+    desc: "We implement next-gen formats (WebP/Avif), automate responsive image delivery, and rewrite font-loading strategies to ensure the visual structure is ready before the user even finishes scrolling."
   },
   {
     icon: <FileText size={28} />,
-    title: "Technical Roadmap",
-    desc: "You get a detailed specification document (SRS) and a development timeline. This breaks the complex project into manageable sprints with clear deliverables and milestones."
+    title: "Execution Optimization",
+    desc: "This is where the engineering happens. We defer non-critical JS, minify CSS, implement tree-shaking, and move heavy processes to Service Workers to free up the browser's main thread for user interaction."
   },
   {
     icon: <Headphones size={28} />,
-    title: "Agile Development",
-    desc: "We move into execution using Scrum methodology. Two-week sprints ensure you see continuous progress and can adapt features based on real user feedback during development."
+    title: "Performance Monitoring",
+    desc: "Post-optimization, we set up continuous monitoring. Speed isn't a one-time fix; we install guardrails that alert us the moment a new code deployment or content update starts to degrade your metrics."
   }
 ];
 
 const FAQ_DATA = [
     {
-        question: "When should I choose custom development over a CMS like WordPress?",
-        answer: "Choose custom development when you have unique functionality that a plugin cannot solve (e.g., a SaaS product, a complex booking system, a customer portal, or an intranet). If your business model depends on unique logic, custom is the only viable path."
+        question: "Is '100/100' on Lighthouse actually necessary?",
+        answer: "While 100/100 is great, we prioritize 'Pass' status in Core Web Vitals over a vanity score. We focus on real-world interaction speed (LCP, INP, CLS) that impacts Google rankings and user psychological comfort."
     },
     {
-        question: "How much longer does a custom website take to build?",
-        answer: "A custom web application generally takes 3 to 6 months depending on complexity. However, we accelerate this by using modern frameworks and our own pre-built internal component libraries to hit the ground running."
+        question: "How long does a speed optimization project take?",
+        answer: "A standard optimization for a complex site takes 2 to 4 weeks. This includes audit, development, staging tests, and a 'warm-up' period for CDN caches before the final verification."
     },
     {
-        question: "Do you provide documentation for the code?",
-        answer: "Yes, extensive documentation is part of our deliverables. This includes API documentation (Swagger), architecture diagrams, and inline code comments so any future developer can easily pick up the project."
+        question: "Can you optimize speed on Shopify or HubSpot?",
+        answer: "Yes. While we have more control over custom React/PHP builds, we utilize advanced liquid optimization, app-bloat reduction, and third-party script management to speed up proprietary platforms significantly."
     },
     {
-        question: "Who owns the code after the project is finished?",
-        answer: "You do. Unlike renting software (SaaS), you possess full Intellectual Property (IP) rights to the source code, database, and design assets upon final payment. You are free to host it wherever you like."
+        question: "Do I have to lose my high-res images for speed?",
+        answer: "Never. We use intelligent compression and 'Lazy Loading with Blur-Up' techniques. This allows you to keep stunning imagery while ensuring they only load the moment they are about to enter the viewport."
     },
     {
-        question: "Can you take over an existing project built by another agency?",
-        answer: "Yes, this is common. We start with a 'Code Audit' to assess the state of the existing codebase. If it meets our quality standards, we can proceed with maintenance; otherwise, we may suggest a partial refactor for stability."
+        question: "Will optimization break any of my site features?",
+        answer: "No. Our methodology relies on testing in isolated environments. We handle sensitive features like analytics and marketing pixels with specific delay-loading triggers so they still track accurately without slowing the user experience."
     }
 ];
 
-// --- Animations & Config ---
 const TRANSITION_EASE: [number, number, number, number] = [0.25, 0.8, 0.25, 1];
 const contentVariants: Variants = {
   enter: (direction: number) => ({
@@ -240,10 +237,10 @@ interface WPPost {
     };
 }
 
-export default function CustomWebDevelopment() {
+export default function SpeedOptimization() {
   const navigate = useNavigate();
 
-  const [openStandard, setOpenStandard] = useState<string | null>("SOLID");
+  const [openStandard, setOpenStandard] = useState<string | null>("LCP");
   
   const [[page, direction], setPage] = useState([0, 0]);
   const cardControls = useAnimation();
@@ -322,17 +319,17 @@ export default function CustomWebDevelopment() {
       <HeroSection>
         <HeroInner>
           <HeroContent>
-            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Custom Web Development</strong></Breadcrumbs>
-            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Custom web <br /> application service</motion.h1>
+            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Speed optimization</strong></Breadcrumbs>
+            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Speed <br /> optimization service</motion.h1>
             <ButtonGroup>
-              <MainBtn>Get an Estimate</MainBtn>
+              <MainBtn>Analyze My Site</MainBtn>
               <IconBtn><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg></IconBtn>
             </ButtonGroup>
-            <HeroPara>Bespoke web engineering for complex business logic, SaaS platforms, and enterprise portals.</HeroPara>
+            <HeroPara>Achieve sub-second load times and pass Google's Core Web Vitals with our performance-focused engineering.</HeroPara>
             <RatingsRow>
-              <RatingItem><span className="brand">Clutch</span><div className="stars">★★★★★ <span className="val">4.9 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">GoodFirms</span><div className="stars">★★★★★ <span className="val">5 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">( Verified Partner )</span><div className="stars">★★★★★ <span className="val">100% Quality</span></div></RatingItem>
+              <RatingItem><span className="brand">PageSpeed</span><div className="stars">★★★★★ <span className="val">Score: 90+</span></div></RatingItem>
+              <RatingItem><span className="brand">GTmetrix</span><div className="stars">★★★★★ <span className="val">Grade: A</span></div></RatingItem>
+              <RatingItem><span className="brand">( Core Web Vitals )</span><div className="stars">★★★★★ <span className="val">Pass</span></div></RatingItem>
             </RatingsRow>
           </HeroContent>
           <HeroGraphic><AbstractGraphicSVG /></HeroGraphic>
@@ -341,12 +338,12 @@ export default function CustomWebDevelopment() {
 
       {/* --- 2. SECONDARY INTRO SECTION --- */}
       <IntroContainer>
-        <BadgeWrapper><span className="dot"></span> Custom Engineering</BadgeWrapper>
+        <BadgeWrapper><span className="dot"></span> Critical Path Engineering</BadgeWrapper>
         <LayoutGrid>
-          <motion.h2 className="audit-heading">Build scalable <br /> software assets <br /> designed for your <br /> unique workflow</motion.h2>
+          <motion.h2 className="audit-heading">Slow performance <br /> is a bug—we fix the <br /> code bottlenecks that <br /> lose you revenue</motion.h2>
           <RightContentBlock>
-            <p>Off-the-shelf software often fails at scale. We audit your technical needs to build custom, cloud-native applications that streamline operations and offer full intellectual property ownership.</p>
-            <BlueButtonGroup><BlueTextBtn>Discuss your project idea</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
+            <p>Our deep-level audit uncovers redundant JavaScript, unoptimized database calls, and render-blocking CSS that typically escape basic tool checks. We turn bloat into speed.</p>
+            <BlueButtonGroup><BlueTextBtn>Get a 60-second speed audit</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
           </RightContentBlock>
         </LayoutGrid>
       </IntroContainer>
@@ -354,9 +351,9 @@ export default function CustomWebDevelopment() {
       {/* --- 3. STANDARDS ACCORDION SECTION --- */}
       <StandardsContainer>
         <StandardsInner>
-            <h2 className="section-title">Engineering standards <br /> we apply to every <br /> custom project</h2>
+            <h2 className="section-title">Global performance <br /> standards mastered by <br /> our team</h2>
             <AccordionList>
-                {CUSTOM_STANDARDS.map((item) => (
+                {STANDARDS.map((item) => (
                     <AccordionItem key={item.id} isOpen={openStandard === item.id}>
                         <div className="header" onClick={() => setOpenStandard(openStandard === item.id ? null : item.id)}>
                             <div className="btn-box">{openStandard === item.id ? '-' : '+'}</div>
@@ -380,12 +377,12 @@ export default function CustomWebDevelopment() {
         <SectionHeader white>What to expect</SectionHeader>
         <CardsGrid>
           {[
-            { id: "01.", title: "Codebase Ownership", desc: "No vendor lock-in. You own the repository and the IP rights entirely." },
-            { id: "02.", title: "Lightning Performance", desc: "Lean architectures without the bloat of CMS themes ensures instant load times." },
-            { id: "03.", title: "Scalable Database", desc: "Designed to handle millions of records and complex queries effortlessly." },
-            { id: "04.", title: "Secure APIs", desc: "Encryption at rest and in transit, with JWT authentication standards." },
-            { id: "05.", title: "Tailored Admin", desc: "We build custom dashboards that exactly match your staff's workflow." },
-            { id: "06.", title: "Third-party Integrations", desc: "Seamless connection to your CRM, ERP, Payment Gateway, or AI tools." }
+            { id: "01.", title: "Zero Layout Shift", desc: "Stable rendering that eliminates jumping text or buttons during loading." },
+            { id: "02.", title: "Image Hydration", desc: "Automatic next-gen image conversion with lazy loading priorities." },
+            { id: "03.", title: "Code Minification", desc: "Drastically reduced bundle sizes through tree-shaking and compression." },
+            { id: "04.", title: "Reduced Latency", desc: "Fine-tuned TTFB and server-side responses for an instant feeling." },
+            { id: "05.", title: "Critical CSS Path", desc: "Inline CSS for above-the-fold content to ensure immediate paint." },
+            { id: "06.", title: "Interaction Readiness", desc: "A browser thread that is free to process clicks and scrolls instantly." }
           ].map((item, i) => (
             <DogEarCard key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
               <span className="card-num">{item.id}</span>
@@ -404,7 +401,7 @@ export default function CustomWebDevelopment() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Why choose bespoke <br /> web development?
+            Why choose our speed-first <br /> architectural solutions?
           </motion.h2>
         </div>
 
@@ -431,7 +428,7 @@ export default function CustomWebDevelopment() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
         >
-          Why choose Code Nest for your <br /> software solution?
+          Why choose Code Nest for your <br /> speed & core web vitals?
         </motion.h2>
         <ChooseCardsGrid>
           {WHY_CHOOSE_CN_DATA.map((card, i) => (
@@ -456,10 +453,10 @@ export default function CustomWebDevelopment() {
               </svg>
             </DecoCircles>
 
-            <BannerText>Have a complex project idea?</BannerText>
+            <BannerText>Curious about your technical debt?</BannerText>
             
             <DownloadBtn>
-              Download Requirement Checklist
+              Download Core Web Vitals audit guide
               <ArrowDown size={18} style={{ marginLeft: "auto", color: '#000' }} /> 
             </DownloadBtn>
 
@@ -482,10 +479,11 @@ export default function CustomWebDevelopment() {
 
         <Container8>
           <HeaderWrapper>
-            <SubHeader>CodeNest Success Stories</SubHeader>
-            <HeaderTitle>What our clients say about the build</HeaderTitle>
+            <SubHeader>Performance Wins</SubHeader>
+            <HeaderTitle>What partners say about the speed boost</HeaderTitle>
             <HeaderDesc>
-              Real experiences from companies that scaled using our custom engineered solutions.
+              Improving performance by even 100ms leads to measurable gains in revenue
+              and long-term user retention for global platforms.
             </HeaderDesc>
           </HeaderWrapper>
 
@@ -554,7 +552,7 @@ export default function CustomWebDevelopment() {
         </Container8>
       </Section8>
 
-      {/* --- 9. PROCESS SECTION --- */}
+      {/* --- 9. HOW OPTIMIZATION WORKS --- */}
       <AuditProcessSection>
         <AuditContainer>
            <motion.h2 
@@ -563,7 +561,7 @@ export default function CustomWebDevelopment() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              How we build custom software
+              How we fix the speed
            </motion.h2>
 
            <ProcessGrid>
@@ -598,10 +596,10 @@ export default function CustomWebDevelopment() {
                          </svg>
                     </DecoCircles>
                     <BannerTitle10>
-                        Ready to digitize <br /> your operations?
+                        Stop the drop — let's fix <br /> your load speed today
                     </BannerTitle10>
                     <ConsultBtn>
-                        Book a discovery call
+                        Start My Free Performance Audit 
                         <ArrowDown size={18} style={{ color: '#000', transform: 'rotate(-45deg)' }} /> 
                     </ConsultBtn>
                     <DecoStar>
@@ -616,7 +614,7 @@ export default function CustomWebDevelopment() {
                 <BackgroundCurve />
                 <FAQContent>
                     <FAQLeft>
-                        <h2>Common questions <br /> about custom apps</h2>
+                        <h2>Performance related <br /> questions and answers</h2>
                     </FAQLeft>
                     <FAQRight>
                         {FAQ_DATA.map((item, index) => (
@@ -657,16 +655,16 @@ export default function CustomWebDevelopment() {
           <BlogContainer>
              <BlogHeaderWrapper>
                 <BlogTitle>
-                  Tech Insights<br />
+                  The Performance Journal<br />
                   <BlogLink onClick={() => navigate('/blog')} role="button" tabIndex={0}>
-                     Check our blog <ArrowUpRight size={32} />
+                     Learn about CWV <ArrowUpRight size={32} />
                   </BlogLink>
                 </BlogTitle>
              </BlogHeaderWrapper>
 
              {loadingBlogs ? (
                <div style={{ textAlign: "center", padding: "40px", color: COLORS.textGray }}>
-                   Loading Articles...
+                   Loading Technical Articles...
                </div>
              ) : (
                 <BlogSliderOuter>
@@ -674,7 +672,7 @@ export default function CustomWebDevelopment() {
                        {blogPosts.map(post => {
                            const featuredImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url 
                                || 'https://via.placeholder.com/600x400?text=No+Image';
-                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Development';
+                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'DevOps';
                            
                            return (
                               <BlogCard key={post.id} onClick={() => navigate(`/blog/${post.slug}`)}>
@@ -711,7 +709,7 @@ const PageWrapper = styled.div`
   overflow-x: hidden;
 `;
 
-/* Hero */
+/* Hero Styles */
 const HeroSection = styled.section`
   background: ${COLORS.coaxBlue}; 
   color: white; 
@@ -721,9 +719,9 @@ const HeroSection = styled.section`
   display: flex; 
   align-items: center;
 
-    @media (max-width: 600px) {
-       font-size: 42px;
-       letter-spacing: -1.5px;
+  @media (max-width: 600px) {
+    padding-top: 140px;
+  }
 `;
 const HeroInner = styled.div`
   max-width: 1440px; 
@@ -732,12 +730,12 @@ const HeroInner = styled.div`
   display: grid; 
   grid-template-columns: 1.1fr 0.9fr; 
   gap: 50px;
-   h1 { 
+  h1 { 
     color: #ffffff;
     font-size: clamp(50px, 6.5vw, 92px); 
     line-height: 1.05; 
     letter-spacing: -2px; 
-
+  }
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -747,14 +745,10 @@ const HeroContent = styled.div`
   display: flex; 
   flex-direction: column; 
   gap: 30px; 
-  h1 { 
-    font-size: clamp(50px, 6.5vw, 92px); 
-    line-height: 1.05; 
-    letter-spacing: -2px; 
-    /* Mobile tweaks */
-    @media (max-width: 600px) {
-       font-size: 42px;
-       letter-spacing: -1.5px;
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 42px;
+      letter-spacing: -1.5px;
     }
   }
 `;
@@ -765,7 +759,7 @@ const Breadcrumbs = styled.div`
   gap: 10px; 
   .star { color: ${COLORS.starGold}; } 
   a { color: white; text-decoration: none; opacity: 0.7; }
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 `;
 const ButtonGroup = styled.div`display: flex; height: 62px; width: fit-content;`;
 const MainBtn = styled.button`background: ${COLORS.lime}; color: black; border: none; padding: 0 45px; font-weight: 600; font-size: 16px; border-radius: 4px 0 0 4px; cursor: pointer;`;
@@ -775,7 +769,7 @@ const RatingsRow = styled.div`display: flex; gap: 40px; margin-top: 30px; flex-w
 const RatingItem = styled.div`.brand { font-size: 22px; font-weight: 600; letter-spacing: -1px; } .stars { color: ${COLORS.starGold}; font-size: 14px; .val { color: white; margin-left: 8px; font-weight: 300; } } @media (max-width: 400px) { .brand { font-size: 18px; } }`;
 const HeroGraphic = styled.div`height: 450px; width: 450px; @media (max-width: 1024px) { display: none; }`;
 
-/* Intro */
+/* Intro Styles */
 const IntroContainer = styled.section`padding: 120px 10%; background: ${COLORS.bgSection}; display: flex; flex-direction: column; @media (max-width: 768px) { padding: 60px 24px; }`;
 const BadgeWrapper = styled.div`background: white; padding: 8px 18px; color: ${COLORS.coaxBlue}; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 50px; width: fit-content; .dot { width: 6px; height: 6px; background: ${COLORS.coaxBlue}; border-radius: 50%; display: inline-block; margin-right: 8px; }`;
 const LayoutGrid = styled.div`
@@ -799,7 +793,7 @@ const BlueButtonGroup = styled.div`display: flex; height: 52px; width: fit-conte
 const BlueTextBtn = styled.button`background: ${COLORS.coaxBlue}; color: white; border: none; padding: 0 30px; font-size: 14px; font-weight: 600; cursor: pointer; @media (max-width: 480px) { width: 100%; text-align: left; }`;
 const BlueIconBtn = styled.div`background: ${COLORS.darkerBlue}; width: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;`;
 
-/* Standards */
+/* Standards Section */
 const StandardsContainer = styled.section`padding: 140px 10%; background: white; @media (max-width: 768px) { padding: 60px 24px; }`;
 const StandardsInner = styled.div`
   max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 120px; 
@@ -810,7 +804,7 @@ const StandardsInner = styled.div`
 const AccordionList = styled.div`display: flex; flex-direction: column;`;
 const AccordionItem = styled.div<{ isOpen: boolean }>`border-top: 1px solid ${COLORS.borderColor}; padding: 30px 0; &:last-child { border-bottom: 1px solid ${COLORS.borderColor}; } .header { display: flex; align-items: center; gap: 30px; cursor: pointer; .btn-box { width: 24px; height: 24px; border: 1.5px solid ${props => props.isOpen ? COLORS.coaxBlue : COLORS.borderColor}; display: flex; align-items: center; justify-content: center; color: ${COLORS.coaxBlue}; font-weight: 700; flex-shrink: 0; } h3 { font-size: 20px; color: ${props => props.isOpen ? COLORS.coaxBlue : COLORS.textDark}; } } .content-body p { padding: 20px 0 0 54px; font-size: 15px; color: ${COLORS.textGray}; line-height: 1.7; max-width: 480px; } @media (max-width: 600px) { .header { gap: 15px; h3 { font-size: 18px; } } .content-body p { padding-left: 39px; } }`;
 
-/* Cards Section */
+/* Dog-Ear Cards Styles */
 const GridSection = styled.section`padding: 120px 10%; background-color: ${COLORS.coaxBlue}; @media (max-width: 768px) { padding: 80px 24px; }`;
 const SectionHeader = styled.h2<{ white?: boolean }>`font-size: 42px; color: white; margin-bottom: 60px; font-weight: 500; @media (max-width: 768px) { font-size: 32px; margin-bottom: 40px; }`;
 const CardsGrid = styled.div`
@@ -826,17 +820,14 @@ const DogEarCard = styled(motion.div)`
   @media (max-width: 600px) { min-height: auto; padding: 30px 24px 60px; }
 `;
 
-/* Benefits */
+/* Benefits Styles */
 const BenefitsContainer = styled.section`
   padding: 140px 0; background-color: white; display: flex; flex-direction: column; 
   .title-wrapper { 
     padding: 0 10%; margin-bottom: 80px; display: flex; justify-content: center; text-align: center; 
     h2 { font-size: clamp(40px, 4.5vw, 68px); font-weight: 500; color: ${COLORS.textDark}; line-height: 1.05; letter-spacing: -2px; max-width: 800px; } 
   }
-  @media (max-width: 768px) { 
-    padding: 80px 0; 
-    .title-wrapper { padding: 0 24px; margin-bottom: 40px; text-align: left; }
-  }
+  @media (max-width: 768px) { padding: 80px 0; .title-wrapper { padding: 0 24px; margin-bottom: 40px; text-align: left; } }
 `;
 const BenefitsGridWrapper = styled.div`
   display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #eee; border-bottom: 1px solid #eee; width: 100%;
@@ -845,24 +836,13 @@ const BenefitsGridWrapper = styled.div`
 const BenefitCell = styled.div<{ isLeft: boolean, index?: number }>`
   padding: 80px 10%; display: flex; flex-direction: column; gap: 24px; 
   border-right: ${props => props.isLeft ? "1px solid #eee" : "none"}; border-bottom: 1px solid #eee;
-  /* Laptop bottom row correction */
   &:nth-last-child(1), &:nth-last-child(2) { border-bottom: none; }
-  
   h4 { font-size: 24px; font-weight: 600; color: ${COLORS.coaxBlue}; } 
   p { font-size: 16px; line-height: 1.7; color: ${COLORS.textGray}; max-width: 480px; }
-
-  @media (max-width: 900px) {
-    /* Stack logic on mobile */
-    padding: 50px 24px;
-    border-right: none !important;
-    border-bottom: 1px solid #eee !important;
-    &:last-child { border-bottom: none !important; }
-    /* Correct border reset from laptop logic */
-    &:nth-last-child(2) { border-bottom: 1px solid #eee; }
-  }
+  @media (max-width: 900px) { padding: 50px 24px; border-right: none !important; border-bottom: 1px solid #eee !important; &:last-child { border-bottom: none !important; } &:nth-last-child(2) { border-bottom: 1px solid #eee !important; } }
 `;
 
-/* Why Choose */
+/* Blue Why-Choose Styles */
 const BlueCardSection = styled.section`padding: 140px 10%; background-color: ${COLORS.coaxBlue}; display: flex; flex-direction: column; align-items: center; .centered-header { font-size: clamp(36px, 4vw, 62px); font-weight: 500; color: white; text-align: center; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 80px; } @media (max-width: 768px) { padding: 80px 24px; .centered-header { text-align: left; align-self: flex-start; margin-bottom: 50px; } }`;
 const ChooseCardsGrid = styled.div`display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); } @media (max-width: 650px) { grid-template-columns: 1fr; }`;
 const WhyChooseCard = styled(motion.div)`background-color: ${COLORS.lime}; padding: 40px; min-height: 400px; position: relative; display: flex; flex-direction: column; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); .card-index { font-size: 11px; color: ${COLORS.textDark}; opacity: 0.6; font-weight: 600; margin-bottom: 40px; } .card-title { font-size: 24px; color: ${COLORS.textDark}; font-weight: 600; margin-bottom: 25px; line-height: 1.2; } .card-text { font-size: 15.5px; color: rgba(10, 31, 68, 0.85); line-height: 1.6; } @media (max-width: 600px) { min-height: auto; padding: 30px 24px 60px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%); }`;
@@ -874,7 +854,7 @@ const AbstractGraphicSVG = () => (
   </motion.svg>
 );
 
-/* Page 7 */
+/* Banner / Page 7 Styles */
 const PageSevenContainer = styled.div`width: 100%; max-width: 1440px; margin: 0 auto; padding: 80px 24px; font-family: 'Inter', sans-serif; @media (max-width: 600px) { padding: 40px 16px; }`;
 const BannerWrapper = styled.div`width: 100%; height: auto; min-height: 240px; background: linear-gradient(100deg, #1d4ed8 0%, #3b82f6 100%); clip-path: polygon(0 0, 100% 0, 100% 80%, 95% 100%, 0 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25); @media (max-width: 850px) { clip-path: none; border-radius: 12px; padding: 30px; }`;
 const BannerContent = styled.div`display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 40px; position: relative; z-index: 5; width: 100%; max-width: 800px; padding: 60px 20px; @media (max-width: 850px) { flex-direction: column; text-align: center; gap: 24px; padding: 40px 20px; }`;
@@ -883,8 +863,8 @@ const DownloadBtn = styled.button`background-color: ${COLORS.lime}; color: #0000
 const DecoCircles = styled.div`position: absolute; top: 0; left: 0; pointer-events: none; width: 250px; height: 200px; z-index: 0;`;
 const DecoStar = styled.div`position: absolute; top: 40px; right: 80px; pointer-events: none; opacity: 0.9; z-index: 1; @media (max-width: 850px) { top: 20px; right: 20px; transform: scale(0.6); }`;
 
-/* Page 8 (Feedback) */
-const Section8 = styled.section`padding: 120px 0 160px; background-color: #f8fdfa; overflow: hidden; font-family: 'Inter', sans-serif; position: relative; @media (max-width: 850px) { padding: 80px 0 120px; }`;
+/* Feedback Styles (Identical logic) */
+const Section8 = styled.section`padding: 120px 0 160px; background-color: #f8fdfa; overflow: hidden; position: relative; @media (max-width: 850px) { padding: 80px 0 120px; }`;
 const BackgroundWrapper = styled.div`position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none;`;
 const GridOverlay = styled.div`position: absolute; inset: 0; background-image: radial-gradient(#28a665 1px, transparent 1px); background-size: 40px 40px; opacity: 0.07; z-index: 2;`;
 const OrbOne = styled(motion.div)`position: absolute; top: -10%; left: -5%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(40, 166, 101, 0.25) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; filter: blur(60px); z-index: 1;`;
@@ -899,10 +879,10 @@ const StackLayerOne = styled.div`position: absolute; top: 10px; left: 10px; righ
 const StackLayerTwo = styled.div`position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; height: 100%; background: #28a665; border-radius: 4px; z-index: 0; clip-path: polygon(0 0, 100% 0, 100% 85%, 93% 100%, 0 100%); @media (max-width: 850px) { display: none; }`;
 const CardWindow = styled.div`position: relative; z-index: 10; width: 100%; height: 100%; border-radius: 4px;`;
 const CardFrame = styled(motion.div)`background-color: #ffffff; width: 100%; height: 100%; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%); border-radius: 4px; overflow: hidden; @media (max-width: 850px) { clip-path: none; border-radius: 12px; height: auto; padding-bottom: 40px; }`;
-const InnerGrid = styled(motion.div)`position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: grid; grid-template-columns: 42% 58%; cursor: grab; will-change: transform, opacity; background-color: #ffffff; &:active { cursor: grabbing; } @media (max-width: 850px) { position: relative; grid-template-columns: 1fr; height: auto; display: flex; flex-direction: column; }`;
+const InnerGrid = styled(motion.div)`position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: grid; grid-template-columns: 42% 58%; cursor: grab; background-color: #ffffff; @media (max-width: 850px) { position: relative; grid-template-columns: 1fr; height: auto; display: flex; flex-direction: column; }`;
 const ImageSide = styled.div`position: relative; background-color: #f0f0f0; height: 100%; width: 100%; @media (max-width: 850px) { height: 280px; flex-shrink: 0; }`;
-const ProfileImg = styled.img`width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; pointer-events: none;`;
-const LogoOverlay = styled.img`position: absolute; top: 24px; right: 24px; width: 100px; height: auto; object-fit: contain; z-index: 2; background: #fff; padding: 8px; border-radius: 4px; pointer-events: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05);`;
+const ProfileImg = styled.img`width: 100%; height: 100%; object-fit: cover; pointer-events: none;`;
+const LogoOverlay = styled.img`position: absolute; top: 24px; right: 24px; width: 100px; height: auto; object-fit: contain; z-index: 2; background: #fff; padding: 8px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);`;
 const ContentSide = styled.div`padding: 60px 50px 80px; display: flex; flex-direction: column; justify-content: flex-start; @media (max-width: 850px) { padding: 30px 24px; }`;
 const ServiceTag = styled.div`font-size: 12px; font-weight: 700; text-transform: uppercase; color: #28a665; margin-bottom: 20px; letter-spacing: 0.5px;`;
 const QuoteIcon = styled.div`font-size: 60px; line-height: 1; color: #28a665; font-family: serif; margin-bottom: 16px; opacity: 0.8;`;
@@ -911,19 +891,19 @@ const AuthorBlock = styled.div`margin-top: auto;`;
 const AuthorName = styled.div`font-size: 18px; font-weight: 700; color: #121212; margin-bottom: 4px;`;
 const AuthorRole = styled.span`font-size: 14px; color: #444;`;
 const AuthorCompany = styled.span`font-size: 14px; color: #28a665; font-weight: 600; margin-left: 6px; &:before { content: "|"; margin-right: 6px; color: #ccc; }`;
-const CtaButton = styled.button`margin-top: 24px; background: #0b363d; color: #fff; border: none; padding: 12px 24px; font-size: 14px; font-weight: 600; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; align-self: flex-start; transition: all 0.3s; box-shadow: 0 4px 15px rgba(11, 54, 61, 0.2); &:hover { background: #28a665; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(40, 166, 101, 0.3); }`;
+const CtaButton = styled.button`margin-top: 24px; background: #0b363d; color: #fff; border: none; padding: 12px 24px; font-size: 14px; font-weight: 600; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; align-self: flex-start; transition: all 0.3s; &:hover { background: #28a665; transform: translateY(-2px); }`;
 const Controls = styled.div`display: flex; gap: 12px; justify-content: center; margin-top: 40px; position: absolute; bottom: -70px; left: 0; right: 0; z-index: 20; @media (max-width: 850px) { bottom: -80px; }`;
-const NavBtn = styled.button`width: 48px; height: 48px; border: 1px solid #e1e1e1; background: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #888; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.05); &:hover { border-color: #28a665; background-color: #28a665; color: #ffffff; transform: scale(1.1); box-shadow: 0 6px 16px rgba(40, 166, 101, 0.4); }`;
+const NavBtn = styled.button`width: 48px; height: 48px; border: 1px solid #e1e1e1; background: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #888; transition: all 0.2s; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.05); &:hover { border-color: #28a665; background-color: #28a665; color: #ffffff; transform: scale(1.1); }`;
 
-/* Page 9 (Audit) */
-const AuditProcessSection = styled.section`padding: 140px 0 160px; background-color: #F8FAFD; font-family: 'Inter', sans-serif; @media (max-width: 800px) { padding: 80px 0 100px; }`;
+/* Audit Process Section Styles */
+const AuditProcessSection = styled.section`padding: 140px 0 160px; background-color: #F8FAFD; @media (max-width: 800px) { padding: 80px 0 100px; }`;
 const AuditContainer = styled.div`max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; .audit-title { font-size: clamp(38px, 4.5vw, 62px); font-weight: 400; text-align: center; color: #1a1b1e; letter-spacing: -1.5px; margin-bottom: 80px; }`;
 const ProcessGrid = styled.div`display: grid; grid-template-columns: 1fr 1fr; width: 100%; border-top: 1px solid ${COLORS.borderColor}; border-bottom: 1px solid ${COLORS.borderColor}; @media (max-width: 800px) { grid-template-columns: 1fr; border-top: none; border-bottom: none; }`;
 const ProcessCard = styled(motion.div)<{ idx: number }>`padding: 60px 50px; display: flex; flex-direction: column; align-items: flex-start; border-right: ${props => (props.idx % 2 === 0 ? `1px solid ${COLORS.borderColor}` : 'none')}; border-bottom: ${props => (props.idx < 2 ? `1px solid ${COLORS.borderColor}` : 'none')}; @media (max-width: 800px) { border-right: none; border-bottom: 1px solid ${COLORS.borderColor}; &:last-child { border-bottom: none; } padding: 40px 24px; } h3 { color: ${COLORS.coaxBlue}; font-size: 26px; font-weight: 500; margin-bottom: 24px; letter-spacing: -0.5px; } p { font-size: 16px; line-height: 1.6; color: ${COLORS.textGray}; font-weight: 400; }`;
 const IconBox = styled.div`color: ${COLORS.coaxBlue}; margin-bottom: 24px;`;
 
-/* Page 10 */
-const PageTenSection = styled.section`padding: 100px 0 160px; background: #ffffff; font-family: 'Inter', sans-serif; @media (max-width: 900px) { padding: 60px 0 100px; }`;
+/* FAQ / Page 10 Section Styles */
+const PageTenSection = styled.section`padding: 100px 0 160px; background: #ffffff; @media (max-width: 900px) { padding: 60px 0 100px; }`;
 const PageTenInner = styled.div`max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; gap: 120px; @media (max-width: 900px) { gap: 60px; }`;
 const CTABanner10 = styled(BannerWrapper)``;
 const BannerContent10 = styled(BannerContent)`justify-content: center; gap: 30px; text-align: center; @media (min-width: 850px) { flex-direction: row; text-align: left; justify-content: space-between; }`;
@@ -934,151 +914,34 @@ const BackgroundCurve = styled.div`position: absolute; top: 50%; left: -20%; wid
 const FAQContent = styled.div`position: relative; z-index: 1; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: flex-start; @media (max-width: 900px) { grid-template-columns: 1fr; gap: 40px; }`;
 const FAQLeft = styled.div`h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 400; letter-spacing: -1.5px; color: #1a1b1e; line-height: 1.15; }`;
 const FAQRight = styled.div`display: flex; flex-direction: column; width: 100%;`;
-const FAQItem = styled.div<{ isOpen: boolean }>`border-top: 1px solid #eee; padding: 24px 0; cursor: pointer; &:last-child { border-bottom: 1px solid #eee; } .q-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; h3 { font-size: 17px; font-weight: 500; color: ${props => props.isOpen ? COLORS.coaxBlue : COLORS.textDark}; transition: color 0.3s; margin: 0; line-height: 1.5; } .icon-box { color: ${props => props.isOpen ? COLORS.coaxBlue : '#ccc'}; flex-shrink: 0; width: 24px; height: 24px; border: 1px solid ${props => props.isOpen ? COLORS.coaxBlue : '#e0e0e0'}; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s; } } .a-body { overflow: hidden; p { margin-top: 24px; margin-bottom: 8px; font-size: 15px; line-height: 1.7; color: ${COLORS.textGray}; max-width: 90%; } } &:hover .icon-box { border-color: ${COLORS.coaxBlue}; color: ${COLORS.coaxBlue}; }`;
+const FAQItem = styled.div<{ isOpen: boolean }>`border-top: 1px solid #eee; padding: 24px 0; cursor: pointer; &:last-child { border-bottom: 1px solid #eee; } .q-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; h3 { font-size: 17px; font-weight: 500; color: ${props => props.isOpen ? COLORS.coaxBlue : COLORS.textDark}; transition: color 0.3s; margin: 0; line-height: 1.5; } .icon-box { color: ${props => props.isOpen ? COLORS.coaxBlue : '#ccc'}; flex-shrink: 0; width: 24px; height: 24px; border: 1px solid ${props => props.isOpen ? COLORS.coaxBlue : '#e0e0e0'}; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s; } } .a-body { overflow: hidden; p { margin-top: 24px; font-size: 15px; line-height: 1.7; color: ${COLORS.textGray}; max-width: 90%; } }`;
 
-/* Page 11 (Blog) */
+/* Blog Slider Styles */
 const BlogSection = styled.div`
   background-color: #f2f9f5;
   padding: 100px 0 120px;
   border-top: 1px solid #e1eadd;
-  font-family: 'Inter', sans-serif;
   overflow: hidden;
   @media (max-width: 768px) { padding: 60px 0 80px; }
 `;
-const BlogContainer = styled.div`
-  max-width: 1280px; 
-  margin: 0 auto; 
-  padding: 0 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  @media (max-width: 768px) { padding: 0 24px; }
-`;
-const BlogHeaderWrapper = styled.div` 
-  margin-bottom: 60px; 
-  text-align: center;
-  width: 100%;
-`;
-const BlogTitle = styled.h2` 
-  font-size: 48px; 
-  font-weight: 600; 
-  line-height: 1.1; 
-  color: #1a1a1a; 
-  margin: 0; 
-  letter-spacing: -1px; 
-  display: flex; 
-  flex-direction: column;
-  gap: 12px;
-  @media (max-width: 768px) { font-size: 32px; } 
-`;
-const BlogLink = styled.span`
-  color: ${COLORS.coaxBlue};
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  transition: gap 0.2s ease;
-  cursor: pointer;
-  outline: none;
-  &:hover { gap: 16px; }
-  svg { transform: translateY(2px); }
-`;
-const BlogSliderOuter = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-`;
-const BlogCardsContainer = styled.div`
-  display: flex; 
-  gap: 30px; 
-  overflow-x: auto; 
-  scroll-behavior: smooth; 
-  width: 100%; 
-  padding: 20px 20px 40px; 
-  -ms-overflow-style: none; scrollbar-width: none; 
-  &::-webkit-scrollbar { display: none; }
-`;
+const BlogContainer = styled.div`max-width: 1280px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; align-items: center; @media (max-width: 768px) { padding: 0 24px; }`;
+const BlogHeaderWrapper = styled.div`margin-bottom: 60px; text-align: center; width: 100%;`;
+const BlogTitle = styled.h2`font-size: 48px; font-weight: 600; line-height: 1.1; color: #1a1a1a; margin: 0; letter-spacing: -1px; display: flex; flex-direction: column; gap: 12px; @media (max-width: 768px) { font-size: 32px; }`;
+const BlogLink = styled.span`color: ${COLORS.coaxBlue}; display: inline-flex; align-items: center; justify-content: center; gap: 12px; transition: gap 0.2s ease; cursor: pointer; &:hover { gap: 16px; }`;
+const BlogSliderOuter = styled.div`display: flex; flex-direction: column; align-items: center; width: 100%;`;
+const BlogCardsContainer = styled.div`display: flex; gap: 30px; overflow-x: auto; scroll-behavior: smooth; width: 100%; padding: 20px 20px 40px; scrollbar-width: none; &::-webkit-scrollbar { display: none; }`;
 const BlogCard = styled.div` 
-  min-width: 450px; 
-  background: white; 
-  display: flex; 
-  height: 260px; 
-  border-radius: 16px; 
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-  border: 1px solid transparent;
-  transition: all 0.3s ease; 
-  cursor: pointer; 
-  flex-shrink: 0;
-
-  &:hover { 
-    transform: translateY(-8px); 
-    box-shadow: 0 20px 40px rgba(40, 166, 101, 0.15); 
-    border-color: ${COLORS.lime};
-  } 
-
-  .card-img { 
-     width: 40%; 
-     background: #f1f1f1; 
-     overflow: hidden;
-     position: relative;
-     
-     img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-  } 
-  
-  &:hover .card-img img { transform: scale(1.05); }
-
-  .card-content { 
-      width: 60%; 
-      padding: 30px; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: flex-start; 
-  } 
-  
-  .tag { 
-    background: #e6f7ee; 
-    color: #28a665; 
-    font-size: 11px; 
-    font-weight: 700; 
-    text-transform: uppercase; 
-    letter-spacing: 0.5px;
-    padding: 6px 12px; 
-    border-radius: 6px; 
-    margin-bottom: 16px; 
-  } 
-  
-  h3 { 
-      font-size: 20px; 
-      font-weight: 700; 
-      color: #111; 
-      margin: 0 0 16px 0; 
-      line-height: 1.4; 
-      transition: color 0.2s;
-  } 
-  
-  &:hover h3 { color: #28a665; }
-
+  min-width: 450px; background: white; display: flex; height: 260px; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.3s ease; cursor: pointer;
+  &:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(40, 166, 101, 0.15); border-color: ${COLORS.lime}; } 
+  .card-img { width: 40%; background: #f1f1f1; img { width: 100%; height: 100%; object-fit: cover; } } 
+  .card-content { width: 60%; padding: 30px; display: flex; flex-direction: column; justify-content: center; } 
+  .tag { background: #e6f7ee; color: #28a665; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 6px 12px; border-radius: 6px; margin-bottom: 16px; width: fit-content; } 
+  h3 { font-size: 20px; font-weight: 700; color: #111; margin-bottom: 16px; line-height: 1.4; } 
   .date { font-size: 13px; color: #999; margin-top: auto; } 
-
-  /* Mobile Stack */
-  @media (max-width: 600px) { 
-    min-width: 85vw;
-    flex-direction: column; 
-    height: auto; 
-    
-    .card-img { width: 100%; height: 200px; } 
-    .card-content { width: 100%; padding: 24px; } 
-  } 
+  @media (max-width: 600px) { min-width: 85vw; flex-direction: column; height: auto; .card-img { width: 100%; height: 200px; } .card-content { width: 100%; padding: 24px; } } 
 `;
 const SliderControls = styled.div` display: flex; gap: 16px; margin-top: 20px; `;
 const SliderButton = styled.button` 
-  width: 56px; height: 56px; border-radius: 50%;
-  border: 1px solid #e1eadd; background: white; color: #111; 
-  display: flex; align-items: center; justify-content: center; 
-  cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  &:hover { background: #28a665; border-color: #28a665; color: white; transform: scale(1.1); box-shadow: 0 8px 20px rgba(40, 166, 101, 0.3); } 
+  width: 56px; height: 56px; border-radius: 50%; border: 1px solid #e1eadd; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s;
+  &:hover { background: #28a665; color: white; transform: scale(1.1); } 
 `;

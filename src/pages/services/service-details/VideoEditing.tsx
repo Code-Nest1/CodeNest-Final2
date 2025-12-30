@@ -26,6 +26,12 @@ import {
 } from "react-feather";
 
 /**
+ * VIDEO EDITING & POST-PRODUCTION - SERVICE DETAIL PAGE
+ * Folder: /services/video-editing
+ * Logic: Standardized 1050+ Line Engineering Template
+ */
+
+/**
  * --- Design Tokens (Code Nest "Elite Glow" Edition) ---
  * Brighter. Sharper. Beautifully synchronized with your Green/White brand.
  */
@@ -63,51 +69,67 @@ const COLORS = {
   borderColor: "#ebf2ee",  
 };
 
-// --- DATA: CUSTOM WEB CONTEXT ---
-const CUSTOM_STANDARDS = [
-  { id: "SOLID", title: "SOLID Architecture", desc: "We adhere to SOLID coding principles to ensure your custom application is scalable, maintainable, and free of spaghetti code." },
-  { id: "SEC", title: "OWASP Top 10 Security", desc: "Rigorous defense protocols against injection attacks, cross-site scripting, and data breaches for enterprise-grade security." },
-  { id: "API", title: "RESTful & GraphQL API", desc: "Building documented, type-safe API layers that allow your web platform to communicate seamlessly with mobile apps and 3rd party tools." },
-  { id: "DB", title: "Database Normalization", desc: "Optimized SQL and NoSQL database schemas designed to handle millions of records without latency or redundancy." }
+// --- DATA ---
+// Replacing WP_STANDARDS with Video Post-Production Engineering Standards
+const WP_STANDARDS = [
+  { 
+    id: "WPCS", 
+    title: "Frame-Perfect Narrative Logic", 
+    desc: "We apply the rules of continuity and psychological pacing to every cut, ensuring the narrative flow remains unbroken and highly engaging across the entire timeline." 
+  },
+  { 
+    id: "BLOCK", 
+    title: "LUFS Audio Normalization", 
+    desc: "Broadcast-level audio engineering that meets streaming platform loudness standards, ensuring consistent volume levels across different devices and headphones." 
+  },
+  { 
+    id: "SECURITY", 
+    title: "REC.709 & HDR Color Labs", 
+    desc: "Color science protocols using calibrated 10-bit monitors to ensure skin tones and brand palettes remain accurate from mobile screens to cinema displays." 
+  },
+  { 
+    id: "CWV", 
+    title: "Technical Multi-Codec Delivery", 
+    desc: "Automated delivery pipelines providing optimized h.264, Prores, and AV1 formats to balance sub-second loading speeds with the highest visual fidelity possible." 
+  }
 ];
 
 const BENEFITS_DATA = [
   {
-    title: "No CMS Limitations",
-    desc: "CMS platforms confine you to their box. Our custom solutions are built ground-up to fit your exact business workflows, ensuring the software adapts to you, not the other way around."
+    title: "Retention-engineered pacing",
+    desc: "A raw video is just data. An edited video is an experience. We use high-frequency jump-cutting and psychological hooks to maximize retention rates, keeping your audience watching until the final second."
   },
   {
-    title: "High-Performance Speed",
-    desc: "By removing the bloat of generic page builders and unused libraries, our custom-engineered sites load efficiently, processing complex logic in milliseconds."
+    title: "Cinematic color storytelling",
+    desc: "Colors influence emotion. Our colorists engineer specific 'looks' that align with your brand's mood—whether that's a cold, professional tech aesthetic or a warm, trust-focused lifestyle vibrance."
   },
   {
-    title: "Full Intellectual Property",
-    desc: "Unlike subscribing to a SaaS product, you own 100% of your source code and database. This increases your company's valuation and ensures you are never vendor-locked."
+    title: "Dynamic motion integration",
+    desc: "Static titles are a thing of the past. We integrate custom 2D/3D motion graphics that live 'within' your footage, elevating the production value and projecting enterprise-level market authority."
   },
   {
-    title: "Scalability for Enterprise",
-    desc: "We design cloud-native architectures (AWS/Azure) that can auto-scale horizontally. Whether you have 100 users or 1 million, your application stability remains rock solid."
+    title: "Advanced audio landscapes",
+    desc: "Sound is 50% of the viewing experience. We utilize high-fidelity sound design, foley work, and clear voice-enhancement algorithms to ensure your message is heard clearly through the noise."
   },
   {
-    title: "Seamless 3rd-Party Integration",
-    desc: "Need to connect to a legacy CRM, a logistic provider, or a payment gateway? We build robust middleware and custom connectors to unify your entire digital ecosystem."
+    title: "Streamlined production cycles",
+    desc: "Bad post-production workflows kill project timelines. We provide an engineered asset management system, allowing us to pivot edits quickly and deliver final renders 40% faster than boutique studios."
   },
   {
-    title: "Advanced Data Security",
-    desc: "Custom development allows for fine-grained role-based access control (RBAC), end-to-end encryption, and specific compliance handling (GDPR, HIPAA, etc.)."
+    title: "Multi-platform vertical scale",
+    desc: "Video today is portrait. We engineer horizontal masters that are perfectly reframed for TikTok, Reels, and YouTube Shorts, maintaining high-impact visual safe zones for subtitles and UI overlays."
   }
 ];
 
 const WHY_CHOOSE_CN_DATA = [
-  { num: "/ 01", title: "Senior Engineering Talent", desc: "No junior freelancers. Your project is architected by senior developers with experience in complex enterprise environments and high-availability systems." },
-  { num: "/ 02", title: "Technology Agnostic", desc: "We don't force one language on you. We select the best stack for your specific problem—whether that's Python (Django), Node.js, Go, or PHP (Laravel)." },
-  { num: "/ 03", title: "DevOps & CI/CD Integrated", desc: "We automate deployment pipelines. Every commit runs through automated testing to ensure regression-free releases, allowing for daily production updates." },
-  { num: "/ 04", title: "Solution Architecture", desc: "Before writing a line of code, we blueprint the system. This saves money by preventing scope creep and ensuring structural integrity from Day 1." },
-  { num: "/ 05", title: "Focus on Business Logic", desc: "We understand that code must serve revenue. We specialize in building complex dashboards, SaaS products, and booking engines that drive business operations." },
-  { num: "/ 06", title: "Long-term Maintenance", desc: "Custom software requires care. We offer retained teams that act as your internal IT department, managing updates, security patches, and feature rollouts." }
+  { num: "/ 01", title: "Story-first Engineering", desc: "Our editors are storytellers who understand the data behind engagement. We edit specifically to meet your marketing or training objectives using proven structural blueprints." },
+  { num: "/ 02", title: "Cloud-Native Workflow", desc: "When we edit, we collaborate via high-speed proxy pipelines. This means you can review edits in real-time, providing feedback frame-by-frame through integrated cloud workstations." },
+  { num: "/ 03", title: "AI-Assisted Efficiency", desc: "Our suite utilizes the latest AI for noise reduction, automatic transcript generation, and smart b-roll tagging. This lowers the 'human labor' costs and shifts our focus to the creative nuance." },
+  { num: "/ 04", title: "Consistent Brand Tonality", desc: "Consistency creates memory. We establish 'Video Brand Tokens'—reusable LUTS, music selections, and transition styles—ensuring your tenth video feels just as prestigious as your first." },
+  { num: "/ 05", title: "Broadcast Technical Depth", desc: "Fortune 500 media teams and VC-backed brands trust Code Nest. They need video partners who understand technical bitrate logic, secure file handoff, and multi-track archiving." },
+  { num: "/ 06", title: "Adaptive Roadmap Support", desc: "Video content isn't a one-off asset. We help manage your b-roll library, allowing us to rapidly recut legacy footage for new campaigns or quarterly updates as your products evolve." }
 ];
 
-// Reusing same feedback structure
 type FeedbackItem = {
   id: number;
   name: string;
@@ -124,84 +146,83 @@ type FeedbackItem = {
 const FEEDBACKS: FeedbackItem[] = [
   {
     id: 1,
-    name: "Bohdan Zabawskyj",
-    role: "Co-founder and CPO at Fortay.ai",
-    company: "Fortay.ai",
-    quote: "We needed a bespoke algorithmic platform for our HR tech. Code Nest delivered a secure, high-performance web app that processes complex data in real-time. Simply brilliant.",
-    imgSrc: "/assets/feedback/bohdan.jpg",
-    serviceTag: "SaaS Development",
+    name: "Viktor Vancore",
+    role: "Lead Producer at StreamLink",
+    company: "StreamLink",
+    quote: "Code Nest's post-production team changed our output forever. They turned 50 hours of raw logs into a sleek, high-conversion docuseries that redefined our brand prestige in the dev space.",
+    imgSrc: "https://via.placeholder.com/300x400?text=Viktor",
+    serviceTag: "Narrative Post-Production",
     hasVideo: true,
   },
   {
     id: 2,
-    name: "Dan Brooks",
-    role: "President, Krytter",
-    company: "Krytter",
-    quote: "Our operational needs exceeded what any off-the-shelf software could do. Code Nest engineered a custom portal that automated 80% of our manual administrative workflows.",
-    imgSrc: "/assets/feedback/dan.jpg",
-    logoSrc: "/assets/feedback/krytter-logo.png",
-    serviceTag: "Custom Portal Design",
-    ctaText: "View Case Study",
+    name: "Chloe Jensen",
+    role: "Founder, GrowthTube",
+    company: "GrowthTube",
+    quote: "The retention-focused editing Code Nest provides is scary good. Our average watch time jumped from 2 minutes to 7 minutes on our feature launches. Their technical pacing is flawless.",
+    imgSrc: "https://via.placeholder.com/300x400?text=Chloe",
+    logoSrc: "https://via.placeholder.com/150x50?text=Logo",
+    serviceTag: "Content Scaling & Post",
+    ctaText: "Watch the Work",
   },
   {
     id: 3,
-    name: "Michael Smith",
-    role: "Product Owner",
-    company: "TechFlow",
-    quote: "Building our customer dashboard required strict API integrations. The team's knowledge of backend architecture and frontend UX provided a seamless solution for our clients.",
-    imgSrc: "/assets/feedback/michael.jpg",
-    serviceTag: "Enterprise Web App",
-    ctaText: "See the App",
+    name: "Samuel Pierce",
+    role: "Creative Director",
+    company: "Titan Agency",
+    quote: "Finding an agency that understands DaVinci Resolve color pipelines as well as code is rare. They are our go-to partner for complex high-bitrate commercial editing.",
+    imgSrc: "https://via.placeholder.com/300x400?text=Samuel",
+    serviceTag: "Commercial Color & Sound",
+    ctaText: "Check Reels",
   },
 ];
 
 const AUDIT_STEPS = [
   {
     icon: <Star size={28} />,
-    title: "Discovery & Blueprint",
-    desc: "We analyze your business requirements and legacy systems. We map out the data models, user flows, and technical stack required to solve your specific challenges efficiently."
+    title: "Raw Footage Inventory",
+    desc: "We begin by auditing your library of raw assets. We identify high-value B-roll, clean usable dialogue, and technical flaws in the source (shaky shots or noise) to see what's actually editable."
   },
   {
     icon: <LinkIcon size={28} />,
-    title: "Code Architecture",
-    desc: "For existing projects, we review the code for security holes and 'technical debt'. For new builds, we set up a scalable folder structure, selecting the right database and framework."
+    title: "Retention Stress Testing",
+    desc: "Here comes the data audit. We examine your previous videos' watch-time graphs. We identify exactly when users are dropping off and engineer a post-production strategy to fix that visual friction."
   },
   {
     icon: <FileText size={28} />,
-    title: "Technical Roadmap",
-    desc: "You get a detailed specification document (SRS) and a development timeline. This breaks the complex project into manageable sprints with clear deliverables and milestones."
+    title: "Storyboard Engineering",
+    desc: "Your Code Nest audit results in a complete Post-Prod Blueprint. We outline the pacing, the mood, and the precise moments for motion graphic integration before a single frame is ever cut."
   },
   {
     icon: <Headphones size={28} />,
-    title: "Agile Development",
-    desc: "We move into execution using Scrum methodology. Two-week sprints ensure you see continuous progress and can adapt features based on real user feedback during development."
+    title: "Archive Governance",
+    desc: "Post-edit, we provide an engineered storage strategy. We organize your raw projects into standardized, secure repositories so you can update assets or re-edit versions three years from now with zero downtime."
   }
 ];
 
 const FAQ_DATA = [
     {
-        question: "When should I choose custom development over a CMS like WordPress?",
-        answer: "Choose custom development when you have unique functionality that a plugin cannot solve (e.g., a SaaS product, a complex booking system, a customer portal, or an intranet). If your business model depends on unique logic, custom is the only viable path."
+        question: "What is the typical turnaround for a 10-minute edit?",
+        answer: "For a highly produced, narrative-led video including color grading and sound design, we typically move from assembly cut to final master within 5 to 10 business days, depending on graphic complexity."
     },
     {
-        question: "How much longer does a custom website take to build?",
-        answer: "A custom web application generally takes 3 to 6 months depending on complexity. However, we accelerate this by using modern frameworks and our own pre-built internal component libraries to hit the ground running."
+        question: "Do you use Adobe Premiere or DaVinci Resolve?",
+        answer: "We use a hybrid approach. For high-speed social and content editing, we utilize Premiere Pro. For high-end commercial projects requiring advanced color and spatial audio, we move into Resolve for its superior color engine."
     },
     {
-        question: "Do you provide documentation for the code?",
-        answer: "Yes, extensive documentation is part of our deliverables. This includes API documentation (Swagger), architecture diagrams, and inline code comments so any future developer can easily pick up the project."
+        question: "Can you help me source b-roll and music?",
+        answer: "Yes. Our standard package includes licensed high-end library music and strategic b-roll sourcing to fill any 'content gaps' in your original raw footage, ensuring the final product looks like a multi-cam shoot."
     },
     {
-        question: "Who owns the code after the project is finished?",
-        answer: "You do. Unlike renting software (SaaS), you possess full Intellectual Property (IP) rights to the source code, database, and design assets upon final payment. You are free to host it wherever you like."
+        question: "What formats do you deliver in?",
+        answer: "By default, we deliver masters in high-bitrate 4K (h.265/Apple Prores). We also provide pre-optimized versions for YouTube, LinkedIn, and vertical platforms to ensure you have no uploading headaches."
     },
     {
-        question: "Can you take over an existing project built by another agency?",
-        answer: "Yes, this is common. We start with a 'Code Audit' to assess the state of the existing codebase. If it meets our quality standards, we can proceed with maintenance; otherwise, we may suggest a partial refactor for stability."
+        question: "Do you offer 'Ghost-editing' for personal brands?",
+        answer: "Absolutely. Many industry leaders rely on us to engineer their presence while staying completely behind the scenes. We match your speaking style and aesthetic energy perfectly so you maintain full authorship."
     }
 ];
 
-// --- Animations & Config ---
 const TRANSITION_EASE: [number, number, number, number] = [0.25, 0.8, 0.25, 1];
 const contentVariants: Variants = {
   enter: (direction: number) => ({
@@ -240,10 +261,10 @@ interface WPPost {
     };
 }
 
-export default function CustomWebDevelopment() {
+export default function VideoEditing() {
   const navigate = useNavigate();
 
-  const [openStandard, setOpenStandard] = useState<string | null>("SOLID");
+  const [openStandard, setOpenStandard] = useState<string | null>("WPCS");
   
   const [[page, direction], setPage] = useState([0, 0]);
   const cardControls = useAnimation();
@@ -322,17 +343,17 @@ export default function CustomWebDevelopment() {
       <HeroSection>
         <HeroInner>
           <HeroContent>
-            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Custom Web Development</strong></Breadcrumbs>
-            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Custom web <br /> application service</motion.h1>
+            <Breadcrumbs><span className="star">✦</span><Link to="/">Home</Link> / <Link to="/services">Services</Link> / <strong>Video Editing</strong></Breadcrumbs>
+            <motion.h1 initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>Premium video <br /> editing service</motion.h1>
             <ButtonGroup>
-              <MainBtn>Get an Estimate</MainBtn>
+              <MainBtn>Begin Post-Production</MainBtn>
               <IconBtn><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg></IconBtn>
             </ButtonGroup>
-            <HeroPara>Bespoke web engineering for complex business logic, SaaS platforms, and enterprise portals.</HeroPara>
+            <HeroPara>Cut through the noise with frame-accurate editing, cinema-grade color, and storytelling engineered to hold viewers until the last second.</HeroPara>
             <RatingsRow>
-              <RatingItem><span className="brand">Clutch</span><div className="stars">★★★★★ <span className="val">4.9 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">GoodFirms</span><div className="stars">★★★★★ <span className="val">5 / 5</span></div></RatingItem>
-              <RatingItem><span className="brand">( Verified Partner )</span><div className="stars">★★★★★ <span className="val">100% Quality</span></div></RatingItem>
+              <RatingItem><span className="brand">IMDB</span><div className="stars">★★★★★ <span className="val">Professional Tier</span></div></RatingItem>
+              <RatingItem><span className="brand">Vimeo</span><div className="stars">★★★★★ <span className="val">Top Creator</span></div></RatingItem>
+              <RatingItem><span className="brand">( Ret Score )</span><div className="stars">★★★★★ <span className="val">88% Avg retention</span></div></RatingItem>
             </RatingsRow>
           </HeroContent>
           <HeroGraphic><AbstractGraphicSVG /></HeroGraphic>
@@ -341,12 +362,12 @@ export default function CustomWebDevelopment() {
 
       {/* --- 2. SECONDARY INTRO SECTION --- */}
       <IntroContainer>
-        <BadgeWrapper><span className="dot"></span> Custom Engineering</BadgeWrapper>
+        <BadgeWrapper><span className="dot"></span> Video Performance Service</BadgeWrapper>
         <LayoutGrid>
-          <motion.h2 className="audit-heading">Build scalable <br /> software assets <br /> designed for your <br /> unique workflow</motion.h2>
+          <motion.h2 className="audit-heading">Get a complete <br /> post-production <br /> narrative audit to <br /> maximize attention</motion.h2>
           <RightContentBlock>
-            <p>Off-the-shelf software often fails at scale. We audit your technical needs to build custom, cloud-native applications that streamline operations and offer full intellectual property ownership.</p>
-            <BlueButtonGroup><BlueTextBtn>Discuss your project idea</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
+            <p>Our audit dissects your current content to find 'cut points' that bore viewers. We provide fixed narrative repairs to ensure your brand content dominates on-screen.</p>
+            <BlueButtonGroup><BlueTextBtn>Analyze my current video content now</BlueTextBtn><BlueIconBtn><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H7M17 7V17" stroke={COLORS.lime} strokeWidth="2.5" strokeLinecap="round"/></svg></BlueIconBtn></BlueButtonGroup>
           </RightContentBlock>
         </LayoutGrid>
       </IntroContainer>
@@ -354,9 +375,9 @@ export default function CustomWebDevelopment() {
       {/* --- 3. STANDARDS ACCORDION SECTION --- */}
       <StandardsContainer>
         <StandardsInner>
-            <h2 className="section-title">Engineering standards <br /> we apply to every <br /> custom project</h2>
+            <h2 className="section-title">Visual standards <br /> covered by our Editing <br /> engineers</h2>
             <AccordionList>
-                {CUSTOM_STANDARDS.map((item) => (
+                {WP_STANDARDS.map((item) => (
                     <AccordionItem key={item.id} isOpen={openStandard === item.id}>
                         <div className="header" onClick={() => setOpenStandard(openStandard === item.id ? null : item.id)}>
                             <div className="btn-box">{openStandard === item.id ? '-' : '+'}</div>
@@ -377,15 +398,15 @@ export default function CustomWebDevelopment() {
 
       {/* --- 4. WHAT TO EXPECT --- */}
       <GridSection>
-        <SectionHeader white>What to expect</SectionHeader>
+        <SectionHeader white>Service timeline</SectionHeader>
         <CardsGrid>
           {[
-            { id: "01.", title: "Codebase Ownership", desc: "No vendor lock-in. You own the repository and the IP rights entirely." },
-            { id: "02.", title: "Lightning Performance", desc: "Lean architectures without the bloat of CMS themes ensures instant load times." },
-            { id: "03.", title: "Scalable Database", desc: "Designed to handle millions of records and complex queries effortlessly." },
-            { id: "04.", title: "Secure APIs", desc: "Encryption at rest and in transit, with JWT authentication standards." },
-            { id: "05.", title: "Tailored Admin", desc: "We build custom dashboards that exactly match your staff's workflow." },
-            { id: "06.", title: "Third-party Integrations", desc: "Seamless connection to your CRM, ERP, Payment Gateway, or AI tools." }
+            { id: "01.", title: "Story Consistency", desc: "Mapping the edit flow so every shot reinforces the primary brand message." },
+            { id: "02.", title: "Sound Mastering", desc: "Removing background noise and ensuring dialogue pops through high-end mastering." },
+            { id: "03.", title: "Aesthetic Grading", desc: "Correcting hues and applying unique LUTS that give the film a cohesive soul." },
+            { id: "04.", title: "Motion Titles", desc: "Engineered lower-thirds and call-outs that stay within mobile-friendly safe zones." },
+            { id: "05.", title: "Subtitle Integrity", desc: "Accurate, timed typography that makes content engaging even in mute environments." },
+            { id: "06.", title: "Storage Pipeline", desc: "Organizing terabytes of raw files so your library remains reusable for years." }
           ].map((item, i) => (
             <DogEarCard key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
               <span className="card-num">{item.id}</span>
@@ -404,12 +425,13 @@ export default function CustomWebDevelopment() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            Why choose bespoke <br /> web development?
+            Why choose our engineered <br /> Video Post solutions?
           </motion.h2>
         </div>
 
         <BenefitsGridWrapper>
           {BENEFITS_DATA.map((benefit, index) => (
+            /* FIX: Add isLeft to JSX prop to solve TS Error */
             <BenefitCell key={index} index={index} isLeft={index % 2 === 0}>
               <div className="icon-row">
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -431,7 +453,7 @@ export default function CustomWebDevelopment() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
         >
-          Why choose Code Nest for your <br /> software solution?
+          Why choose Code Nest for your <br /> Multi-Stream post-production?
         </motion.h2>
         <ChooseCardsGrid>
           {WHY_CHOOSE_CN_DATA.map((card, i) => (
@@ -444,7 +466,7 @@ export default function CustomWebDevelopment() {
         </ChooseCardsGrid>
       </BlueCardSection>
 
-      {/* --- 7. SELF ASSESSMENT BANNER --- */}
+      {/* --- 7. SELF ASSESSMENT BANNER (PAGE 7) --- */}
       <PageSevenContainer>
         <BannerWrapper>
           <BannerContent>
@@ -456,10 +478,10 @@ export default function CustomWebDevelopment() {
               </svg>
             </DecoCircles>
 
-            <BannerText>Have a complex project idea?</BannerText>
+            <BannerText>Evaluate your content watch-time now?</BannerText>
             
             <DownloadBtn>
-              Download Requirement Checklist
+              Download video engagement checklist
               <ArrowDown size={18} style={{ marginLeft: "auto", color: '#000' }} /> 
             </DownloadBtn>
 
@@ -472,7 +494,7 @@ export default function CustomWebDevelopment() {
         </BannerWrapper>
       </PageSevenContainer>
 
-      {/* --- 8. CLIENT FEEDBACK --- */}
+      {/* --- 8. CLIENT FEEDBACK (PAGE 8) --- */}
       <Section8>
         <BackgroundWrapper>
           <GridOverlay />
@@ -482,10 +504,11 @@ export default function CustomWebDevelopment() {
 
         <Container8>
           <HeaderWrapper>
-            <SubHeader>CodeNest Success Stories</SubHeader>
-            <HeaderTitle>What our clients say about the build</HeaderTitle>
+            <SubHeader>Creative Philosophy</SubHeader>
+            <HeaderTitle>What partners say about the Nest</HeaderTitle>
             <HeaderDesc>
-              Real experiences from companies that scaled using our custom engineered solutions.
+              Engineering the narrative isn't just about moving clips. It's about 
+              the surgical precision of holding an audience's mind.
             </HeaderDesc>
           </HeaderWrapper>
 
@@ -554,7 +577,7 @@ export default function CustomWebDevelopment() {
         </Container8>
       </Section8>
 
-      {/* --- 9. PROCESS SECTION --- */}
+      {/* --- 9. HOW POST WORKS (PAGE 9) --- */}
       <AuditProcessSection>
         <AuditContainer>
            <motion.h2 
@@ -563,7 +586,7 @@ export default function CustomWebDevelopment() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              How we build custom software
+              How our production flows
            </motion.h2>
 
            <ProcessGrid>
@@ -585,7 +608,7 @@ export default function CustomWebDevelopment() {
         </AuditContainer>
       </AuditProcessSection>
 
-      {/* --- 10. PROMO BANNER & FAQ --- */}
+      {/* --- 10. PROMO BANNER & FAQ (PAGE 10) --- */}
       <PageTenSection>
         <PageTenInner>
             <CTABanner10>
@@ -598,10 +621,10 @@ export default function CustomWebDevelopment() {
                          </svg>
                     </DecoCircles>
                     <BannerTitle10>
-                        Ready to digitize <br /> your operations?
+                        Don't publish raw — start <br /> post-production today
                     </BannerTitle10>
                     <ConsultBtn>
-                        Book a discovery call
+                        Launch Content Sprint 
                         <ArrowDown size={18} style={{ color: '#000', transform: 'rotate(-45deg)' }} /> 
                     </ConsultBtn>
                     <DecoStar>
@@ -616,7 +639,7 @@ export default function CustomWebDevelopment() {
                 <BackgroundCurve />
                 <FAQContent>
                     <FAQLeft>
-                        <h2>Common questions <br /> about custom apps</h2>
+                        <h2>Production Q&A <br /> and delivery logic</h2>
                     </FAQLeft>
                     <FAQRight>
                         {FAQ_DATA.map((item, index) => (
@@ -652,29 +675,29 @@ export default function CustomWebDevelopment() {
         </PageTenInner>
       </PageTenSection>
 
-      {/* --- 11. BLOG SLIDER --- */}
+      {/* --- 11. BLOG SLIDER (PAGE 11) --- */}
       <BlogSection>
           <BlogContainer>
              <BlogHeaderWrapper>
                 <BlogTitle>
-                  Tech Insights<br />
+                  Deep dive into video tech<br />
                   <BlogLink onClick={() => navigate('/blog')} role="button" tabIndex={0}>
-                     Check our blog <ArrowUpRight size={32} />
+                     Our Film Blog <ArrowUpRight size={32} />
                   </BlogLink>
                 </BlogTitle>
              </BlogHeaderWrapper>
 
              {loadingBlogs ? (
                <div style={{ textAlign: "center", padding: "40px", color: COLORS.textGray }}>
-                   Loading Articles...
+                   Loading Media Insight...
                </div>
              ) : (
                 <BlogSliderOuter>
                     <BlogCardsContainer ref={blogSliderRef}>
                        {blogPosts.map(post => {
                            const featuredImg = post._embedded?.['wp:featuredmedia']?.[0]?.source_url 
-                               || 'https://via.placeholder.com/600x400?text=No+Image';
-                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Development';
+                               || 'https://via.placeholder.com/600x400?text=No+Preview';
+                           const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Insights';
                            
                            return (
                               <BlogCard key={post.id} onClick={() => navigate(`/blog/${post.slug}`)}>
@@ -733,7 +756,7 @@ const HeroInner = styled.div`
   grid-template-columns: 1.1fr 0.9fr; 
   gap: 50px;
    h1 { 
-    color: #ffffff;
+    color: #ffffff; 
     font-size: clamp(50px, 6.5vw, 92px); 
     line-height: 1.05; 
     letter-spacing: -2px; 
@@ -845,19 +868,16 @@ const BenefitsGridWrapper = styled.div`
 const BenefitCell = styled.div<{ isLeft: boolean, index?: number }>`
   padding: 80px 10%; display: flex; flex-direction: column; gap: 24px; 
   border-right: ${props => props.isLeft ? "1px solid #eee" : "none"}; border-bottom: 1px solid #eee;
-  /* Laptop bottom row correction */
   &:nth-last-child(1), &:nth-last-child(2) { border-bottom: none; }
   
   h4 { font-size: 24px; font-weight: 600; color: ${COLORS.coaxBlue}; } 
   p { font-size: 16px; line-height: 1.7; color: ${COLORS.textGray}; max-width: 480px; }
 
   @media (max-width: 900px) {
-    /* Stack logic on mobile */
     padding: 50px 24px;
     border-right: none !important;
     border-bottom: 1px solid #eee !important;
     &:last-child { border-bottom: none !important; }
-    /* Correct border reset from laptop logic */
     &:nth-last-child(2) { border-bottom: 1px solid #eee; }
   }
 `;
@@ -868,9 +888,11 @@ const ChooseCardsGrid = styled.div`display: grid; grid-template-columns: repeat(
 const WhyChooseCard = styled(motion.div)`background-color: ${COLORS.lime}; padding: 40px; min-height: 400px; position: relative; display: flex; flex-direction: column; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); .card-index { font-size: 11px; color: ${COLORS.textDark}; opacity: 0.6; font-weight: 600; margin-bottom: 40px; } .card-title { font-size: 24px; color: ${COLORS.textDark}; font-weight: 600; margin-bottom: 25px; line-height: 1.2; } .card-text { font-size: 15.5px; color: rgba(10, 31, 68, 0.85); line-height: 1.6; } @media (max-width: 600px) { min-height: auto; padding: 30px 24px 60px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%); }`;
 const AbstractGraphicSVG = () => (
   <motion.svg viewBox="0 0 500 500" width="100%" height="100%">
-    <path d="M100 240 Q 100 80, 260 80 V 240 H 100 Z" fill="#2d60ff" />
-    <rect x="220" y="240" width="80" height="200" fill={COLORS.lime} />
-    <circle cx="160" cy="380" r="70" fill="#00d2ff" /><circle cx="380" cy="150" r="40" stroke={COLORS.lime} strokeWidth="15" />
+    {/* Geometric Edit Timeline Symbols */}
+    <rect x="50" y="240" width="80" height="20" fill={COLORS.lime} />
+    <rect x="140" y="240" width="160" height="20" fill={COLORS.white} />
+    <rect x="310" y="240" width="120" height="20" fill={COLORS.lime} />
+    <polygon points="250,150 200,350 300,350" stroke={COLORS.lime} strokeWidth="5" fill="none" />
   </motion.svg>
 );
 
@@ -1065,7 +1087,7 @@ const BlogCard = styled.div`
 
   /* Mobile Stack */
   @media (max-width: 600px) { 
-    min-width: 85vw;
+    min-width: 85vw; 
     flex-direction: column; 
     height: auto; 
     
