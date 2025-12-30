@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4 # Updated to v4 for speed
 
     - name: 🛠️ Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4 # Updated to v4
       with:
         node-version: '18'
 
@@ -33,8 +33,8 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
-        # Make sure this matches your Hostinger folder name EXACTLY (Case Sensitive)
-        server-dir: "public_html" 
+        # Using ./ and / ensures files land IN public_html, not a subfolder
+        server-dir: ./public_html/
         dangerous-clean-slate: false
         exclude: |
           **/.htaccess**
