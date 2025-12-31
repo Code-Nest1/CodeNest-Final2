@@ -3,7 +3,7 @@ name: Deploy React to Hostinger
 on:
   push:
     branches:
-      - main  # Make sure your branch is named 'main'
+      - main 
 
 jobs:
   web-deploy:
@@ -16,17 +16,18 @@ jobs:
     - name: 🛠️ Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20' # Using current stable LTS
 
     - name: 📦 Install Dependencies
       run: npm install
 
     - name: 🏗️ Build Project
       env:
-        CI: false
+        CI: false 
       run: npm run build
 
     - name: 📂 Sync files
+    # Using v4.3.5 as requested
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -34,12 +35,11 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./build/
         server-dir: ./public_html/
-        # This part is CRITICAL: It prevents the action from deleting your WordPress blogs
+        # Set to false to ensure it does NOT delete your 'blogs' or 'assets' folders on Hostinger
         dangerous-clean-slate: false 
         exclude: |
           **/blog/**
           **/blogs/**
           **/Blogs/**
-          **/.htaccess**
           **/.git*/**
           **/.github*/**
