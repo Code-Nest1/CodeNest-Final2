@@ -16,7 +16,7 @@ jobs:
     - name: 🛠️ Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Using current stable LTS
+        node-version: '20'
 
     - name: 📦 Install Dependencies
       run: npm install
@@ -26,16 +26,20 @@ jobs:
         CI: false 
       run: npm run build
 
+    # NEW STEP: This confirms files exist before uploading
+    - name: 🔍 Check if build folder exists
+      run: ls -R build/
+
     - name: 📂 Sync files
-    # Using v4.3.5 as requested
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./build/
-        server-dir: ./public_html/
-        # Set to false to ensure it does NOT delete your 'blogs' or 'assets' folders on Hostinger
+        # 1. We use 'build/' because it's in your root
+        local-dir: build/
+        # 2. FIXED: Use './' because your FTP account lands DIRECTLY in public_html
+        server-dir: ./
         dangerous-clean-slate: false 
         exclude: |
           **/blog/**
