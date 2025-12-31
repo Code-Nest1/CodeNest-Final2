@@ -222,7 +222,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             {/* Kept marketing text & removed conflict markers */}
-            Testing new year, Scale & <DesktopBr />
+            Happy 1, Scale & <DesktopBr />
             Succeed with <DesktopBr />
             Code Nest
           </Title>
