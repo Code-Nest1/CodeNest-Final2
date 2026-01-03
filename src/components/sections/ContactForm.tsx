@@ -14,7 +14,7 @@ const BG_LEFT = "#f7f7fa";
 const BG_RIGHT = "#e8e8ed";
 const BORDER_COLOR = "#d1d5db";
 
-// --- Icons (Same as before) ---
+// --- Icons ---
 const ChatIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: 8 }}>
     <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H6L4 18V4H20V16Z" />
@@ -75,19 +75,35 @@ export default function ContactForm() {
     }
     setIsSending(true);
     
-    // --- Simulation for Demo ---
-    setTimeout(() => {
-        alert("Message sent successfully!");
-        setIsSending(false);
-        setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "", budget: "", agreeFuture: false, agreeTerms: false });
-    }, 1500);
+    // Create the parameters to send to EmailJS
+    const templateParams = { 
+        ...formData, 
+        budget: formData.budget || "Not specified", 
+        agreeFuture: formData.agreeFuture ? "Yes" : "No", 
+        agreeTerms: formData.agreeTerms ? "Yes" : "No" 
+    };
 
-    /* 
-    // Enable this when real keys are ready
-    const templateParams = { ...formData, budget: formData.budget || "Not specified", agreeFuture: formData.agreeFuture ? "Yes" : "No", agreeTerms: formData.agreeTerms ? "Yes" : "No" };
-    emailjs.send("service_id", "template_id", templateParams, "public_key")
-    .then(() => { ... })
-    */
+    // Replace the placeholders with your provided keys
+    emailjs.send(
+        "service_v0bvgaj",   
+        "template_9jp1jr8",  
+        templateParams, 
+        "MNATOKAylaiM9uzxD"    
+    )
+    .then(() => {
+        alert("Message sent successfully!");
+        setFormData({ 
+            firstName: "", lastName: "", email: "", phone: "", 
+            message: "", budget: "", agreeFuture: false, agreeTerms: false 
+        });
+    })
+    .catch((error) => {
+        console.error("EmailJS Error:", error);
+        alert("Failed to send message. Please try again later.");
+    })
+    .finally(() => {
+        setIsSending(false);
+    });
   };
 
   return (
@@ -178,36 +194,36 @@ export default function ContactForm() {
                 style={{ overflow: 'hidden' }}
               >
                 <SectionLabel>Budget</SectionLabel>
-<BudgetGrid>
-  <RadioOption 
-    label="$1k - $3k" 
-    name="budget" 
-    value="1-3" 
-    checked={formData.budget === "1-3"} 
-    onChange={handleBudgetChange} 
-  />
-  <RadioOption 
-    label="$3k - $5k" 
-    name="budget" 
-    value="3-5" 
-    checked={formData.budget === "3-5"} 
-    onChange={handleBudgetChange} 
-  />
-  <RadioOption 
-    label="$5k - $10k" 
-    name="budget" 
-    value="5-10" 
-    checked={formData.budget === "5-10"} 
-    onChange={handleBudgetChange} 
-  />
-  <RadioOption 
-    label="> $20k" 
-    name="budget" 
-    value="20+" 
-    checked={formData.budget === "20+"} 
-    onChange={handleBudgetChange} 
-  />
-</BudgetGrid>
+                <BudgetGrid>
+                  <RadioOption 
+                    label="$1k - $3k" 
+                    name="budget" 
+                    value="1-3" 
+                    checked={formData.budget === "1-3"} 
+                    onChange={handleBudgetChange} 
+                  />
+                  <RadioOption 
+                    label="$3k - $5k" 
+                    name="budget" 
+                    value="3-5" 
+                    checked={formData.budget === "3-5"} 
+                    onChange={handleBudgetChange} 
+                  />
+                  <RadioOption 
+                    label="$5k - $10k" 
+                    name="budget" 
+                    value="5-10" 
+                    checked={formData.budget === "5-10"} 
+                    onChange={handleBudgetChange} 
+                  />
+                  <RadioOption 
+                    label="> $20k" 
+                    name="budget" 
+                    value="20+" 
+                    checked={formData.budget === "20+"} 
+                    onChange={handleBudgetChange} 
+                  />
+                </BudgetGrid>
               </motion.div>
             )}
             </AnimatePresence>
@@ -267,18 +283,13 @@ export default function ContactForm() {
             <ProfileInfo>
               <ProfileName>Khrystyna Chebanenko</ProfileName>
               <ProfileRole>Client engagement manager</ProfileRole>
-              
-              {/* Wrapped email to prevent text overflow */}
               <EmailLink href="mailto:contact@codenest.us.com">
                 contact@codenest.us.com
               </EmailLink>
-              
               <PhoneInfo>
                 <span><strong>US:</strong> +1 805 399 2436</span>
-                {/* <span><strong>UA:</strong> +1 805 399 2436</span> */}
               </PhoneInfo>
             </ProfileInfo>
-            
             <ProfileImageContainer>
                <img src="/images/Manager.png" alt="Manager" onError={(e) => { e.currentTarget.src='https://placehold.co/400x400/png?text=Profile'; }}/>
             </ProfileImageContainer>
@@ -305,7 +316,7 @@ const SectionWrapper = styled.section`
   background-color: #fff;
   display: flex;
   justify-content: center;
-  overflow: hidden; /* Critical for mobile responsiveness with absolute images */
+  overflow: hidden;
   
   @media (max-width: 768px) {
     padding: 40px 10px;
@@ -322,7 +333,6 @@ const MainContainer = styled(motion.div)`
   border-radius: 4px;
   overflow: hidden;
 
-  /* Stack layouts nicely on Tablet/Mobile */
   @media (max-width: 960px) {
     grid-template-columns: 1fr;
     box-shadow: none; 
@@ -330,21 +340,11 @@ const MainContainer = styled(motion.div)`
   }
 `;
 
-// --- LEFT PANEL STYLES ---
-
 const LeftPanel = styled.div`
   padding: 45px 50px;
   background: ${BG_LEFT};
-  
-  /* Adaptive padding for tablet */
-  @media (max-width: 960px) {
-    padding: 30px;
-  }
-  
-  /* Tighter padding for mobile phones */
-  @media (max-width: 480px) {
-    padding: 30px 20px;
-  }
+  @media (max-width: 960px) { padding: 30px; }
+  @media (max-width: 480px) { padding: 30px 20px; }
 `;
 
 const TabsContainer = styled.div`
@@ -370,15 +370,11 @@ const TabButton = styled.button<{ active: boolean }>`
   color: ${props => props.active ? "#fff" : TEXT_DARK};
   transition: all 0.2s;
   
-  /* Fix touch target and font size on mobile */
   @media (max-width: 480px) {
     font-size: 13px;
     padding: 12px 6px;
     white-space: nowrap;
-    
-    svg {
-        width: 14px; height: 14px; margin-right: 5px;
-    }
+    svg { width: 14px; height: 14px; margin-right: 5px; }
   }
 `;
 
@@ -395,7 +391,6 @@ const HeaderTitle = styled.h2`
   color: ${TEXT_DARK};
   font-weight: 400;
   margin-bottom: 12px;
-  
   @media (max-width: 480px) { font-size: 26px; }
 `;
 
@@ -434,7 +429,6 @@ const StyledTextArea = styled.textarea`
   color: ${TEXT_DARK};
   resize: none;
   transition: border-color 0.2s;
-  
   &::placeholder { color: #d1d5db; }
   &:focus { outline: none; border-color: ${COAX_BLUE}; }
 `;
@@ -452,8 +446,6 @@ const Row = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-bottom: 15px;
-  
-  /* Stack fields earlier for better touch usage */
   @media (max-width: 650px) { grid-template-columns: 1fr; }
 `;
 
@@ -477,7 +469,6 @@ const StyledInput = styled.input`
   font-size: 14px;
   color: ${TEXT_DARK};
   transition: border-color 0.2s;
-  
   &::placeholder { color: #d1d5db; }
   &:focus { outline: none; border-color: ${COAX_BLUE}; }
 `;
@@ -487,7 +478,6 @@ const BudgetGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-bottom: 25px;
-  
   @media (max-width: 650px) { grid-template-columns: 1fr; }
 `;
 
@@ -499,7 +489,6 @@ const RadioLabel = styled.label`
   color: ${TEXT_GREY};
   gap: 10px;
   padding: 5px 0;
-  
   &:hover span { color: ${TEXT_DARK}; }
 `;
 
@@ -515,7 +504,6 @@ const RadioCircle = styled.div<{ checked: boolean }>`
   justify-content: center;
   background: #fff;
   flex-shrink: 0;
-  
   &::after {
     content: '';
     width: 10px;
@@ -537,13 +525,12 @@ const CheckboxGroup = styled.div`
 
 const CheckboxLabel = styled.label`
   display: flex;
-  align-items: flex-start; /* Aligns checkbox to top of text for multiline */
+  align-items: flex-start;
   cursor: pointer;
   font-size: 13px;
   color: ${TEXT_GREY};
   gap: 10px;
   line-height: 1.5;
-  
   a { color: ${TEXT_DARK}; text-decoration: underline; }
 `;
 
@@ -559,7 +546,7 @@ const StyledCheckbox = styled.div<{ checked: boolean }>`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 2px; /* Visual alignment with text */
+  margin-top: 2px;
 `;
 
 const SubmitButton = styled(motion.button)`
@@ -578,36 +565,27 @@ const SubmitButton = styled(motion.button)`
   border-radius: 2px;
   box-shadow: 0 4px 6px rgba(0, 69, 204, 0.2);
   transition: background 0.2s;
-
   &:disabled { opacity: 0.7; cursor: not-allowed; }
-
-  @media (max-width: 480px) { width: 100%; /* Full width for easy tap on phones */ }
+  @media (max-width: 480px) { width: 100%; }
 `;
-
-// --- RIGHT PANEL STYLES (SPLIT CARDS) ---
 
 const RightPanel = styled.div`
   background-color: ${BG_RIGHT}; 
   display: flex;
   flex-direction: column;
   position: relative;
-  /* Clip-path modified for responsiveness: corner cut only exists on Desktop/Tablet if wider than mobile */
   @media (min-width: 961px) {
     clip-path: polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 0 100%);
   }
 `;
 
-// -- Top Card --
 const RightTopCard = styled.div`
   padding: 60px 40px 40px 40px; 
   border-bottom: 2px solid #fff;
   flex: 1; 
   display: flex;
   flex-direction: column;
-  
-  @media (max-width: 960px) {
-    padding: 40px 30px;
-  }
+  @media (max-width: 960px) { padding: 40px 30px; }
 `;
 
 const InfoTitle = styled.h3`
@@ -616,7 +594,6 @@ const InfoTitle = styled.h3`
   margin: 0;
   font-weight: 400;
   letter-spacing: -0.5px;
-  
   @media (max-width: 480px) { font-size: 22px; }
 `;
 
@@ -661,7 +638,6 @@ const StepText = styled.p`
 
 const BlueText = styled.span` color: ${COAX_BLUE}; font-weight: 700; `;
 
-// -- Bottom Card --
 const RightBottomCard = styled.div`
   padding: 40px;
   flex: 0 0 auto; 
@@ -671,8 +647,6 @@ const RightBottomCard = styled.div`
   flex-direction: column;
   justify-content: flex-end; 
   overflow: hidden; 
-
-  /* Allow height to adjust on mobile if content needs more space */
   @media (max-width: 960px) {
     padding: 30px;
     height: auto;
@@ -696,13 +670,8 @@ const StarBackground = styled.div`
 
 const ProfileInfo = styled.div`
   position: relative;
-  z-index: 5; /* Text must be above image */
+  z-index: 5;
   margin-bottom: 20px;
-  
-  /* Create a slight backdrop gradient for text readability on mobile in case overlap happens */
-  @media (max-width: 480px) {
-    margin-bottom: 0;
-  }
 `;
 
 const ProfileName = styled.h4`
@@ -724,10 +693,8 @@ const EmailLink = styled.a`
   color: ${COAX_BLUE};
   text-decoration: none;
   margin-bottom: 8px;
-  word-break: break-word; /* Prevents long emails from breaking mobile layout */
-  
+  word-break: break-word;
   &:hover { text-decoration: underline; }
-  
   @media (max-width: 480px) { font-size: 18px; }
 `;
 
@@ -735,27 +702,14 @@ const PhoneInfo = styled.div`
   display: flex;
   font-size: 14px;
   color: ${TEXT_DARK};
-  flex-wrap: wrap; /* Wraps phone numbers on very small screens */
+  flex-wrap: wrap;
   gap: 15px;
-
-  strong {
-    color: ${TEXT_GREY}; 
-    font-weight: 600;
-    margin-right: 4px;
-  }
-  
-  @media (max-width: 1200px) {
-     flex-direction: column; 
-     gap: 6px; 
-  }
-  @media (max-width: 960px) {
-      flex-direction: row; 
-      gap: 15px; 
-  }
+  strong { color: ${TEXT_GREY}; font-weight: 600; margin-right: 4px; }
+  @media (max-width: 1200px) { flex-direction: column; gap: 6px; }
+  @media (max-width: 960px) { flex-direction: row; gap: 15px; }
   @media (max-width: 480px) {
       flex-direction: column;
       margin-top: 15px;
-      /* Background ensure readability over image bottom edge */
       background: rgba(255,255,255,0.7); 
       backdrop-filter: blur(2px);
       padding: 8px;
@@ -771,24 +725,11 @@ const ProfileImageContainer = styled.div`
   bottom: 0;
   right: -67px; 
   z-index: 2;
-  
-  img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    object-position: center top; 
-  }
-
-  /* Responsive Positioning for Image */
-  @media (max-width: 960px) {
-      right: -20px; /* Bring image slightly in on tablet */
-  }
-
+  img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  @media (max-width: 960px) { right: -20px; }
   @media (max-width: 480px) {
-      width: 180px; 
-      height: 180px;
-      right: -20px;
-      bottom: 0;
+      width: 180px; height: 180px;
+      right: -20px; bottom: 0;
       opacity: 0.9;
   }
 `;
