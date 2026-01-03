@@ -307,7 +307,7 @@ const App: React.FC = () => {
            * BLOG ECOSYSTEM 
            */}
           <Route path="/blog" element={<BlogListing />} />
-          <Route path="/blog:slug" element={<BlogPost />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
 
         </Routes>
       </main>
